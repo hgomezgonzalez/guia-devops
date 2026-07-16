@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#1f3355">
 <title>Guía DevOps &amp; Cloud — Hugo Gómez</title>
-<meta name="description" content="Guía visual de entrevista técnica: DevOps, Docker, Kubernetes, Helm, CI/CD, Spring Boot y calidad de código.">
+<meta name="description" content="Guía visual de entrevista técnica: DevOps, Docker, Kubernetes, Helm, CI/CD, Spring Boot, Next.js y calidad de código.">
 </head>
 <body>
 <style>
@@ -78,7 +78,7 @@
     padding:3px 9px;border-radius:999px;color:#fff}
   .t-docker{background:var(--docker)} .t-k8s{background:var(--k8s)} .t-azure{background:var(--azure)}
   .t-helm{background:#0f9d8a} .t-quality{background:#6f57c9} .t-java{background:#4f8a2e}
-  .t-devops{background:#c9711a} .t-cheat{background:#b83a5e}
+  .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
   .cmp-wrap{overflow-x:auto;margin:1.2em 0}
   table.cmp{width:100%;border-collapse:collapse;font-size:.92rem;min-width:520px;border:1px solid var(--line);
     border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
@@ -194,6 +194,37 @@
     box-shadow:0 6px 20px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .25s}
   #totop.show{opacity:1;pointer-events:auto}
 
+  /* Menú categorizado interactivo */
+  .nav .quick{background:var(--azure);color:#fff;font-weight:600}
+  .nav .quick:hover{color:#fff;text-decoration:none;filter:brightness(1.06)}
+  .menu-btn{margin-left:8px;background:var(--brand);color:#fff;border:none;border-radius:9px;
+    padding:8px 14px;font-size:.9rem;font-weight:600;cursor:pointer;white-space:nowrap}
+  :root[data-theme="dark"] .menu-btn,:root[data-theme="dark"] .nav .quick{color:#0c121b}
+  .menu-btn:hover{filter:brightness(1.08)}
+  .menu-overlay{position:fixed;inset:0;z-index:50;background:rgba(10,18,30,.55);
+    opacity:0;transition:opacity .22s ease;display:flex;justify-content:flex-end}
+  .menu-overlay[hidden]{display:none}
+  .menu-overlay.open{opacity:1}
+  .menu-panel{width:min(420px,88vw);height:100%;background:var(--bg);border-left:1px solid var(--line);
+    box-shadow:-14px 0 44px rgba(0,0,0,.3);display:flex;flex-direction:column;
+    transform:translateX(24px);transition:transform .24s ease;overflow:hidden}
+  .menu-overlay.open .menu-panel{transform:translateX(0)}
+  .menu-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;
+    border-bottom:1px solid var(--line);font-weight:700;color:var(--brand-ink);background:var(--bg)}
+  .menu-close{background:var(--surface-2);border:1px solid var(--line);color:var(--ink);border-radius:8px;
+    width:34px;height:34px;font-size:1rem;cursor:pointer}
+  .menu-groups{padding:6px 14px 30px;overflow-y:auto}
+  .menu-cat{margin-top:16px}
+  .menu-cat h4{display:flex;align-items:center;gap:9px;margin:0 0 6px;font-size:.76rem;text-transform:uppercase;
+    letter-spacing:.09em;color:var(--ink-faint);font-weight:700}
+  .menu-cat h4 .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+  .menu-cat a{display:flex;flex-direction:column;gap:1px;padding:10px 12px;border-radius:10px;
+    color:var(--ink);border:1px solid transparent;transition:background .15s,border-color .15s}
+  .menu-cat a:hover{background:var(--surface-2);text-decoration:none;border-color:var(--line)}
+  .menu-cat a b{color:var(--brand-ink);font-size:.96rem;font-weight:600}
+  .menu-cat a span{color:var(--ink-faint);font-size:.8rem}
+  body.menu-open{overflow:hidden}
+
   @media(max-width:720px){
     .metrics{grid-template-columns:repeat(2,1fr)}
     .cols-2,.cols-3{grid-template-columns:1fr}
@@ -210,22 +241,50 @@
 <nav class="nav">
   <div class="wrap">
     <span class="brand">Guía técnica · Hugo Gómez</span>
-    <a href="#chuleta">🎯 Chuleta</a>
-    <a href="#curso-devops">Curso DevOps</a>
-    <a href="#panorama">Panorama</a>
-    <a href="#springboot">Spring Boot</a>
-    <a href="#docker">Docker</a>
-    <a href="#kubernetes">Kubernetes</a>
-    <a href="#k8s-deep">K8s+</a>
-    <a href="#helm">Helm</a>
-    <a href="#azure">Azure</a>
-    <a href="#pipelines">Pipelines</a>
-    <a href="#calidad">Calidad</a>
-    <a href="#flujo">Flujo</a>
-    <a href="#glosario">Glosario</a>
-    <a href="#entrevista">Entrevista</a>
+    <a class="quick" href="#chuleta">🎯 Chuleta</a>
+    <button id="menubtn" class="menu-btn" aria-expanded="false" aria-controls="menu">☰&nbsp; Menú</button>
   </div>
 </nav>
+
+<div id="menu" class="menu-overlay" hidden>
+  <div class="menu-panel" role="dialog" aria-modal="true" aria-label="Menú de secciones">
+    <div class="menu-head"><span>Secciones</span>
+      <button id="menuclose" class="menu-close" aria-label="Cerrar menú">✕</button>
+    </div>
+    <div class="menu-groups">
+      <div class="menu-cat">
+        <h4><span class="dot" style="background:#b83a5e"></span>Entrevista</h4>
+        <a href="#chuleta"><b>🎯 Chuleta</b><span>Qué decir, agrupado por tema</span></a>
+        <a href="#entrevista"><b>Preguntas &amp; respuestas</b><span>Practica en voz alta</span></a>
+        <a href="#glosario"><b>Glosario del CV</b><span>Cada término, explicado</span></a>
+      </div>
+      <div class="menu-cat">
+        <h4><span class="dot" style="background:#0a7fbd"></span>Panorámica</h4>
+        <a href="#panorama"><b>Panorama</b><span>Tu stack de un vistazo</span></a>
+        <a href="#flujo"><b>Flujo end-to-end</b><span>Del teclado al usuario</span></a>
+      </div>
+      <div class="menu-cat">
+        <h4><span class="dot" style="background:#4f8a2e"></span>Desarrollo</h4>
+        <a href="#springboot"><b>Java / Spring Boot</b><span>Microservicios backend</span></a>
+        <a href="#nextjs"><b>Next.js</b><span>Frontend moderno (React)</span></a>
+      </div>
+      <div class="menu-cat">
+        <h4><span class="dot" style="background:#3760d4"></span>Contenedores &amp; Cloud</h4>
+        <a href="#docker"><b>Docker</b><span>Empaquetar</span></a>
+        <a href="#kubernetes"><b>Kubernetes</b><span>Orquestar</span></a>
+        <a href="#k8s-deep"><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
+        <a href="#helm"><b>Helm</b><span>Despliegues reutilizables</span></a>
+        <a href="#azure"><b>Azure &amp; AKS</b><span>La nube</span></a>
+      </div>
+      <div class="menu-cat">
+        <h4><span class="dot" style="background:#c9711a"></span>DevOps &amp; Calidad</h4>
+        <a href="#curso-devops"><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
+        <a href="#pipelines"><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
+        <a href="#calidad"><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <header class="hero">
   <div class="wrap">
@@ -512,6 +571,75 @@ server:
     </details>
     <details class="qa"><summary>¿Cómo se comunican dos microservicios en Spring Boot?</summary>
       <div class="ans"><p>De forma <b>síncrona</b> con <b>WebClient</b> u <b>OpenFeign</b> (llamadas REST), envolviéndolas en un <b>circuit breaker</b> (Resilience4j) para tolerar fallos; o de forma <b>asíncrona</b> por <b>eventos/mensajería</b> (NATS), que los desacopla y los hace más resilientes.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="nextjs">
+  <div class="wrap">
+    <h2><span class="tag t-next">El frontend</span> Cursillo de Next.js</h2>
+    <p class="sub">Next.js es el framework de React para producción: enrutado, renderizado en servidor y hasta APIs — todo listo. Es la capa de UI con la que tus microservicios se vuelven una app real (como tu <b>ROHU PayControl</b> PWA).</p>
+
+    <div class="callout"><b>Analogía:</b> si React son los ladrillos (componentes de UI), <b>Next.js es la casa prefabricada</b>: te da enrutado, renderizado, optimización y estructura de producción, para no ensamblar todo a mano.</div>
+
+    <h3>Los conceptos que debes saber explicar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>App Router</h4><p>Enrutado por carpetas: cada carpeta en <code>app/</code> es una ruta; <code>page.tsx</code> es la página y <code>layout.tsx</code> el marco compartido.</p></div>
+      <div class="card"><h4>Server vs Client</h4><p>Por defecto los componentes corren en el <b>servidor</b> (rápidos, sin JS al cliente). <code>"use client"</code> los vuelve interactivos en el navegador.</p></div>
+      <div class="card"><h4>Estrategias de render</h4><p><b>SSR</b> (en cada request), <b>SSG</b> (en el build), <b>ISR</b> (regenera cada X), <b>CSR</b> (en el cliente). Eliges por página.</p></div>
+      <div class="card"><h4>Data fetching</h4><p>En Server Components haces <code>await fetch(...)</code> directo — sin <code>useEffect</code>. Con caché y revalidación integradas.</p></div>
+      <div class="card"><h4>Route Handlers (API)</h4><p><code>app/api/.../route.ts</code> crea endpoints (tu propio backend ligero) dentro de Next.js.</p></div>
+      <div class="card"><h4>Carga y errores</h4><p><code>loading.tsx</code> y <code>error.tsx</code> dan spinners y manejo de errores automáticos por ruta.</p></div>
+    </div>
+
+    <h3>Una página que consume tu API (Server Component)</h3>
+    <pre><code><span class="cmt">// app/facturas/page.tsx  — corre en el servidor</span>
+<span class="kw">async function</span> getFacturas() {
+  <span class="kw">const</span> res = <span class="kw">await</span> fetch("https://api.rohu/facturas/pendientes",
+                        { next: { revalidate: 60 } }); <span class="cmt">// ISR: cachea 60s</span>
+  <span class="kw">return</span> res.json();
+}
+
+<span class="kw">export default async function</span> FacturasPage() {
+  <span class="kw">const</span> facturas = <span class="kw">await</span> getFacturas();
+  <span class="kw">return</span> (
+    &lt;ul&gt;
+      {facturas.map((f) =&gt; (
+        &lt;li key={f.id}&gt;{f.concepto} — ${f.monto}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+
+    <h3>Un componente interactivo (Client Component)</h3>
+    <pre><code><span class="cmt">// app/components/Contador.tsx</span>
+<span class="kw">"use client";</span>
+<span class="kw">import</span> { useState } <span class="kw">from</span> "react";
+
+<span class="kw">export default function</span> Contador() {
+  <span class="kw">const</span> [n, setN] = useState(0);
+  <span class="kw">return</span> &lt;button onClick={() =&gt; setN(n + 1)}&gt;Pagos: {n}&lt;/button&gt;;
+}</code></pre>
+
+    <h3>Un endpoint propio (Route Handler)</h3>
+    <pre><code><span class="cmt">// app/api/health/route.ts</span>
+<span class="kw">export function</span> GET() {
+  <span class="kw">return</span> Response.json({ status: "ok" });
+}</code></pre>
+
+    <div class="callout"><b>Cómo encaja con tu stack:</b> Next.js es la UI (web/PWA) que consume las <b>REST APIs</b> de tus microservicios Spring Boot/FastAPI; se conteneriza con Docker y se despliega igual (AKS, o un hosting como Vercel/Heroku). En <b>ROHU PayControl</b> el frontend es exactamente Next.js PWA.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Construyo frontends con React/Next.js (App Router, Server Components y renderizado híbrido SSR/SSG/ISR) que consumen las REST APIs de mis microservicios; en ROHU PayControl el cliente es una PWA en Next.js sobre un backend FastAPI."</div>
+
+    <h3>Preguntas típicas de Next.js</h3>
+    <details class="qa"><summary>¿Por qué Next.js y no solo React?</summary>
+      <div class="ans"><p>React es una librería de UI; Next.js le agrega lo de <b>producción</b>: enrutado por archivos, <b>renderizado en servidor</b> (mejor rendimiento y SEO), optimización de imágenes/fuentes, code-splitting y API routes — sin configurarlo todo a mano.</p></div>
+    </details>
+    <details class="qa"><summary>¿Server Components vs Client Components?</summary>
+      <div class="ans"><p>Los <b>Server Components</b> (por defecto) se renderizan en el servidor: no envían JS al navegador y pueden hacer <code>fetch</code>/leer datos directo — ideales para contenido. Los <b>Client Components</b> (<code>"use client"</code>) corren en el navegador y permiten interactividad (estado, eventos, hooks como <code>useState</code>).</p></div>
+    </details>
+    <details class="qa"><summary>¿SSR, SSG o ISR — cuándo usar cada uno?</summary>
+      <div class="ans"><p><b>SSG</b> (genera en el build) para contenido estático; <b>SSR</b> (en cada request) para datos siempre frescos o personalizados; <b>ISR</b> (regenera cada cierto tiempo) para el punto medio: rápido como estático pero se actualiza. Se elige por página con las opciones de <code>fetch</code>/revalidate.</p></div>
     </details>
   </div>
 </section>
@@ -917,6 +1045,15 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
     function onScroll(){ if(window.scrollY>480){b.classList.add('show');}else{b.classList.remove('show');} }
     window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
     b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+    var ov=document.getElementById('menu'), btn=document.getElementById('menubtn'), cl=document.getElementById('menuclose');
+    function openMenu(){ ov.hidden=false; requestAnimationFrame(function(){ ov.classList.add('open'); }); document.body.classList.add('menu-open'); btn.setAttribute('aria-expanded','true'); }
+    function closeMenu(){ ov.classList.remove('open'); document.body.classList.remove('menu-open'); btn.setAttribute('aria-expanded','false'); setTimeout(function(){ ov.hidden=true; },240); }
+    btn.addEventListener('click',openMenu);
+    cl.addEventListener('click',closeMenu);
+    ov.addEventListener('click',function(e){ if(e.target===ov) closeMenu(); });
+    Array.prototype.forEach.call(ov.querySelectorAll('a'),function(a){ a.addEventListener('click',closeMenu); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !ov.hidden) closeMenu(); });
   })();
 </script>
 
