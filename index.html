@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1f3355">
+<title>Guía DevOps &amp; Cloud — Hugo Gómez</title>
+<meta name="description" content="Guía visual de entrevista técnica: DevOps, Docker, Kubernetes, Helm, CI/CD, Spring Boot y calidad de código.">
+</head>
+<body>
+<style>
+  :root{
+    --bg:#f4f7fb; --surface:#ffffff; --surface-2:#eef2f8; --surface-3:#e6ecf5;
+    --ink:#16202e; --ink-soft:#48566a; --ink-faint:#6f7d92; --line:#d9e1ee;
+    --brand:#1f3355; --brand-ink:#1f3355;
+    --azure:#0a7fbd; --docker:#1f7fd6; --k8s:#3760d4; --good:#158a5e; --warn:#b5761b;
+    --code-bg:#f1f5fa; --code-ink:#243244;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --maxw:960px; --radius:14px;
+    --shadow:0 1px 2px rgba(20,40,70,.05),0 8px 24px rgba(20,40,70,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0c121b; --surface:#131c28; --surface-2:#182333; --surface-3:#1f2c3e;
+      --ink:#e7edf5; --ink-soft:#a7b6c9; --ink-faint:#7f90a5; --line:#26344a;
+      --brand:#7fb0e2; --brand-ink:#cfe0f4;
+      --azure:#42b2e8; --docker:#4aa3ef; --k8s:#6d8ef2; --good:#3bbd88; --warn:#d99a3f;
+      --code-bg:#0e1722; --code-ink:#cdd9e8;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#f4f7fb; --surface:#ffffff; --surface-2:#eef2f8; --surface-3:#e6ecf5;
+    --ink:#16202e; --ink-soft:#48566a; --ink-faint:#6f7d92; --line:#d9e1ee;
+    --brand:#1f3355; --brand-ink:#1f3355; --azure:#0a7fbd; --docker:#1f7fd6; --k8s:#3760d4;
+    --good:#158a5e; --warn:#b5761b; --code-bg:#f1f5fa; --code-ink:#243244;
+    --shadow:0 1px 2px rgba(20,40,70,.05),0 8px 24px rgba(20,40,70,.06);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0c121b; --surface:#131c28; --surface-2:#182333; --surface-3:#1f2c3e;
+    --ink:#e7edf5; --ink-soft:#a7b6c9; --ink-faint:#7f90a5; --line:#26344a;
+    --brand:#7fb0e2; --brand-ink:#cfe0f4; --azure:#42b2e8; --docker:#4aa3ef; --k8s:#6d8ef2;
+    --good:#3bbd88; --warn:#d99a3f; --code-bg:#0e1722; --code-ink:#cdd9e8;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16.5px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  a{color:var(--azure);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Sticky nav */
+  .nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;gap:6px;min-height:52px;overflow-x:auto}
+  .nav .brand{font-weight:700;color:var(--brand-ink);margin-right:auto;white-space:nowrap;letter-spacing:.2px}
+  .nav a{padding:6px 10px;border-radius:8px;color:var(--ink-soft);font-size:.85rem;white-space:nowrap;font-weight:500}
+  .nav a:hover{background:var(--surface-2);text-decoration:none;color:var(--ink)}
+
+  /* Hero */
+  header.hero{padding:54px 0 30px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--azure);font-weight:600}
+  h1{font-size:clamp(1.9rem,4.6vw,2.7rem);line-height:1.12;margin:.35em 0 .3em;letter-spacing:-.02em;
+    text-wrap:balance;color:var(--brand-ink)}
+  .lede{font-size:1.12rem;color:var(--ink-soft);max-width:60ch;margin:0}
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}
+  .metric{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow)}
+  .metric b{display:block;font-size:1.35rem;color:var(--brand-ink);font-variant-numeric:tabular-nums}
+  .metric span{font-size:.76rem;color:var(--ink-faint)}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:1.55rem;letter-spacing:-.01em;margin:0 0 .1em;display:flex;align-items:center;gap:12px;text-wrap:balance}
+  h2 .tag{font-family:var(--mono);font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;
+    padding:3px 9px;border-radius:999px;color:#fff}
+  .t-docker{background:var(--docker)} .t-k8s{background:var(--k8s)} .t-azure{background:var(--azure)}
+  .t-helm{background:#0f9d8a} .t-quality{background:#6f57c9} .t-java{background:#4f8a2e}
+  .t-devops{background:#c9711a} .t-cheat{background:#b83a5e}
+  .cmp-wrap{overflow-x:auto;margin:1.2em 0}
+  table.cmp{width:100%;border-collapse:collapse;font-size:.92rem;min-width:520px;border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  table.cmp th,table.cmp td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.cmp thead th{background:var(--surface-2);color:var(--brand-ink);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+  table.cmp td:first-child{font-weight:600;color:var(--brand-ink)}
+  table.cmp tr:last-child td{border-bottom:none}
+  .sub{color:var(--ink-soft);margin:.2em 0 1.4em;max-width:64ch}
+
+  h3{font-size:1.08rem;margin:1.6em 0 .5em;color:var(--brand-ink)}
+  p{max-width:66ch}
+  code{font-family:var(--mono);font-size:.88em;background:var(--surface-2);padding:.12em .42em;
+    border-radius:6px;color:var(--code-ink);border:1px solid var(--line)}
+  pre{background:var(--code-bg);border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    overflow-x:auto;margin:1em 0;box-shadow:var(--shadow)}
+  pre code{background:none;border:none;padding:0;color:var(--code-ink);font-size:.85rem;line-height:1.55}
+  .cmt{color:var(--ink-faint)}
+  .kw{color:var(--azure);font-weight:600}
+
+  .grid{display:grid;gap:14px}
+  .cols-2{grid-template-columns:repeat(2,1fr)}
+  .cols-3{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+  .card h4{margin:0 0 .3em;font-size:1rem;color:var(--brand-ink);display:flex;align-items:center;gap:8px}
+  .card p{margin:.2em 0 0;font-size:.92rem;color:var(--ink-soft);max-width:none}
+  .card .obj{font-family:var(--mono);font-size:.72rem;color:var(--azure);font-weight:600}
+
+  /* Analogy callout */
+  .callout{border-left:3px solid var(--azure);background:var(--surface-2);border-radius:0 12px 12px 0;
+    padding:12px 16px;margin:1.1em 0;font-size:.95rem}
+  .callout b{color:var(--brand-ink)}
+  .youuse{border-left:3px solid var(--good);background:color-mix(in srgb,var(--good) 9%,var(--surface));
+    border-radius:0 12px 12px 0;padding:12px 16px;margin:1.1em 0;font-size:.94rem}
+  .youuse b{color:var(--good)}
+
+  /* Layer diagram (docker) */
+  .layers{display:flex;flex-direction:column-reverse;gap:6px;margin:1em 0;max-width:520px}
+  .layer{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--docker);
+    border-radius:8px;padding:9px 14px;font-family:var(--mono);font-size:.82rem;display:flex;justify-content:space-between;gap:12px}
+  .layer span{color:var(--ink-faint);font-family:var(--sans);font-size:.78rem}
+
+  /* Pipeline */
+  .pipe-scroll{overflow-x:auto;padding:6px 2px 12px;margin:1.2em 0}
+  .pipe{display:flex;align-items:stretch;gap:0;min-width:720px}
+  .step{flex:1;min-width:120px;background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:13px 12px;text-align:center;position:relative;box-shadow:var(--shadow)}
+  .step .ic{font-size:1.5rem;line-height:1}
+  .step .n{font-family:var(--mono);font-size:.68rem;color:var(--azure);font-weight:700}
+  .step h5{margin:.3em 0 .15em;font-size:.86rem;color:var(--brand-ink)}
+  .step p{margin:0;font-size:.74rem;color:var(--ink-faint);max-width:none}
+  .arrow{display:flex;align-items:center;color:var(--azure);font-size:1.3rem;padding:0 4px;flex:0 0 auto}
+
+  /* Glossary */
+  dl.gloss{display:grid;grid-template-columns:1fr;gap:0;margin:0}
+  .term{padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:200px 1fr;gap:18px}
+  .term:last-child{border-bottom:none}
+  .term dt{font-weight:600;color:var(--brand-ink)}
+  .term dt small{display:block;font-family:var(--mono);font-size:.7rem;color:var(--ink-faint);font-weight:500;margin-top:2px}
+  .term dd{margin:0;color:var(--ink-soft);font-size:.94rem}
+
+  /* Interview Q&A */
+  details.qa{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin:10px 0;box-shadow:var(--shadow);overflow:hidden}
+  details.qa summary{cursor:pointer;padding:14px 18px;font-weight:600;color:var(--brand-ink);list-style:none;
+    display:flex;gap:12px;align-items:flex-start}
+  details.qa summary::-webkit-details-marker{display:none}
+  details.qa summary::before{content:"›";color:var(--azure);font-size:1.3rem;line-height:1;transition:transform .2s;flex:0 0 auto}
+  details.qa[open] summary::before{transform:rotate(90deg)}
+  details.qa .ans{padding:0 18px 16px 42px;color:var(--ink-soft);font-size:.95rem}
+  details.qa .ans p{max-width:none;margin:.2em 0 .6em}
+  .pill{display:inline-block;font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.04em;
+    padding:2px 8px;border-radius:999px;background:var(--surface-3);color:var(--ink-soft);margin-right:6px}
+
+  footer{padding:34px 0 60px;color:var(--ink-faint);font-size:.85rem}
+
+  html{scroll-behavior:smooth}
+  section{scroll-margin-top:60px}
+
+  /* Chuleta de entrevista */
+  .cheat-pitch{background:linear-gradient(135deg,var(--brand),color-mix(in srgb,var(--brand) 45%,var(--azure)));
+    border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);margin:2px 0 22px}
+  .cheat-pitch .lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;opacity:.85}
+  .cheat-pitch p{margin:.4em 0 0;font-size:1.06rem;line-height:1.5;max-width:72ch;color:#fff}
+  .cheat-metrics{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 22px}
+  .cheat-metrics span{font-family:var(--mono);font-size:.8rem;font-weight:600;background:var(--surface);
+    border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--brand-ink);box-shadow:var(--shadow)}
+  details.say{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin:8px 0;overflow:hidden;box-shadow:var(--shadow)}
+  details.say summary{cursor:pointer;padding:13px 15px;font-weight:600;color:var(--brand-ink);list-style:none;display:flex;align-items:center;gap:10px}
+  details.say summary::-webkit-details-marker{display:none}
+  details.say summary .chip2{font-family:var(--mono);font-size:.64rem;font-weight:700;text-transform:uppercase;
+    letter-spacing:.05em;padding:3px 7px;border-radius:6px;color:#fff;flex:0 0 auto}
+  details.say summary::after{content:"+";margin-left:auto;color:var(--azure);font-size:1.25rem;line-height:1}
+  details.say[open] summary::after{content:"\2013"}
+  details.say .say-body{padding:2px 15px 14px 15px;color:var(--ink);font-size:.98rem;line-height:1.5}
+  details.say .say-body em{color:var(--ink-faint);font-style:normal;font-size:.84rem;display:block;margin-top:5px}
+  .toplinks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+  .toplinks a{display:block;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 13px;color:var(--ink);box-shadow:var(--shadow)}
+  .toplinks a:hover{text-decoration:none;border-color:var(--azure)}
+  .toplinks a b{color:var(--brand-ink);display:block;font-size:.92rem}
+  .toplinks a span{color:var(--ink-faint);font-size:.82rem}
+
+  /* Módulos del curso */
+  .mod{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px 17px;box-shadow:var(--shadow)}
+  .mod .num{font-family:var(--mono);font-size:.74rem;font-weight:700;color:#fff;background:#c9711a;
+    width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center}
+  .mod .new{font-size:.62rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--good);font-weight:700;margin-left:8px}
+  .mod h4{margin:.5em 0 .25em;font-size:1rem;color:var(--brand-ink)}
+  .mod p{margin:0;font-size:.9rem;color:var(--ink-soft);max-width:none}
+  .mod a.jump{display:inline-block;margin-top:8px;font-size:.8rem;font-family:var(--mono);color:var(--azure)}
+
+  /* Back to top */
+  #totop{position:fixed;right:16px;bottom:16px;z-index:30;width:46px;height:46px;border-radius:50%;
+    border:none;background:#1f6fa8;color:#fff;font-size:1.25rem;cursor:pointer;
+    box-shadow:0 6px 20px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .25s}
+  #totop.show{opacity:1;pointer-events:auto}
+
+  @media(max-width:720px){
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .cols-2,.cols-3{grid-template-columns:1fr}
+    .term{grid-template-columns:1fr;gap:4px}
+    .term dt{margin-top:2px}
+    .nav a{padding:9px 12px;font-size:.9rem}
+    .toplinks{grid-template-columns:1fr}
+    .cheat-pitch p{font-size:1rem}
+    h2{font-size:1.35rem}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<nav class="nav">
+  <div class="wrap">
+    <span class="brand">Guía técnica · Hugo Gómez</span>
+    <a href="#chuleta">🎯 Chuleta</a>
+    <a href="#curso-devops">Curso DevOps</a>
+    <a href="#panorama">Panorama</a>
+    <a href="#springboot">Spring Boot</a>
+    <a href="#docker">Docker</a>
+    <a href="#kubernetes">Kubernetes</a>
+    <a href="#k8s-deep">K8s+</a>
+    <a href="#helm">Helm</a>
+    <a href="#azure">Azure</a>
+    <a href="#pipelines">Pipelines</a>
+    <a href="#calidad">Calidad</a>
+    <a href="#flujo">Flujo</a>
+    <a href="#glosario">Glosario</a>
+    <a href="#entrevista">Entrevista</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Preparación para entrevista · Cloud &amp; Arquitectura</p>
+    <h1>Docker, Kubernetes y Azure — y todo tu CV, explicado para que lo defiendas con seguridad</h1>
+    <p class="lede">Una guía visual de tu propio stack: cómo funciona cada pieza, cómo encajan de punta a punta, y cómo contar <em>tu</em> experiencia (migración a microservicios, zero-downtime, 500&nbsp;ms) con lenguaje claro y preciso.</p>
+    <div class="metrics">
+      <div class="metric"><b>20+</b><span>años en TI</span></div>
+      <div class="metric"><b>21</b><span>personas lideradas</span></div>
+      <div class="metric"><b>500&nbsp;ms</b><span>respuesta alto tráfico</span></div>
+      <div class="metric"><b>60%</b><span>menos tiempo de despliegue</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="chuleta">
+  <div class="wrap">
+    <h2><span class="tag t-cheat">Chuleta</span> Lo que debes decir en la entrevista</h2>
+    <p class="sub">Tu tarjeta de bolsillo — ábrela desde el celular antes de entrar. Toca cada tema para ver la frase lista.</p>
+
+    <div class="cheat-pitch">
+      <div class="lbl">Pitch de 20 segundos</div>
+      <p>"Soy ingeniero de sistemas con 20+ años en TI y líder técnico de equipos de hasta 21 personas. Lideré la migración del monolito WebLogic de Movistar a microservicios event-driven en Azure AKS —con REST APIs, CI/CD y zero-downtime— logrando respuestas de 500&nbsp;ms bajo alto tráfico y 60% menos tiempo de despliegue. Programo en Java/Spring Boot, .NET y Python, y hoy construyo productos con IA integrada."</p>
+    </div>
+
+    <h3>Métricas que siempre mencionas</h3>
+    <div class="cheat-metrics">
+      <span>20+ años</span><span>Equipos de 21</span><span>500&nbsp;ms alto tráfico</span>
+      <span>−60% despliegues</span><span>Zero-downtime</span><span>Métricas DORA</span>
+    </div>
+
+    <h3>Frases listas por tema</h3>
+    <details class="say"><summary><span class="chip2" style="background:#4f8a2e">Java/Spring</span>Microservicios en Spring Boot</summary>
+      <div class="say-body">"Construyo microservicios en Java/Spring Boot por capas (Controller/Service/Repository), con Spring Data JPA sobre PostgreSQL/Oracle, REST APIs y Actuator para health checks integrados con las probes de Kubernetes."<em>Detalle completo en la sección Spring Boot ↓</em></div>
+    </details>
+    <details class="say"><summary><span class="chip2" style="background:#1f7fd6">Docker</span>Contenedores</summary>
+      <div class="say-body">"Empaqueté cada microservicio en su imagen Docker para que corriera idéntico en dev y producción, publicándolas en Azure Container Registry."</div>
+    </details>
+    <details class="say"><summary><span class="chip2" style="background:#3760d4">Kubernetes</span>Orquestación</summary>
+      <div class="say-body">"Desplegué los microservicios en AKS con Deployments y rolling updates (zero-downtime); el autoescalado (HPA) sostuvo 500&nbsp;ms bajo alto tráfico y la auto-reparación mantuvo la alta disponibilidad."</div>
+    </details>
+    <details class="say"><summary><span class="chip2" style="background:#0f9d8a">Helm</span>Despliegue reutilizable</summary>
+      <div class="say-body">"Empaqueté los servicios como charts de Helm para desplegar igual en dev/QA/prod cambiando solo los values, con versionado y rollback inmediato."</div>
+    </details>
+    <details class="say"><summary><span class="chip2" style="background:#0a7fbd">CI/CD</span>Pipelines</summary>
+      <div class="say-body">"Implementé pipelines de CI/CD en Azure DevOps que compilan, prueban, pasan un quality gate y despliegan con Helm a AKS con aprobaciones para producción — 60% menos tiempo de despliegue y despliegues diarios."</div>
+    </details>
+    <details class="say"><summary><span class="chip2" style="background:#6f57c9">Calidad</span>SonarQube / Kiuwan</summary>
+      <div class="say-body">"Integré análisis estático (SonarQube/Kiuwan) como quality gate: cada cambio se evalúa por bugs, vulnerabilidades y cobertura, y no llega a producción si no cumple el umbral — alineado con CMMI y seguridad en banca."</div>
+    </details>
+    <details class="say"><summary><span class="chip2" style="background:#c9711a">DevOps</span>Cultura y entrega</summary>
+      <div class="say-body">"Aplico DevOps de punta a punta: automatización (CI/CD), infraestructura como código, observabilidad y cultura de mejora continua; lo mido con las métricas DORA para entregar rápido y confiable."</div>
+    </details>
+
+    <h3>Preguntas más probables (respuesta en una línea)</h3>
+    <div class="toplinks">
+      <a href="#kubernetes"><b>¿Cómo logras zero-downtime?</b><span>Rolling updates + readiness/liveness probes.</span></a>
+      <a href="#springboot"><b>¿Inyección de dependencias?</b><span>Spring inyecta por constructor; desacopla y facilita pruebas.</span></a>
+      <a href="#docker"><b>¿Docker vs VM?</b><span>El contenedor comparte el kernel; más liviano y reproducible.</span></a>
+      <a href="#pipelines"><b>¿Qué es un quality gate?</b><span>Umbral que bloquea el despliegue si el código no cumple.</span></a>
+      <a href="#curso-devops"><b>¿Qué miden las métricas DORA?</b><span>Frecuencia de despliegue, lead time, MTTR y tasa de fallo.</span></a>
+      <a href="#springboot"><b>¿Cómo migraste el monolito?</b><span>Enfoque strangler fig, por dominios, event-driven en AKS.</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="panorama">
+  <div class="wrap">
+    <h2>Panorama: tu stack de un vistazo</h2>
+    <p class="sub">Todo lo que sigue gira en torno a una idea: <b>empaquetar</b> tu software (Docker), <b>orquestarlo</b> a escala (Kubernetes) y <b>correrlo en la nube</b> con entrega automatizada (Azure + CI/CD). Estas tres capas son el corazón de tu perfil.</p>
+    <div class="grid cols-3">
+      <div class="card"><h4>📦 Empaquetar</h4><p class="obj">Docker · Dockerfile</p><p>Metes tu app y sus dependencias en un “contenedor” que corre idéntico en cualquier máquina.</p></div>
+      <div class="card"><h4>🎛️ Orquestar</h4><p class="obj">Kubernetes (AKS)</p><p>Coordinas cientos de contenedores: escalado, auto-reparación y actualizaciones sin cortar el servicio.</p></div>
+      <div class="card"><h4>☁️ Ejecutar &amp; entregar</h4><p class="obj">Azure · CI/CD</p><p>La nube provee los servidores y Azure DevOps automatiza el camino de código a producción.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="curso-devops">
+  <div class="wrap">
+    <h2><span class="tag t-devops">Curso</span> DevOps básico, de cero a la práctica</h2>
+    <p class="sub">DevOps no es una herramienta: es <b>cultura + prácticas + herramientas</b> para entregar software rápido y confiable. Este mini-curso ordena todo lo de la guía en una ruta y suma lo que falta.</p>
+
+    <div class="callout"><b>Modelo CALMS:</b> <b>C</b>ulture (colaboración Dev+Ops), <b>A</b>utomation (automatizar lo repetible), <b>L</b>ean (flujo sin desperdicio), <b>M</b>easurement (medir para mejorar) y <b>S</b>haring (conocimiento compartido).</div>
+
+    <h3>El ciclo de vida DevOps — el "bucle infinito"</h3>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">📝</div><h5>Plan</h5><p>Backlog, historias</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">💻</div><h5>Code</h5><p>Git, ramas, PRs</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🔨</div><h5>Build</h5><p>Compilar</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🧪</div><h5>Test</h5><p>Pruebas + calidad</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🚀</div><h5>Release</h5><p>Versionar</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🎛️</div><h5>Deploy</h5><p>A Kubernetes</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">⚙️</div><h5>Operate</h5><p>Correr en prod</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">📈</div><h5>Monitor</h5><p>Observar y aprender</p></div>
+      </div>
+    </div>
+
+    <h3>Los 10 módulos (tu ruta de aprendizaje)</h3>
+    <div class="grid cols-3">
+      <div class="mod"><span class="num">1</span><span class="new">nuevo</span><h4>Cultura DevOps</h4><p>Romper el muro entre desarrollo y operaciones; responsabilidad compartida del producto en producción (CALMS).</p></div>
+      <div class="mod"><span class="num">2</span><span class="new">nuevo</span><h4>Control de versiones</h4><p>Git: ramas, Pull Requests, revisiones y estrategia <b>trunk-based</b> para integrar seguido y en pequeño.</p></div>
+      <div class="mod"><span class="num">3</span><h4>Integración continua (CI)</h4><p>Cada cambio se compila y prueba automáticamente. <a class="jump" href="#pipelines">Ver Pipelines →</a></p></div>
+      <div class="mod"><span class="num">4</span><h4>Entrega/Despliegue continuo (CD)</h4><p>El código validado llega a los ambientes con aprobaciones. <a class="jump" href="#pipelines">Ver Pipelines →</a></p></div>
+      <div class="mod"><span class="num">5</span><h4>Contenedores</h4><p>Empaquetar la app y sus dependencias con Docker. <a class="jump" href="#docker">Ver Docker →</a></p></div>
+      <div class="mod"><span class="num">6</span><h4>Orquestación</h4><p>Coordinar contenedores a escala con Kubernetes/AKS. <a class="jump" href="#kubernetes">Ver Kubernetes →</a></p></div>
+      <div class="mod"><span class="num">7</span><h4>Empaquetado de despliegues</h4><p>Plantillas reutilizables por entorno con Helm. <a class="jump" href="#helm">Ver Helm →</a></p></div>
+      <div class="mod"><span class="num">8</span><span class="new">nuevo</span><h4>Infraestructura como Código</h4><p>Definir la infraestructura en archivos versionados (<b>Terraform</b>, <b>Bicep</b>) — reproducible y auditable, no "a mano".</p></div>
+      <div class="mod"><span class="num">9</span><span class="new">nuevo</span><h4>Observabilidad</h4><p>Los 3 pilares: <b>logs</b>, <b>métricas</b> y <b>trazas</b>. Herramientas: Prometheus + Grafana, Azure Monitor.</p></div>
+      <div class="mod"><span class="num">10</span><h4>DevSecOps</h4><p>Seguridad integrada: SAST/SCA y secretos en Key Vault. <a class="jump" href="#calidad">Ver Calidad →</a></p></div>
+    </div>
+
+    <h3>Cómo se mide DevOps: las 4 métricas DORA</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>🚀 Frecuencia de despliegue</h4><p>Cada cuánto liberas a producción. Más frecuente = más ágil (tú: despliegues diarios).</p></div>
+      <div class="card"><h4>⏱️ Lead time for changes</h4><p>Cuánto tarda un cambio desde el commit hasta producción.</p></div>
+      <div class="card"><h4>🔧 MTTR — tiempo de recuperación</h4><p>Cuánto tardas en restablecer el servicio tras un fallo.</p></div>
+      <div class="card"><h4>❌ Change failure rate</h4><p>% de despliegues que causan un fallo. Menos = más calidad.</p></div>
+    </div>
+    <div class="callout"><b>SRE en una frase:</b> defines <b>SLIs/SLOs</b> (objetivos de fiabilidad), gastas un <b>error budget</b> cuando fallas, y haces <b>postmortems sin culpa</b> para aprender, no para señalar.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Trabajo DevOps de punta a punta: automatización con CI/CD, contenedores en Kubernetes, infraestructura como código y observabilidad, con cultura de mejora continua. Mis resultados hablan en métricas DORA: despliegues diarios, −60% en tiempo de despliegue y zero-downtime."</div>
+
+    <details class="qa"><summary>¿Qué es DevOps, en una frase?</summary>
+      <div class="ans"><p>Unir desarrollo y operaciones con <b>cultura, automatización y medición</b> para entregar software más rápido y confiable. No es un cargo ni una herramienta: es una forma de trabajar (modelo CALMS).</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es Infraestructura como Código (IaC)?</summary>
+      <div class="ans"><p>Definir servidores, redes y recursos en <b>archivos versionados</b> (Terraform, Bicep) en lugar de configurarlos a mano. Así la infraestructura es <b>reproducible, revisable y auditable</b>, y se despliega igual en cada entorno.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué miden las métricas DORA?</summary>
+      <div class="ans"><p>La salud de la entrega: <b>frecuencia de despliegue</b>, <b>lead time</b> de un cambio, <b>MTTR</b> (recuperación ante fallos) y <b>change failure rate</b>. Son el estándar para medir a un equipo DevOps de alto rendimiento.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="springboot">
+  <div class="wrap">
+    <h2><span class="tag t-java">El código</span> Microservicios con Java &amp; Spring Boot</h2>
+    <p class="sub">Antes de empaquetar y desplegar, hay que <b>escribir el servicio</b>. Spring Boot es el framework más usado para construir microservicios en Java: trae un servidor embebido (Tomcat) y configuración por defecto, así levantas una API REST en minutos y te concentras en la lógica de negocio.</p>
+
+    <div class="callout"><b>Analogía:</b> Spring Boot te entrega el <b>kit de arranque ya ensamblado</b> —servidor web, inyección de dependencias, acceso a datos— para que no reinventes la plomería y escribas solo lo que aporta valor.</div>
+
+    <h3>Arquitectura por capas (el recorrido de una petición)</h3>
+    <p>Un microservicio Spring Boot se organiza en capas con una responsabilidad clara cada una. Así se ve el viaje de una petición HTTP:</p>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">🌐</div><div class="n">HTTP</div><h5>Cliente</h5><p>GET /api/facturas</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🚪</div><div class="n">@RestController</div><h5>Controller</h5><p>Recibe y responde</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🧠</div><div class="n">@Service</div><h5>Service</h5><p>Lógica de negocio</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🗃️</div><div class="n">@Repository</div><h5>Repository</h5><p>Acceso a datos (JPA)</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🐘</div><div class="n">SQL</div><h5>PostgreSQL</h5><p>La base de datos</p></div>
+      </div>
+    </div>
+
+    <h3>Las anotaciones que debes saber explicar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>@SpringBootApplication</h4><p>Marca el punto de arranque; activa autoconfiguración y el escaneo de componentes.</p></div>
+      <div class="card"><h4>@RestController</h4><p>Expone la clase como API REST: sus métodos devuelven JSON directamente.</p></div>
+      <div class="card"><h4>@Service</h4><p>Contiene la lógica de negocio; es un componente inyectable.</p></div>
+      <div class="card"><h4>@Repository</h4><p>Acceso a datos. Con Spring Data JPA casi no escribes SQL.</p></div>
+      <div class="card"><h4>@Entity</h4><p>Mapea una clase Java a una tabla (ORM con Hibernate).</p></div>
+      <div class="card"><h4>Inyección por constructor</h4><p>Spring "inyecta" las dependencias que la clase necesita: desacopla y facilita las pruebas.</p></div>
+    </div>
+
+    <h3>Un microservicio completo, capa por capa</h3>
+    <p>Ejemplo: un servicio de <b>facturas</b> con un endpoint para listar pendientes y otro para crear.</p>
+
+    <p><b>1. Entity</b> — el objeto que mapea a la tabla:</p>
+    <pre><code><span class="kw">@Entity</span>
+<span class="kw">public class</span> Factura {
+  <span class="kw">@Id</span> <span class="kw">@GeneratedValue</span>
+  <span class="kw">private</span> Long id;
+  <span class="kw">private</span> String concepto;
+  <span class="kw">private</span> BigDecimal monto;
+  <span class="kw">private</span> LocalDate vence;
+  <span class="cmt">// + getters / setters</span>
+}</code></pre>
+
+    <p><b>2. Repository</b> — acceso a datos sin escribir SQL (Spring lo genera desde el nombre del método):</p>
+    <pre><code><span class="kw">public interface</span> FacturaRepository
+        <span class="kw">extends</span> JpaRepository&lt;Factura, Long&gt; {
+
+  List&lt;Factura&gt; findByVenceBefore(LocalDate fecha);  <span class="cmt">// SELECT ... WHERE vence &lt; ?</span>
+}</code></pre>
+
+    <p><b>3. Service</b> — la lógica de negocio, con inyección por constructor:</p>
+    <pre><code><span class="kw">@Service</span>
+<span class="kw">public class</span> FacturaService {
+  <span class="kw">private final</span> FacturaRepository repo;
+
+  <span class="kw">public</span> FacturaService(FacturaRepository repo) {  <span class="cmt">// Spring inyecta el repo</span>
+    <span class="kw">this</span>.repo = repo;
+  }
+
+  <span class="kw">public</span> List&lt;Factura&gt; pendientes() {
+    <span class="kw">return</span> repo.findByVenceBefore(LocalDate.now());
+  }
+
+  <span class="kw">public</span> Factura crear(Factura f) { <span class="kw">return</span> repo.save(f); }
+}</code></pre>
+
+    <p><b>4. Controller</b> — expone los endpoints REST:</p>
+    <pre><code><span class="kw">@RestController</span>
+<span class="kw">@RequestMapping</span>("/api/facturas")
+<span class="kw">public class</span> FacturaController {
+  <span class="kw">private final</span> FacturaService service;
+
+  <span class="kw">public</span> FacturaController(FacturaService service) {
+    <span class="kw">this</span>.service = service;
+  }
+
+  <span class="kw">@GetMapping</span>("/pendientes")
+  <span class="kw">public</span> List&lt;Factura&gt; pendientes() {
+    <span class="kw">return</span> service.pendientes();
+  }
+
+  <span class="kw">@PostMapping</span>
+  <span class="kw">public</span> ResponseEntity&lt;Factura&gt; crear(<span class="kw">@Valid @RequestBody</span> Factura f) {
+    <span class="kw">return</span> ResponseEntity.status(201).body(service.crear(f));
+  }
+}</code></pre>
+
+    <p><b>5. application.yml</b> — configuración y conexión a la base de datos (sin credenciales en el código):</p>
+    <pre><code>spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/rohu
+    username: ${DB_USER}      <span class="cmt"># viene de variables/Secrets</span>
+    password: ${DB_PASS}
+  jpa:
+    hibernate.ddl-auto: validate
+server:
+  port: 8080</code></pre>
+
+    <h3>Lo que lo vuelve "microservicio" (y conecta con el resto de la guía)</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Actuator = health checks</h4><p><code>spring-boot-starter-actuator</code> expone <code>/actuator/health</code> → es justo lo que apuntan las <b>readiness/liveness probes</b> de Kubernetes.</p></div>
+      <div class="card"><h4>Perfiles por entorno</h4><p><code>application-dev.yml</code> / <code>-prod.yml</code> con <b>Spring Profiles</b>: misma imagen, distinta config.</p></div>
+      <div class="card"><h4>Comunicación entre servicios</h4><p><b>WebClient</b> u <b>OpenFeign</b> para llamar otras APIs REST; eventos con NATS para lo asíncrono.</p></div>
+      <div class="card"><h4>Resiliencia</h4><p><b>Resilience4j</b>: circuit breaker, retry y timeout para no caer en cascada si un servicio falla.</p></div>
+      <div class="card"><h4>Persistencia</h4><p><b>Spring Data JPA</b> sobre PostgreSQL/Oracle; migraciones con Flyway/Liquibase.</p></div>
+      <div class="card"><h4>Observabilidad</h4><p>Métricas de Actuator/Micrometer → Prometheus/Azure Monitor.</p></div>
+    </div>
+
+    <h3>Y se empaqueta así (Dockerfile multi-stage para Java)</h3>
+    <pre><code><span class="cmt"># --- etapa build: compila el .jar ---</span>
+<span class="kw">FROM</span> maven:3.9-eclipse-temurin-21 AS build
+<span class="kw">WORKDIR</span> /app
+<span class="kw">COPY</span> pom.xml .
+<span class="kw">RUN</span>  mvn -q dependency:go-offline     <span class="cmt"># cachea dependencias</span>
+<span class="kw">COPY</span> src ./src
+<span class="kw">RUN</span>  mvn -q clean package -DskipTests
+<span class="cmt"># --- etapa runtime: imagen liviana solo con el JRE ---</span>
+<span class="kw">FROM</span> eclipse-temurin:21-jre
+<span class="kw">WORKDIR</span> /app
+<span class="kw">COPY</span> --from=build /app/target/*.jar app.jar
+<span class="kw">EXPOSE</span> 8080
+<span class="kw">ENTRYPOINT</span> ["java","-jar","app.jar"]</code></pre>
+
+    <div class="callout"><b>El círculo completo:</b> escribes el servicio (Spring Boot) → lo compilas en un <code>.jar</code> y lo metes en una imagen (Docker) → el pipeline lo construye y <b>SonarQube/Kiuwan</b> revisan el código Java → se despliega en <b>AKS</b> con Helm → <b>Actuator</b> alimenta las probes de Kubernetes. Todo encaja.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Construí microservicios en Java/Spring Boot con arquitectura por capas (Controller/Service/Repository), Spring Data JPA sobre PostgreSQL/Oracle, endpoints REST y Actuator para health checks integrados con las probes de Kubernetes, además de comunicación event-driven — e integré sistemas legacy .NET/Java con estas APIs modernas."</div>
+
+    <h3>Preguntas típicas de Spring Boot</h3>
+    <details class="qa"><summary>¿Qué es la inyección de dependencias y cómo la hace Spring?</summary>
+      <div class="ans"><p>Es dejar que un contenedor (el <b>IoC container</b> de Spring) cree y "entregue" las dependencias que una clase necesita, en vez de que ella las construya. Spring detecta los componentes (<code>@Service</code>, <code>@Repository</code>) y los inyecta — preferiblemente <b>por constructor</b>, lo que desacopla y hace el código fácil de probar (puedes inyectar un mock).</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo accedes a la base de datos sin escribir SQL?</summary>
+      <div class="ans"><p>Con <b>Spring Data JPA</b>: extiendes <code>JpaRepository&lt;Entidad, Id&gt;</code> y ya tienes <code>save</code>, <code>findAll</code>, <code>findById</code>, etc. Además, Spring genera consultas a partir del <b>nombre del método</b> (<code>findByVenceBefore</code> → <code>WHERE vence &lt; ?</code>). Para casos complejos usas <code>@Query</code> con JPQL o SQL nativo.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo conecta un servicio Spring Boot con los health checks de Kubernetes?</summary>
+      <div class="ans"><p>Con <b>Spring Boot Actuator</b>, que expone <code>/actuator/health/readiness</code> y <code>/actuator/health/liveness</code>. Las <b>probes</b> del Deployment de Kubernetes apuntan a esas URLs: si readiness no responde OK, K8s no le manda tráfico; si liveness falla, lo reinicia. Eso es lo que habilita el zero-downtime real.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo se comunican dos microservicios en Spring Boot?</summary>
+      <div class="ans"><p>De forma <b>síncrona</b> con <b>WebClient</b> u <b>OpenFeign</b> (llamadas REST), envolviéndolas en un <b>circuit breaker</b> (Resilience4j) para tolerar fallos; o de forma <b>asíncrona</b> por <b>eventos/mensajería</b> (NATS), que los desacopla y los hace más resilientes.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="docker">
+  <div class="wrap">
+    <h2><span class="tag t-docker">Paso 1</span> Docker &amp; Dockerfile</h2>
+    <p class="sub">Docker resuelve el clásico <em>“en mi máquina sí funciona”</em>: empaqueta tu aplicación con TODO lo que necesita para correr, de forma aislada y reproducible.</p>
+
+    <div class="callout"><b>Analogía:</b> un <b>contenedor</b> es como una lonchera sellada: adentro va tu comida (la app) y sus cubiertos (librerías, versión de Python/Java, config). La abras donde la abras —tu portátil o un servidor en Azure— adentro está exactamente lo mismo.</div>
+
+    <h3>Los tres conceptos que debes distinguir</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Dockerfile</h4><p class="obj">la receta</p><p>Un archivo de texto con instrucciones para construir la imagen (qué base usar, qué copiar, qué instalar, cómo arrancar).</p></div>
+      <div class="card"><h4>Imagen</h4><p class="obj">la plantilla</p><p>El resultado de construir el Dockerfile. Es <b>inmutable</b> y se guarda en un registro (p. ej. Azure Container Registry).</p></div>
+      <div class="card"><h4>Contenedor</h4><p class="obj">la instancia viva</p><p>Una imagen en ejecución. De una misma imagen puedes levantar 1 o 100 contenedores iguales.</p></div>
+    </div>
+
+    <h3>Cómo se construye por “capas”</h3>
+    <p>Cada instrucción del Dockerfile crea una <b>capa</b> que Docker cachea. Si no cambia, se reutiliza → los builds son rápidos. Por eso se ponen primero las cosas que cambian poco (dependencias) y de último el código.</p>
+    <div class="layers" aria-label="Capas de una imagen Docker">
+      <div class="layer"><code>CMD ["uvicorn", ...]</code><span>cómo arranca</span></div>
+      <div class="layer"><code>COPY . .</code><span>tu código (cambia seguido)</span></div>
+      <div class="layer"><code>RUN pip install ...</code><span>dependencias (cacheable)</span></div>
+      <div class="layer"><code>COPY requirements.txt</code><span>lista de dependencias</span></div>
+      <div class="layer"><code>FROM python:3.12-slim</code><span>imagen base (SO + runtime)</span></div>
+    </div>
+
+    <h3>Dockerfile de ejemplo (un microservicio Python/FastAPI)</h3>
+    <pre><code><span class="kw">FROM</span> python:3.12-slim            <span class="cmt"># base: Linux mínimo + Python</span>
+<span class="kw">WORKDIR</span> /app                     <span class="cmt"># carpeta de trabajo dentro del contenedor</span>
+<span class="kw">COPY</span> requirements.txt .          <span class="cmt"># primero las dependencias (capa cacheable)</span>
+<span class="kw">RUN</span>  pip install --no-cache-dir -r requirements.txt
+<span class="kw">COPY</span> . .                         <span class="cmt"># luego el código de la app</span>
+<span class="kw">EXPOSE</span> 8000                       <span class="cmt"># puerto que expone el servicio</span>
+<span class="kw">CMD</span> ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]</code></pre>
+
+    <h3>Flujo básico</h3>
+    <p><code>docker build</code> (crea la imagen desde el Dockerfile) → <code>docker push</code> (la sube al registro) → <code>docker run</code> (levanta el contenedor). En producción, ese “run” lo hace Kubernetes por ti.</p>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> “Empaqueté cada microservicio de la plataforma de compras y recargas en su propia imagen Docker, de modo que corriera idéntico en desarrollo y en producción, y lo publiqué en Azure Container Registry para desplegarlo en AKS.”</div>
+  </div>
+</section>
+
+<section id="kubernetes">
+  <div class="wrap">
+    <h2><span class="tag t-k8s">Paso 2</span> Kubernetes (K8s)</h2>
+    <p class="sub">Un contenedor está bien para una app; pero con decenas de microservicios, en muchos servidores, escalando y fallando en vivo, coordinarlos a mano es imposible. <b>Kubernetes orquesta todo eso automáticamente.</b></p>
+
+    <div class="callout"><b>Analogía:</b> Kubernetes es el <b>director de orquesta</b>. Tú le dices el resultado que quieres (“quiero 5 copias de este servicio, siempre sanas y accesibles”) y él se encarga de reiniciar lo que se cae, repartir la carga y actualizar sin que el público note el cambio.</div>
+
+    <h3>El modelo mental clave: estado deseado</h3>
+    <p>No le das órdenes paso a paso; le entregas un <b>manifiesto YAML</b> que declara el estado deseado. Kubernetes lo <em>reconcilia</em> constantemente: si algo se desvía (un Pod muere), lo vuelve a poner como pediste. Eso es la <b>auto-reparación</b>.</p>
+
+    <h3>Los objetos que debes nombrar</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Pod</h4><p class="obj">la unidad mínima</p><p>Envuelve uno o varios contenedores que viven juntos. Es lo más pequeño que Kubernetes despliega.</p></div>
+      <div class="card"><h4>Deployment</h4><p class="obj">réplicas + actualizaciones</p><p>Declara cuántas copias (réplicas) quieres de un Pod y gestiona las actualizaciones graduales (rolling updates).</p></div>
+      <div class="card"><h4>Service</h4><p class="obj">dirección estable</p><p>Da una IP/DNS fija para llegar a un grupo de Pods y balancea el tráfico entre ellos, aunque los Pods cambien.</p></div>
+      <div class="card"><h4>Ingress</h4><p class="obj">puerta de entrada</p><p>Enruta el tráfico HTTP/HTTPS desde afuera hacia el Service correcto (por dominio o ruta).</p></div>
+      <div class="card"><h4>ConfigMap &amp; Secret</h4><p class="obj">config fuera del código</p><p>Guardan configuración y credenciales por separado, para no “quemarlas” en la imagen.</p></div>
+      <div class="card"><h4>HPA (autoscaler)</h4><p class="obj">escala solo</p><p>Sube o baja el número de réplicas según la carga (CPU/memoria) — clave bajo alto tráfico.</p></div>
+    </div>
+
+    <h3>Cómo se despliega</h3>
+    <pre><code><span class="cmt"># Declaras el estado deseado y lo aplicas</span>
+kubectl apply -f deployment.yaml
+kubectl get pods           <span class="cmt"># ver las réplicas corriendo</span>
+kubectl rollout status ... <span class="cmt"># seguir una actualización</span></code></pre>
+
+    <h3>Las tres superpotencias (tu argumento de venta)</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>♻️ Rolling update</h4><p>Levanta las réplicas nuevas y retira las viejas de a poco → <b>zero-downtime</b>.</p></div>
+      <div class="card"><h4>🩹 Auto-reparación</h4><p>Si un Pod se cae o no responde (health checks), lo reinicia o reemplaza solo.</p></div>
+      <div class="card"><h4>📈 Autoescalado</h4><p>Con el HPA, agrega réplicas cuando sube el tráfico y las quita cuando baja.</p></div>
+    </div>
+
+    <div class="callout"><b>Dato de entrevista — probes:</b> el zero-downtime real depende de las <b>readiness</b> y <b>liveness probes</b>. La <em>readiness</em> le dice a Kubernetes “ya estoy listo para recibir tráfico” (no enruta hasta entonces); la <em>liveness</em> dice “sigo vivo” (si falla, me reinicia). Mencionarlas demuestra profundidad.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> “Desplegué los microservicios en AKS con Deployments y rolling updates, logrando despliegues sin downtime; el autoescalado (HPA) sostuvo tiempos de respuesta de 500&nbsp;ms bajo alto tráfico, y la auto-reparación mantuvo la alta disponibilidad.”</div>
+  </div>
+</section>
+
+<section id="k8s-deep">
+  <div class="wrap">
+    <h2><span class="tag t-k8s">A fondo</span> Kubernetes por dentro</h2>
+    <p class="sub">Si el entrevistador va más allá de "¿qué es un Pod?", esto es lo que separa a alguien que <em>usa</em> Kubernetes de alguien que lo <em>entiende</em>.</p>
+
+    <h3>Arquitectura del clúster</h3>
+    <p>Un clúster tiene dos mitades: el <b>control plane</b> (el cerebro que decide) y los <b>nodos</b> (los músculos que ejecutan tus contenedores).</p>
+    <div class="grid cols-2">
+      <div class="card"><h4>🧠 Control plane</h4><p class="obj">decide y coordina</p><p><b>API Server</b> (la puerta de entrada), <b>etcd</b> (la base de datos del estado), <b>Scheduler</b> (asigna Pods a nodos) y <b>Controller Manager</b> (reconcilia el estado deseado).</p></div>
+      <div class="card"><h4>💪 Nodos (workers)</h4><p class="obj">ejecutan los Pods</p><p><b>kubelet</b> (agente que crea los contenedores), <b>kube-proxy</b> (redes/enrutamiento) y el <b>container runtime</b> (containerd) que realmente corre los contenedores.</p></div>
+    </div>
+    <div class="callout"><b>En AKS</b>, Azure gestiona el control plane por ti (no lo ves ni lo pagas como VMs); tú solo administras los nodos y tus aplicaciones.</div>
+
+    <h3>Más objetos que vale la pena nombrar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>StatefulSet</h4><p>Para apps con <b>estado</b> e identidad estable (bases de datos, colas). A diferencia del Deployment, cada Pod es distinguible y persistente.</p></div>
+      <div class="card"><h4>DaemonSet</h4><p>Garantiza <b>un Pod por nodo</b> — típico para agentes de logs, métricas o seguridad.</p></div>
+      <div class="card"><h4>Job / CronJob</h4><p>Tareas que corren y terminan; el <b>CronJob</b> las programa (p. ej. una conciliación nocturna).</p></div>
+      <div class="card"><h4>PV / PVC</h4><p><b>PersistentVolume</b> y su reclamo (PVC): almacenamiento que sobrevive aunque el Pod muera.</p></div>
+      <div class="card"><h4>Namespace</h4><p>Divide el clúster en espacios lógicos (dev / qa / prod, o por equipo).</p></div>
+      <div class="card"><h4>Service types</h4><p><b>ClusterIP</b> (interno), <b>NodePort</b> (puerto del nodo), <b>LoadBalancer</b> (IP pública, vía Azure LB).</p></div>
+    </div>
+
+    <h3>Salud, recursos y actualización sin cortes</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Requests &amp; Limits</h4><p><b>requests</b> = lo que el Pod reserva; <b>limits</b> = su tope. Evitan que un servicio ahogue a los demás.</p></div>
+      <div class="card"><h4>Probes</h4><p><b>readiness</b> (¿listo para tráfico?), <b>liveness</b> (¿sigo vivo?) y <b>startup</b> (para arranques lentos).</p></div>
+      <div class="card"><h4>Estrategia rolling</h4><p><code>maxUnavailable: 0</code> + <code>maxSurge: 1</code> = nunca bajas capacidad mientras actualizas.</p></div>
+    </div>
+
+    <pre><code><span class="kw">apiVersion:</span> apps/v1
+<span class="kw">kind:</span> Deployment
+<span class="kw">metadata:</span> { name: recargas-svc }
+<span class="kw">spec:</span>
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }   <span class="cmt"># zero-downtime</span>
+  template:
+    spec:
+      containers:
+        - name: app
+          image: acr.azurecr.io/recargas:1.4.2
+          resources:
+            requests: { cpu: "250m", memory: "256Mi" }
+            limits:   { cpu: "500m", memory: "512Mi" }
+          readinessProbe: { httpGet: { path: /health, port: 8000 } }
+          livenessProbe:  { httpGet: { path: /alive,  port: 8000 } }</code></pre>
+
+    <h3>kubectl — comandos en la punta de la lengua</h3>
+    <pre><code>kubectl get pods -n prod            <span class="cmt"># listar Pods de un namespace</span>
+kubectl describe pod &lt;nombre&gt;       <span class="cmt"># diagnosticar por qué falla</span>
+kubectl logs -f &lt;pod&gt;               <span class="cmt"># ver logs en vivo</span>
+kubectl rollout status deploy/recargas-svc
+kubectl rollout undo   deploy/recargas-svc   <span class="cmt"># revertir un despliegue</span>
+kubectl scale deploy/recargas-svc --replicas=8</code></pre>
+
+    <details class="qa"><summary>Pregunta típica: ¿qué pasa cuando un nodo se cae?</summary>
+      <div class="ans"><p>El control plane lo detecta (deja de recibir el "latido" del kubelet), marca sus Pods como perdidos y el <b>Scheduler</b> los <b>reprograma en nodos sanos</b>. Si tenías varias réplicas repartidas, el servicio ni se entera — eso es alta disponibilidad real.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="helm">
+  <div class="wrap">
+    <h2><span class="tag t-helm">Empaquetado</span> Helm</h2>
+    <p class="sub">Mantener a mano decenas de archivos YAML —y duplicarlos por cada entorno— es un dolor. <b>Helm es el gestor de paquetes de Kubernetes</b>: el "apt" o "npm" del clúster.</p>
+
+    <div class="callout"><b>Analogía:</b> un <b>Chart</b> de Helm es una <b>plantilla parametrizable</b> de tu despliegue. En vez de un YAML para dev y otro para prod, tienes una plantilla y un archivo de <code>values</code> por entorno: cambias valores, no copias archivos.</div>
+
+    <h3>Los tres términos</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Chart</h4><p class="obj">el paquete</p><p>Conjunto de plantillas YAML + valores por defecto. Reutilizable y versionable.</p></div>
+      <div class="card"><h4>values.yaml</h4><p class="obj">la configuración</p><p>Los valores que rellenan la plantilla (imagen, réplicas, dominio). Uno por entorno.</p></div>
+      <div class="card"><h4>Release</h4><p class="obj">la instalación</p><p>Una instancia de un chart desplegada, con historial de versiones para hacer rollback.</p></div>
+    </div>
+
+    <h3>Estructura de un chart</h3>
+    <pre><code>mi-servicio/
+├─ Chart.yaml         <span class="cmt"># nombre y versión del chart</span>
+├─ values.yaml        <span class="cmt"># valores por defecto</span>
+├─ values-prod.yaml   <span class="cmt"># valores de producción</span>
+└─ templates/
+   ├─ deployment.yaml <span class="cmt"># usa {{ .Values.replicas }}, {{ .Values.image.tag }}</span>
+   ├─ service.yaml
+   └─ ingress.yaml</code></pre>
+
+    <h3>Comandos clave</h3>
+    <pre><code>helm install recargas ./mi-servicio -f values-prod.yaml
+helm upgrade recargas ./mi-servicio --set image.tag=1.4.3   <span class="cmt"># nueva versión</span>
+helm rollback recargas 2      <span class="cmt"># volver a una versión anterior en segundos</span>
+helm list                     <span class="cmt"># ver releases instaladas</span></code></pre>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Empaqueté los microservicios como charts de Helm para desplegarlos de forma consistente en dev, QA y producción cambiando solo los <em>values</em>, con versionado y rollback inmediato — despliegues repetibles y seguros."</div>
+  </div>
+</section>
+
+<section id="azure">
+  <div class="wrap">
+    <h2><span class="tag t-azure">Paso 3</span> Azure &amp; AKS</h2>
+    <p class="sub">Azure es la <b>nube de Microsoft</b>: servidores, redes, bases de datos y servicios bajo demanda. <b>AKS (Azure Kubernetes Service)</b> es Kubernetes <em>gestionado</em>: Azure opera la parte compleja (el “control plane”) y tú te concentras en desplegar tus apps.</p>
+
+    <h3>Las piezas de Azure que se conectan</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>AKS</h4><p class="obj">Kubernetes gestionado</p><p>El clúster donde corren tus contenedores. Azure administra la infraestructura y las actualizaciones del clúster.</p></div>
+      <div class="card"><h4>ACR — Container Registry</h4><p class="obj">tus imágenes privadas</p><p>El “almacén” donde guardas y versionas las imágenes Docker que AKS descarga para desplegar.</p></div>
+      <div class="card"><h4>Azure DevOps / Pipelines</h4><p class="obj">CI/CD</p><p>Automatiza construir, probar, publicar la imagen y desplegar a AKS en cada cambio de código.</p></div>
+      <div class="card"><h4>Key Vault &amp; Monitor</h4><p class="obj">secretos + observabilidad</p><p>Key Vault guarda credenciales de forma segura; Azure Monitor/Log Analytics da métricas, logs y alertas.</p></div>
+    </div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> “Lideré la migración del monolito WebLogic a microservicios en Azure AKS, con imágenes en ACR y pipelines de Azure DevOps que automatizaron el despliegue diario en producción — reduciendo el tiempo de despliegue en un 60%.”</div>
+  </div>
+</section>
+
+<section id="pipelines">
+  <div class="wrap">
+    <h2><span class="tag t-azure">Paso 4</span> Pipelines (CI/CD)</h2>
+    <p class="sub">Un <b>pipeline</b> es la línea de ensamblaje automatizada que lleva tu código de "commit" a "producción" sin pasos manuales: construye, prueba, valida calidad y despliega.</p>
+
+    <h3>Las etapas típicas</h3>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">🔨</div><div class="n">CI</div><h5>Build</h5><p>Compila el código</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🧪</div><div class="n">CI</div><h5>Test</h5><p>Pruebas unitarias</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🛡️</div><div class="n">Gate</div><h5>Calidad</h5><p>SonarQube / Kiuwan</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">📦</div><div class="n">CI</div><h5>Imagen</h5><p>Docker build + push a ACR</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🚦</div><div class="n">CD</div><h5>Aprobación</h5><p>Gate manual a prod</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🎛️</div><div class="n">CD</div><h5>Deploy</h5><p>Helm → AKS</p></div>
+      </div>
+    </div>
+
+    <h3>Conceptos que debes manejar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Stages / Jobs / Steps</h4><p>La jerarquía del pipeline: etapas → trabajos → pasos concretos.</p></div>
+      <div class="card"><h4>Agente / Runner</h4><p>La máquina que ejecuta el pipeline (en la nube o propia).</p></div>
+      <div class="card"><h4>Artefacto</h4><p>El resultado que se pasa entre etapas (un binario, una imagen).</p></div>
+      <div class="card"><h4>Trigger</h4><p>Lo que dispara el pipeline (un push a <code>main</code>, un Pull Request).</p></div>
+      <div class="card"><h4>Environment + Approval</h4><p>Producción como entorno "protegido" que exige una aprobación antes de desplegar.</p></div>
+      <div class="card"><h4>Variables &amp; Secrets</h4><p>Config y credenciales (idealmente desde Key Vault), nunca en el código.</p></div>
+    </div>
+
+    <h3>Ejemplo (Azure DevOps, YAML)</h3>
+    <pre><code><span class="kw">trigger:</span> [ main ]
+<span class="kw">stages:</span>
+  - stage: Build
+    jobs:
+      - job: build_test
+        steps:
+          - script: mvn test
+          - task: SonarQubePrepare@5       <span class="cmt"># prepara el análisis</span>
+          - script: mvn verify sonar:sonar
+          - task: SonarQubePublish@5        <span class="cmt"># Quality Gate: falla si no pasa</span>
+          - script: docker build -t $(ACR)/recargas:$(Build.BuildId) .
+          - script: docker push $(ACR)/recargas:$(Build.BuildId)
+  - stage: Deploy_Prod
+    dependsOn: Build
+    jobs:
+      - deployment: prod
+        environment: produccion             <span class="cmt"># requiere aprobación</span>
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: helm upgrade recargas ./chart --set image.tag=$(Build.BuildId)</code></pre>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Implementé pipelines de CI/CD en Azure DevOps que compilan, prueban, pasan por un quality gate y despliegan con Helm a AKS, con aprobaciones para producción — reduciendo el tiempo de despliegue en 60% y habilitando despliegues diarios."</div>
+  </div>
+</section>
+
+<section id="calidad">
+  <div class="wrap">
+    <h2><span class="tag t-quality">Paso 5</span> Calidad &amp; seguridad del código: SonarQube y Kiuwan</h2>
+    <p class="sub">En banca y gobierno, la calidad y la seguridad del código no son opcionales: se automatizan dentro del pipeline como un <b>"quality gate"</b> que <b>bloquea</b> el despliegue si el código no cumple.</p>
+
+    <div class="callout"><b>Concepto base — SAST:</b> ambas herramientas hacen <b>análisis estático</b> (Static Application Security Testing): revisan el código <em>sin ejecutarlo</em>, buscando bugs, vulnerabilidades y malas prácticas. Se contrasta con <b>DAST</b>, que prueba la aplicación ya corriendo.</div>
+
+    <h3>SonarQube</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Qué detecta</h4><p><b>Bugs</b>, <b>vulnerabilidades</b>, <b>"code smells"</b> (malas prácticas), <b>duplicación</b> y <b>cobertura de pruebas</b>. Cuantifica la <b>deuda técnica</b>.</p></div>
+      <div class="card"><h4>Quality Gate</h4><p>Un umbral que defines (p. ej. "0 vulnerabilidades nuevas, cobertura ≥ 80%"). Si no se cumple, el pipeline <b>falla</b> y no se despliega.</p></div>
+    </div>
+
+    <h3>Kiuwan</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Enfoque</h4><p>Plataforma de <b>seguridad y calidad</b> orientada a <b>compliance</b>. Fuerte en <b>Code Security</b> (SAST) y <b>SCA</b> (análisis de dependencias con vulnerabilidades conocidas).</p></div>
+      <div class="card"><h4>Estándares</h4><p>Mapea hallazgos a <b>OWASP Top 10</b>, <b>CWE</b>, <b>PCI-DSS</b>, CERT… — clave en entornos regulados como banca y gobierno.</p></div>
+    </div>
+
+    <h3>SonarQube vs. Kiuwan — cómo diferenciarlas</h3>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Dimensión</th><th>SonarQube</th><th>Kiuwan</th></tr></thead>
+        <tbody>
+          <tr><td>Foco principal</td><td>Calidad de código (+ seguridad)</td><td>Seguridad y compliance (+ calidad)</td></tr>
+          <tr><td>SCA (dependencias)</td><td>Básico</td><td>Fuerte (Insights)</td></tr>
+          <tr><td>Estándares de seguridad</td><td>Reglas propias, OWASP</td><td>OWASP, CWE, PCI, CERT…</td></tr>
+          <tr><td>Modelo</td><td>Open source / self-host + SonarCloud</td><td>Comercial, cloud u on-premise</td></tr>
+          <tr><td>Uso típico</td><td>Quality gate del día a día</td><td>Auditoría de seguridad / gobierno</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout"><b>Glosario rápido:</b> <b>SAST</b> = análisis del código estático · <b>SCA</b> = análisis de librerías/dependencias · <b>DAST</b> = pruebas sobre la app corriendo · <b>Quality Gate</b> = umbral que aprueba o bloquea · <b>Deuda técnica</b> = costo futuro de los atajos de hoy · <b>OWASP Top 10 / CWE</b> = catálogos estándar de vulnerabilidades.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Integré análisis estático (SonarQube/Kiuwan) como quality gate en los pipelines: cada cambio se evalúa por bugs, vulnerabilidades y cobertura, y no llega a producción si no cumple el umbral — alineado con estándares CMMI y de seguridad en proyectos financieros."</div>
+
+    <details class="qa"><summary>Pregunta típica: ¿dónde encajan estas herramientas en el pipeline?</summary>
+      <div class="ans"><p>Justo después de las pruebas y <b>antes</b> de construir/desplegar la imagen: el pipeline manda el código al análisis, espera el resultado del <b>Quality Gate</b> y solo continúa si aprueba. Así se evita que código con vulnerabilidades o baja calidad llegue a producción.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="flujo">
+  <div class="wrap">
+    <h2>El flujo completo, de tu teclado al usuario</h2>
+    <p class="sub">Esta es la historia que une todo. Si la cuentas de corrido en una entrevista, demuestras que dominas el ciclo end-to-end — no piezas sueltas.</p>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">⌨️</div><div class="n">01</div><h5>Código + commit</h5><p>Escribes y subes a Git (Azure Repos / GitHub)</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">⚙️</div><div class="n">02</div><h5>CI/CD</h5><p>Azure DevOps compila y prueba</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">📦</div><div class="n">03</div><h5>Build imagen</h5><p>Con el Dockerfile crea la imagen</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🗄️</div><div class="n">04</div><h5>Push a ACR</h5><p>Guarda la imagen versionada</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🎛️</div><div class="n">05</div><h5>Deploy a AKS</h5><p>K8s hace rolling update de los Pods</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🌐</div><div class="n">06</div><h5>Usuarios</h5><p>Ingress enruta el tráfico, sin downtime</p></div>
+      </div>
+    </div>
+    <div class="callout"><b>Y por debajo, tu arquitectura:</b> microservicios <b>event-driven</b> que se comunican por mensajería <b>NATS</b> (desacoplados), exponen <b>REST APIs</b>, guardan datos en <b>PostgreSQL/Oracle</b> y usan <b>Redis</b> como caché para responder rápido. Resultado: <b>500&nbsp;ms</b> bajo alto tráfico, <b>zero-downtime</b> y <b>−60%</b> en tiempos de despliegue.</div>
+  </div>
+</section>
+
+<section id="glosario">
+  <div class="wrap">
+    <h2>Glosario entendible de todo tu CV</h2>
+    <p class="sub">Cada término de tu hoja de vida, explicado en una frase clara. Sirve para que ninguna palabra del CV te tome por sorpresa.</p>
+    <dl class="gloss">
+      <div class="term"><dt>Monolito <small>arquitectura</small></dt><dd>Una sola aplicación grande donde todo está junto. Fácil al inicio, difícil de escalar y actualizar sin afectar el resto.</dd></div>
+      <div class="term"><dt>Microservicios <small>arquitectura</small></dt><dd>Dividir esa app en servicios pequeños e independientes, cada uno con su responsabilidad; se despliegan y escalan por separado.</dd></div>
+      <div class="term"><dt>WebLogic <small>legacy</small></dt><dd>Servidor de aplicaciones Java empresarial (Oracle). Suele ser el “monolito” pesado del que se migra hacia la nube.</dd></div>
+      <div class="term"><dt>Event-driven <small>patrón</small></dt><dd>Los servicios reaccionan a “eventos” (mensajes) en vez de llamarse directo. Los desacopla y los hace más resilientes.</dd></div>
+      <div class="term"><dt>NATS <small>mensajería</small></dt><dd>Un sistema de mensajería muy rápido que transporta esos eventos entre microservicios (publicar/suscribir).</dd></div>
+      <div class="term"><dt>REST API <small>integración</small></dt><dd>Un contrato sobre HTTP para que sistemas hablen entre sí (GET/POST/PUT/DELETE sobre “recursos”). El idioma común entre servicios y frontend.</dd></div>
+      <div class="term"><dt>Webhook <small>integración</small></dt><dd>Una notificación automática: un sistema “llama” a una URL tuya cuando ocurre algo, en lugar de que tú preguntes.</dd></div>
+      <div class="term"><dt>CI/CD <small>automatización</small></dt><dd>Integración y Entrega Continua: automatizar el camino de compilar → probar → desplegar, para publicar seguido y sin errores manuales.</dd></div>
+      <div class="term"><dt>DevOps <small>cultura</small></dt><dd>Unir desarrollo y operaciones con automatización, para entregar más rápido y con calidad. CI/CD es su herramienta central.</dd></div>
+      <div class="term"><dt>Zero-downtime <small>disponibilidad</small></dt><dd>Actualizar el sistema sin cortar el servicio: los usuarios nunca ven una caída durante el despliegue.</dd></div>
+      <div class="term"><dt>Alta disponibilidad <small>disponibilidad</small></dt><dd>El sistema sigue funcionando aunque falle una pieza, gracias a réplicas y auto-reparación.</dd></div>
+      <div class="term"><dt>Java / Spring Boot <small>backend</small></dt><dd>Lenguaje y framework para construir servicios backend robustos y APIs empresariales.</dd></div>
+      <div class="term"><dt>.NET / C# <small>backend</small></dt><dd>Plataforma y lenguaje de Microsoft para backend y servicios empresariales.</dd></div>
+      <div class="term"><dt>Python · FastAPI · Flask <small>backend</small></dt><dd>Python para servicios y dashboards. FastAPI es moderno y asíncrono; Flask es ligero y directo.</dd></div>
+      <div class="term"><dt>SQLAlchemy async <small>datos</small></dt><dd>Librería de Python (ORM) para hablar con la base de datos usando objetos, en modo asíncrono (no bloquea mientras espera).</dd></div>
+      <div class="term"><dt>React / Next.js <small>frontend</small></dt><dd>Para construir interfaces web modernas. Next.js añade renderizado en servidor y estructura de producción sobre React.</dd></div>
+      <div class="term"><dt>PostgreSQL / Oracle <small>bases de datos</small></dt><dd>Bases de datos relacionales (tablas y SQL) para datos transaccionales y consistentes.</dd></div>
+      <div class="term"><dt>Redis <small>caché</small></dt><dd>Base de datos en memoria, ultrarrápida; se usa como caché para responder sin golpear la base cada vez.</dd></div>
+      <div class="term"><dt>Scrum / Ágil <small>gestión</small></dt><dd>Marco de trabajo iterativo: entregas por sprints, reuniones cortas y mejora continua del equipo.</dd></div>
+      <div class="term"><dt>Integración de IA · OpenAI / LLM <small>producto</small></dt><dd>Incorporar modelos de lenguaje (IA) dentro de un producto para tareas como leer facturas o asistir procesos — no solo usar IA como ayuda de desarrollo.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="entrevista">
+  <div class="wrap">
+    <h2>Preguntas típicas + tu respuesta</h2>
+    <p class="sub">Respuestas cortas y correctas, ancladas en tu experiencia real. Ábrelas y practícalas en voz alta.</p>
+
+    <details class="qa"><summary>¿Cuál es la diferencia entre Docker y una máquina virtual?</summary>
+      <div class="ans"><p><span class="pill">clave</span> Una VM virtualiza un sistema operativo completo (pesada, arranca lento). Un contenedor <b>comparte el kernel del host</b> y solo empaqueta la app y sus dependencias: es mucho más liviano, arranca en segundos y es reproducible. Por eso encaja perfecto con microservicios.</p></div>
+    </details>
+
+    <details class="qa"><summary>¿Cómo logras un despliegue sin downtime?</summary>
+      <div class="ans"><p>Con <b>rolling updates</b> en Kubernetes: levanta réplicas nuevas y solo cuando pasan la <b>readiness probe</b> empieza a enviarles tráfico, retirando las viejas gradualmente. Sumado a <b>liveness probes</b> para auto-reparación. Así los usuarios nunca ven una caída — justo como en la plataforma de compras y recargas que migré.</p></div>
+    </details>
+
+    <details class="qa"><summary>¿Cómo migraste de un monolito WebLogic a microservicios?</summary>
+      <div class="ans"><p>Con un enfoque incremental tipo <b>strangler fig</b>: identificar dominios, ir extrayendo servicios uno a uno sin “big bang”, comunicarlos por eventos (<b>NATS</b>) y REST, contenerizarlos con Docker y desplegarlos en <b>AKS</b> con CI/CD. Esto permitió convivir con el monolito mientras se reducía el riesgo, logrando zero-downtime y −60% en despliegues.</p></div>
+    </details>
+
+    <details class="qa"><summary>Explica Pod, Deployment y Service.</summary>
+      <div class="ans"><p><b>Pod</b>: la unidad mínima, envuelve el/los contenedores. <b>Deployment</b>: declara cuántas réplicas de ese Pod quiero y gestiona actualizaciones. <b>Service</b>: da una dirección estable y balancea el tráfico entre esos Pods aunque cambien. El <b>Ingress</b> los expone al exterior por HTTP/HTTPS.</p></div>
+    </details>
+
+    <details class="qa"><summary>¿Cómo escalas el sistema bajo un pico de tráfico?</summary>
+      <div class="ans"><p>Con el <b>HPA (Horizontal Pod Autoscaler)</b>, que agrega réplicas según CPU/memoria, más <b>Redis</b> como caché para descargar la base de datos y APIs eficientes. Esa combinación fue la que sostuvo <b>500&nbsp;ms</b> de respuesta bajo alto tráfico.</p></div>
+    </details>
+
+    <details class="qa"><summary>¿Cómo manejas configuración y secretos?</summary>
+      <div class="ans"><p>Fuera del código y de la imagen: <b>ConfigMap</b> para configuración y <b>Secret</b> para datos sensibles en Kubernetes, y <b>Azure Key Vault</b> para credenciales. Así la misma imagen sirve para dev, pruebas y producción cambiando solo la configuración.</p></div>
+    </details>
+
+    <details class="qa"><summary>¿Qué hace un Dockerfile, capa por capa?</summary>
+      <div class="ans"><p>Define cómo se construye la imagen: <code>FROM</code> (base), <code>WORKDIR</code>, <code>COPY</code> de dependencias, <code>RUN</code> para instalarlas, <code>COPY</code> del código y <code>CMD</code> para arrancar. Cada instrucción es una <b>capa cacheada</b>: por eso las dependencias van primero (cambian poco) y el código de último (cambia seguido), para builds rápidos.</p></div>
+    </details>
+
+    <details class="qa"><summary>¿Por qué event-driven y no llamadas directas entre servicios?</summary>
+      <div class="ans"><p>Porque <b>desacopla</b>: el emisor publica un evento y no le importa quién lo consume. Si un servicio está caído, el mensaje espera; se pueden agregar consumidores sin tocar al emisor. Da resiliencia y escalabilidad — por eso usé NATS en la arquitectura de microservicios.</p></div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
+    Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
+  </div>
+</footer>
+
+<button id="totop" aria-label="Volver arriba" title="Volver arriba">↑</button>
+<script>
+  (function(){
+    var b=document.getElementById('totop');
+    function onScroll(){ if(window.scrollY>480){b.classList.add('show');}else{b.classList.remove('show');} }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+    b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  })();
+</script>
+
+</body>
+</html>
