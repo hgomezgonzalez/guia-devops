@@ -7,7 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%23c0392b'/%3E%3Ctext%20x='32'%20y='46'%20font-family='Arial,sans-serif'%20font-size='38'%20font-weight='bold'%20fill='white'%20text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%23c0392b'/%3E%3Ctext%20x='32'%20y='46'%20font-family='Arial,sans-serif'%20font-size='38'%20font-weight='bold'%20fill='white'%20text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
 <title>Guía DevOps & Cloud — Hugo Gómez</title>
-<meta name="description" content="Dashboard de cursos: DevOps, Docker, Kubernetes, Spring Boot, Next.js, Node.js, SQL, NATS, Testing y liderazgo.">
+<meta name="description" content="Dashboard de cursos con modo enfoque: DevOps, Docker, Kubernetes, Spring Boot, Next.js, Node.js, SQL, NATS, Testing y liderazgo.">
 </head>
 <body>
 <style>
@@ -277,6 +277,14 @@
   .menu-cat[hidden]{display:none}
   .menu-cat a[hidden]{display:none}
   .menu-noresult{padding:16px;color:var(--ink-faint);font-size:.9rem;text-align:center;margin:0}
+  /* Modo enfoque: ver un curso a la vez (solo cuando está activo) */
+  .focus-btn{margin-left:8px;background:var(--surface-2);color:var(--brand-ink);border:1px solid var(--line);
+    border-radius:9px;padding:8px 12px;font-size:.86rem;font-weight:600;cursor:pointer;white-space:nowrap}
+  .focus-btn.on{background:var(--azure);color:#fff;border-color:var(--azure)}
+  body.focus-mode header.hero{display:none}
+  body.focus-mode #progress{display:none}
+  body.focus-mode section{display:none}
+  body.focus-mode section:target{display:block}
 
   @media(max-width:720px){
     .metrics{grid-template-columns:repeat(2,1fr)}
@@ -296,6 +304,7 @@
   <div class="wrap">
     <a class="brand" href="#dashboard">Guía técnica · Hugo Gómez</a>
     <a class="quick" href="#chuleta">🎯 Chuleta</a>
+    <button id="focusbtn" class="focus-btn" aria-pressed="false" title="Ver un curso a la vez">🔎 Enfoque</button>
     <button id="menubtn" class="menu-btn" aria-expanded="false" aria-controls="menu">☰&nbsp; Menú</button>
   </div>
 </nav>
@@ -369,7 +378,7 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-16 21:22 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-16 21:32 (Bogotá)</span></span></p>
 
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
@@ -1467,7 +1476,7 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
   <div class="wrap">
     Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
     Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
-    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-16 21:22 (Bogotá)</span></span>
+    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-16 21:32 (Bogotá)</span></span>
   </div>
 </footer>
 
@@ -1521,6 +1530,14 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
       if(i<SEQ.length-1){ var n=SEQ[i+1]; html+='<a class="next" href="#'+n[0]+'"><small>Siguiente &#8250;</small><b>'+n[1]+'</b></a>'; }
       nav.innerHTML=html; wrap.appendChild(nav);
     });
+
+    // Modo enfoque: muestra un curso a la vez (usa :target; apagado = página normal)
+    var fb=document.getElementById('focusbtn');
+    function applyFocusUI(on){ document.body.classList.toggle('focus-mode',on); fb.classList.toggle('on',on); fb.setAttribute('aria-pressed',on?'true':'false'); fb.textContent=on?'🔎 Enfoque: ON':'🔎 Enfoque'; }
+    function setFocus(on){ if(on && !location.hash){ location.hash='#dashboard'; } applyFocusUI(on); try{ localStorage.setItem('focusMode',on?'1':'0'); }catch(e){} if(on){ window.scrollTo(0,0); } }
+    fb.addEventListener('click',function(){ setFocus(!document.body.classList.contains('focus-mode')); });
+    window.addEventListener('hashchange',function(){ if(document.body.classList.contains('focus-mode')) window.scrollTo({top:0}); });
+    try{ if(localStorage.getItem('focusMode')==='1'){ if(!location.hash) location.hash='#dashboard'; applyFocusUI(true); } }catch(e){}
   })();
 </script>
 
