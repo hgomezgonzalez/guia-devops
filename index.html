@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#1f3355">
 <title>Guía DevOps &amp; Cloud — Hugo Gómez</title>
-<meta name="description" content="Guía visual de entrevista técnica: DevOps, Docker, Kubernetes, Helm, CI/CD, Spring Boot, Next.js y calidad de código.">
+<meta name="description" content="Guía visual de entrevista: ruta de estudio, guion consolidado, liderazgo, DevOps, Docker, Kubernetes, Spring Boot, Next.js y calidad.">
 </head>
 <body>
 <style>
@@ -79,6 +79,25 @@
   .t-docker{background:var(--docker)} .t-k8s{background:var(--k8s)} .t-azure{background:var(--azure)}
   .t-helm{background:#0f9d8a} .t-quality{background:#6f57c9} .t-java{background:#4f8a2e}
   .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
+  .t-lead{background:#a9791f} .t-guion{background:#b83a5e} .t-ruta{background:#1f6fa8}
+  /* Ruta de estudio por niveles */
+  .lvl{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:14px 16px;box-shadow:var(--shadow);margin:12px 0}
+  .lvl-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .lvl-n{font-family:var(--mono);font-weight:800;color:#fff;background:#1f6fa8;border-radius:8px;padding:3px 9px;font-size:.72rem;letter-spacing:.04em}
+  .lvl-h b{color:var(--brand-ink);font-size:1rem}
+  .lvl-steps{display:flex;flex-wrap:wrap;gap:8px}
+  .lvl-steps a{display:inline-flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:999px;padding:6px 13px;color:var(--ink);font-size:.88rem}
+  .lvl-steps a:hover{text-decoration:none;border-color:var(--azure);background:var(--surface-3)}
+  .lvl-steps a i{font-family:var(--mono);font-style:normal;color:var(--ink-faint);font-size:.74rem}
+  /* Guion consolidado */
+  .say-group{margin-top:18px}
+  .say-group > h3{margin-bottom:8px}
+  .quote{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--good);
+    border-radius:0 12px 12px 0;padding:13px 16px;margin:8px 0;box-shadow:var(--shadow)}
+  .quote .qt{display:inline-block;font-family:var(--mono);font-size:.64rem;font-weight:700;text-transform:uppercase;
+    letter-spacing:.05em;color:#fff;padding:3px 8px;border-radius:6px;margin-bottom:7px}
+  .quote p{margin:0;font-size:.97rem;line-height:1.5;color:var(--ink);max-width:none}
   .cmp-wrap{overflow-x:auto;margin:1.2em 0}
   table.cmp{width:100%;border-collapse:collapse;font-size:.92rem;min-width:520px;border:1px solid var(--line);
     border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
@@ -255,12 +274,14 @@
       <div class="menu-cat">
         <h4><span class="dot" style="background:#b83a5e"></span>Entrevista</h4>
         <a href="#chuleta"><b>🎯 Chuleta</b><span>Qué decir, agrupado por tema</span></a>
+        <a href="#guion"><b>Guion completo</b><span>Todos los "cómo lo cuentas tú"</span></a>
         <a href="#entrevista"><b>Preguntas &amp; respuestas</b><span>Practica en voz alta</span></a>
         <a href="#glosario"><b>Glosario del CV</b><span>Cada término, explicado</span></a>
       </div>
       <div class="menu-cat">
         <h4><span class="dot" style="background:#0a7fbd"></span>Panorámica</h4>
         <a href="#panorama"><b>Panorama</b><span>Tu stack de un vistazo</span></a>
+        <a href="#ruta"><b>Ruta de estudio</b><span>El orden de lo que debes saber</span></a>
         <a href="#flujo"><b>Flujo end-to-end</b><span>Del teclado al usuario</span></a>
       </div>
       <div class="menu-cat">
@@ -281,6 +302,10 @@
         <a href="#curso-devops"><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
         <a href="#pipelines"><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
         <a href="#calidad"><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
+      </div>
+      <div class="menu-cat">
+        <h4><span class="dot" style="background:#a9791f"></span>Liderazgo &amp; Gestión</h4>
+        <a href="#liderazgo"><b>Curso de liderazgo</b><span>Asignar, estimar, seguimiento, personas</span></a>
       </div>
     </div>
   </div>
@@ -347,6 +372,93 @@
       <a href="#pipelines"><b>¿Qué es un quality gate?</b><span>Umbral que bloquea el despliegue si el código no cumple.</span></a>
       <a href="#curso-devops"><b>¿Qué miden las métricas DORA?</b><span>Frecuencia de despliegue, lead time, MTTR y tasa de fallo.</span></a>
       <a href="#springboot"><b>¿Cómo migraste el monolito?</b><span>Enfoque strangler fig, por dominios, event-driven en AKS.</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="guion">
+  <div class="wrap">
+    <h2><span class="tag t-guion">Guion</span> Tu guion: todos los "cómo lo cuentas tú"</h2>
+    <p class="sub">Todas tus frases listas, agrupadas en un solo lugar. Léelas seguidas para armar tu discurso — cada una está anclada en tu experiencia real.</p>
+
+    <div class="say-group">
+      <h3>💻 Desarrollo</h3>
+      <div class="quote"><span class="qt" style="background:#4f8a2e">Java / Spring Boot</span><p>"Construí microservicios en Java/Spring Boot con arquitectura por capas (Controller/Service/Repository), Spring Data JPA sobre PostgreSQL/Oracle, endpoints REST y Actuator para health checks integrados con las probes de Kubernetes, además de comunicación event-driven — e integré sistemas legacy .NET/Java con estas APIs modernas."</p></div>
+      <div class="quote"><span class="qt" style="background:#111827">Next.js</span><p>"Construyo frontends con React/Next.js (App Router, Server Components y renderizado híbrido SSR/SSG/ISR) que consumen las REST APIs de mis microservicios; en ROHU PayControl el cliente es una PWA en Next.js sobre un backend FastAPI."</p></div>
+    </div>
+
+    <div class="say-group">
+      <h3>☁️ Contenedores &amp; Cloud</h3>
+      <div class="quote"><span class="qt" style="background:#1f7fd6">Docker</span><p>"Empaqueté cada microservicio de la plataforma de compras y recargas en su propia imagen Docker, de modo que corriera idéntico en desarrollo y en producción, y lo publiqué en Azure Container Registry para desplegarlo en AKS."</p></div>
+      <div class="quote"><span class="qt" style="background:#3760d4">Kubernetes</span><p>"Desplegué los microservicios en AKS con Deployments y rolling updates, logrando despliegues sin downtime; el autoescalado (HPA) sostuvo tiempos de respuesta de 500&nbsp;ms bajo alto tráfico, y la auto-reparación mantuvo la alta disponibilidad."</p></div>
+      <div class="quote"><span class="qt" style="background:#0f9d8a">Helm</span><p>"Empaqueté los microservicios como charts de Helm para desplegarlos de forma consistente en dev, QA y producción cambiando solo los values, con versionado y rollback inmediato — despliegues repetibles y seguros."</p></div>
+      <div class="quote"><span class="qt" style="background:#0a7fbd">Azure &amp; AKS</span><p>"Lideré la migración del monolito WebLogic a microservicios en Azure AKS, con imágenes en ACR y pipelines de Azure DevOps que automatizaron el despliegue diario en producción — reduciendo el tiempo de despliegue en un 60%."</p></div>
+    </div>
+
+    <div class="say-group">
+      <h3>🔄 DevOps &amp; Calidad</h3>
+      <div class="quote"><span class="qt" style="background:#c9711a">DevOps</span><p>"Trabajo DevOps de punta a punta: automatización con CI/CD, contenedores en Kubernetes, infraestructura como código y observabilidad, con cultura de mejora continua. Mis resultados hablan en métricas DORA: despliegues diarios, −60% en tiempo de despliegue y zero-downtime."</p></div>
+      <div class="quote"><span class="qt" style="background:#1f6fa8">CI/CD</span><p>"Implementé pipelines de CI/CD en Azure DevOps que compilan, prueban, pasan por un quality gate y despliegan con Helm a AKS, con aprobaciones para producción — reduciendo el tiempo de despliegue en 60% y habilitando despliegues diarios."</p></div>
+      <div class="quote"><span class="qt" style="background:#6f57c9">Calidad</span><p>"Integré análisis estático (SonarQube/Kiuwan) como quality gate en los pipelines: cada cambio se evalúa por bugs, vulnerabilidades y cobertura, y no llega a producción si no cumple el umbral — alineado con estándares CMMI y de seguridad en proyectos financieros."</p></div>
+    </div>
+
+    <div class="say-group">
+      <h3>👥 Liderazgo &amp; gestión</h3>
+      <div class="quote"><span class="qt" style="background:#a9791f">Liderazgo</span><p>"Lidero equipos cross-funcionales de hasta 21 personas (dev, QA, DevOps): planifico las asignaciones por capacidad y fortalezas, estimo con el equipo (story points / Planning Poker), hago seguimiento con tableros y métricas (velocity, burndown) y desarrollo a las personas con 1:1s y feedback — entregando resultados medibles con enfoque ágil y CMMI."</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ruta">
+  <div class="wrap">
+    <h2><span class="tag t-ruta">Ruta</span> Ruta de estudio — el orden de lo que debes saber</h2>
+    <p class="sub">Estudia de arriba hacia abajo: primero los fundamentos, luego cómo construyes, cómo lo entregas y cómo lideras. Cada paso enlaza a su sección.</p>
+
+    <div class="lvl">
+      <div class="lvl-h"><span class="lvl-n">Nivel 1</span><b>Fundamentos</b></div>
+      <div class="lvl-steps">
+        <a href="#panorama"><i>1</i>Panorama</a>
+        <a href="#docker"><i>2</i>Docker</a>
+        <a href="#kubernetes"><i>3</i>Kubernetes</a>
+      </div>
+    </div>
+    <div class="lvl">
+      <div class="lvl-h"><span class="lvl-n">Nivel 2</span><b>Desarrollo</b></div>
+      <div class="lvl-steps">
+        <a href="#springboot"><i>4</i>Java / Spring Boot</a>
+        <a href="#nextjs"><i>5</i>Next.js</a>
+      </div>
+    </div>
+    <div class="lvl">
+      <div class="lvl-h"><span class="lvl-n">Nivel 3</span><b>Infraestructura &amp; Cloud</b></div>
+      <div class="lvl-steps">
+        <a href="#k8s-deep"><i>6</i>Kubernetes a fondo</a>
+        <a href="#helm"><i>7</i>Helm</a>
+        <a href="#azure"><i>8</i>Azure &amp; AKS</a>
+      </div>
+    </div>
+    <div class="lvl">
+      <div class="lvl-h"><span class="lvl-n">Nivel 4</span><b>Entrega (DevOps)</b></div>
+      <div class="lvl-steps">
+        <a href="#curso-devops"><i>9</i>Curso DevOps</a>
+        <a href="#pipelines"><i>10</i>Pipelines CI/CD</a>
+        <a href="#calidad"><i>11</i>Calidad &amp; seguridad</a>
+      </div>
+    </div>
+    <div class="lvl">
+      <div class="lvl-h"><span class="lvl-n">Nivel 5</span><b>Liderazgo &amp; gestión</b></div>
+      <div class="lvl-steps">
+        <a href="#liderazgo"><i>12</i>Curso de liderazgo</a>
+      </div>
+    </div>
+    <div class="lvl">
+      <div class="lvl-h"><span class="lvl-n">Repaso</span><b>Antes de la entrevista</b></div>
+      <div class="lvl-steps">
+        <a href="#chuleta"><i>★</i>Chuleta</a>
+        <a href="#guion"><i>★</i>Guion</a>
+        <a href="#entrevista"><i>★</i>Preguntas</a>
+        <a href="#glosario"><i>★</i>Glosario</a>
+      </div>
     </div>
   </div>
 </section>
@@ -936,6 +1048,76 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
 
     <details class="qa"><summary>Pregunta típica: ¿dónde encajan estas herramientas en el pipeline?</summary>
       <div class="ans"><p>Justo después de las pruebas y <b>antes</b> de construir/desplegar la imagen: el pipeline manda el código al análisis, espera el resultado del <b>Quality Gate</b> y solo continúa si aprueba. Así se evita que código con vulnerabilidades o baja calidad llegue a producción.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="liderazgo">
+  <div class="wrap">
+    <h2><span class="tag t-lead">Curso</span> Liderazgo y gestión de equipos</h2>
+    <p class="sub">Cómo planear el trabajo, estimar, hacer seguimiento y desarrollar personas. Tips prácticos que ya aplicas liderando equipos de hasta 21 personas — para contarlos con estructura.</p>
+
+    <h3>1 · Planear las asignaciones</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Desglosa el trabajo (WBS)</h4><p>Parte lo grande en tareas pequeñas y claras (1–3 días). Lo pequeño se estima mejor, se sigue mejor y motiva por avances visibles.</p></div>
+      <div class="card"><h4>Prioriza</h4><p><b>MoSCoW</b> (Must/Should/Could/Won't) o matriz <b>valor vs. esfuerzo</b>: primero lo de más valor y menos esfuerzo.</p></div>
+      <div class="card"><h4>Asigna por fortalezas y capacidad</h4><p>Empareja la tarea con quien la hace mejor, respetando su <b>carga real</b> (no al 100%: deja holgura para imprevistos).</p></div>
+      <div class="card"><h4>Mapea dependencias</h4><p>Identifica qué bloquea a qué para secuenciar y evitar cuellos de botella.</p></div>
+    </div>
+
+    <h3>2 · Estimar (sin adivinar)</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>T-shirt sizing</h4><p>S/M/L/XL para una idea rápida de tamaño relativo antes de afinar.</p></div>
+      <div class="card"><h4>Story points + Planning Poker</h4><p>El equipo estima por complejidad relativa, en consenso — no en horas. Reduce el sesgo individual.</p></div>
+      <div class="card"><h4>Estimación a 3 puntos (PERT)</h4><p>(optimista + 4×probable + pesimista) / 6. Incorpora la incertidumbre.</p></div>
+      <div class="card"><h4>Falacia de planificación</h4><p>Tendemos a subestimar. Agrega <b>buffer</b> y compara con datos históricos.</p></div>
+      <div class="card"><h4>Re-estima con velocity</h4><p>Usa cuánto entregó el equipo en sprints pasados para proyectar lo que cabe en el próximo.</p></div>
+      <div class="card"><h4>Estima en equipo</h4><p>Quien hace el trabajo estima; el líder facilita, no impone.</p></div>
+    </div>
+
+    <h3>3 · Seguimiento de tareas</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Tablero Kanban</h4><p>Visualiza el flujo (Por hacer → En curso → En revisión → Hecho). El estado se ve de un vistazo.</p></div>
+      <div class="card"><h4>Límites WIP</h4><p>Limita el trabajo en curso: menos multitarea = más se termina y más rápido.</p></div>
+      <div class="card"><h4>Definición de Hecho (DoD)</h4><p>Criterio claro de "terminado" (probado, revisado, documentado) para evitar el 90%-eterno.</p></div>
+      <div class="card"><h4>Daily stand-up</h4><p>15 min: qué hice, qué haré, qué me bloquea. Para sincronizar y destrabar, no para reportar al jefe.</p></div>
+      <div class="card"><h4>Métricas</h4><p><b>Burndown</b> (trabajo restante), <b>velocity</b> (entregado por sprint), <b>cycle/lead time</b> (qué tan rápido fluye una tarea).</p></div>
+      <div class="card"><h4>Gestiona bloqueos</h4><p>Tu trabajo #1 como líder: remover impedimentos rápido para que el equipo avance.</p></div>
+    </div>
+
+    <h3>4 · Manejo de personas</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Delega con contexto</h4><p>Delega el <b>resultado</b> y el porqué, no la microtarea. Da autonomía con un punto de control, no vigilancia.</p></div>
+      <div class="card"><h4>Feedback con el modelo SBI</h4><p><b>Situación → Comportamiento → Impacto</b>: concreto y sin juzgar a la persona. Reconoce en público, corrige en privado.</p></div>
+      <div class="card"><h4>1:1s regulares</h4><p>Espacio quincenal por persona: cómo va, qué necesita, hacia dónde quiere crecer. Construye confianza.</p></div>
+      <div class="card"><h4>Bajo desempeño</h4><p>Abórdalo pronto y con datos: expectativa clara, apoyo, plan y seguimiento — no lo dejes crecer.</p></div>
+      <div class="card"><h4>Motiva</h4><p>Autonomía, maestría y propósito. Celebra avances y conecta el trabajo con su impacto real.</p></div>
+      <div class="card"><h4>Resuelve conflictos</h4><p>Escucha a ambas partes, enfócate en el problema (no en la persona) y busca el interés común.</p></div>
+    </div>
+
+    <h3>5 · Comunicación y gobierno</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>RACI</h4><p>Por tarea define quién es <b>R</b>esponsable, <b>A</b>probador, <b>C</b>onsultado e <b>I</b>nformado. Elimina el "pensé que lo hacías tú".</p></div>
+      <div class="card"><h4>Gestión de riesgos</h4><p>Anticipa lo que puede salir mal (probabilidad × impacto) y ten un plan de mitigación.</p></div>
+      <div class="card"><h4>Reportes ejecutivos</h4><p>Al patrocinador: estado (semáforo), avance, riesgos y decisiones que necesitas — breve y claro.</p></div>
+    </div>
+
+    <div class="callout"><b>Para preguntas conductuales usa STAR:</b> <b>S</b>ituación (contexto) → <b>T</b>area (tu responsabilidad) → <b>A</b>cción (qué hiciste tú) → <b>R</b>esultado (medible). Estructura cualquier "cuéntame de una vez que…".</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Lidero equipos cross-funcionales de hasta 21 personas: planifico las asignaciones por capacidad y fortalezas, estimo con el equipo (story points/Planning Poker), hago seguimiento con tableros Kanban y métricas (velocity, burndown), remuevo bloqueos y desarrollo a las personas con 1:1s y feedback — entregando resultados medibles con enfoque ágil y CMMI."</div>
+
+    <h3>Preguntas típicas de liderazgo</h3>
+    <details class="qa"><summary>¿Cómo estimas un proyecto o una tarea?</summary>
+      <div class="ans"><p>Desgloso el trabajo en piezas pequeñas y <b>estimo con el equipo</b> por complejidad relativa (story points / Planning Poker), no en horas de una sola persona. Para lo incierto uso estimación a 3 puntos y comparo con la <b>velocity</b> histórica; agrego buffer para la variabilidad y re-estimo a medida que aprendemos.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo haces seguimiento sin caer en microgestión?</summary>
+      <div class="ans"><p>Con un tablero visible, límites de trabajo en curso y una <b>Definición de Hecho</b> clara; el daily sincroniza y saca bloqueos. Miro métricas (burndown, cycle time) y hago 1:1s. Delego el resultado, no la microtarea: doy autonomía con puntos de control, no vigilancia.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo manejas a alguien de bajo desempeño?</summary>
+      <div class="ans"><p>Lo abordo pronto y en privado, con datos concretos (modelo SBI). Aclaro la expectativa, entiendo la causa (¿capacidad, motivación, bloqueo?), acuerdo un plan de mejora con apoyo y hago seguimiento cercano. La clave es actuar temprano, no dejar que escale.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo priorizas cuando "todo es urgente"?</summary>
+      <div class="ans"><p>Con criterio de <b>valor vs. esfuerzo</b> y MoSCoW, alineado con el objetivo del negocio y el patrocinador. Hago explícitas las <b>compensaciones</b> (si entra esto, sale aquello) y comunico la decisión, para que la prioridad sea transparente y no una promesa de "todo para ayer".</p></div>
     </details>
   </div>
 </section>
