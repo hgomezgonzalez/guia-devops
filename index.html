@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#1f3355">
 <title>Guía DevOps &amp; Cloud — Hugo Gómez</title>
-<meta name="description" content="Guía visual de entrevista: ruta de estudio, guion consolidado, liderazgo, DevOps, Docker, Kubernetes, Spring Boot, Next.js y calidad.">
+<meta name="description" content="Guía visual de entrevista con menú buscable: DevOps, Docker, Kubernetes, Spring Boot, Next.js, Node.js, SQL, NATS, Testing y liderazgo.">
 </head>
 <body>
 <style>
@@ -80,6 +80,7 @@
   .t-helm{background:#0f9d8a} .t-quality{background:#6f57c9} .t-java{background:#4f8a2e}
   .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
   .t-lead{background:#a9791f} .t-guion{background:#b83a5e} .t-ruta{background:#1f6fa8}
+  .t-sql{background:#2f6f8f} .t-test{background:#2e7d5b} .t-nats{background:#9c3d86} .t-node{background:#43873a}
   /* Ruta de estudio por niveles */
   .lvl{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:14px 16px;box-shadow:var(--shadow);margin:12px 0}
   .lvl-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
@@ -243,6 +244,13 @@
   .menu-cat a b{color:var(--brand-ink);font-size:.96rem;font-weight:600}
   .menu-cat a span{color:var(--ink-faint);font-size:.8rem}
   body.menu-open{overflow:hidden}
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--azure);z-index:60;transition:width .08s linear}
+  .menu-search{padding:12px 14px 2px}
+  .menu-search input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:.95rem}
+  .menu-search input:focus{outline:2px solid var(--azure);outline-offset:1px;border-color:var(--azure)}
+  .menu-cat[hidden]{display:none}
+  .menu-cat a[hidden]{display:none}
+  .menu-noresult{padding:16px;color:var(--ink-faint);font-size:.9rem;text-align:center;margin:0}
 
   @media(max-width:720px){
     .metrics{grid-template-columns:repeat(2,1fr)}
@@ -257,6 +265,7 @@
   @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
+<div id="progress" aria-hidden="true"></div>
 <nav class="nav">
   <div class="wrap">
     <span class="brand">Guía técnica · Hugo Gómez</span>
@@ -270,7 +279,9 @@
     <div class="menu-head"><span>Secciones</span>
       <button id="menuclose" class="menu-close" aria-label="Cerrar menú">✕</button>
     </div>
+    <div class="menu-search"><input id="menufilter" type="search" placeholder="Buscar sección…" aria-label="Buscar sección"></div>
     <div class="menu-groups">
+      <p class="menu-noresult" id="menu-noresult" hidden>Sin resultados</p>
       <div class="menu-cat">
         <h4><span class="dot" style="background:#b83a5e"></span>Entrevista</h4>
         <a href="#chuleta"><b>🎯 Chuleta</b><span>Qué decir, agrupado por tema</span></a>
@@ -288,6 +299,9 @@
         <h4><span class="dot" style="background:#4f8a2e"></span>Desarrollo</h4>
         <a href="#springboot"><b>Java / Spring Boot</b><span>Microservicios backend</span></a>
         <a href="#nextjs"><b>Next.js</b><span>Frontend moderno (React)</span></a>
+        <a href="#nodejs"><b>Node.js</b><span>Backend JavaScript (E/S)</span></a>
+        <a href="#sql"><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle, consultas</span></a>
+        <a href="#nats"><b>NATS (mensajería)</b><span>Event-driven entre servicios</span></a>
       </div>
       <div class="menu-cat">
         <h4><span class="dot" style="background:#3760d4"></span>Contenedores &amp; Cloud</h4>
@@ -301,6 +315,7 @@
         <h4><span class="dot" style="background:#c9711a"></span>DevOps &amp; Calidad</h4>
         <a href="#curso-devops"><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
         <a href="#pipelines"><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
+        <a href="#testing"><b>Pruebas / Testing</b><span>JUnit, Mockito, pirámide</span></a>
         <a href="#calidad"><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
       </div>
       <div class="menu-cat">
@@ -385,6 +400,9 @@
       <h3>💻 Desarrollo</h3>
       <div class="quote"><span class="qt" style="background:#4f8a2e">Java / Spring Boot</span><p>"Construí microservicios en Java/Spring Boot con arquitectura por capas (Controller/Service/Repository), Spring Data JPA sobre PostgreSQL/Oracle, endpoints REST y Actuator para health checks integrados con las probes de Kubernetes, además de comunicación event-driven — e integré sistemas legacy .NET/Java con estas APIs modernas."</p></div>
       <div class="quote"><span class="qt" style="background:#111827">Next.js</span><p>"Construyo frontends con React/Next.js (App Router, Server Components y renderizado híbrido SSR/SSG/ISR) que consumen las REST APIs de mis microservicios; en ROHU PayControl el cliente es una PWA en Next.js sobre un backend FastAPI."</p></div>
+      <div class="quote"><span class="qt" style="background:#43873a">Node.js</span><p>"Uso Node.js para APIs ligeras y BFF que alimentan el frontend Next.js, aprovechando su modelo no bloqueante para operaciones de mucha E/S — complementando mis microservicios Java/Spring y Python según lo que cada caso necesita."</p></div>
+      <div class="quote"><span class="qt" style="background:#2f6f8f">Bases de datos</span><p>"Modelo y consulto PostgreSQL y Oracle en apps de misión crítica: esquemas normalizados, consultas optimizadas con índices, transacciones ACID para reconciliación financiera y sin problema N+1 con Spring Data JPA — procesando miles de registros diarios."</p></div>
+      <div class="quote"><span class="qt" style="background:#9c3d86">NATS</span><p>"Diseñé la comunicación event-driven de la plataforma con NATS: los microservicios publican eventos y otros los consumen desacoplados (pub/sub y queue groups), lo que dio resiliencia, absorbió picos de tráfico y permitió agregar servicios sin tocar a los existentes."</p></div>
     </div>
 
     <div class="say-group">
@@ -400,6 +418,7 @@
       <div class="quote"><span class="qt" style="background:#c9711a">DevOps</span><p>"Trabajo DevOps de punta a punta: automatización con CI/CD, contenedores en Kubernetes, infraestructura como código y observabilidad, con cultura de mejora continua. Mis resultados hablan en métricas DORA: despliegues diarios, −60% en tiempo de despliegue y zero-downtime."</p></div>
       <div class="quote"><span class="qt" style="background:#1f6fa8">CI/CD</span><p>"Implementé pipelines de CI/CD en Azure DevOps que compilan, prueban, pasan por un quality gate y despliegan con Helm a AKS, con aprobaciones para producción — reduciendo el tiempo de despliegue en 60% y habilitando despliegues diarios."</p></div>
       <div class="quote"><span class="qt" style="background:#6f57c9">Calidad</span><p>"Integré análisis estático (SonarQube/Kiuwan) como quality gate en los pipelines: cada cambio se evalúa por bugs, vulnerabilidades y cobertura, y no llega a producción si no cumple el umbral — alineado con estándares CMMI y de seguridad en proyectos financieros."</p></div>
+      <div class="quote"><span class="qt" style="background:#2e7d5b">Testing</span><p>"Aseguro la calidad con la pirámide de pruebas: unitarias con JUnit/Mockito, integración con @SpringBootTest y Testcontainers para BD real, integradas al pipeline con cobertura que alimenta el quality gate — así el equipo cambia código con confianza."</p></div>
     </div>
 
     <div class="say-group">
@@ -427,28 +446,32 @@
       <div class="lvl-steps">
         <a href="#springboot"><i>4</i>Java / Spring Boot</a>
         <a href="#nextjs"><i>5</i>Next.js</a>
+        <a href="#nodejs"><i>6</i>Node.js</a>
+        <a href="#sql"><i>7</i>Bases de datos / SQL</a>
+        <a href="#nats"><i>8</i>NATS (mensajería)</a>
       </div>
     </div>
     <div class="lvl">
       <div class="lvl-h"><span class="lvl-n">Nivel 3</span><b>Infraestructura &amp; Cloud</b></div>
       <div class="lvl-steps">
-        <a href="#k8s-deep"><i>6</i>Kubernetes a fondo</a>
-        <a href="#helm"><i>7</i>Helm</a>
-        <a href="#azure"><i>8</i>Azure &amp; AKS</a>
+        <a href="#k8s-deep"><i>9</i>Kubernetes a fondo</a>
+        <a href="#helm"><i>10</i>Helm</a>
+        <a href="#azure"><i>11</i>Azure &amp; AKS</a>
       </div>
     </div>
     <div class="lvl">
       <div class="lvl-h"><span class="lvl-n">Nivel 4</span><b>Entrega (DevOps)</b></div>
       <div class="lvl-steps">
-        <a href="#curso-devops"><i>9</i>Curso DevOps</a>
-        <a href="#pipelines"><i>10</i>Pipelines CI/CD</a>
-        <a href="#calidad"><i>11</i>Calidad &amp; seguridad</a>
+        <a href="#curso-devops"><i>12</i>Curso DevOps</a>
+        <a href="#pipelines"><i>13</i>Pipelines CI/CD</a>
+        <a href="#testing"><i>14</i>Pruebas / Testing</a>
+        <a href="#calidad"><i>15</i>Calidad &amp; seguridad</a>
       </div>
     </div>
     <div class="lvl">
       <div class="lvl-h"><span class="lvl-n">Nivel 5</span><b>Liderazgo &amp; gestión</b></div>
       <div class="lvl-steps">
-        <a href="#liderazgo"><i>12</i>Curso de liderazgo</a>
+        <a href="#liderazgo"><i>16</i>Curso de liderazgo</a>
       </div>
     </div>
     <div class="lvl">
@@ -756,6 +779,155 @@ server:
   </div>
 </section>
 
+<section id="nodejs">
+  <div class="wrap">
+    <h2><span class="tag t-node">Backend JS</span> Cursillo de Node.js</h2>
+    <p class="sub">JavaScript del lado del servidor. Es el motor detrás de Next.js y una opción ágil para APIs y servicios ligeros — complemento a tu backend Java/Spring y Python.</p>
+
+    <div class="callout"><b>La clave de Node:</b> un solo hilo con un <b>event loop</b> y <b>E/S no bloqueante</b>. En vez de esperar parado a que responda la base de datos o la red, sigue atendiendo otras peticiones y reacciona cuando el dato llega. Por eso brilla en apps con <b>mucha E/S</b> y muchas conexiones.</div>
+
+    <h3>Conceptos que debes explicar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Event loop</h4><p>El bucle que atiende eventos y callbacks sin bloquear. Un hilo, alta concurrencia de E/S.</p></div>
+      <div class="card"><h4>No bloqueante / async</h4><p>Las operaciones de E/S devuelven promesas; con <code>async/await</code> escribes asíncrono que se lee como síncrono.</p></div>
+      <div class="card"><h4>npm</h4><p>El gestor de paquetes (el ecosistema más grande). <code>package.json</code> declara dependencias y scripts.</p></div>
+      <div class="card"><h4>Express / Nest</h4><p><b>Express</b>: framework web minimalista. <b>NestJS</b>: estructurado (al estilo Spring) para apps grandes.</p></div>
+      <div class="card"><h4>Módulos</h4><p><code>import/export</code> (ESM) para organizar el código; ejecución con Node o runtimes como Bun/Deno.</p></div>
+      <div class="card"><h4>¿Cuándo Node?</h4><p>APIs de mucha E/S, tiempo real (websockets), BFF para el frontend. Para CPU intensivo, mejor otro stack.</p></div>
+    </div>
+
+    <h3>Una API REST mínima (Express)</h3>
+    <pre><code><span class="kw">import</span> express <span class="kw">from</span> "express";
+<span class="kw">const</span> app = express();
+app.use(express.json());
+
+<span class="cmt">// GET no bloqueante: espera la BD sin frenar el servidor</span>
+app.get("/facturas/pendientes", <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">const</span> data = <span class="kw">await</span> repo.pendientes();
+  res.json(data);
+});
+
+app.listen(3000, () =&gt; console.log("API en :3000"));</code></pre>
+
+    <div class="grid cols-2">
+      <div class="card"><h4>Node vs. Java/Spring</h4><p><b>Node</b>: arranque rápido, ideal para E/S y tiempo real, mismo lenguaje que el frontend. <b>Spring</b>: tipado fuerte, maduro para dominios complejos y transaccionales. Se complementan.</p></div>
+      <div class="card"><h4>Node y Next.js</h4><p>Next.js corre sobre Node; sus Route Handlers y el renderizado en servidor son, por debajo, Node ejecutando tu JavaScript.</p></div>
+    </div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Uso Node.js para APIs ligeras y BFF que alimentan el frontend Next.js, aprovechando su modelo no bloqueante para operaciones de mucha E/S — complementando mis microservicios Java/Spring y Python según lo que cada caso necesita."</div>
+
+    <h3>Preguntas típicas de Node.js</h3>
+    <details class="qa"><summary>¿Por qué Node es de un solo hilo y aun así maneja mucha concurrencia?</summary>
+      <div class="ans"><p>Porque no bloquea: mientras espera una operación de E/S (BD, red, archivo), el <b>event loop</b> sigue atendiendo otras peticiones y ejecuta el callback cuando el resultado llega. Así, un solo hilo sostiene miles de conexiones concurrentes de E/S.</p></div>
+    </details>
+    <details class="qa"><summary>¿Diferencia entre bloqueante y no bloqueante?</summary>
+      <div class="ans"><p>Una operación <b>bloqueante</b> detiene el hilo hasta terminar; una <b>no bloqueante</b> devuelve el control de inmediato y avisa después (callback/promesa). Node es no bloqueante por diseño, por eso conviene evitar código CPU-intensivo que "tape" el event loop.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cuándo elegirías Node y cuándo Java/Spring?</summary>
+      <div class="ans"><p><b>Node</b> para APIs de mucha E/S, tiempo real (websockets) o un BFF en el mismo lenguaje del frontend. <b>Java/Spring</b> para dominios complejos, tipado fuerte y transaccionalidad pesada. No es "uno u otro": elijo por el problema.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="sql">
+  <div class="wrap">
+    <h2><span class="tag t-sql">Los datos</span> Cursillo de Bases de Datos &amp; SQL</h2>
+    <p class="sub">El corazón de casi toda app: guardar y consultar datos de forma correcta y rápida. Tú trabajas PostgreSQL y Oracle a diario (dashboards, reconciliación) — aquí lo estructuras para explicarlo.</p>
+
+    <div class="callout"><b>Modelo relacional en una frase:</b> los datos viven en <b>tablas</b> (filas y columnas); las tablas se relacionan por <b>claves</b> (una <b>primary key</b> identifica cada fila, una <b>foreign key</b> apunta a otra tabla).</div>
+
+    <h3>Conceptos que debes dominar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Claves</h4><p><b>Primary key</b>: identifica cada fila. <b>Foreign key</b>: relaciona tablas y garantiza integridad referencial.</p></div>
+      <div class="card"><h4>JOINs</h4><p>Combinan tablas: <code>INNER</code> (solo coincidencias), <code>LEFT</code> (todo lo de la izquierda + lo que empate).</p></div>
+      <div class="card"><h4>Índices</h4><p>Aceleran búsquedas (como el índice de un libro). Clave para el rendimiento; cuestan en escritura.</p></div>
+      <div class="card"><h4>Transacciones (ACID)</h4><p><b>A</b>tomicidad, <b>C</b>onsistencia, a<b>I</b>slamiento, <b>D</b>urabilidad. O todo o nada — clave en finanzas.</p></div>
+      <div class="card"><h4>Normalización</h4><p>Organizar tablas para evitar datos duplicados e inconsistentes (1FN, 2FN, 3FN).</p></div>
+      <div class="card"><h4>Problema N+1</h4><p>Hacer 1 consulta + N por cada fila. Se evita con JOINs o carga anticipada (eager). Clásico con ORMs.</p></div>
+    </div>
+
+    <h3>SQL esencial en un ejemplo</h3>
+    <pre><code><span class="cmt">-- Facturas vencidas por cliente, con su nombre (JOIN + filtro + orden)</span>
+<span class="kw">SELECT</span> c.nombre, f.concepto, f.monto, f.vence
+<span class="kw">FROM</span>   facturas f
+<span class="kw">JOIN</span>   clientes c <span class="kw">ON</span> c.id = f.cliente_id
+<span class="kw">WHERE</span>  f.pagada = false
+  <span class="kw">AND</span>  f.vence &lt; CURRENT_DATE
+<span class="kw">ORDER BY</span> f.vence;
+
+<span class="cmt">-- Agregación: total pendiente por cliente (solo &gt; 1.000.000)</span>
+<span class="kw">SELECT</span> c.nombre, SUM(f.monto) <span class="kw">AS</span> total
+<span class="kw">FROM</span>   facturas f <span class="kw">JOIN</span> clientes c <span class="kw">ON</span> c.id = f.cliente_id
+<span class="kw">WHERE</span>  f.pagada = false
+<span class="kw">GROUP BY</span> c.nombre
+<span class="kw">HAVING</span> SUM(f.monto) &gt; 1000000;</code></pre>
+
+    <div class="grid cols-2">
+      <div class="card"><h4>SQL vs. NoSQL</h4><p><b>SQL</b> (relacional): estructura fija y transacciones fuertes — ideal para datos financieros. <b>NoSQL</b>: flexible y escala horizontal — para grandes volúmenes o esquema variable.</p></div>
+      <div class="card"><h4>Pool de conexiones</h4><p>Reutilizar conexiones abiertas (HikariCP en Spring) en vez de abrir una por request — clave para el rendimiento bajo carga.</p></div>
+    </div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Modelo y consulto PostgreSQL y Oracle en apps de misión crítica: diseño esquemas normalizados, optimizo consultas con índices, manejo transacciones ACID para la reconciliación financiera y evito el problema N+1 con Spring Data JPA — procesando miles de registros diarios."</div>
+
+    <h3>Preguntas típicas de bases de datos</h3>
+    <details class="qa"><summary>¿Diferencia entre INNER JOIN y LEFT JOIN?</summary>
+      <div class="ans"><p><b>INNER</b> devuelve solo las filas que coinciden en ambas tablas. <b>LEFT</b> devuelve todas las de la tabla izquierda y, donde no hay coincidencia, rellena con <code>NULL</code> — útil para listar clientes aunque no tengan facturas.</p></div>
+    </details>
+    <details class="qa"><summary>¿Para qué sirve un índice y cuándo NO usarlo?</summary>
+      <div class="ans"><p>Acelera lecturas al evitar escanear toda la tabla. Pero <b>ralentiza las escrituras</b> (hay que mantenerlo) y ocupa espacio; no conviene indexar columnas que casi no se consultan ni tablas muy pequeñas. Se indexan las columnas de filtros/JOINs frecuentes.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué significa ACID?</summary>
+      <div class="ans"><p>Las garantías de una transacción: <b>Atomicidad</b> (todo o nada), <b>Consistencia</b> (deja la BD en estado válido), <b>Aislamiento</b> (transacciones concurrentes no se pisan) y <b>Durabilidad</b> (una vez confirmada, persiste). Es lo que hace confiable una operación financiera.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="nats">
+  <div class="wrap">
+    <h2><span class="tag t-nats">Mensajería</span> Cursillo de NATS (event-driven)</h2>
+    <p class="sub">Cómo se comunican tus microservicios sin acoplarse. NATS es el sistema de mensajería que usaste en la plataforma de compras y recargas para que los servicios hablen por eventos.</p>
+
+    <div class="callout"><b>Analogía:</b> en vez de que un servicio <b>llame por teléfono</b> a otro (y espere), publica un <b>anuncio</b> (evento); quien le interese lo escucha. Emisor y receptor no necesitan conocerse ni estar activos a la vez — eso es estar <b>desacoplados</b>.</div>
+
+    <h3>Los conceptos</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Publish / Subscribe</h4><p>Un servicio <b>publica</b> en un <i>subject</i> (tema) y todos los <b>suscritos</b> lo reciben. Uno-a-muchos.</p></div>
+      <div class="card"><h4>Subject</h4><p>El "canal" con nombre jerárquico (p. ej. <code>pagos.recarga.ok</code>). Admite comodines para suscribirse a grupos.</p></div>
+      <div class="card"><h4>Queue groups</h4><p>Varios consumidores comparten la carga: cada mensaje lo procesa <b>solo uno</b> del grupo (balanceo).</p></div>
+      <div class="card"><h4>Request / Reply</h4><p>NATS también soporta pedir y esperar respuesta (RPC ligero), no solo "disparar y olvidar".</p></div>
+      <div class="card"><h4>JetStream</h4><p>La capa de <b>persistencia</b>: guarda mensajes, reintenta y garantiza entrega (at-least-once). Para no perder eventos.</p></div>
+      <div class="card"><h4>¿Por qué event-driven?</h4><p>Desacopla, absorbe picos, agrega consumidores sin tocar al emisor y da resiliencia si algo se cae.</p></div>
+    </div>
+
+    <h3>La idea en dos líneas</h3>
+    <pre><code><span class="cmt">// El servicio de recargas PUBLICA un evento cuando algo pasa</span>
+nc.publish("pagos.recarga.ok", evento);
+
+<span class="cmt">// Otro servicio (notificaciones) SE SUSCRIBE y reacciona</span>
+nc.subscribe("pagos.recarga.ok", msg -&gt; enviarNotificacion(msg));</code></pre>
+
+    <div class="grid cols-2">
+      <div class="card"><h4>NATS vs. Kafka / RabbitMQ</h4><p><b>NATS</b>: ultraligero, rapidísimo y simple. <b>Kafka</b>: para grandes volúmenes y re-lectura de historiales. <b>RabbitMQ</b>: enrutamiento rico con colas.</p></div>
+      <div class="card"><h4>Garantía de entrega</h4><p>NATS "core" es <b>at-most-once</b> (rápido, sin persistir); con <b>JetStream</b> pasa a <b>at-least-once</b> con almacenamiento.</p></div>
+    </div>
+
+    <div class="callout"><b>Dónde encaja:</b> es el "sistema nervioso" entre tus microservicios en AKS. Complementa las <b>REST APIs</b> (síncronas) con eventos <b>asíncronos</b> para todo lo que no necesita respuesta inmediata.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Diseñé la comunicación event-driven de la plataforma con NATS: los microservicios publican eventos y otros los consumen de forma desacoplada (pub/sub y queue groups), lo que dio resiliencia, absorbió picos de tráfico y permitió agregar servicios sin tocar a los existentes."</div>
+
+    <h3>Preguntas típicas de mensajería</h3>
+    <details class="qa"><summary>¿Por qué usar mensajería en vez de llamadas REST directas?</summary>
+      <div class="ans"><p>Para <b>desacoplar</b>: el emisor no depende de que el receptor esté disponible ni de quién sea. Da resiliencia (si un servicio cae, el mensaje espera), absorbe picos y permite escalar consumidores. REST se queda para lo síncrono (necesito la respuesta ya); los eventos para lo asíncrono.</p></div>
+    </details>
+    <details class="qa"><summary>¿Diferencia entre pub/sub y queue group?</summary>
+      <div class="ans"><p>En <b>pub/sub</b> puro, <b>todos</b> los suscritos reciben cada mensaje (uno-a-muchos). En un <b>queue group</b> los consumidores comparten la carga y cada mensaje lo procesa <b>solo uno</b> — así escalas el procesamiento horizontalmente.</p></div>
+    </details>
+    <details class="qa"><summary>¿NATS garantiza que no se pierda un mensaje?</summary>
+      <div class="ans"><p>El NATS "core" es <b>at-most-once</b> (muy rápido, pero si nadie escucha, el mensaje se pierde). Para garantía de entrega usas <b>JetStream</b>, que persiste los mensajes y reintenta (<b>at-least-once</b>) — el que usarías para eventos críticos como un pago.</p></div>
+    </details>
+  </div>
+</section>
+
 <section id="docker">
   <div class="wrap">
     <h2><span class="tag t-docker">Paso 1</span> Docker &amp; Dockerfile</h2>
@@ -1052,6 +1224,58 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
   </div>
 </section>
 
+<section id="testing">
+  <div class="wrap">
+    <h2><span class="tag t-test">La calidad</span> Cursillo de Pruebas (Testing)</h2>
+    <p class="sub">Probar es lo que hace que el "quality gate" tenga sentido: código que se puede cambiar sin miedo. Complementa tu sección de SonarQube/Kiuwan con las pruebas que alimentan la cobertura.</p>
+
+    <div class="callout"><b>La pirámide de pruebas:</b> muchas <b>unitarias</b> (rápidas, aisladas) en la base, menos de <b>integración</b> (varias piezas juntas) en el medio, y pocas <b>end-to-end</b> (todo el sistema) arriba. Rápido y barato abajo; lento y costoso arriba.</div>
+
+    <h3>Los tipos y conceptos</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Unitarias</h4><p>Prueban una clase/método aislado. Rápidas; usan <b>mocks</b> para las dependencias.</p></div>
+      <div class="card"><h4>Integración</h4><p>Prueban varias piezas juntas (p. ej. servicio + base de datos real).</p></div>
+      <div class="card"><h4>End-to-end (E2E)</h4><p>Prueban el flujo completo como un usuario (UI → API → BD).</p></div>
+      <div class="card"><h4>Mock vs. Stub</h4><p><b>Mock</b>: verifica interacciones (¿se llamó?). <b>Stub</b>: devuelve datos fijos. Aíslan la unidad bajo prueba.</p></div>
+      <div class="card"><h4>Cobertura</h4><p>% de código ejecutado por las pruebas. Útil como señal, no como meta ciega.</p></div>
+      <div class="card"><h4>TDD</h4><p>Red → Green → Refactor: escribes la prueba que falla, el código mínimo para pasarla, y luego limpias.</p></div>
+    </div>
+
+    <h3>Una prueba unitaria (JUnit + Mockito)</h3>
+    <pre><code><span class="kw">@Test</span>
+<span class="kw">void</span> pendientes_devuelveSoloVencidas() {
+  <span class="cmt">// Arrange — el repositorio es un mock</span>
+  <span class="kw">when</span>(repo.findByVenceBefore(<span class="kw">any</span>()))
+      .thenReturn(List.of(<span class="kw">new</span> Factura("Luz", 50000)));
+  <span class="cmt">// Act</span>
+  <span class="kw">var</span> result = service.pendientes();
+  <span class="cmt">// Assert</span>
+  assertEquals(1, result.size());
+  verify(repo).findByVenceBefore(<span class="kw">any</span>());
+}</code></pre>
+
+    <div class="grid cols-2">
+      <div class="card"><h4>@SpringBootTest</h4><p>Levanta el contexto de Spring para <b>pruebas de integración</b> del servicio real y sus beans.</p></div>
+      <div class="card"><h4>Testcontainers</h4><p>Arranca una <b>base de datos real en un contenedor Docker</b> durante las pruebas — integración fiel, no un simulacro.</p></div>
+    </div>
+
+    <div class="callout"><b>Conecta con tu pipeline:</b> estas pruebas corren en el paso de <b>Test</b> del CI/CD; su <b>cobertura</b> alimenta el <b>Quality Gate</b> de SonarQube/Kiuwan que decide si el código pasa a producción.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Aseguro la calidad con la pirámide de pruebas: unitarias con JUnit/Mockito, integración con @SpringBootTest y Testcontainers para BD real, e integradas al pipeline con cobertura que alimenta el quality gate — así el equipo cambia código con confianza."</div>
+
+    <h3>Preguntas típicas de testing</h3>
+    <details class="qa"><summary>¿Qué es la pirámide de pruebas?</summary>
+      <div class="ans"><p>Una guía de proporción: <b>muchas</b> unitarias (rápidas y baratas), <b>algunas</b> de integración, y <b>pocas</b> end-to-end (lentas y frágiles). Evita el "cono de helado" (demasiadas E2E), que es lento e inestable.</p></div>
+    </details>
+    <details class="qa"><summary>¿Diferencia entre mock y stub?</summary>
+      <div class="ans"><p>Un <b>stub</b> devuelve respuestas predefinidas para que la prueba avance; un <b>mock</b> además <b>verifica</b> que se le llamó como esperabas (interacciones). Ambos aíslan la unidad de sus dependencias.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es TDD?</summary>
+      <div class="ans"><p><b>Test-Driven Development</b>: escribes primero una prueba que falla (Red), luego el código mínimo para que pase (Green) y después refactorizas (Refactor). Fuerza un diseño testeable y evita sobre-ingeniería.</p></div>
+    </details>
+  </div>
+</section>
+
 <section id="liderazgo">
   <div class="wrap">
     <h2><span class="tag t-lead">Curso</span> Liderazgo y gestión de equipos</h2>
@@ -1228,14 +1452,32 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
     window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
     b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
 
+    // Barra de progreso de lectura
+    var pr=document.getElementById('progress');
+    function onProg(){ var h=document.documentElement; var max=h.scrollHeight-h.clientHeight; pr.style.width=(max>0?(h.scrollTop/max*100):0)+'%'; }
+    window.addEventListener('scroll',onProg,{passive:true}); window.addEventListener('resize',onProg); onProg();
+
     var ov=document.getElementById('menu'), btn=document.getElementById('menubtn'), cl=document.getElementById('menuclose');
-    function openMenu(){ ov.hidden=false; requestAnimationFrame(function(){ ov.classList.add('open'); }); document.body.classList.add('menu-open'); btn.setAttribute('aria-expanded','true'); }
+    var f=document.getElementById('menufilter'), nores=document.getElementById('menu-noresult');
+    function resetFilter(){ if(!f) return; f.value=''; Array.prototype.forEach.call(ov.querySelectorAll('.menu-cat'),function(c){ c.hidden=false; }); Array.prototype.forEach.call(ov.querySelectorAll('.menu-cat a'),function(a){ a.hidden=false; }); if(nores) nores.hidden=true; }
+    function openMenu(){ ov.hidden=false; resetFilter(); requestAnimationFrame(function(){ ov.classList.add('open'); }); document.body.classList.add('menu-open'); btn.setAttribute('aria-expanded','true'); }
     function closeMenu(){ ov.classList.remove('open'); document.body.classList.remove('menu-open'); btn.setAttribute('aria-expanded','false'); setTimeout(function(){ ov.hidden=true; },240); }
     btn.addEventListener('click',openMenu);
     cl.addEventListener('click',closeMenu);
     ov.addEventListener('click',function(e){ if(e.target===ov) closeMenu(); });
-    Array.prototype.forEach.call(ov.querySelectorAll('a'),function(a){ a.addEventListener('click',closeMenu); });
+    Array.prototype.forEach.call(ov.querySelectorAll('.menu-cat a'),function(a){ a.addEventListener('click',closeMenu); });
     document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !ov.hidden) closeMenu(); });
+    if(f){ f.addEventListener('input',function(){
+      var q=f.value.trim().toLowerCase(), any=false;
+      Array.prototype.forEach.call(ov.querySelectorAll('.menu-cat'),function(cat){
+        var vis=0;
+        Array.prototype.forEach.call(cat.querySelectorAll('a'),function(a){
+          var m=a.textContent.toLowerCase().indexOf(q)>=0; a.hidden=!m; if(m)vis++;
+        });
+        cat.hidden=(vis===0); if(vis>0)any=true;
+      });
+      if(nores) nores.hidden=any;
+    }); }
   })();
 </script>
 
