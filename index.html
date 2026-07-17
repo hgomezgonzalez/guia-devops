@@ -3,9 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#1f3355">
-<title>Guía DevOps &amp; Cloud — Hugo Gómez</title>
-<meta name="description" content="Guía visual de entrevista con menú buscable: DevOps, Docker, Kubernetes, Spring Boot, Next.js, Node.js, SQL, NATS, Testing y liderazgo.">
+<meta name="theme-color" content="#c0392b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%23c0392b'/%3E%3Ctext%20x='32'%20y='46'%20font-family='Arial,sans-serif'%20font-size='38'%20font-weight='bold'%20fill='white'%20text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%23c0392b'/%3E%3Ctext%20x='32'%20y='46'%20font-family='Arial,sans-serif'%20font-size='38'%20font-weight='bold'%20fill='white'%20text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<title>Guía DevOps & Cloud — Hugo Gómez</title>
+<meta name="description" content="Dashboard de cursos: DevOps, Docker, Kubernetes, Spring Boot, Next.js, Node.js, SQL, NATS, Testing y liderazgo.">
 </head>
 <body>
 <style>
@@ -81,6 +83,30 @@
   .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
   .t-lead{background:#a9791f} .t-guion{background:#b83a5e} .t-ruta{background:#1f6fa8}
   .t-sql{background:#2f6f8f} .t-test{background:#2e7d5b} .t-nats{background:#9c3d86} .t-node{background:#43873a}
+  /* Dashboard de cursos */
+  .stamp{display:inline-block;font-family:var(--mono);font-size:.76rem;color:var(--ink-faint);
+    background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px 11px;margin-top:6px}
+  .dash-level{margin:16px 0}
+  .dash-level > h3{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-size:1rem;color:var(--brand-ink)}
+  .dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+  .dash-card{position:relative;display:block;background:var(--surface);border:1px solid var(--line);
+    border-left:4px solid var(--c,var(--azure));border-radius:12px;padding:13px 15px 14px;box-shadow:var(--shadow);
+    color:var(--ink);transition:transform .14s,box-shadow .14s,border-color .14s}
+  .dash-card:hover{text-decoration:none;transform:translateY(-2px);box-shadow:0 10px 26px rgba(20,40,70,.12);border-color:var(--c,var(--azure))}
+  .dash-card .dc-n{position:absolute;top:11px;right:12px;font-family:var(--mono);font-size:.72rem;font-weight:800;
+    color:#fff;background:var(--c,var(--azure));width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+  .dash-card b{display:block;color:var(--brand-ink);font-size:1rem;margin:0 30px .1em 0}
+  .dash-card span{color:var(--ink-faint);font-size:.83rem}
+
+  /* Navegación secuencial entre cursos */
+  .seq-nav{display:flex;justify-content:space-between;gap:10px;margin-top:26px;padding-top:16px;border-top:1px solid var(--line)}
+  .seq-nav a{flex:1;max-width:48%;display:flex;flex-direction:column;gap:1px;background:var(--surface);
+    border:1px solid var(--line);border-radius:12px;padding:11px 14px;color:var(--ink);box-shadow:var(--shadow)}
+  .seq-nav a:hover{text-decoration:none;border-color:var(--azure)}
+  .seq-nav a.next{text-align:right;margin-left:auto}
+  .seq-nav a small{color:var(--ink-faint);font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em}
+  .seq-nav a b{color:var(--brand-ink);font-size:.94rem}
+
   /* Ruta de estudio por niveles */
   .lvl{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:14px 16px;box-shadow:var(--shadow);margin:12px 0}
   .lvl-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
@@ -268,7 +294,7 @@
 <div id="progress" aria-hidden="true"></div>
 <nav class="nav">
   <div class="wrap">
-    <span class="brand">Guía técnica · Hugo Gómez</span>
+    <a class="brand" href="#dashboard">Guía técnica · Hugo Gómez</a>
     <a class="quick" href="#chuleta">🎯 Chuleta</a>
     <button id="menubtn" class="menu-btn" aria-expanded="false" aria-controls="menu">☰&nbsp; Menú</button>
   </div>
@@ -291,8 +317,8 @@
       </div>
       <div class="menu-cat">
         <h4><span class="dot" style="background:#0a7fbd"></span>Panorámica</h4>
+        <a href="#dashboard"><b>🧭 Dashboard</b><span>Recorre los cursos en orden</span></a>
         <a href="#panorama"><b>Panorama</b><span>Tu stack de un vistazo</span></a>
-        <a href="#ruta"><b>Ruta de estudio</b><span>El orden de lo que debes saber</span></a>
         <a href="#flujo"><b>Flujo end-to-end</b><span>Del teclado al usuario</span></a>
       </div>
       <div class="menu-cat">
@@ -339,6 +365,64 @@
     </div>
   </div>
 </header>
+
+<section id="dashboard">
+  <div class="wrap">
+    <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
+    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-16 21:22 (Bogotá)</span></span></p>
+
+    <div class="dash-level">
+      <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
+      <div class="dash-grid">
+        <a class="dash-card" href="#panorama" style="--c:#0a7fbd"><span class="dc-n">1</span><b>Panorama</b><span>Tu stack de un vistazo</span></a>
+        <a class="dash-card" href="#docker" style="--c:#1f7fd6"><span class="dc-n">2</span><b>Docker</b><span>Empaquetar la app</span></a>
+        <a class="dash-card" href="#kubernetes" style="--c:#3760d4"><span class="dc-n">3</span><b>Kubernetes</b><span>Orquestar contenedores</span></a>
+      </div>
+    </div>
+    <div class="dash-level">
+      <h3><span class="lvl-n">Nivel 2</span> Desarrollo</h3>
+      <div class="dash-grid">
+        <a class="dash-card" href="#springboot" style="--c:#4f8a2e"><span class="dc-n">4</span><b>Java / Spring Boot</b><span>Microservicios backend</span></a>
+        <a class="dash-card" href="#nextjs" style="--c:#111827"><span class="dc-n">5</span><b>Next.js</b><span>Frontend moderno</span></a>
+        <a class="dash-card" href="#nodejs" style="--c:#43873a"><span class="dc-n">6</span><b>Node.js</b><span>Backend JavaScript</span></a>
+        <a class="dash-card" href="#sql" style="--c:#2f6f8f"><span class="dc-n">7</span><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle</span></a>
+        <a class="dash-card" href="#nats" style="--c:#9c3d86"><span class="dc-n">8</span><b>NATS</b><span>Mensajería event-driven</span></a>
+      </div>
+    </div>
+    <div class="dash-level">
+      <h3><span class="lvl-n">Nivel 3</span> Infraestructura &amp; Cloud</h3>
+      <div class="dash-grid">
+        <a class="dash-card" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">9</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
+        <a class="dash-card" href="#helm" style="--c:#0f9d8a"><span class="dc-n">10</span><b>Helm</b><span>Despliegues reutilizables</span></a>
+        <a class="dash-card" href="#azure" style="--c:#0a7fbd"><span class="dc-n">11</span><b>Azure &amp; AKS</b><span>La nube</span></a>
+      </div>
+    </div>
+    <div class="dash-level">
+      <h3><span class="lvl-n">Nivel 4</span> Entrega (DevOps)</h3>
+      <div class="dash-grid">
+        <a class="dash-card" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">12</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
+        <a class="dash-card" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">13</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
+        <a class="dash-card" href="#testing" style="--c:#2e7d5b"><span class="dc-n">14</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
+        <a class="dash-card" href="#calidad" style="--c:#6f57c9"><span class="dc-n">15</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
+      </div>
+    </div>
+    <div class="dash-level">
+      <h3><span class="lvl-n">Nivel 5</span> Liderazgo &amp; gestión</h3>
+      <div class="dash-grid">
+        <a class="dash-card" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">16</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
+      </div>
+    </div>
+    <div class="dash-level">
+      <h3><span class="lvl-n">Repaso</span> Antes de la entrevista</h3>
+      <div class="dash-grid">
+        <a class="dash-card" href="#chuleta" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎯 Chuleta</b><span>Qué decir, rápido</span></a>
+        <a class="dash-card" href="#guion" style="--c:#b83a5e"><span class="dc-n">★</span><b>Guion completo</b><span>Todos los talking points</span></a>
+        <a class="dash-card" href="#entrevista" style="--c:#6f57c9"><span class="dc-n">★</span><b>Preguntas</b><span>Practica en voz alta</span></a>
+        <a class="dash-card" href="#glosario" style="--c:#0a7fbd"><span class="dc-n">★</span><b>Glosario</b><span>Cada término del CV</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="chuleta">
   <div class="wrap">
@@ -424,64 +508,6 @@
     <div class="say-group">
       <h3>👥 Liderazgo &amp; gestión</h3>
       <div class="quote"><span class="qt" style="background:#a9791f">Liderazgo</span><p>"Lidero equipos cross-funcionales de hasta 21 personas (dev, QA, DevOps): planifico las asignaciones por capacidad y fortalezas, estimo con el equipo (story points / Planning Poker), hago seguimiento con tableros y métricas (velocity, burndown) y desarrollo a las personas con 1:1s y feedback — entregando resultados medibles con enfoque ágil y CMMI."</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="ruta">
-  <div class="wrap">
-    <h2><span class="tag t-ruta">Ruta</span> Ruta de estudio — el orden de lo que debes saber</h2>
-    <p class="sub">Estudia de arriba hacia abajo: primero los fundamentos, luego cómo construyes, cómo lo entregas y cómo lideras. Cada paso enlaza a su sección.</p>
-
-    <div class="lvl">
-      <div class="lvl-h"><span class="lvl-n">Nivel 1</span><b>Fundamentos</b></div>
-      <div class="lvl-steps">
-        <a href="#panorama"><i>1</i>Panorama</a>
-        <a href="#docker"><i>2</i>Docker</a>
-        <a href="#kubernetes"><i>3</i>Kubernetes</a>
-      </div>
-    </div>
-    <div class="lvl">
-      <div class="lvl-h"><span class="lvl-n">Nivel 2</span><b>Desarrollo</b></div>
-      <div class="lvl-steps">
-        <a href="#springboot"><i>4</i>Java / Spring Boot</a>
-        <a href="#nextjs"><i>5</i>Next.js</a>
-        <a href="#nodejs"><i>6</i>Node.js</a>
-        <a href="#sql"><i>7</i>Bases de datos / SQL</a>
-        <a href="#nats"><i>8</i>NATS (mensajería)</a>
-      </div>
-    </div>
-    <div class="lvl">
-      <div class="lvl-h"><span class="lvl-n">Nivel 3</span><b>Infraestructura &amp; Cloud</b></div>
-      <div class="lvl-steps">
-        <a href="#k8s-deep"><i>9</i>Kubernetes a fondo</a>
-        <a href="#helm"><i>10</i>Helm</a>
-        <a href="#azure"><i>11</i>Azure &amp; AKS</a>
-      </div>
-    </div>
-    <div class="lvl">
-      <div class="lvl-h"><span class="lvl-n">Nivel 4</span><b>Entrega (DevOps)</b></div>
-      <div class="lvl-steps">
-        <a href="#curso-devops"><i>12</i>Curso DevOps</a>
-        <a href="#pipelines"><i>13</i>Pipelines CI/CD</a>
-        <a href="#testing"><i>14</i>Pruebas / Testing</a>
-        <a href="#calidad"><i>15</i>Calidad &amp; seguridad</a>
-      </div>
-    </div>
-    <div class="lvl">
-      <div class="lvl-h"><span class="lvl-n">Nivel 5</span><b>Liderazgo &amp; gestión</b></div>
-      <div class="lvl-steps">
-        <a href="#liderazgo"><i>16</i>Curso de liderazgo</a>
-      </div>
-    </div>
-    <div class="lvl">
-      <div class="lvl-h"><span class="lvl-n">Repaso</span><b>Antes de la entrevista</b></div>
-      <div class="lvl-steps">
-        <a href="#chuleta"><i>★</i>Chuleta</a>
-        <a href="#guion"><i>★</i>Guion</a>
-        <a href="#entrevista"><i>★</i>Preguntas</a>
-        <a href="#glosario"><i>★</i>Glosario</a>
-      </div>
     </div>
   </div>
 </section>
@@ -1441,6 +1467,7 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
   <div class="wrap">
     Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
     Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
+    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-16 21:22 (Bogotá)</span></span>
   </div>
 </footer>
 
@@ -1478,6 +1505,22 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
       });
       if(nores) nores.hidden=any;
     }); }
+
+    // Navegación secuencial entre cursos (orden lógico de la ruta)
+    var SEQ=[['panorama','Panorama'],['docker','Docker'],['kubernetes','Kubernetes'],
+      ['springboot','Java / Spring Boot'],['nextjs','Next.js'],['nodejs','Node.js'],
+      ['sql','Bases de datos / SQL'],['nats','NATS'],['k8s-deep','Kubernetes a fondo'],
+      ['helm','Helm'],['azure','Azure / AKS'],['curso-devops','Curso DevOps'],
+      ['pipelines','Pipelines CI/CD'],['testing','Pruebas / Testing'],
+      ['calidad','Calidad y seguridad'],['liderazgo','Curso de liderazgo']];
+    SEQ.forEach(function(it,i){
+      var sec=document.getElementById(it[0]); if(!sec) return;
+      var wrap=sec.querySelector('.wrap'); if(!wrap) return;
+      var nav=document.createElement('div'); nav.className='seq-nav'; var html='';
+      if(i>0){ var p=SEQ[i-1]; html+='<a href="#'+p[0]+'"><small>&#8249; Anterior</small><b>'+p[1]+'</b></a>'; }
+      if(i<SEQ.length-1){ var n=SEQ[i+1]; html+='<a class="next" href="#'+n[0]+'"><small>Siguiente &#8250;</small><b>'+n[1]+'</b></a>'; }
+      nav.innerHTML=html; wrap.appendChild(nav);
+    });
   })();
 </script>
 
