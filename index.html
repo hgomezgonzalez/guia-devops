@@ -83,6 +83,7 @@
   .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
   .t-lead{background:#a9791f} .t-guion{background:#b83a5e} .t-ruta{background:#1f6fa8}
   .t-sql{background:#2f6f8f} .t-test{background:#2e7d5b} .t-nats{background:#9c3d86} .t-node{background:#43873a}
+  .t-train{background:#b83a5e} .t-jira{background:#2f81c9}
   /* Dashboard de cursos */
   .stamp{display:inline-block;font-family:var(--mono);font-size:.76rem;color:var(--ink-faint);
     background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px 11px;margin-top:6px}
@@ -322,6 +323,7 @@
         <a href="#chuleta"><b>🎯 Chuleta</b><span>Qué decir, agrupado por tema</span></a>
         <a href="#guion"><b>Guion completo</b><span>Todos los "cómo lo cuentas tú"</span></a>
         <a href="#entrevista"><b>Preguntas &amp; respuestas</b><span>Practica en voz alta</span></a>
+        <a href="#entrenamiento"><b>🎓 Entrenamiento</b><span>Banco de preguntas (quiz)</span></a>
         <a href="#glosario"><b>Glosario del CV</b><span>Cada término, explicado</span></a>
       </div>
       <div class="menu-cat">
@@ -356,6 +358,7 @@
       <div class="menu-cat">
         <h4><span class="dot" style="background:#a9791f"></span>Liderazgo &amp; Gestión</h4>
         <a href="#liderazgo"><b>Curso de liderazgo</b><span>Asignar, estimar, seguimiento, personas</span></a>
+        <a href="#jira"><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
       </div>
     </div>
   </div>
@@ -378,7 +381,7 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-16 21:32 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-22 09:19 (Bogotá)</span></span></p>
 
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
@@ -419,6 +422,7 @@
       <h3><span class="lvl-n">Nivel 5</span> Liderazgo &amp; gestión</h3>
       <div class="dash-grid">
         <a class="dash-card" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">16</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
+        <a class="dash-card" href="#jira" style="--c:#2f81c9"><span class="dc-n">17</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
       </div>
     </div>
     <div class="dash-level">
@@ -426,6 +430,7 @@
       <div class="dash-grid">
         <a class="dash-card" href="#chuleta" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎯 Chuleta</b><span>Qué decir, rápido</span></a>
         <a class="dash-card" href="#guion" style="--c:#b83a5e"><span class="dc-n">★</span><b>Guion completo</b><span>Todos los talking points</span></a>
+        <a class="dash-card" href="#entrenamiento" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎓 Entrenamiento</b><span>Banco de preguntas (quiz)</span></a>
         <a class="dash-card" href="#entrevista" style="--c:#6f57c9"><span class="dc-n">★</span><b>Preguntas</b><span>Practica en voz alta</span></a>
         <a class="dash-card" href="#glosario" style="--c:#0a7fbd"><span class="dc-n">★</span><b>Glosario</b><span>Cada término del CV</span></a>
       </div>
@@ -517,6 +522,7 @@
     <div class="say-group">
       <h3>👥 Liderazgo &amp; gestión</h3>
       <div class="quote"><span class="qt" style="background:#a9791f">Liderazgo</span><p>"Lidero equipos cross-funcionales de hasta 21 personas (dev, QA, DevOps): planifico las asignaciones por capacidad y fortalezas, estimo con el equipo (story points / Planning Poker), hago seguimiento con tableros y métricas (velocity, burndown) y desarrollo a las personas con 1:1s y feedback — entregando resultados medibles con enfoque ágil y CMMI."</p></div>
+      <div class="quote"><span class="qt" style="background:#2f81c9">Seguimiento</span><p>"Gestiono el trabajo del equipo en Jira (backlog, sprints, tableros Scrum/Kanban, workflows) y documento en Confluence; hago seguimiento con reportes de burndown y velocity y consultas JQL — con visibilidad clara del avance, los bloqueos y las métricas del equipo."</p></div>
     </div>
   </div>
 </section>
@@ -1381,6 +1387,61 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
   </div>
 </section>
 
+<section id="jira">
+  <div class="wrap">
+    <h2><span class="tag t-jira">Gestión</span> Jira, Confluence y seguimiento de proyectos</h2>
+    <p class="sub">Las herramientas con las que un líder hace <b>visible y controlable</b> el trabajo del equipo. Complementan tu curso de liderazgo: aquí el "cómo" operativo del seguimiento.</p>
+
+    <div class="callout"><b>La idea:</b> <b>Jira</b> gestiona el <em>trabajo</em> (qué hacer, en qué estado va, quién y cuándo); <b>Confluence</b> gestiona el <em>conocimiento</em> (documentación, decisiones, actas). Juntos dan visibilidad y trazabilidad.</div>
+
+    <h3>Jira — conceptos clave</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Tipos de issue</h4><p><b>Epic</b> (iniciativa grande) → <b>Story</b>/<b>Task</b> (trabajo) → <b>Sub-task</b>; <b>Bug</b> para defectos.</p></div>
+      <div class="card"><h4>Scrum vs Kanban</h4><p><b>Scrum</b>: trabajo por <b>sprints</b> con compromiso. <b>Kanban</b>: flujo continuo con <b>límites WIP</b>.</p></div>
+      <div class="card"><h4>Backlog &amp; Sprint</h4><p>El backlog prioriza; el <b>sprint</b> toma lo de arriba para un periodo fijo (1–2 semanas).</p></div>
+      <div class="card"><h4>Workflow / estados</h4><p>El camino de un issue: <em>Por hacer → En curso → En revisión → Hecho</em>, configurable.</p></div>
+      <div class="card"><h4>Reportes</h4><p><b>Burndown</b> (restante del sprint), <b>velocity</b> (entregado por sprint), flujo acumulado.</p></div>
+      <div class="card"><h4>Roadmap / versiones</h4><p>Vista temporal de épicas y <b>releases</b> para alinear con el negocio.</p></div>
+    </div>
+
+    <h3>JQL — el "SQL" de Jira para buscar y medir</h3>
+    <pre><code><span class="cmt"># Mis tareas abiertas en el sprint actual</span>
+assignee = currentUser() AND sprint in openSprints() AND status != Done
+
+<span class="cmt"># Bugs de alta prioridad sin asignar</span>
+type = Bug AND priority = High AND assignee is EMPTY ORDER BY created DESC
+
+<span class="cmt"># Trabajo cerrado esta semana (para reportar avance)</span>
+status changed to Done AFTER -7d</code></pre>
+
+    <h3>Confluence — el conocimiento del equipo</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Spaces &amp; páginas</h4><p>Un <b>space</b> por equipo/producto; páginas jerárquicas para documentación viva.</p></div>
+      <div class="card"><h4>Plantillas</h4><p>Actas de reunión, <b>Definición de Hecho</b>, decisiones (ADR), retrospectivas, runbooks.</p></div>
+      <div class="card"><h4>Integración con Jira</h4><p>Enlazas issues en las páginas y ves su estado en vivo: trazabilidad requisito → tarea → doc.</p></div>
+    </div>
+
+    <h3>Herramientas similares (cuándo cada una)</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Azure DevOps Boards</h4><p>Equivalente a Jira, integrado con repos y pipelines de Azure — natural si ya usas Azure DevOps.</p></div>
+      <div class="card"><h4>Trello / Asana / Monday / ClickUp</h4><p>Más ligeros y visuales para equipos pequeños o gestión no técnica; menos potentes que Jira en flujos ágiles complejos.</p></div>
+    </div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Gestiono el trabajo del equipo en Jira —backlog, sprints, tableros Scrum/Kanban y workflows— y documento en Confluence (actas, DoD, decisiones). Hago seguimiento con burndown, velocity y consultas JQL, y también he usado Azure DevOps Boards integrado al pipeline."</div>
+
+    <h3>Preguntas típicas de seguimiento</h3>
+    <details class="qa"><summary>¿Diferencia entre un tablero Scrum y uno Kanban en Jira?</summary>
+      <div class="ans"><p><b>Scrum</b> organiza el trabajo en <b>sprints</b> (periodos fijos con compromiso y burndown). <b>Kanban</b> es <b>flujo continuo</b> con límites de trabajo en curso (WIP), sin sprints — ideal para soporte o flujo constante. Se elige según cómo trabaja el equipo.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo usas Jira para hacer seguimiento sin microgestionar?</summary>
+      <div class="ans"><p>El tablero da visibilidad automática: el estado se ve solo. Reviso <b>métricas</b> (burndown, cycle time) y bloqueos en el daily, no persona por persona; JQL me da reportes rápidos para el patrocinador. La herramienta informa; la confianza la pongo yo.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es JQL y para qué lo usas?</summary>
+      <div class="ans"><p>Es el lenguaje de consulta de Jira (como SQL para issues). Lo uso para filtros y <b>reportes</b>: qué está bloqueado, qué se cerró esta semana, carga por persona, bugs sin asignar — y para tableros y dashboards a la medida.</p></div>
+    </details>
+  </div>
+</section>
+
 <section id="flujo">
   <div class="wrap">
     <h2>El flujo completo, de tu teclado al usuario</h2>
@@ -1472,11 +1533,59 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
   </div>
 </section>
 
+<section id="entrenamiento">
+  <div class="wrap">
+    <h2><span class="tag t-train">Entrenamiento</span> Banco de preguntas de entrevista</h2>
+    <p class="sub">Auto-entrénate: lee la pregunta, respóndela en voz alta y luego ábrela para ver una respuesta modelo. Adáptalas a la empresa y al cargo específicos.</p>
+
+    <div class="callout"><b>Método STAR</b> para las de comportamiento: <b>S</b>ituación → <b>T</b>area → <b>A</b>cción (qué hiciste tú) → <b>R</b>esultado (medible). Ten listas tus <b>3 historias estrella</b> (migración a microservicios, liderar 21 personas, integrar IA) — casi todo se responde con una de ellas. Cierra siempre con una cifra.</div>
+
+    <h3>Encaje y motivación</h3>
+    <details class="qa"><summary>Cuéntame de ti (pitch de 30–45 s)</summary><div class="ans"><p>"Ingeniero de sistemas con 20+ años, hoy líder técnico de un equipo de 21 personas. Lideré la migración de una plataforma monolítica a microservicios en Azure/AKS: 500 ms en alto tráfico, cero downtime y 60% menos tiempo de despliegue. Vengo de telecomunicaciones y banca, y hoy construyo productos con IA integrada. Me mueve liderar equipos que entregan productos de calidad."</p></div></details>
+    <details class="qa"><summary>¿Por qué [esta empresa] / por qué este cargo?</summary><div class="ans"><p>Conecta tres cosas concretas: (1) su <b>dominio</b> con tu experiencia (p. ej. telco/alto volumen), (2) su <b>tecnología o producto</b> con lo que haces (p. ej. IA), y (3) el <b>cargo</b> con tu fortaleza (liderazgo técnico + producto). Investiga la empresa y nómbrala con especificidad.</p></div></details>
+    <details class="qa"><summary>¿Por qué buscas un cambio?</summary><div class="ans"><p>"He crecido mucho en mi rol y busco un siguiente paso donde el liderazgo técnico tenga más impacto en producto e innovación." Nunca hables mal de tu empleo actual.</p></div></details>
+
+    <h3>Liderazgo y equipo (STAR)</h3>
+    <details class="qa"><summary>Háblame de un proyecto complejo que lideraste</summary><div class="ans"><p><b>S:</b> un monolito que no escalaba y frenaba las entregas. <b>T:</b> modernizarlo sin cortar el servicio. <b>A:</b> migración incremental (strangler fig) a microservicios event-driven en AKS, con CI/CD y rolling updates, coordinando dev/QA/DevOps. <b>R:</b> 500 ms, cero downtime, −60% en despliegues y un equipo más autónomo.</p></div></details>
+    <details class="qa"><summary>¿Cómo desarrollas y potencias a tu equipo?</summary><div class="ans"><p>1:1s quincenales, delegar el <b>resultado</b> (no la microtarea) con autonomía y puntos de control, y mentoría técnica. Mido con métricas DORA y reconozco los avances.</p></div></details>
+    <details class="qa"><summary>¿Cómo manejas a alguien de bajo desempeño?</summary><div class="ans"><p>Pronto y en privado, con datos (modelo SBI). Entiendo la causa (capacidad, motivación, bloqueo), acuerdo expectativas y un plan con apoyo, y hago seguimiento cercano. Actuar temprano es la clave.</p></div></details>
+    <details class="qa"><summary>Un conflicto en el equipo y cómo lo resolviste</summary><div class="ans"><p>Escucho a ambas partes, enfoco en el problema (no la persona) y decido con criterios objetivos (costo, riesgo, mantenibilidad). Todos se comprometen con la decisión.</p></div></details>
+    <details class="qa"><summary>¿Cómo estimas y planeas las asignaciones?</summary><div class="ans"><p>Desgloso en piezas pequeñas y estimo <b>con el equipo</b> por complejidad relativa (story points/Planning Poker). Asigno por fortalezas y capacidad real, mapeo dependencias y re-estimo con la velocity histórica + buffer.</p></div></details>
+    <details class="qa"><summary>¿Cómo haces seguimiento sin caer en microgestión?</summary><div class="ans"><p>Tablero visible, límites WIP, Definición de Hecho clara; el daily saca bloqueos. Miro métricas (burndown, cycle time) y doy autonomía con puntos de control, no vigilancia.</p></div></details>
+    <details class="qa"><summary>¿Cómo describirías tu estilo de liderazgo?</summary><div class="ans"><p>Servicial y por resultados: contexto y autonomía, remuevo bloqueos y hago crecer a la gente; exigente con la calidad pero cercano. Reconozco en público, corrijo en privado.</p></div></details>
+    <details class="qa"><summary>¿Cómo das feedback?</summary><div class="ans"><p>Modelo SBI (situación → comportamiento → impacto), concreto y a tiempo, orientado a la mejora. Positivo en público, correctivo en privado.</p></div></details>
+    <details class="qa"><summary>¿Cómo integras (onboarding) a un nuevo miembro?</summary><div class="ans"><p>Un buddy, una primera tarea pequeña y significativa para una victoria temprana, contexto del "por qué" y 1:1s frecuentes las primeras semanas.</p></div></details>
+    <details class="qa"><summary>Una decisión impopular que tomaste</summary><div class="ans"><p>Frenar una entrega para pagar deuda técnica que arriesgaba la estabilidad. Lo expliqué con datos, asumí la responsabilidad y el resultado fue una base más sólida que aceleró lo siguiente.</p></div></details>
+    <details class="qa"><summary>¿Qué haces si no estás de acuerdo con una decisión de tu jefe?</summary><div class="ans"><p>Expongo mi punto con datos y alternativas, en privado y con respeto. Si la decisión se mantiene, me comprometo y la ejecuto bien ("disagree and commit").</p></div></details>
+
+    <h3>Técnicas y de producto</h3>
+    <details class="qa"><summary>¿Cómo escalarías una plataforma de alto volumen?</summary><div class="ans"><p>Microservicios desacoplados, comunicación event-driven para absorber picos, caché (Redis), autoescalado en Kubernetes (HPA) y observabilidad (métricas, logs, trazas, SLOs) para atacar la latencia antes de que sea un problema.</p></div></details>
+    <details class="qa"><summary>¿Cómo incorporas IA (LLMs) que aporte valor real?</summary><div class="ans"><p>Foco en valor medible: un caso con ROI claro, con evaluación y guardrails (precisión, costo, alucinaciones), integrado como servicio. La diferencia entre un demo y algo productivo y confiable.</p></div></details>
+    <details class="qa"><summary>¿Cómo garantizas calidad y cero downtime?</summary><div class="ans"><p>Calidad en el pipeline (pruebas + quality gate que bloquea) y cero downtime con rolling updates + readiness/liveness probes en Kubernetes.</p></div></details>
+    <details class="qa"><summary>Microservicios vs monolito (explícalo simple)</summary><div class="ans"><p>Monolito: todo junto, fácil al inicio, difícil de escalar. Microservicios: servicios pequeños e independientes que se despliegan/escalan por separado. No siempre microservicios: se justifica con escala y velocidad de entrega.</p></div></details>
+    <details class="qa"><summary>¿Cómo aseguras la seguridad de datos (verticales financieros)?</summary><div class="ans"><p>Seguridad por diseño: secretos fuera del código (Key Vault), cifrado, RBAC y análisis SAST/SCA en el pipeline (OWASP). En banca trabajé bajo CMMI y cumplimiento.</p></div></details>
+    <details class="qa"><summary>¿Cómo manejas un incidente en producción?</summary><div class="ans"><p>Estabilizar (mitigar/rollback), comunicar con transparencia y luego postmortem <b>sin culpa</b> para la causa raíz. Mido el MTTR y convierto el incidente en aprendizaje.</p></div></details>
+    <details class="qa"><summary>¿Cómo balanceas calidad vs. velocidad?</summary><div class="ans"><p>No son opuestos a mediano plazo: la automatización da velocidad sostenible. Defino una calidad mínima no negociable y hago explícito el trade-off con el negocio.</p></div></details>
+    <details class="qa"><summary>¿Cómo mides la productividad del equipo?</summary><div class="ans"><p>Con resultados y flujo, no líneas de código: métricas DORA, cumplimiento de objetivos y calidad (defectos, cobertura). Valor con calidad de forma sostenible.</p></div></details>
+
+    <h3>Clásicas de RR.HH.</h3>
+    <details class="qa"><summary>¿Cuáles son tus fortalezas?</summary><div class="ans"><p>Liderazgo técnico hands-on, visión de punta a punta y entrega de resultados medibles (500 ms, cero downtime, −60%).</p></div></details>
+    <details class="qa"><summary>¿Una debilidad?</summary><div class="ans"><p>"Me involucro mucho en el detalle técnico por mi perfil hands-on; lo trabajo delegando el resultado y confiando en el equipo." Muestra autoconciencia + acción.</p></div></details>
+    <details class="qa"><summary>¿Dónde te ves en 5 años?</summary><div class="ans"><p>Liderando la tecnología de una plataforma de producto con impacto real, habiendo formado un equipo fuerte y autónomo.</p></div></details>
+    <details class="qa"><summary>¿Por qué deberíamos contratarte?</summary><div class="ans"><p>Por la combinación exacta que pide el cargo: experiencia en el dominio, construcción de productos (con IA) y liderazgo probado de equipos que entregan calidad a escala. Aporto desde el día uno.</p></div></details>
+    <details class="qa"><summary>¿Expectativa salarial?</summary><div class="ans"><p>"Abierto a conversarlo según el alcance total del rol; mi expectativa está alineada a una posición de liderazgo con mi trayectoria." Si insisten, da un rango de mercado investigado y aclara que es negociable.</p></div></details>
+    <details class="qa"><summary>¿Cómo manejas la presión y los deadlines?</summary><div class="ans"><p>Priorizo por valor vs. esfuerzo, hago explícitas las compensaciones con el patrocinador y protejo la calidad mínima. Bajo presión: más comunicación y foco, no más horas ciegas.</p></div></details>
+
+    <h3>Preguntas que TÚ haces al final</h3>
+    <details class="qa"><summary>Ideas de preguntas para el entrevistador</summary><div class="ans"><p>• ¿Cómo se ve el éxito en los primeros <b>90 días</b>?<br>• ¿Cuáles son los mayores <b>retos técnicos</b> hoy (escala, latencia, IA)?<br>• ¿Qué tan maduras están CI/CD, pruebas y observabilidad?<br>• ¿Cómo priorizan nuevos productos vs. deuda técnica?<br>• ¿Cómo es la <b>cultura de equipo</b> y qué valoran de un líder técnico aquí?</p></div></details>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
     Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
-    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-16 21:32 (Bogotá)</span></span>
+    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-22 09:19 (Bogotá)</span></span>
   </div>
 </footer>
 
@@ -1521,7 +1630,8 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
       ['sql','Bases de datos / SQL'],['nats','NATS'],['k8s-deep','Kubernetes a fondo'],
       ['helm','Helm'],['azure','Azure / AKS'],['curso-devops','Curso DevOps'],
       ['pipelines','Pipelines CI/CD'],['testing','Pruebas / Testing'],
-      ['calidad','Calidad y seguridad'],['liderazgo','Curso de liderazgo']];
+      ['calidad','Calidad y seguridad'],['liderazgo','Curso de liderazgo'],
+      ['jira','Jira & seguimiento']];
     SEQ.forEach(function(it,i){
       var sec=document.getElementById(it[0]); if(!sec) return;
       var wrap=sec.querySelector('.wrap'); if(!wrap) return;
