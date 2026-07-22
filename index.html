@@ -83,7 +83,7 @@
   .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
   .t-lead{background:#a9791f} .t-guion{background:#b83a5e} .t-ruta{background:#1f6fa8}
   .t-sql{background:#2f6f8f} .t-test{background:#2e7d5b} .t-nats{background:#9c3d86} .t-node{background:#43873a}
-  .t-train{background:#b83a5e} .t-jira{background:#2f81c9} .t-sd{background:#2f6fb0} .t-assess{background:#b8860b}
+  .t-train{background:#b83a5e} .t-jira{background:#2f81c9} .t-sd{background:#2f6fb0} .t-assess{background:#b8860b} .t-sim{background:#c0392b}
   /* Dashboard de cursos */
   .stamp{display:inline-block;font-family:var(--mono);font-size:.76rem;color:var(--ink-faint);
     background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px 11px;margin-top:6px}
@@ -286,6 +286,26 @@
   body.focus-mode #progress{display:none}
   body.focus-mode section{display:none}
   body.focus-mode section:target{display:block}
+  /* Simulador de entrevista */
+  .sim-panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);margin-top:8px}
+  .sim-sets{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .sim-set{background:var(--surface-2);border:1px solid var(--line);color:var(--brand-ink);border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer}
+  .sim-set:hover{border-color:var(--azure)}
+  .sim-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .sim-prog{font-family:var(--mono);font-size:.8rem;color:var(--ink-faint)}
+  .sim-timer{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--brand-ink);background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:3px 10px}
+  #sim-qtext{font-size:1.08rem;font-weight:600;color:var(--ink);margin:.4em 0}
+  .sim-hint{font-size:.84rem;color:var(--ink-faint);margin:.2em 0}
+  #sim-answer{width:100%;min-height:90px;margin:10px 0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:.95rem;resize:vertical}
+  .sim-eval{border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
+  .sim-rub{font-size:.92rem;margin:5px 0;color:var(--ink-soft)}
+  .sim-rub b{color:var(--ink)}
+  .sim-model{background:color-mix(in srgb,var(--good) 9%,var(--surface));border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:.93rem;color:var(--ink)}
+  .sim-actions{display:flex;gap:10px;margin-top:14px}
+  .sim-btn{background:var(--surface-2);border:1px solid var(--line);color:var(--brand-ink);border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer}
+  .sim-btn.pri{background:var(--azure);color:#fff;border-color:var(--azure);margin-left:auto}
+  .sim-btn:hover{filter:brightness(1.05)}
+  .sim-btn:disabled{opacity:.5;cursor:default}
 
   @media(max-width:720px){
     .metrics{grid-template-columns:repeat(2,1fr)}
@@ -323,6 +343,7 @@
         <a href="#chuleta"><b>🎯 Chuleta</b><span>Qué decir, agrupado por tema</span></a>
         <a href="#guion"><b>Guion completo</b><span>Todos los "cómo lo cuentas tú"</span></a>
         <a href="#entrevista"><b>Preguntas &amp; respuestas</b><span>Practica en voz alta</span></a>
+        <a href="#simulador"><b>🎬 Simulador</b><span>Práctica cronometrada</span></a>
         <a href="#entrenamiento"><b>🎓 Entrenamiento</b><span>Banco de preguntas (quiz)</span></a>
         <a href="#glosario"><b>Glosario del CV</b><span>Cada término, explicado</span></a>
       </div>
@@ -388,7 +409,7 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-22 09:29 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-22 09:42 (Bogotá)</span></span></p>
 
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
@@ -437,6 +458,7 @@
       <div class="dash-grid">
         <a class="dash-card" href="#chuleta" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎯 Chuleta</b><span>Qué decir, rápido</span></a>
         <a class="dash-card" href="#guion" style="--c:#b83a5e"><span class="dc-n">★</span><b>Guion completo</b><span>Todos los talking points</span></a>
+        <a class="dash-card" href="#simulador" style="--c:#c0392b"><span class="dc-n">★</span><b>🎬 Simulador</b><span>Práctica cronometrada</span></a>
         <a class="dash-card" href="#entrenamiento" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎓 Entrenamiento</b><span>Banco de preguntas (quiz)</span></a>
         <a class="dash-card" href="#entrevista" style="--c:#6f57c9"><span class="dc-n">★</span><b>Preguntas</b><span>Practica en voz alta</span></a>
         <a class="dash-card" href="#glosario" style="--c:#0a7fbd"><span class="dc-n">★</span><b>Glosario</b><span>Cada término del CV</span></a>
@@ -1549,6 +1571,111 @@ status changed to Done AFTER -7d</code></pre>
   </div>
 </section>
 
+<section id="simulador">
+  <div class="wrap">
+    <h2><span class="tag t-sim">Simulador</span> Simulador de entrevista</h2>
+    <p class="sub">Practica como en vivo: elige un set, responde (en voz alta o escrito), cronométrate, y revela la evaluación y una respuesta modelo. Nada se guarda ni se envía.</p>
+    <div id="sim-app">
+      <div id="sim-start" class="sim-panel">
+        <p><b>Elige tu práctica:</b></p>
+        <div class="sim-sets">
+          <button class="sim-set" data-set="all">Completo (10)</button>
+          <button class="sim-set" data-set="quick">Rápido (5)</button>
+          <button class="sim-set" data-set="sysdesign">System Design</button>
+          <button class="sim-set" data-set="lead">Liderazgo</button>
+        </div>
+      </div>
+      <div id="sim-quiz" class="sim-panel" hidden>
+        <div class="sim-top">
+          <span id="sim-prog" class="sim-prog">Pregunta 1 / 10</span>
+          <span id="sim-timer" class="sim-timer">00:00</span>
+        </div>
+        <span id="sim-cat" class="chip"></span>
+        <p id="sim-qtext"></p>
+        <p id="sim-hint" class="sim-hint"></p>
+        <textarea id="sim-answer" placeholder="Escribe o esboza tu respuesta (opcional)…"></textarea>
+        <div id="sim-eval" class="sim-eval" hidden>
+          <div class="sim-rub"><b>✅ Suma:</b> <span id="sim-good"></span></div>
+          <div class="sim-rub"><b>⚠️ Cuestionan:</b> <span id="sim-watch"></span></div>
+          <div class="sim-rub"><b>💡 Sube el nivel:</b> <span id="sim-level"></span></div>
+          <div class="sim-model"><b>Respuesta modelo:</b> <span id="sim-modeltext"></span></div>
+        </div>
+        <div class="sim-actions">
+          <button id="sim-reveal" class="sim-btn">Ver evaluación</button>
+          <button id="sim-next" class="sim-btn pri">Siguiente ›</button>
+        </div>
+      </div>
+      <div id="sim-end" class="sim-panel" hidden>
+        <p><b>¡Terminaste la práctica! 🎉</b></p>
+        <p>Repasa dónde dudaste y vuelve a intentarlo. Recuerda cerrar cada respuesta con una <b>cifra</b>.</p>
+        <button id="sim-restart" class="sim-btn pri">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var Q=[
+    {cat:'Encaje',q:'En 30 segundos: ¿por qué eres el candidato idóneo?',hint:'Perfil + dominio + cargo; cierra con una cifra.',
+     good:'conectas tu perfil con el dominio y el cargo, e incluyes una métrica.',watch:'pitch genérico, sin números ni foco.',level:'una frase de cierre con resultado medible (500 ms, −60%).',
+     model:'Ingeniero con 20+ años, hoy líder de 21 personas; migré un monolito a microservicios en AKS con 500 ms, cero downtime y −60% en despliegues; vengo de telco y banca y construyo productos con IA. Aporto liderazgo técnico desde el día uno.',
+     sets:['all','quick'],time:30},
+    {cat:'System Design',q:'Diseña a alto nivel una plataforma de notificaciones omnicanal (SMS/WhatsApp/push) a escala.',hint:'Aclara → estima → diseño → deep dive → trade-offs.',
+     good:'aclaras requisitos y no-funcionales, estimas carga, usas cola + workers por canal y mencionas trade-offs.',watch:'saltar directo a la solución u olvidar disponibilidad/latencia.',level:'idempotencia, dead-letter queue, rate-limiting por proveedor y observabilidad.',
+     model:'API de ingesta → cola (NATS/Kafka) → workers por canal → proveedores externos, con reintentos y estado en BD. No-funcionales: alta disponibilidad, ~10k msg/s. Trade-off: entrega at-least-once con deduplicación.',
+     sets:['all','quick','sysdesign'],time:420},
+    {cat:'System Design',q:'¿Cómo evitas enviar un mensaje dos veces y que no se pierda si un proveedor falla?',hint:'Piensa en idempotencia y garantías de entrega.',
+     good:'clave de idempotencia, at-least-once + dedup, reintentos con backoff, dead-letter queue y estado persistido.',watch:'asumir exactly-once mágico o ignorar los fallos del proveedor.',level:'explicar por qué at-least-once + dedup es más realista que exactly-once.',
+     model:'Cada mensaje con una clave única; el worker verifica si ya se envió (idempotencia). Reintentos con backoff ante fallo del proveedor y una dead-letter queue para los que agotan reintentos; el estado se persiste para no perder nada.',
+     sets:['all','sysdesign'],time:180},
+    {cat:'Liderazgo (STAR)',q:'Cuéntame de una vez que lideraste un cambio técnico grande con resistencia.',hint:'Situación → Tarea → Acción (tú) → Resultado con cifra.',
+     good:'estructura STAR clara, tu acción concreta, cómo manejaste la resistencia y un resultado medible.',watch:'hablar en nosotros sin tu rol, o no dar resultado.',level:'menciona cómo alineaste al equipo/negocio (datos, piloto, quick wins).',
+     model:'S: monolito que frenaba entregas. T: modernizar sin cortar servicio. A: migración incremental a microservicios en AKS, con piloto y quick wins para bajar la resistencia. R: 500 ms, cero downtime, −60% en despliegues.',
+     sets:['all','quick','lead'],time:180},
+    {cat:'Liderazgo',q:'Un desarrollador clave está desmotivado y bajó su rendimiento. ¿Qué haces?',hint:'Aborda temprano, en privado, con datos.',
+     good:'1:1 privado, entender la causa, expectativas claras, plan con apoyo y seguimiento.',watch:'ignorarlo, exponerlo en público o asumir la causa.',level:'usar el modelo SBI y diferenciar capacidad vs. motivación vs. bloqueo.',
+     model:'Un 1:1 privado y pronto: escucho para entender la causa (¿capacidad, motivación, un bloqueo?), aclaro expectativas con datos (SBI), acuerdo un plan con apoyo y hago seguimiento cercano.',
+     sets:['all','lead'],time:120},
+    {cat:'Situacional',q:'El negocio pide 3 features este sprint; solo tienes capacidad para 1 y el sponsor presiona. ¿Qué haces?',hint:'Prioriza por valor y hazlo transparente.',
+     good:'priorizas por valor vs. esfuerzo, haces explícitos los trade-offs y negocias el alcance.',watch:'prometer las tres o decir no en seco.',level:'ofrecer una versión mínima de la más valiosa y un plan para el resto.',
+     model:'Priorizo por valor vs. esfuerzo alineado al objetivo, hago explícito el trade-off (si entran las 3, ninguna sale bien) y propongo entregar la de mayor valor completa ahora y las otras en un plan claro. Transparencia, no promesas imposibles.',
+     sets:['all','quick','lead'],time:120},
+    {cat:'Técnica',q:'¿Cómo garantizas un despliegue sin downtime?',hint:'Piensa en Kubernetes.',
+     good:'rolling updates + readiness/liveness probes.',watch:'decir solo despliego sin explicar cómo evitas la caída.',level:'mencionar drenaje de conexiones y maxUnavailable: 0.',
+     model:'Con rolling updates en Kubernetes: levanto réplicas nuevas y solo cuando pasan la readiness probe reciben tráfico, retirando las viejas gradualmente; liveness para auto-reparación. Cero downtime real.',
+     sets:['all','quick'],time:90},
+    {cat:'Técnica',q:'¿SQL o NoSQL? ¿Cómo decides?',hint:'Patrón de acceso y garantías.',
+     good:'decides por patrón de acceso y consistencia; mencionas que a veces se usan ambos.',watch:'responder por moda o siempre lo mismo.',level:'dar un ejemplo (financiero = SQL; catálogo/escala = NoSQL).',
+     model:'SQL para transacciones y relaciones fuertes (financiero); NoSQL para escala horizontal, esquema flexible o lecturas masivas. A menudo ambos (persistencia poliglota).',
+     sets:['all','sysdesign'],time:90},
+    {cat:'RR.HH.',q:'¿Cuál es tu principal debilidad?',hint:'Honesta + cómo la trabajas.',
+     good:'debilidad real + acción concreta para manejarla.',watch:'una fortaleza disfrazada o algo descalificante.',level:'mostrar autoconciencia y mejora continua.',
+     model:'Por mi perfil hands-on me involucro mucho en el detalle técnico; lo trabajo delegando el resultado y confiando en el equipo, reservando mi tiempo para arquitectura y desbloqueos.',
+     sets:['all'],time:60},
+    {cat:'RR.HH.',q:'¿Dónde te ves en 5 años?',hint:'Ambición alineada al rol.',
+     good:'crecimiento coherente con el cargo y la empresa.',watch:'respuesta vaga o desconectada del rol.',level:'ligarlo al impacto en producto y en el equipo.',
+     model:'Liderando la tecnología de una plataforma de producto con impacto real, habiendo formado un equipo fuerte y autónomo.',
+     sets:['all'],time:60}
+  ];
+  var app=document.getElementById('sim-app'); if(!app) return;
+  var start=document.getElementById('sim-start'),quiz=document.getElementById('sim-quiz'),end=document.getElementById('sim-end');
+  var elProg=document.getElementById('sim-prog'),elTimer=document.getElementById('sim-timer'),elCat=document.getElementById('sim-cat'),elQ=document.getElementById('sim-qtext'),elHint=document.getElementById('sim-hint'),elAns=document.getElementById('sim-answer'),elEval=document.getElementById('sim-eval'),elReveal=document.getElementById('sim-reveal');
+  var elGood=document.getElementById('sim-good'),elWatch=document.getElementById('sim-watch'),elLevel=document.getElementById('sim-level'),elModel=document.getElementById('sim-modeltext');
+  var queue=[],i=0,t=0,timer=null;
+  function fmt(s){var m=Math.floor(s/60),ss=s%60;return (m<10?'0':'')+m+':'+(ss<10?'0':'')+ss;}
+  function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
+  function startTimer(){stopTimer();t=0;elTimer.textContent='00:00';timer=setInterval(function(){t++;elTimer.textContent=fmt(t);},1000);}
+  function show(){var x=queue[i];elProg.textContent='Pregunta '+(i+1)+' / '+queue.length;elCat.textContent=x.cat;elQ.textContent=x.q;elHint.textContent='⏱ Sugerido: '+fmt(x.time)+' · '+x.hint;elAns.value='';elEval.hidden=true;elReveal.disabled=false;startTimer();}
+  function reveal(){var x=queue[i];elGood.textContent=x.good;elWatch.textContent=x.watch;elLevel.textContent=x.level;elModel.textContent=x.model;elEval.hidden=false;elReveal.disabled=true;stopTimer();}
+  function next(){i++;if(i>=queue.length){stopTimer();quiz.hidden=true;end.hidden=false;}else{show();}}
+  function begin(set){queue=Q.filter(function(q){return q.sets.indexOf(set)>=0;});if(set==='quick')queue=queue.slice(0,5);i=0;start.hidden=true;end.hidden=true;quiz.hidden=false;show();}
+  Array.prototype.forEach.call(document.querySelectorAll('.sim-set'),function(b){b.addEventListener('click',function(){begin(b.getAttribute('data-set'));});});
+  elReveal.addEventListener('click',reveal);
+  document.getElementById('sim-next').addEventListener('click',next);
+  document.getElementById('sim-restart').addEventListener('click',function(){end.hidden=true;quiz.hidden=true;start.hidden=false;});
+})();
+</script>
+
 <section id="entrenamiento">
   <div class="wrap">
     <h2><span class="tag t-train">Entrenamiento</span> Banco de preguntas de entrevista</h2>
@@ -1717,7 +1844,7 @@ status changed to Done AFTER -7d</code></pre>
   <div class="wrap">
     Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
     Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
-    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-22 09:29 (Bogotá)</span></span>
+    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-22 09:42 (Bogotá)</span></span>
   </div>
 </footer>
 
