@@ -83,7 +83,7 @@
   .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
   .t-lead{background:#a9791f} .t-guion{background:#b83a5e} .t-ruta{background:#1f6fa8}
   .t-sql{background:#2f6f8f} .t-test{background:#2e7d5b} .t-nats{background:#9c3d86} .t-node{background:#43873a}
-  .t-train{background:#b83a5e} .t-jira{background:#2f81c9}
+  .t-train{background:#b83a5e} .t-jira{background:#2f81c9} .t-sd{background:#2f6fb0} .t-assess{background:#b8860b}
   /* Dashboard de cursos */
   .stamp{display:inline-block;font-family:var(--mono);font-size:.76rem;color:var(--ink-faint);
     background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px 11px;margin-top:6px}
@@ -360,6 +360,13 @@
         <a href="#liderazgo"><b>Curso de liderazgo</b><span>Asignar, estimar, seguimiento, personas</span></a>
         <a href="#jira"><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
       </div>
+      <div class="menu-cat">
+        <h4><span class="dot" style="background:#b8860b"></span>Assessments</h4>
+        <a href="#system-design"><b>System Design</b><span>Diseño de sistemas (framework)</span></a>
+        <a href="#assessment-coding"><b>Pruebas técnicas / coding</b><span>Live coding y take-home</span></a>
+        <a href="#assessment-psico"><b>Psicométricos / aptitud</b><span>DISC, Big Five, razonamiento</span></a>
+        <a href="#assessment-center"><b>Assessment center</b><span>Dinámicas, role-play, SJT</span></a>
+      </div>
     </div>
   </div>
 </div>
@@ -381,7 +388,7 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-22 09:19 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-22 09:29 (Bogotá)</span></span></p>
 
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
@@ -433,6 +440,15 @@
         <a class="dash-card" href="#entrenamiento" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎓 Entrenamiento</b><span>Banco de preguntas (quiz)</span></a>
         <a class="dash-card" href="#entrevista" style="--c:#6f57c9"><span class="dc-n">★</span><b>Preguntas</b><span>Practica en voz alta</span></a>
         <a class="dash-card" href="#glosario" style="--c:#0a7fbd"><span class="dc-n">★</span><b>Glosario</b><span>Cada término del CV</span></a>
+      </div>
+    </div>
+    <div class="dash-level">
+      <h3><span class="lvl-n">🏆</span> Assessments (ganar la prueba)</h3>
+      <div class="dash-grid">
+        <a class="dash-card" href="#system-design" style="--c:#2f6fb0"><span class="dc-n">A</span><b>System Design</b><span>Diseño de sistemas</span></a>
+        <a class="dash-card" href="#assessment-coding" style="--c:#b8860b"><span class="dc-n">A</span><b>Pruebas técnicas</b><span>Coding &amp; take-home</span></a>
+        <a class="dash-card" href="#assessment-psico" style="--c:#b8860b"><span class="dc-n">A</span><b>Psicométricos</b><span>DISC, aptitud</span></a>
+        <a class="dash-card" href="#assessment-center" style="--c:#b8860b"><span class="dc-n">A</span><b>Assessment center</b><span>Dinámicas, SJT</span></a>
       </div>
     </div>
   </div>
@@ -1581,11 +1597,127 @@ status changed to Done AFTER -7d</code></pre>
   </div>
 </section>
 
+<section id="system-design">
+  <div class="wrap">
+    <h2><span class="tag t-sd">Diseño</span> System Design (diseño de sistemas)</h2>
+    <p class="sub">La prueba estrella para roles de líder/arquitecto. No buscan la respuesta perfecta, sino tu forma de pensar: requisitos, trade-offs y comunicación. Aquí tienes un método repetible.</p>
+
+    <div class="callout"><b>Regla de oro:</b> no saltes a la solución. <b>Aclara primero, dimensiona y razona en voz alta</b> los trade-offs. Evalúan cómo piensas, no cuánto memorizas.</div>
+
+    <h3>El método en 6 pasos</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>1 · Aclara requisitos</h4><p>Funcionales (qué hace) y <b>no funcionales</b> (escala, latencia, disponibilidad, consistencia). Acota el alcance con el entrevistador.</p></div>
+      <div class="card"><h4>2 · Estima (back-of-envelope)</h4><p>Usuarios, QPS (lecturas/escrituras), almacenamiento, ancho de banda. Órdenes de magnitud, no exactitud.</p></div>
+      <div class="card"><h4>3 · API &amp; modelo de datos</h4><p>Endpoints clave y esquema (SQL vs NoSQL según patrón de acceso y consistencia).</p></div>
+      <div class="card"><h4>4 · Diseño de alto nivel</h4><p>Cliente → API/gateway → servicios → datos, con balanceador, caché y colas.</p></div>
+      <div class="card"><h4>5 · Profundiza (deep dive)</h4><p>Elige 1–2 componentes críticos y detállalos (particionado, replicación, índice, cola).</p></div>
+      <div class="card"><h4>6 · Cuellos de botella &amp; trade-offs</h4><p>Puntos únicos de fallo, escalado, consistencia vs disponibilidad (CAP), y cómo mitigar.</p></div>
+    </div>
+
+    <h3>Piezas que siempre aparecen</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Balanceo &amp; escalado horizontal</h4><p>Load balancer + réplicas sin estado. Escalar afuera, no arriba.</p></div>
+      <div class="card"><h4>Caché</h4><p>Redis/CDN para lecturas calientes; define invalidación y TTL.</p></div>
+      <div class="card"><h4>Base de datos</h4><p><b>Sharding</b> (partición) y <b>réplicas</b> de lectura; SQL para transacciones, NoSQL para escala/flexibilidad.</p></div>
+      <div class="card"><h4>Colas / mensajería</h4><p>Kafka/NATS para desacoplar y absorber picos (procesamiento asíncrono).</p></div>
+      <div class="card"><h4>CAP &amp; consistencia</h4><p>En partición eliges Consistencia o Disponibilidad; muchos sistemas usan <b>consistencia eventual</b>.</p></div>
+      <div class="card"><h4>Observabilidad</h4><p>Métricas, logs, trazas y alertas — cómo sabrás que funciona en producción.</p></div>
+    </div>
+
+    <h3>Ejemplo resuelto: "Diseña una plataforma de notificaciones/mensajería a escala"</h3>
+    <div class="callout"><b>1) Requisitos:</b> enviar SMS/WhatsApp/push a millones/día, alta disponibilidad, entrega garantizada, baja latencia. <b>2) Escala:</b> ~10k mensajes/s en pico. <b>3) Diseño:</b> API de ingesta → <b>cola</b> (NATS/Kafka) → workers por canal → proveedores externos, con <b>reintentos</b> y estado en base de datos. <b>4) Deep dive:</b> idempotencia (no duplicar), rate-limiting por proveedor, <em>dead-letter queue</em> para fallos. <b>5) Trade-off:</b> entrega <em>at-least-once</em> con deduplicación (sobre exactly-once) y consistencia eventual del estado.</div>
+
+    <div class="youuse"><b>Tu ventaja:</b> ya construiste esto en la vida real (plataformas de alto tráfico, event-driven, 500&nbsp;ms, zero-downtime). En un System Design, <b>ancla en tus decisiones reales</b> — te da una credibilidad que pocos candidatos tienen.</div>
+
+    <h3>Preguntas típicas de diseño</h3>
+    <details class="qa"><summary>¿SQL o NoSQL, cómo decides?</summary><div class="ans"><p>Por el patrón de acceso y las garantías: <b>SQL</b> para transacciones y relaciones fuertes (financiero); <b>NoSQL</b> para escala horizontal, esquema flexible o lecturas masivas. A menudo ambos (persistencia poliglota).</p></div></details>
+    <details class="qa"><summary>¿Cómo escalas lecturas vs. escrituras?</summary><div class="ans"><p>Lecturas: <b>caché</b> + <b>réplicas de lectura</b> + CDN. Escrituras: <b>sharding</b> por clave, colas para absorber picos y procesamiento asíncrono. Separar caminos (CQRS) cuando la carga lo exige.</p></div></details>
+    <details class="qa"><summary>¿Qué es el teorema CAP y cómo lo aplicas?</summary><div class="ans"><p>Ante una partición de red eliges <b>Consistencia</b> o <b>Disponibilidad</b> (no ambas). En alta escala se suele elegir disponibilidad con <b>consistencia eventual</b>; en financiero, consistencia fuerte. Lo clave es justificar el trade-off.</p></div></details>
+  </div>
+</section>
+
+<section id="assessment-coding">
+  <div class="wrap">
+    <h2><span class="tag t-assess">Assessment</span> Pruebas técnicas y de código</h2>
+    <p class="sub">HackerRank, Codility, live coding o un take-home. A nivel líder no buscan trucos de algoritmos, sino <b>código limpio, criterio y comunicación</b>.</p>
+
+    <div class="callout"><b>El proceso que impresiona (dilo en voz alta):</b> 1) <b>Aclara</b> el problema y sus casos borde. 2) Da <b>ejemplos</b>. 3) Plantea una solución <b>fuerza bruta</b> y su complejidad. 4) <b>Optimiza</b> explicando el porqué. 5) <b>Codifica</b> limpio. 6) <b>Prueba</b> con casos (incluidos los borde).</div>
+
+    <h3>Live coding / plataformas</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Piensa antes de teclear</h4><p>Un minuto de plan ahorra diez de reescritura. Comunica tu enfoque antes de codificar.</p></div>
+      <div class="card"><h4>Complejidad (Big-O)</h4><p>Sé explícito con tiempo y espacio; menciona el trade-off al optimizar.</p></div>
+      <div class="card"><h4>Patrones frecuentes</h4><p>Hash maps, dos punteros, ventana deslizante, BFS/DFS, ordenamiento, recursión/DP. Domina lo básico, no lo exótico.</p></div>
+      <div class="card"><h4>Casos borde</h4><p>Vacío, nulos, duplicados, negativos, overflow. Probarlos demuestra rigor.</p></div>
+    </div>
+
+    <h3>Take-home: cómo entregar uno ganador</h3>
+    <ul class="bullets" style="padding-left:18px">
+      <li><b>README claro:</b> cómo correrlo, decisiones y <b>trade-offs</b> (qué harías con más tiempo).</li>
+      <li><b>Código limpio y por capas</b> — nombres claros, funciones pequeñas, lee como el resto del proyecto.</li>
+      <li><b>Pruebas</b> (aunque sean pocas): demuestran que piensas en calidad — tu diferenciador como líder.</li>
+      <li><b>Git con commits significativos</b> y, si aplica, Docker para correrlo en un comando.</li>
+      <li><b>No sobre-ingenierices:</b> resuelve el problema pedido con calidad, no una catedral.</li>
+    </ul>
+
+    <div class="youuse"><b>Tu ventaja:</b> entregar con <b>pruebas, README de trade-offs y estructura limpia</b> te distingue de quien solo "hace que funcione". Muestra criterio de ingeniería, no solo la solución.</div>
+  </div>
+</section>
+
+<section id="assessment-psico">
+  <div class="wrap">
+    <h2><span class="tag t-assess">Assessment</span> Pruebas psicométricas y de aptitud</h2>
+    <p class="sub">Miden rasgos de personalidad y razonamiento. No se "aprueban" memorizando, pero sí se llega mejor con estrategia y práctica del formato.</p>
+
+    <h3>Personalidad (DISC, Big Five, 16PF)</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Honestidad y consistencia</h4><p>Tienen preguntas de control para detectar respuestas "fabricadas". Sé auténtico; la coherencia importa más que "la respuesta ideal".</p></div>
+      <div class="card"><h4>Conoce el marco</h4><p><b>DISC</b> (Dominancia, Influencia, Estabilidad, Cumplimiento) y <b>Big Five</b>. Para un líder suelen valorar responsabilidad, estabilidad emocional y orientación a personas y resultados.</p></div>
+    </div>
+
+    <h3>Aptitud / razonamiento</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Numérico</h4><p>Porcentajes, ratios, lectura de tablas/gráficas. Gestiona el tiempo: no te atasques en una.</p></div>
+      <div class="card"><h4>Lógico / abstracto</h4><p>Series y patrones: busca la regla (rotación, secuencia, alternancia) y descarta opciones.</p></div>
+      <div class="card"><h4>Verbal</h4><p>"Verdadero / Falso / No se puede determinar": responde <b>solo con lo que dice el texto</b>, no con lo que sabes.</p></div>
+    </div>
+
+    <div class="callout"><b>Estrategia de examen:</b> suelen ser <b>contra reloj</b>. Primero las fáciles, marca y salta las difíciles, cuida el ritmo. Haz 1–2 simulacros (hay gratuitos) para acostumbrarte al formato.</div>
+
+    <div class="youuse"><b>Tip honesto:</b> en los de personalidad responde como el <b>líder que ya eres</b> (colaborativo, orientado a resultados, íntegro) — no inventes un personaje; la incoherencia se detecta y la autenticidad se valora.</div>
+  </div>
+</section>
+
+<section id="assessment-center">
+  <div class="wrap">
+    <h2><span class="tag t-assess">Assessment</span> Assessment center y liderazgo</h2>
+    <p class="sub">Ejercicios en vivo para observar tu liderazgo en acción: dinámicas grupales, role-plays, presentaciones y juicio situacional (SJT).</p>
+
+    <h3>Los formatos típicos</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Dinámica grupal</h4><p>Resolver un caso en equipo. Buscan colaboración y liderazgo: aporta estructura, integra a otros y avanza a una decisión — <b>sin apabullar</b>.</p></div>
+      <div class="card"><h4>Role-play</h4><p>Simulan un 1:1 difícil (bajo desempeño, conflicto). Aplica <b>SBI</b> y escucha activa; enfócate en el problema y el plan.</p></div>
+      <div class="card"><h4>Presentación</h4><p>Exponer un caso/solución con estructura clara (problema → propuesta → impacto), seguro y conciso.</p></div>
+      <div class="card"><h4>SJT (juicio situacional)</h4><p>"¿Qué harías si…?" Elige la opción que equilibra <b>resultado, personas y ética</b>; evita los extremos.</p></div>
+    </div>
+
+    <h3>Cómo destacar como líder (sin pasarte)</h3>
+    <ul class="bullets" style="padding-left:18px">
+      <li><b>Escucha y suma:</b> el mejor líder hace brillar al grupo, no lo monopoliza. Integra ideas y da crédito.</li>
+      <li><b>Estructura el caos:</b> propón un método, timeboxing y un objetivo claro — eso ya es liderazgo.</li>
+      <li><b>Decide y avanza:</b> ante el empate, ayuda al grupo a decidir con criterios, no a quedarse en el debate.</li>
+      <li><b>Datos y calma:</b> mantén la compostura, apóyate en hechos y reconoce los buenos aportes ajenos.</li>
+    </ul>
+
+    <div class="youuse"><b>Tu ventaja:</b> lideras 21 personas en la vida real. En el assessment center <b>actúa como el líder que ya eres</b> — estructura, integra y decide. La experiencia real se nota.</div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
     Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
-    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-22 09:19 (Bogotá)</span></span>
+    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-22 09:29 (Bogotá)</span></span>
   </div>
 </footer>
 
