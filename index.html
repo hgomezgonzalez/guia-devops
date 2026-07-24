@@ -83,6 +83,7 @@
   .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
   .t-lead{background:#a9791f} .t-guion{background:#b83a5e} .t-ruta{background:#1f6fa8}
   .t-sql{background:#2f6f8f} .t-test{background:#2e7d5b} .t-nats{background:#9c3d86} .t-node{background:#43873a}
+  .t-py{background:#3776ab}
   .t-train{background:#b83a5e} .t-jira{background:#2f81c9} .t-sd{background:#2f6fb0} .t-assess{background:#b8860b} .t-sim{background:#c0392b}
   /* Dashboard de cursos */
   .stamp{display:inline-block;font-family:var(--mono);font-size:.76rem;color:var(--ink-faint);
@@ -144,6 +145,7 @@
   pre code{background:none;border:none;padding:0;color:var(--code-ink);font-size:.85rem;line-height:1.55}
   .cmt{color:var(--ink-faint)}
   .kw{color:var(--azure);font-weight:600}
+  pre code .str{color:#2e7d5b} pre code .num{color:#c9711a}
 
   .grid{display:grid;gap:14px}
   .cols-2{grid-template-columns:repeat(2,1fr)}
@@ -358,6 +360,7 @@
         <a href="#springboot"><b>Java / Spring Boot</b><span>Microservicios backend</span></a>
         <a href="#nextjs"><b>Next.js</b><span>Frontend moderno (React)</span></a>
         <a href="#nodejs"><b>Node.js</b><span>Backend JavaScript (E/S)</span></a>
+        <a href="#fastapi"><b>FastAPI / Python</b><span>APIs backend en Python (async)</span></a>
         <a href="#sql"><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle, consultas</span></a>
         <a href="#nats"><b>NATS (mensajería)</b><span>Event-driven entre servicios</span></a>
       </div>
@@ -409,7 +412,7 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-22 09:42 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-24 12:49 (Bogotá)</span></span></p>
 
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
@@ -425,32 +428,33 @@
         <a class="dash-card" href="#springboot" style="--c:#4f8a2e"><span class="dc-n">4</span><b>Java / Spring Boot</b><span>Microservicios backend</span></a>
         <a class="dash-card" href="#nextjs" style="--c:#111827"><span class="dc-n">5</span><b>Next.js</b><span>Frontend moderno</span></a>
         <a class="dash-card" href="#nodejs" style="--c:#43873a"><span class="dc-n">6</span><b>Node.js</b><span>Backend JavaScript</span></a>
-        <a class="dash-card" href="#sql" style="--c:#2f6f8f"><span class="dc-n">7</span><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle</span></a>
-        <a class="dash-card" href="#nats" style="--c:#9c3d86"><span class="dc-n">8</span><b>NATS</b><span>Mensajería event-driven</span></a>
+        <a class="dash-card" href="#fastapi" style="--c:#3776ab"><span class="dc-n">7</span><b>FastAPI / Python</b><span>APIs backend en Python</span></a>
+        <a class="dash-card" href="#sql" style="--c:#2f6f8f"><span class="dc-n">8</span><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle</span></a>
+        <a class="dash-card" href="#nats" style="--c:#9c3d86"><span class="dc-n">9</span><b>NATS</b><span>Mensajería event-driven</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 3</span> Infraestructura &amp; Cloud</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">9</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
-        <a class="dash-card" href="#helm" style="--c:#0f9d8a"><span class="dc-n">10</span><b>Helm</b><span>Despliegues reutilizables</span></a>
-        <a class="dash-card" href="#azure" style="--c:#0a7fbd"><span class="dc-n">11</span><b>Azure &amp; AKS</b><span>La nube</span></a>
+        <a class="dash-card" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">10</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
+        <a class="dash-card" href="#helm" style="--c:#0f9d8a"><span class="dc-n">11</span><b>Helm</b><span>Despliegues reutilizables</span></a>
+        <a class="dash-card" href="#azure" style="--c:#0a7fbd"><span class="dc-n">12</span><b>Azure &amp; AKS</b><span>La nube</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 4</span> Entrega (DevOps)</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">12</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
-        <a class="dash-card" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">13</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
-        <a class="dash-card" href="#testing" style="--c:#2e7d5b"><span class="dc-n">14</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
-        <a class="dash-card" href="#calidad" style="--c:#6f57c9"><span class="dc-n">15</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
+        <a class="dash-card" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">13</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
+        <a class="dash-card" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">14</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
+        <a class="dash-card" href="#testing" style="--c:#2e7d5b"><span class="dc-n">15</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
+        <a class="dash-card" href="#calidad" style="--c:#6f57c9"><span class="dc-n">16</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 5</span> Liderazgo &amp; gestión</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">16</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
-        <a class="dash-card" href="#jira" style="--c:#2f81c9"><span class="dc-n">17</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
+        <a class="dash-card" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">17</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
+        <a class="dash-card" href="#jira" style="--c:#2f81c9"><span class="dc-n">18</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
       </div>
     </div>
     <div class="dash-level">
@@ -496,6 +500,9 @@
     <details class="say"><summary><span class="chip2" style="background:#4f8a2e">Java/Spring</span>Microservicios en Spring Boot</summary>
       <div class="say-body">"Construyo microservicios en Java/Spring Boot por capas (Controller/Service/Repository), con Spring Data JPA sobre PostgreSQL/Oracle, REST APIs y Actuator para health checks integrados con las probes de Kubernetes."<em>Detalle completo en la sección Spring Boot ↓</em></div>
     </details>
+    <details class="say"><summary><span class="chip2" style="background:#3776ab">Python</span>APIs con FastAPI</summary>
+      <div class="say-body">"Construyo APIs REST en Python con FastAPI: validación automática con Pydantic, endpoints async, inyección de dependencias con Depends y SQLAlchemy + Alembic sobre PostgreSQL, con documentación OpenAPI en /docs."<em>Detalle completo en la sección FastAPI ↓</em></div>
+    </details>
     <details class="say"><summary><span class="chip2" style="background:#1f7fd6">Docker</span>Contenedores</summary>
       <div class="say-body">"Empaqueté cada microservicio en su imagen Docker para que corriera idéntico en dev y producción, publicándolas en Azure Container Registry."</div>
     </details>
@@ -519,6 +526,7 @@
     <div class="toplinks">
       <a href="#kubernetes"><b>¿Cómo logras zero-downtime?</b><span>Rolling updates + readiness/liveness probes.</span></a>
       <a href="#springboot"><b>¿Inyección de dependencias?</b><span>Spring inyecta por constructor; desacopla y facilita pruebas.</span></a>
+      <a href="#fastapi"><b>¿Por qué FastAPI?</b><span>Validación Pydantic, async y docs OpenAPI automáticas, con alto rendimiento.</span></a>
       <a href="#docker"><b>¿Docker vs VM?</b><span>El contenedor comparte el kernel; más liviano y reproducible.</span></a>
       <a href="#pipelines"><b>¿Qué es un quality gate?</b><span>Umbral que bloquea el despliegue si el código no cumple.</span></a>
       <a href="#curso-devops"><b>¿Qué miden las métricas DORA?</b><span>Frecuencia de despliegue, lead time, MTTR y tasa de fallo.</span></a>
@@ -904,6 +912,149 @@ app.listen(3000, () =&gt; console.log("API en :3000"));</code></pre>
     </details>
     <details class="qa"><summary>¿Cuándo elegirías Node y cuándo Java/Spring?</summary>
       <div class="ans"><p><b>Node</b> para APIs de mucha E/S, tiempo real (websockets) o un BFF en el mismo lenguaje del frontend. <b>Java/Spring</b> para dominios complejos, tipado fuerte y transaccionalidad pesada. No es "uno u otro": elijo por el problema.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="fastapi">
+  <div class="wrap">
+    <h2><span class="tag t-py">El código</span> APIs en Python con FastAPI</h2>
+    <p class="sub">FastAPI es el framework moderno para construir <b>APIs REST en Python</b>. Con solo declarar los tipos de tus datos obtienes, sin esfuerzo extra, <b>validación automática</b>, <b>documentación interactiva</b> y soporte <b>asíncrono</b> nativo. Es rápido de escribir y rápido en ejecución — por eso lo elegí para varios de mis desarrollos (PayControl, dian-tax, split-expenses).</p>
+
+    <div class="callout"><b>Analogía:</b> FastAPI es como un <b>asistente que revisa la puerta</b>: tú describes qué forma deben tener los datos (con <i>type hints</i> de Python) y él se encarga de <b>validar, convertir y documentar</b> cada petición. Lo que en otros frameworks escribirías a mano, aquí sale "gratis" a partir de los tipos.</div>
+
+    <h3>Arquitectura por capas (el recorrido de una petición)</h3>
+    <p>Una API FastAPI se organiza en capas, igual que un microservicio Spring Boot. Así viaja una petición HTTP:</p>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">🌐</div><div class="n">HTTP</div><h5>Cliente</h5><p>GET /api/facturas</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🚪</div><div class="n">APIRouter</div><h5>Router</h5><p>Recibe y responde</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🧩</div><div class="n">Depends</div><h5>Dependencia</h5><p>Inyecta sesión de BD</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">✅</div><div class="n">Pydantic</div><h5>Schema</h5><p>Valida datos</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🗃️</div><div class="n">SQLAlchemy</div><h5>ORM</h5><p>Acceso a datos</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🐘</div><div class="n">SQL</div><h5>PostgreSQL</h5><p>La base de datos</p></div>
+      </div>
+    </div>
+
+    <h3>Los conceptos que debes saber explicar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Type hints</h4><p>Anotar los tipos (<code>id: int</code>, <code>monto: Decimal</code>). FastAPI los usa para validar, convertir y documentar automáticamente.</p></div>
+      <div class="card"><h4>Pydantic</h4><p>Los <b>schemas</b> definen la forma de entrada/salida. Validan y serializan; si el JSON no cumple, responde <b>422</b> con el detalle.</p></div>
+      <div class="card"><h4>async / await</h4><p>FastAPI es <b>ASGI</b>: las rutas <code>async</code> no bloquean mientras esperan la BD o la red — ideal para mucha E/S y alta concurrencia.</p></div>
+      <div class="card"><h4>Depends (inyección)</h4><p>La <b>inyección de dependencias</b> de FastAPI: la sesión de BD, el usuario autenticado o la config se "inyectan" en la ruta y se reusan y testean fácil.</p></div>
+      <div class="card"><h4>Path / Query params</h4><p>Tipados en la firma de la función (<code>/facturas/{id}</code>, <code>?estado=pendiente</code>); se validan solos.</p></div>
+      <div class="card"><h4>OpenAPI / <code>/docs</code></h4><p>Genera el contrato <b>OpenAPI (Swagger)</b> automáticamente: <code>/docs</code> te da una API navegable sin escribir una línea extra.</p></div>
+    </div>
+
+    <h3>Un servicio completo, capa por capa</h3>
+    <p>Ejemplo: un servicio de <b>facturas</b> con un endpoint para listar pendientes y otro para crear — el mismo caso de la sección de Spring Boot, ahora en Python.</p>
+
+    <p><b>1. Schema Pydantic</b> — describe y valida los datos que entran y salen:</p>
+    <pre><code><span class="kw">from</span> pydantic <span class="kw">import</span> BaseModel
+<span class="kw">from</span> datetime <span class="kw">import</span> date
+<span class="kw">from</span> decimal <span class="kw">import</span> Decimal
+
+<span class="kw">class</span> FacturaIn(BaseModel):        <span class="cmt"># lo que llega en el POST</span>
+    concepto: str
+    monto: Decimal
+    vence: date
+
+<span class="kw">class</span> FacturaOut(FacturaIn):       <span class="cmt"># lo que devolvemos (agrega id)</span>
+    id: int
+    <span class="kw">class</span> Config: from_attributes = <span class="kw">True</span>   <span class="cmt"># lee desde el modelo ORM</span></code></pre>
+
+    <p><b>2. Modelo SQLAlchemy</b> — mapea la clase a la tabla (el equivalente a la <code>@Entity</code> de JPA):</p>
+    <pre><code><span class="kw">from</span> sqlalchemy.orm <span class="kw">import</span> Mapped, mapped_column
+<span class="kw">from</span> app.db <span class="kw">import</span> Base
+
+<span class="kw">class</span> Factura(Base):
+    __tablename__ = <span class="str">"facturas"</span>
+    id: Mapped[int] = mapped_column(primary_key=<span class="kw">True</span>)
+    concepto: Mapped[str]
+    monto: Mapped[Decimal]
+    vence: Mapped[date]</code></pre>
+
+    <p><b>3. Dependencia</b> — inyecta una sesión de BD por petición y la cierra sola:</p>
+    <pre><code><span class="kw">def</span> get_db():
+    db = SessionLocal()
+    <span class="kw">try</span>:
+        <span class="kw">yield</span> db          <span class="cmt"># la ruta usa 'db'; al terminar, se cierra</span>
+    <span class="kw">finally</span>:
+        db.close()</code></pre>
+
+    <p><b>4. Router</b> — expone los endpoints REST (async, con validación e inyección):</p>
+    <pre><code><span class="kw">from</span> fastapi <span class="kw">import</span> APIRouter, Depends
+
+router = APIRouter(prefix=<span class="str">"/api/facturas"</span>)
+
+<span class="kw">@router.get</span>(<span class="str">"/pendientes"</span>, response_model=list[FacturaOut])
+<span class="kw">async def</span> pendientes(db = Depends(get_db)):
+    <span class="kw">return</span> db.query(Factura).filter(Factura.vence &lt; date.today()).all()
+
+<span class="kw">@router.post</span>(<span class="str">""</span>, response_model=FacturaOut, status_code=<span class="num">201</span>)
+<span class="kw">async def</span> crear(f: FacturaIn, db = Depends(get_db)):   <span class="cmt"># Pydantic ya validó 'f'</span>
+    row = Factura(**f.model_dump())
+    db.add(row); db.commit(); db.refresh(row)
+    <span class="kw">return</span> row</code></pre>
+
+    <p><b>5. main.py</b> — arma la app, monta el router y expone un health check:</p>
+    <pre><code><span class="kw">from</span> fastapi <span class="kw">import</span> FastAPI
+<span class="kw">from</span> app.routers <span class="kw">import</span> facturas
+
+app = FastAPI(title=<span class="str">"Facturas API"</span>)
+app.include_router(facturas.router)
+
+<span class="kw">@app.get</span>(<span class="str">"/health"</span>)          <span class="cmt"># lo apuntan las probes de Kubernetes</span>
+<span class="kw">async def</span> health():
+    <span class="kw">return</span> {<span class="str">"status"</span>: <span class="str">"ok"</span>}
+
+<span class="cmt"># Se arranca con:  uvicorn app.main:app --host 0.0.0.0 --port 8000</span></code></pre>
+
+    <h3>Lo que lo vuelve "microservicio" (y conecta con el resto de la guía)</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Health check</h4><p><code>/health</code> es justo lo que apuntan las <b>readiness/liveness probes</b> de Kubernetes para el zero-downtime.</p></div>
+      <div class="card"><h4>Config por entorno</h4><p><b>Pydantic Settings</b> lee variables de entorno (<code>DB_URL</code>, secretos) — sin credenciales en el código; misma imagen, distinta config.</p></div>
+      <div class="card"><h4>OpenAPI como contrato</h4><p>El esquema OpenAPI automático sirve para documentar, generar clientes y validar contratos entre servicios.</p></div>
+      <div class="card"><h4>Async para alto I/O</h4><p>Al ser ASGI (Uvicorn), sostiene muchas conexiones concurrentes de E/S sin bloquear — clave para 500&nbsp;ms bajo tráfico.</p></div>
+      <div class="card"><h4>Migraciones con Alembic</h4><p><b>Alembic</b> versiona el esquema de la BD (el equivalente Python de Flyway/Liquibase).</p></div>
+      <div class="card"><h4>Observabilidad</h4><p>Logs estructurados + métricas (Prometheus) y health checks → integrable con Azure Monitor.</p></div>
+    </div>
+
+    <h3>Y se empaqueta así (Dockerfile multi-stage para Python)</h3>
+    <pre><code><span class="cmt"># --- etapa build: instala dependencias en un venv ---</span>
+<span class="kw">FROM</span> python:3.12-slim AS build
+<span class="kw">WORKDIR</span> /app
+<span class="kw">COPY</span> requirements.txt .
+<span class="kw">RUN</span>  pip install --prefix=/install -r requirements.txt
+<span class="cmt"># --- etapa runtime: imagen liviana solo con lo necesario ---</span>
+<span class="kw">FROM</span> python:3.12-slim
+<span class="kw">WORKDIR</span> /app
+<span class="kw">COPY</span> --from=build /install /usr/local
+<span class="kw">COPY</span> . .
+<span class="kw">EXPOSE</span> 8000
+<span class="kw">CMD</span> ["uvicorn","app.main:app","--host","0.0.0.0","--port","8000"]</code></pre>
+
+    <div class="callout"><b>El círculo completo:</b> escribes el servicio (FastAPI) → lo metes en una imagen liviana (Docker) → el pipeline lo construye, corre los tests y <b>SonarQube</b> revisa el código Python → se despliega en <b>AKS</b> con Helm → el <code>/health</code> alimenta las probes de Kubernetes y <code>/docs</code> documenta la API. El mismo flujo que Spring Boot, en Python.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Construí APIs REST en Python con FastAPI: definí los datos con schemas de Pydantic para validación automática, endpoints asíncronos, inyección de dependencias con <code>Depends</code>, y SQLAlchemy + Alembic sobre PostgreSQL. Aprovecho la documentación OpenAPI automática (<code>/docs</code>) como contrato y health checks para desplegar en contenedores — lo apliqué en varios productos propios, incluidos algunos con IA integrada."</div>
+
+    <h3>Preguntas típicas de FastAPI / Python</h3>
+    <details class="qa"><summary>¿Por qué FastAPI y no Flask o Django?</summary>
+      <div class="ans"><p><b>FastAPI</b> trae de fábrica lo que en Flask armarías a mano: validación con Pydantic, soporte <b>async</b> nativo (ASGI) y documentación OpenAPI automática, con muy buen rendimiento. <b>Django</b> es excelente para apps con panel de administración y ORM integrado, más "baterías incluidas"; para <b>microservicios/API-first</b> con alta concurrencia de E/S, FastAPI es más liviano y directo. Elijo por el caso.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo valida los datos de entrada?</summary>
+      <div class="ans"><p>Con <b>Pydantic</b>: declaras un modelo con los tipos esperados y FastAPI valida y convierte cada petición contra él. Si el cuerpo no cumple (tipo equivocado, campo faltante), responde automáticamente <b>422 Unprocessable Entity</b> con el detalle de qué falló — sin que escribas esa validación.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es async/await y cuándo ayuda de verdad?</summary>
+      <div class="ans"><p>Permite que una ruta <b>ceda el control</b> mientras espera una operación de E/S (BD, otra API, archivo) en vez de bloquear el proceso. Ayuda en cargas <b>I/O-bound</b> con mucha concurrencia. Ojo: para trabajo <b>CPU-intensivo</b> no acelera (ahí conviene workers o procesos aparte); y si usas un driver de BD síncrono, esa llamada sigue siendo bloqueante.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo se documenta la API?</summary>
+      <div class="ans"><p>FastAPI genera el esquema <b>OpenAPI</b> a partir de tus tipos y schemas, y expone una UI interactiva en <code>/docs</code> (Swagger UI) y <code>/redoc</code>. Sirve para probar endpoints, compartir el contrato con otros equipos y generar clientes automáticamente — todo sin mantenimiento manual.</p></div>
     </details>
   </div>
 </section>
@@ -1886,6 +2037,7 @@ status changed to Done AFTER -7d</code></pre>
     // Navegación secuencial entre cursos (orden lógico de la ruta)
     var SEQ=[['panorama','Panorama'],['docker','Docker'],['kubernetes','Kubernetes'],
       ['springboot','Java / Spring Boot'],['nextjs','Next.js'],['nodejs','Node.js'],
+      ['fastapi','FastAPI / Python'],
       ['sql','Bases de datos / SQL'],['nats','NATS'],['k8s-deep','Kubernetes a fondo'],
       ['helm','Helm'],['azure','Azure / AKS'],['curso-devops','Curso DevOps'],
       ['pipelines','Pipelines CI/CD'],['testing','Pruebas / Testing'],
