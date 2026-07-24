@@ -412,7 +412,7 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-24 12:49 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-24 13:04 (Bogotá)</span></span></p>
 
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
@@ -1730,8 +1730,9 @@ status changed to Done AFTER -7d</code></pre>
       <div id="sim-start" class="sim-panel">
         <p><b>Elige tu práctica:</b></p>
         <div class="sim-sets">
-          <button class="sim-set" data-set="all">Completo (10)</button>
+          <button class="sim-set" data-set="all">Completo (13)</button>
           <button class="sim-set" data-set="quick">Rápido (5)</button>
+          <button class="sim-set" data-set="tech">Técnica</button>
           <button class="sim-set" data-set="sysdesign">System Design</button>
           <button class="sim-set" data-set="lead">Liderazgo</button>
         </div>
@@ -1794,11 +1795,23 @@ status changed to Done AFTER -7d</code></pre>
     {cat:'Técnica',q:'¿Cómo garantizas un despliegue sin downtime?',hint:'Piensa en Kubernetes.',
      good:'rolling updates + readiness/liveness probes.',watch:'decir solo despliego sin explicar cómo evitas la caída.',level:'mencionar drenaje de conexiones y maxUnavailable: 0.',
      model:'Con rolling updates en Kubernetes: levanto réplicas nuevas y solo cuando pasan la readiness probe reciben tráfico, retirando las viejas gradualmente; liveness para auto-reparación. Cero downtime real.',
-     sets:['all','quick'],time:90},
+     sets:['all','quick','tech'],time:90},
     {cat:'Técnica',q:'¿SQL o NoSQL? ¿Cómo decides?',hint:'Patrón de acceso y garantías.',
      good:'decides por patrón de acceso y consistencia; mencionas que a veces se usan ambos.',watch:'responder por moda o siempre lo mismo.',level:'dar un ejemplo (financiero = SQL; catálogo/escala = NoSQL).',
      model:'SQL para transacciones y relaciones fuertes (financiero); NoSQL para escala horizontal, esquema flexible o lecturas masivas. A menudo ambos (persistencia poliglota).',
-     sets:['all','sysdesign'],time:90},
+     sets:['all','sysdesign','tech'],time:90},
+    {cat:'Técnica (FastAPI)',q:'¿Por qué elegiste FastAPI para tus servicios en Python?',hint:'Compáralo con Flask/Django; da 2–3 ventajas concretas.',
+     good:'nombras validación con Pydantic, async nativo y OpenAPI automático, y decides por el caso (API-first).',watch:'decir solo "es moderno/rápido" sin ventajas concretas, o descartar Django sin criterio.',level:'mencionar el rendimiento (ASGI/Starlette) y cuándo NO usarlo (app con admin+ORM → Django).',
+     model:'Por tres cosas que trae de fábrica: validación con Pydantic a partir de los type hints, soporte async nativo (ASGI) para alta concurrencia de E/S, y documentación OpenAPI automática en /docs. Para microservicios API-first es liviano y rápido; si necesitara panel de administración y ORM integrado, iría a Django.',
+     sets:['all','tech'],time:90},
+    {cat:'Técnica (FastAPI)',q:'En FastAPI, ¿cómo validas los datos de entrada y qué pasa si no cumplen?',hint:'Piensa en Pydantic y el código de estado.',
+     good:'defines un schema Pydantic con tipos; FastAPI valida y responde 422 con el detalle automáticamente.',watch:'validar a mano con ifs, o no mencionar el 422.',level:'mencionar que con response_model también valida y serializa la salida.',
+     model:'Declaro un modelo Pydantic con los tipos esperados; FastAPI valida cada request contra él y, si no cumple, responde 422 Unprocessable Entity con el detalle de qué falló, sin que yo escriba esa validación. Con response_model, además valido y serializo la respuesta.',
+     sets:['all','tech'],time:75},
+    {cat:'Técnica (FastAPI)',q:'¿Qué es async/await en FastAPI y cuándo ayuda de verdad?',hint:'Distingue I/O-bound de CPU-bound.',
+     good:'cede el control durante la E/S; ayuda en cargas I/O-bound con alta concurrencia; no acelera lo CPU-bound.',watch:'creer que async acelera todo, u olvidar que un driver síncrono sigue bloqueando.',level:'nombrar ASGI/Uvicorn y que un driver de BD síncrono anula el beneficio.',
+     model:'async permite que la ruta ceda el control mientras espera una operación de E/S (BD, otra API) en vez de bloquear el proceso; con Uvicorn (ASGI) eso sostiene mucha concurrencia. Ayuda en trabajo I/O-bound; para CPU-intensivo no acelera, y si el driver de BD es síncrono esa llamada sigue bloqueando.',
+     sets:['all','tech'],time:90},
     {cat:'RR.HH.',q:'¿Cuál es tu principal debilidad?',hint:'Honesta + cómo la trabajas.',
      good:'debilidad real + acción concreta para manejarla.',watch:'una fortaleza disfrazada o algo descalificante.',level:'mostrar autoconciencia y mejora continua.',
      model:'Por mi perfil hands-on me involucro mucho en el detalle técnico; lo trabajo delegando el resultado y confiando en el equipo, reservando mi tiempo para arquitectura y desbloqueos.',
@@ -1862,6 +1875,10 @@ status changed to Done AFTER -7d</code></pre>
     <details class="qa"><summary>¿Cómo balanceas calidad vs. velocidad?</summary><div class="ans"><p>No son opuestos a mediano plazo: la automatización da velocidad sostenible. Defino una calidad mínima no negociable y hago explícito el trade-off con el negocio.</p></div></details>
     <details class="qa"><summary>¿Cómo mides la productividad del equipo?</summary><div class="ans"><p>Con resultados y flujo, no líneas de código: métricas DORA, cumplimiento de objetivos y calidad (defectos, cobertura). Valor con calidad de forma sostenible.</p></div></details>
 
+    <details class="qa"><summary>¿Por qué FastAPI y no Flask o Django?</summary><div class="ans"><p>FastAPI trae de fábrica lo que en Flask armarías a mano: <b>validación con Pydantic</b>, <b>async</b> nativo (ASGI) y <b>documentación OpenAPI</b> automática, con muy buen rendimiento. <b>Django</b> brilla con panel de administración y ORM integrado ("baterías incluidas"); para <b>microservicios API-first</b> con alta concurrencia de E/S, FastAPI es más liviano y directo. Elijo por el caso.</p></div></details>
+    <details class="qa"><summary>¿Cómo validas los datos de entrada en FastAPI?</summary><div class="ans"><p>Con <b>Pydantic</b>: defino un schema con los tipos esperados y FastAPI valida y convierte cada request. Si no cumple, responde <b>422</b> con el detalle, sin escribir esa validación. Con <code>response_model</code> también valido y serializo la salida.</p></div></details>
+    <details class="qa"><summary>¿Qué es <code>Depends</code> (inyección de dependencias) en FastAPI?</summary><div class="ans"><p>Es el mecanismo para "inyectar" cosas reutilizables en una ruta: la <b>sesión de BD</b>, el <b>usuario autenticado</b>, la configuración. Se declaran una vez y FastAPI las provee y las limpia por petición — desacopla y hace el código fácil de testear (puedes sobrescribir la dependencia con un mock).</p></div></details>
+    <details class="qa"><summary>¿Cuándo ayuda async/await y cuándo no?</summary><div class="ans"><p>Ayuda en trabajo <b>I/O-bound</b> (BD, otras APIs) con alta concurrencia: la ruta cede el control mientras espera, en vez de bloquear. <b>No</b> acelera lo <b>CPU-intensivo</b>, y si el driver de BD es síncrono esa llamada sigue bloqueando. Con Python real: FastAPI corre sobre <b>Uvicorn (ASGI)</b>.</p></div></details>
     <h3>Clásicas de RR.HH.</h3>
     <details class="qa"><summary>¿Cuáles son tus fortalezas?</summary><div class="ans"><p>Liderazgo técnico hands-on, visión de punta a punta y entrega de resultados medibles (500 ms, cero downtime, −60%).</p></div></details>
     <details class="qa"><summary>¿Una debilidad?</summary><div class="ans"><p>"Me involucro mucho en el detalle técnico por mi perfil hands-on; lo trabajo delegando el resultado y confiando en el equipo." Muestra autoconciencia + acción.</p></div></details>
