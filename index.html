@@ -83,7 +83,8 @@
   .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
   .t-lead{background:#a9791f} .t-guion{background:#b83a5e} .t-ruta{background:#1f6fa8}
   .t-sql{background:#2f6f8f} .t-test{background:#2e7d5b} .t-nats{background:#9c3d86} .t-node{background:#43873a}
-  .t-py{background:#3776ab} .t-arq{background:#7048a8}
+  .t-py{background:#3776ab} .t-arq{background:#7048a8} .t-net{background:#512bd4}
+  .t-front{background:#dd0031} .t-api{background:#0e6f74} .t-auth{background:#b45309}
   .t-train{background:#b83a5e} .t-jira{background:#2f81c9} .t-sd{background:#2f6fb0} .t-assess{background:#b8860b} .t-sim{background:#c0392b}
   /* Dashboard de cursos */
   .stamp{display:inline-block;font-family:var(--mono);font-size:.76rem;color:var(--ink-faint);
@@ -358,7 +359,9 @@
       <div class="menu-cat">
         <h4><span class="dot" style="background:#4f8a2e"></span>Desarrollo</h4>
         <a href="#springboot"><b>Java / Spring Boot</b><span>Microservicios backend</span></a>
+        <a href="#dotnet"><b>.NET / C#</b><span>Backend empresarial, EF Core</span></a>
         <a href="#nextjs"><b>Next.js</b><span>Frontend moderno (React)</span></a>
+        <a href="#react-angular"><b>React vs Angular</b><span>Fundamentos y equivalencias</span></a>
         <a href="#nodejs"><b>Node.js</b><span>Backend JavaScript (E/S)</span></a>
         <a href="#fastapi"><b>FastAPI / Python</b><span>APIs backend en Python (async)</span></a>
         <a href="#sql"><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle, consultas</span></a>
@@ -367,6 +370,11 @@
       <div class="menu-cat">
         <h4><span class="dot" style="background:#7048a8"></span>Arquitectura</h4>
         <a href="#arquitectura"><b>Arquitectura de software</b><span>Hexagonal, DDD, capas, trade-offs</span></a>
+      </div>
+      <div class="menu-cat">
+        <h4><span class="dot" style="background:#0e6f74"></span>APIs, integración &amp; seguridad</h4>
+        <a href="#rest-soap"><b>REST vs SOAP</b><span>APIs, WSDL, ESB, modernizar legacy</span></a>
+        <a href="#jwt"><b>JWT y autenticación</b><span>OAuth2, OIDC, RBAC, seguridad de APIs</span></a>
       </div>
       <div class="menu-cat">
         <h4><span class="dot" style="background:#3760d4"></span>Contenedores &amp; Cloud</h4>
@@ -416,7 +424,7 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-28 15:24 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-28 18:21 (Bogotá)</span></span></p>
 
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
@@ -430,36 +438,45 @@
       <h3><span class="lvl-n">Nivel 2</span> Desarrollo</h3>
       <div class="dash-grid">
         <a class="dash-card" href="#springboot" style="--c:#4f8a2e"><span class="dc-n">4</span><b>Java / Spring Boot</b><span>Microservicios backend</span></a>
-        <a class="dash-card" href="#nextjs" style="--c:#111827"><span class="dc-n">5</span><b>Next.js</b><span>Frontend moderno</span></a>
-        <a class="dash-card" href="#nodejs" style="--c:#43873a"><span class="dc-n">6</span><b>Node.js</b><span>Backend JavaScript</span></a>
-        <a class="dash-card" href="#fastapi" style="--c:#3776ab"><span class="dc-n">7</span><b>FastAPI / Python</b><span>APIs backend en Python</span></a>
-        <a class="dash-card" href="#sql" style="--c:#2f6f8f"><span class="dc-n">8</span><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle</span></a>
-        <a class="dash-card" href="#nats" style="--c:#9c3d86"><span class="dc-n">9</span><b>NATS</b><span>Mensajería event-driven</span></a>
-        <a class="dash-card" href="#arquitectura" style="--c:#7048a8"><span class="dc-n">10</span><b>Arquitectura de software</b><span>Hexagonal, DDD, trade-offs</span></a>
+        <a class="dash-card" href="#dotnet" style="--c:#512bd4"><span class="dc-n">5</span><b>.NET / C#</b><span>Backend empresarial</span></a>
+        <a class="dash-card" href="#nextjs" style="--c:#111827"><span class="dc-n">6</span><b>Next.js</b><span>Frontend moderno</span></a>
+        <a class="dash-card" href="#react-angular" style="--c:#dd0031"><span class="dc-n">7</span><b>React vs Angular</b><span>Fundamentos y equivalencias</span></a>
+        <a class="dash-card" href="#nodejs" style="--c:#43873a"><span class="dc-n">8</span><b>Node.js</b><span>Backend JavaScript</span></a>
+        <a class="dash-card" href="#fastapi" style="--c:#3776ab"><span class="dc-n">9</span><b>FastAPI / Python</b><span>APIs backend en Python</span></a>
+        <a class="dash-card" href="#sql" style="--c:#2f6f8f"><span class="dc-n">10</span><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle</span></a>
+        <a class="dash-card" href="#nats" style="--c:#9c3d86"><span class="dc-n">11</span><b>NATS</b><span>Mensajería event-driven</span></a>
+        <a class="dash-card" href="#arquitectura" style="--c:#7048a8"><span class="dc-n">12</span><b>Arquitectura de software</b><span>Hexagonal, DDD, trade-offs</span></a>
       </div>
     </div>
     <div class="dash-level">
-      <h3><span class="lvl-n">Nivel 3</span> Infraestructura &amp; Cloud</h3>
+      <h3><span class="lvl-n">Nivel 3</span> APIs, integración &amp; seguridad</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">11</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
-        <a class="dash-card" href="#helm" style="--c:#0f9d8a"><span class="dc-n">12</span><b>Helm</b><span>Despliegues reutilizables</span></a>
-        <a class="dash-card" href="#azure" style="--c:#0a7fbd"><span class="dc-n">13</span><b>Azure &amp; AKS</b><span>La nube</span></a>
+        <a class="dash-card" href="#rest-soap" style="--c:#0e6f74"><span class="dc-n">13</span><b>REST vs SOAP</b><span>APIs, ESB, modernizar legacy</span></a>
+        <a class="dash-card" href="#jwt" style="--c:#b45309"><span class="dc-n">14</span><b>JWT y autenticación</b><span>OAuth2, OIDC, RBAC</span></a>
       </div>
     </div>
     <div class="dash-level">
-      <h3><span class="lvl-n">Nivel 4</span> Entrega (DevOps)</h3>
+      <h3><span class="lvl-n">Nivel 4</span> Infraestructura &amp; Cloud</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">14</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
-        <a class="dash-card" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">15</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
-        <a class="dash-card" href="#testing" style="--c:#2e7d5b"><span class="dc-n">16</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
-        <a class="dash-card" href="#calidad" style="--c:#6f57c9"><span class="dc-n">17</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
+        <a class="dash-card" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">15</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
+        <a class="dash-card" href="#helm" style="--c:#0f9d8a"><span class="dc-n">16</span><b>Helm</b><span>Despliegues reutilizables</span></a>
+        <a class="dash-card" href="#azure" style="--c:#0a7fbd"><span class="dc-n">17</span><b>Azure &amp; AKS</b><span>La nube</span></a>
       </div>
     </div>
     <div class="dash-level">
-      <h3><span class="lvl-n">Nivel 5</span> Liderazgo &amp; gestión</h3>
+      <h3><span class="lvl-n">Nivel 5</span> Entrega (DevOps)</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">18</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
-        <a class="dash-card" href="#jira" style="--c:#2f81c9"><span class="dc-n">19</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
+        <a class="dash-card" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">18</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
+        <a class="dash-card" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">19</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
+        <a class="dash-card" href="#testing" style="--c:#2e7d5b"><span class="dc-n">20</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
+        <a class="dash-card" href="#calidad" style="--c:#6f57c9"><span class="dc-n">21</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
+      </div>
+    </div>
+    <div class="dash-level">
+      <h3><span class="lvl-n">Nivel 6</span> Liderazgo &amp; gestión</h3>
+      <div class="dash-grid">
+        <a class="dash-card" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">22</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
+        <a class="dash-card" href="#jira" style="--c:#2f81c9"><span class="dc-n">23</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
       </div>
     </div>
     <div class="dash-level">
@@ -802,6 +819,189 @@ server:
   </div>
 </section>
 
+<section id="dotnet">
+  <div class="wrap">
+    <h2><span class="tag t-net">El código</span> Backend empresarial con .NET y C#</h2>
+    <p class="sub">Es tu <b>otra competencia experta</b> en backend, y la que más peso tiene en banca, seguros y gobierno. Vienes de construir aplicaciones .NET para Avianca, Softtek y E-Trade, dirigiste soluciones .NET/C# para plataformas bancarias críticas en everis y hoy integras sistemas legacy .NET con APIs REST modernas en Movistar. Este curso te da el vocabulario del <b>.NET moderno</b> (net8) para que no te encasillen en "el señor que sabe .NET Framework".</p>
+
+    <div class="callout"><b>Analogía:</b> .NET es el <b>Spring Boot de Microsoft</b>. Casi todo lo que sabes se traduce pieza por pieza: <code>@RestController</code>→<code>[ApiController]</code>, <code>@Service</code>→una clase registrada en el contenedor, JPA→<b>Entity Framework Core</b>, Maven→<code>dotnet</code> CLI. Si dominas uno, el otro es cuestión de sintaxis, no de conceptos.</div>
+
+    <h3>El recorrido de una petición</h3>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">🌐</div><div class="n">HTTP</div><h5>Kestrel</h5><p>El servidor web integrado</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🧱</div><div class="n">Middleware</div><h5>Pipeline</h5><p>Auth, CORS, logging, errores</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🚪</div><div class="n">Controller</div><h5>Endpoint</h5><p>[HttpGet], model binding</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🧩</div><div class="n">DI</div><h5>Servicio</h5><p>Lógica de negocio inyectada</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🗃️</div><div class="n">EF Core</div><h5>DbContext</h5><p>LINQ → SQL</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🐘</div><div class="n">SQL</div><h5>SQL Server / PostgreSQL</h5><p>La base de datos</p></div>
+      </div>
+    </div>
+
+    <h3>Los conceptos que debes saber explicar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>ASP.NET Core</h4><p>El framework web: <b>multiplataforma</b> (Linux, contenedores), con servidor <b>Kestrel</b> integrado. Es lo que reemplazó al viejo ASP.NET sobre IIS/Windows.</p></div>
+      <div class="card"><h4>Inyección de dependencias</h4><p>Viene <b>de fábrica</b> en el framework (no necesitas Spring ni un contenedor externo): registras en <code>Program.cs</code> con <code>AddScoped</code>, <code>AddSingleton</code> o <code>AddTransient</code>.</p></div>
+      <div class="card"><h4>Entity Framework Core</h4><p>El ORM: el equivalente de JPA/Hibernate. <code>DbContext</code> es la unidad de trabajo, y las <b>migraciones</b> versionan el esquema (como Flyway o Alembic).</p></div>
+      <div class="card"><h4>LINQ</h4><p>Consultas <b>tipadas dentro del lenguaje</b>: <code>Where</code>, <code>Select</code>, <code>Include</code>. EF Core las traduce a SQL. Es lo que más sorprende a quien viene de Java.</p></div>
+      <div class="card"><h4>async / await + Task</h4><p>C# fue pionero en esto: <code>Task&lt;T&gt;</code> representa el trabajo pendiente. Igual que en FastAPI, ayuda en carga <b>I/O-bound</b>, no en CPU.</p></div>
+      <div class="card"><h4>Middleware</h4><p>Una <b>tubería</b> ordenada por la que pasa cada petición: excepciones → HTTPS → CORS → autenticación → autorización → endpoints. El orden importa.</p></div>
+    </div>
+
+    <h3>El mismo servicio de facturas, en C#</h3>
+    <p><b>1. Modelo y DbContext</b> — el equivalente a la <code>@Entity</code> y al repositorio JPA:</p>
+    <pre><code><span class="cmt">// Models/Factura.cs</span>
+<span class="kw">public class</span> Factura
+{
+    <span class="kw">public int</span> Id { <span class="kw">get</span>; <span class="kw">set</span>; }
+    <span class="kw">public string</span> Concepto { <span class="kw">get</span>; <span class="kw">set</span>; } = <span class="str">""</span>;
+    <span class="kw">public decimal</span> Monto { <span class="kw">get</span>; <span class="kw">set</span>; }        <span class="cmt">// decimal, NUNCA double, para dinero</span>
+    <span class="kw">public</span> DateOnly Vence { <span class="kw">get</span>; <span class="kw">set</span>; }
+}
+
+<span class="cmt">// Data/AppDbContext.cs — la sesión con la BD</span>
+<span class="kw">public class</span> AppDbContext : DbContext
+{
+    <span class="kw">public</span> AppDbContext(DbContextOptions&lt;AppDbContext&gt; o) : <span class="kw">base</span>(o) { }
+    <span class="kw">public</span> DbSet&lt;Factura&gt; Facturas =&gt; Set&lt;Factura&gt;();
+}</code></pre>
+
+    <p><b>2. El servicio</b> — la lógica, con LINQ y <code>async</code>:</p>
+    <pre><code><span class="kw">public class</span> FacturaService(AppDbContext db)          <span class="cmt">// constructor primario (C# 12)</span>
+{
+    <span class="kw">public async</span> Task&lt;List&lt;Factura&gt;&gt; PendientesAsync() =&gt;
+        <span class="kw">await</span> db.Facturas
+                .Where(f =&gt; f.Vence &lt; DateOnly.FromDateTime(DateTime.Today))
+                .OrderBy(f =&gt; f.Vence)
+                .ToListAsync();                        <span class="cmt">// LINQ se traduce a SQL</span>
+
+    <span class="kw">public async</span> Task&lt;Factura&gt; CrearAsync(Factura f)
+    {
+        db.Facturas.Add(f);
+        <span class="kw">await</span> db.SaveChangesAsync();                    <span class="cmt">// commit de la unidad de trabajo</span>
+        <span class="kw">return</span> f;
+    }
+}</code></pre>
+
+    <p><b>3. El controlador REST</b> — casi idéntico a Spring Boot:</p>
+    <pre><code><span class="kw">[ApiController]</span>
+<span class="kw">[Route</span>(<span class="str">"api/facturas"</span>)]
+<span class="kw">public class</span> FacturasController(FacturaService svc) : ControllerBase
+{
+    <span class="kw">[HttpGet(</span><span class="str">"pendientes"</span><span class="kw">)]</span>
+    <span class="kw">public async</span> Task&lt;ActionResult&lt;List&lt;Factura&gt;&gt;&gt; Pendientes() =&gt;
+        <span class="kw">await</span> svc.PendientesAsync();
+
+    <span class="kw">[HttpPost]</span>
+    <span class="kw">public async</span> Task&lt;ActionResult&lt;Factura&gt;&gt; Crear(Factura f)
+    {
+        <span class="kw">var</span> creada = <span class="kw">await</span> svc.CrearAsync(f);
+        <span class="kw">return</span> CreatedAtAction(nameof(Pendientes), <span class="kw">new</span> { id = creada.Id }, creada);
+    }                                                  <span class="cmt">// devuelve 201 + Location</span>
+}</code></pre>
+
+    <p><b>4. <code>Program.cs</code></b> — aquí se arma todo: DI, middleware y arranque. Es el archivo que te pueden pedir explicar línea por línea:</p>
+    <pre><code><span class="kw">var</span> builder = WebApplication.CreateBuilder(args);
+
+<span class="cmt">// --- registro de servicios en el contenedor de DI ---</span>
+builder.Services.AddDbContext&lt;AppDbContext&gt;(o =&gt;
+    o.UseNpgsql(builder.Configuration.GetConnectionString(<span class="str">"Default"</span>)));
+builder.Services.AddScoped&lt;FacturaService&gt;();          <span class="cmt">// uno por petición</span>
+builder.Services.AddControllers();
+builder.Services.AddHealthChecks();                    <span class="cmt">// para las probes de K8s</span>
+
+<span class="kw">var</span> app = builder.Build();
+
+<span class="cmt">// --- pipeline de middleware: el ORDEN importa ---</span>
+app.UseExceptionHandler(<span class="str">"/error"</span>);
+app.UseHttpsRedirection();
+app.UseAuthentication();                               <span class="cmt">// ¿quién eres?</span>
+app.UseAuthorization();                                <span class="cmt">// ¿puedes hacerlo?  (nunca antes)</span>
+app.MapControllers();
+app.MapHealthChecks(<span class="str">"/health"</span>);
+
+app.Run();</code></pre>
+
+    <div class="callout"><b>Ojo con el orden del middleware:</b> <code>UseAuthentication</code> siempre va <b>antes</b> de <code>UseAuthorization</code> (primero se sabe quién eres, luego si puedes). Es una pregunta trampa clásica en entrevistas de .NET.</div>
+
+    <h3>La pregunta que SIEMPRE hacen: .NET Framework vs .NET moderno</h3>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Dimensión</th><th>.NET Framework (4.8)</th><th>.NET moderno (Core → 5, 6, 8…)</th></tr></thead>
+        <tbody>
+          <tr><td>Sistema operativo</td><td>Solo Windows</td><td><b>Multiplataforma</b>: Linux, macOS, contenedores</td></tr>
+          <tr><td>Servidor web</td><td>IIS</td><td><b>Kestrel</b> integrado (detrás de un reverse proxy o un Ingress)</td></tr>
+          <tr><td>Despliegue</td><td>Servidor Windows, IIS</td><td>Imagen Docker en <b>AKS/Kubernetes</b></td></tr>
+          <tr><td>Rendimiento</td><td>Correcto</td><td>Muy superior; mejora en cada versión</td></tr>
+          <tr><td>Estado</td><td>Solo mantenimiento y correcciones</td><td><b>Donde ocurre todo</b>; versiones LTS cada 2 años</td></tr>
+          <tr><td>Migrar cuesta por…</td><td colspan="2">Dependencias solo-Windows (WCF, WebForms), <code>System.Web</code>, y librerías de terceros sin versión moderna</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>Tu ángulo diferencial:</b> muchos candidatos saben uno o el otro. Tú <b>viviste la transición</b> y hoy integras legacy .NET con APIs modernas — eso es exactamente lo que necesita una empresa con sistemas heredados, y es un argumento de venta muy fuerte para banca y gobierno.</div>
+
+    <h3>De Spring Boot a .NET: la tabla de traducción</h3>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Concepto</th><th>Java / Spring Boot</th><th>.NET / C#</th></tr></thead>
+        <tbody>
+          <tr><td>Controlador REST</td><td><code>@RestController</code></td><td><code>[ApiController]</code> + <code>ControllerBase</code></td></tr>
+          <tr><td>Servicio inyectable</td><td><code>@Service</code></td><td><code>AddScoped&lt;T&gt;()</code> en <code>Program.cs</code></td></tr>
+          <tr><td>ORM</td><td>JPA / Hibernate</td><td><b>Entity Framework Core</b></td></tr>
+          <tr><td>Repositorio</td><td><code>JpaRepository</code></td><td><code>DbSet&lt;T&gt;</code> + LINQ</td></tr>
+          <tr><td>Migraciones</td><td>Flyway / Liquibase</td><td><code>dotnet ef migrations</code></td></tr>
+          <tr><td>Configuración</td><td><code>application.yml</code></td><td><code>appsettings.json</code> + variables de entorno</td></tr>
+          <tr><td>Build / dependencias</td><td>Maven / Gradle</td><td><code>dotnet build</code> + NuGet</td></tr>
+          <tr><td>Pruebas</td><td>JUnit + Mockito</td><td>xUnit + Moq</td></tr>
+          <tr><td>Documentación API</td><td>SpringDoc / Swagger</td><td>Swashbuckle / OpenAPI integrado</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Y se empaqueta igual que todo lo demás</h3>
+    <pre><code><span class="cmt"># --- build: compila y publica en modo Release ---</span>
+<span class="kw">FROM</span> mcr.microsoft.com/dotnet/sdk:8.0 AS build
+<span class="kw">WORKDIR</span> /src
+<span class="kw">COPY</span> . .
+<span class="kw">RUN</span>  dotnet publish -c Release -o /app
+<span class="cmt"># --- runtime: imagen liviana, solo el runtime (no el SDK) ---</span>
+<span class="kw">FROM</span> mcr.microsoft.com/dotnet/aspnet:8.0
+<span class="kw">WORKDIR</span> /app
+<span class="kw">COPY</span> --from=build /app .
+<span class="kw">EXPOSE</span> 8080
+<span class="kw">ENTRYPOINT</span> ["dotnet","Facturas.dll"]</code></pre>
+
+    <div class="callout"><b>El círculo completo:</b> el servicio .NET expone REST y <code>/health</code> → Docker lo empaqueta con imagen runtime liviana → el pipeline corre <code>dotnet test</code> y SonarQube analiza el C# → Helm lo despliega en <b>AKS</b> → las probes apuntan al health check. <b>Exactamente el mismo flujo que Java y Python</b>: por eso puedes liderar equipos poliglotas.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Tengo .NET y C# a nivel experto desde hace más de quince años: construí aplicaciones empresariales para aviación y banca, y dirigí soluciones .NET/C# en plataformas bancarias críticas. Manejo <b>ASP.NET Core</b> con inyección de dependencias nativa, <b>Entity Framework Core</b> y LINQ sobre SQL Server y PostgreSQL, y <code>async</code>/<code>await</code> para cargas de alta concurrencia. Y algo que no todos tienen: <b>viví la transición de .NET Framework a .NET moderno</b> — hoy integro sistemas legacy .NET con APIs REST nuevas y los llevo a contenedores en AKS, que es justo el problema que tiene cualquier empresa con sistemas heredados."</div>
+
+    <h3>Preguntas típicas de .NET / C#</h3>
+    <details class="qa"><summary>¿Diferencia entre .NET Framework, .NET Core y .NET 8?</summary>
+      <div class="ans"><p><b>.NET Framework</b> (hasta 4.8) es el clásico: <b>solo Windows</b>, sobre IIS, hoy en modo mantenimiento. <b>.NET Core</b> fue la reescritura <b>multiplataforma</b> y open source. Desde <b>.NET 5</b> se unificaron los nombres, y hoy vamos por <b>.NET 8</b> (LTS): multiplataforma, mucho más rápido y pensado para <b>contenedores</b>. Lo que complica una migración no es el lenguaje sino las dependencias solo-Windows (WebForms, WCF, <code>System.Web</code>).</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo funciona la inyección de dependencias en ASP.NET Core?</summary>
+      <div class="ans"><p>El contenedor viene <b>integrado</b>. En <code>Program.cs</code> registras los servicios con un <b>ciclo de vida</b>: <b>Transient</b> (uno nuevo cada vez que se pide), <b>Scoped</b> (uno por petición HTTP — el habitual para servicios y <code>DbContext</code>) y <b>Singleton</b> (uno para toda la app). El framework los inyecta por constructor. El error clásico es inyectar un <b>Scoped dentro de un Singleton</b>: el <code>DbContext</code> queda capturado y se corrompe.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es Entity Framework Core y cuándo usarías Dapper?</summary>
+      <div class="ans"><p><b>EF Core</b> es el ORM: mapea clases a tablas y traduce <b>LINQ</b> a SQL, con <i>change tracking</i> y migraciones. Uso <b>Dapper</b> (un micro-ORM) cuando necesito <b>SQL a mano y máximo rendimiento</b>: reportes pesados, consultas muy afinadas o procedimientos almacenados. Conviven bien: EF Core para el CRUD del dominio y Dapper para las consultas críticas.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es el middleware pipeline y por qué importa el orden?</summary>
+      <div class="ans"><p>Cada petición atraviesa una <b>tubería</b> de componentes que pueden actuar antes y después del siguiente. El orden define el comportamiento: el manejador de <b>excepciones</b> va primero (para envolver todo lo demás), y <code>UseAuthentication</code> siempre <b>antes</b> de <code>UseAuthorization</code>, porque primero se establece quién eres y solo después si tienes permiso. Ponerlos al revés hace que la autorización nunca vea al usuario.</p></div>
+    </details>
+    <details class="qa"><summary>¿async/await en C#: qué resuelve y qué no?</summary>
+      <div class="ans"><p>Libera el hilo mientras se espera una operación de <b>E/S</b> (BD, otra API), de modo que el servidor atiende muchas más peticiones concurrentes. No acelera el trabajo <b>CPU-intensivo</b>. Dos errores clásicos: <b>bloquear</b> con <code>.Result</code> o <code>.Wait()</code> (puede provocar <i>deadlock</i>) y el <code>async void</code>, que impide capturar excepciones — salvo en manejadores de eventos, siempre <code>async Task</code>.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es LINQ y qué cuidado hay que tener?</summary>
+      <div class="ans"><p>Es consultar colecciones <b>con sintaxis tipada del lenguaje</b> (<code>Where</code>, <code>Select</code>, <code>GroupBy</code>); con EF Core se traduce a SQL. El cuidado: distinguir <code>IQueryable</code> (se ejecuta <b>en la base de datos</b>) de <code>IEnumerable</code> (se ejecuta <b>en memoria</b>). Si materializas antes de tiempo, te traes la tabla entera al proceso. Y ojo con el <b>N+1</b>: se resuelve con <code>Include</code>, igual que con <code>JOIN FETCH</code> en JPA.</p></div>
+    </details>
+  </div>
+</section>
+
 <section id="nextjs">
   <div class="wrap">
     <h2><span class="tag t-next">El frontend</span> Cursillo de Next.js</h2>
@@ -867,6 +1067,156 @@ server:
     </details>
     <details class="qa"><summary>¿SSR, SSG o ISR — cuándo usar cada uno?</summary>
       <div class="ans"><p><b>SSG</b> (genera en el build) para contenido estático; <b>SSR</b> (en cada request) para datos siempre frescos o personalizados; <b>ISR</b> (regenera cada cierto tiempo) para el punto medio: rápido como estático pero se actualiza. Se elige por página con las opciones de <code>fetch</code>/revalidate.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="react-angular">
+  <div class="wrap">
+    <h2><span class="tag t-front">El código</span> Frontend: React a fondo y Angular comparado</h2>
+    <p class="sub">Tu CV dice <b>React / Next.js (Avanzado)</b> — y el curso de Next.js da por sabido React. Aquí bajas a los fundamentos que realmente preguntan en entrevista, y además aprendes a <b>mapear cada concepto a Angular</b>, que aparece en muchísimas vacantes empresariales. El objetivo no es fingir experiencia en Angular: es que puedas <b>hablar el idioma con propiedad y responder con honestidad</b>, que es lo que convence de verdad.</p>
+
+    <div class="callout"><b>Analogía:</b> los dos resuelven el mismo problema — <b>mantener la pantalla sincronizada con los datos</b> sin tocar el DOM a mano. La diferencia es de filosofía: <b>React es una caja de herramientas</b> (tú eliges router, estado y formularios); <b>Angular es un taller completo</b> (viene con router, HTTP, formularios, DI y pruebas, y hay una forma oficial de hacer cada cosa).</div>
+
+    <h3>Parte 1 · React: lo que hay que saber explicar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Componente</h4><p>Una <b>función</b> que recibe datos y devuelve la UI (JSX). Se compone con otros componentes, como funciones que se llaman entre sí.</p></div>
+      <div class="card"><h4>Props vs estado</h4><p><b>Props</b>: datos que <b>bajan</b> del padre y son de solo lectura. <b>Estado</b>: datos que el componente <b>posee y puede cambiar</b>. Cambiar el estado provoca un nuevo render.</p></div>
+      <div class="card"><h4>Renderizado declarativo</h4><p>No manipulas el DOM: describes <b>cómo se ve la UI para un estado dado</b> y React calcula la diferencia mínima y la aplica.</p></div>
+      <div class="card"><h4><code>useState</code></h4><p>Añade estado a un componente. El <i>setter</i> es <b>asíncrono por lotes</b>: no leas el valor justo después de escribirlo, usa la forma con función.</p></div>
+      <div class="card"><h4><code>useEffect</code></h4><p>Sincroniza con algo <b>externo</b> (una API, un timer, una suscripción). El <b>array de dependencias</b> decide cuándo vuelve a correr; y devuelve una función de <b>limpieza</b>.</p></div>
+      <div class="card"><h4><code>key</code> en listas</h4><p>Identidad estable de cada elemento para no re-crear el DOM. <b>Nunca uses el índice</b> si la lista se reordena o filtra: rompe el estado de las filas.</p></div>
+      <div class="card"><h4>Hooks personalizados</h4><p>Extraer lógica reutilizable en una función <code>useAlgo()</code>. Es el mecanismo de reutilización de React (no hay herencia).</p></div>
+      <div class="card"><h4>Context</h4><p>Pasar datos a todo un subárbol sin ir prop por prop (<i>prop drilling</i>): tema, usuario autenticado, idioma. Para estado complejo, Redux o Zustand.</p></div>
+      <div class="card"><h4>Cuándo re-renderiza</h4><p>Cuando cambia su <b>estado</b>, sus <b>props</b> o un <b>contexto</b> que consume. Optimizar antes de medir es el error más común.</p></div>
+    </div>
+
+    <p>El mismo caso de facturas, en React:</p>
+    <pre><code><span class="cmt">// FacturasPendientes.jsx</span>
+<span class="kw">import</span> { useState, useEffect } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">export default function</span> FacturasPendientes() {
+  <span class="kw">const</span> [facturas, setFacturas] = useState([]);      <span class="cmt">// estado local</span>
+  <span class="kw">const</span> [cargando, setCargando] = useState(<span class="kw">true</span>);
+
+  useEffect(() =&gt; {                                  <span class="cmt">// corre después del render</span>
+    fetch(<span class="str">'/api/facturas/pendientes'</span>)
+      .then(r =&gt; r.json())
+      .then(data =&gt; { setFacturas(data); setCargando(<span class="kw">false</span>); });
+  }, []);                                            <span class="cmt">// [] = solo al montar</span>
+
+  <span class="kw">if</span> (cargando) <span class="kw">return</span> &lt;p&gt;Cargando…&lt;/p&gt;;
+
+  <span class="kw">return</span> (
+    &lt;ul&gt;
+      {facturas.map(f =&gt; (
+        &lt;li key={f.id}&gt;{f.concepto} — {f.monto}&lt;/li&gt;   <span class="cmt">// key estable, no el índice</span>
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+
+    <h3>Parte 2 · Angular: los mismos conceptos, otro vocabulario</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Componente</h4><p>Una <b>clase</b> con decorador <code>@Component</code>, su <b>template</b> HTML y sus estilos. La lógica y la vista van separadas.</p></div>
+      <div class="card"><h4>Servicios + DI</h4><p>La lógica compartida vive en un <code>@Injectable</code> que el framework <b>inyecta por constructor</b>. La inyección de dependencias es de primera clase (en React no existe).</p></div>
+      <div class="card"><h4>RxJS y Observables</h4><p>Lo asíncrono se modela como <b>flujos</b> que emiten valores en el tiempo, con operadores (<code>map</code>, <code>switchMap</code>, <code>debounceTime</code>). Es la mayor curva de aprendizaje.</p></div>
+      <div class="card"><h4>Signals</h4><p>El estado reactivo <b>moderno</b> (Angular 16+): <code>signal()</code>, <code>computed()</code>, <code>effect()</code>. Conceptualmente muy cercano a <code>useState</code>.</p></div>
+      <div class="card"><h4>Standalone components</h4><p>Angular moderno ya <b>no obliga a NgModules</b>: cada componente declara lo que importa. Si solo conoces los módulos, suenas desactualizado.</p></div>
+      <div class="card"><h4>Todo incluido</h4><p>Router, <code>HttpClient</code>, formularios (reactivos y de plantilla), pruebas y CLI vienen <b>en la caja</b>, con TypeScript obligatorio.</p></div>
+    </div>
+
+    <p>Y el equivalente exacto del componente de arriba, en Angular:</p>
+    <pre><code><span class="cmt">// factura.service.ts — el "@Service" de Angular</span>
+<span class="kw">@Injectable</span>({ providedIn: <span class="str">'root'</span> })
+<span class="kw">export class</span> FacturaService {
+  <span class="kw">constructor</span>(<span class="kw">private</span> http: HttpClient) {}
+
+  pendientes(): Observable&lt;Factura[]&gt; {              <span class="cmt">// flujo, no promesa</span>
+    <span class="kw">return this</span>.http.get&lt;Factura[]&gt;(<span class="str">'/api/facturas/pendientes'</span>);
+  }
+}
+
+<span class="cmt">// facturas-pendientes.component.ts</span>
+<span class="kw">@Component</span>({
+  selector: <span class="str">'app-facturas-pendientes'</span>,
+  standalone: <span class="kw">true</span>,
+  template: <span class="str">`
+    @if (cargando()) { &lt;p&gt;Cargando…&lt;/p&gt; }
+    @else {
+      &lt;ul&gt;
+        @for (f of facturas(); track f.id) {</span>        <span class="cmt">// track = el key de React</span><span class="str">
+          &lt;li&gt;{{ f.concepto }} — {{ f.monto }}&lt;/li&gt;
+        }
+      &lt;/ul&gt;
+    }`</span>
+})
+<span class="kw">export class</span> FacturasPendientesComponent <span class="kw">implements</span> OnInit {
+  facturas = signal&lt;Factura[]&gt;([]);                  <span class="cmt">// ≈ useState([])</span>
+  cargando = signal(<span class="kw">true</span>);
+
+  <span class="kw">constructor</span>(<span class="kw">private</span> svc: FacturaService) {}        <span class="cmt">// inyección por constructor</span>
+
+  ngOnInit() {                                       <span class="cmt">// ≈ useEffect(…, [])</span>
+    <span class="kw">this</span>.svc.pendientes().subscribe(data =&gt; {
+      <span class="kw">this</span>.facturas.set(data);
+      <span class="kw">this</span>.cargando.set(<span class="kw">false</span>);
+    });
+  }
+}</code></pre>
+
+    <h3>Parte 3 · La tabla de traducción (memorízala)</h3>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Concepto</th><th>React</th><th>Angular</th></tr></thead>
+        <tbody>
+          <tr><td>Unidad de UI</td><td>Componente (función) + JSX</td><td>Componente (clase) + template HTML</td></tr>
+          <tr><td>Estado local</td><td><code>useState</code></td><td><code>signal()</code> o propiedad de la clase</td></tr>
+          <tr><td>Efecto / ciclo de vida</td><td><code>useEffect</code></td><td><code>ngOnInit</code> / <code>ngOnDestroy</code></td></tr>
+          <tr><td>Datos hacia abajo</td><td><code>props</code></td><td><code>@Input()</code></td></tr>
+          <tr><td>Eventos hacia arriba</td><td><i>callback</i> en las props</td><td><code>@Output()</code> + <code>EventEmitter</code></td></tr>
+          <tr><td>Estado compartido</td><td>Context, Redux, Zustand</td><td>Un <b>servicio</b> inyectable (singleton)</td></tr>
+          <tr><td>Inyección de dependencias</td><td>No existe como tal</td><td>De primera clase, por constructor</td></tr>
+          <tr><td>Asincronía</td><td>Promesas / <code>async-await</code></td><td><b>RxJS Observables</b> (+ signals)</td></tr>
+          <tr><td>Identidad en listas</td><td><code>key</code></td><td><code>track</code> (antes <code>trackBy</code>)</td></tr>
+          <tr><td>Enrutado</td><td>React Router o Next.js</td><td><code>@angular/router</code>, incluido</td></tr>
+          <tr><td>Llamadas HTTP</td><td><code>fetch</code>, axios, TanStack Query</td><td><code>HttpClient</code>, incluido</td></tr>
+          <tr><td>Lenguaje</td><td>JS o TypeScript (opcional)</td><td><b>TypeScript obligatorio</b></td></tr>
+          <tr><td>Filosofía</td><td>Biblioteca: tú eliges el ecosistema</td><td>Framework: una forma oficial de hacer todo</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>¿Por qué una empresa elige uno u otro?</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Suelen elegir Angular</h4><p>Banca, seguros, gobierno y corporativos grandes: <b>convención sobre configuración</b>, TypeScript obligatorio, estructura uniforme entre equipos y un ciclo de versiones predecible. Con 50 desarrolladores, que todos escriban igual vale oro.</p></div>
+      <div class="card"><h4>Suelen elegir React</h4><p>Producto, startups y equipos que necesitan <b>velocidad y flexibilidad</b>, o SSR/SEO con <b>Next.js</b>. Ecosistema enorme y mercado laboral más amplio.</p></div>
+      <div class="card"><h4>Lo que NO cambia</h4><p>Componentes, estado, flujo de datos, rendimiento, accesibilidad, pruebas y cómo consumes la API. <b>Ahí está el 80% del trabajo real</b> — y es transferible entre los dos.</p></div>
+      <div class="card"><h4>Tu argumento de líder</h4><p>Como líder técnico no eliges por gusto sino por <b>contexto</b>: el equipo que ya tienes, el ecosistema de la empresa y el coste de mantenimiento a cinco años. Esa respuesta vale más que defender un bando.</p></div>
+    </div>
+
+    <div class="callout"><b>Si te preguntan "¿has trabajado con Angular?" — responde con honestidad y sin encogerte:</b> "En producción he trabajado con <b>React y Next.js</b>. Angular no lo he usado en un proyecto real, pero conozco su modelo: componentes con template, servicios con inyección de dependencias, RxJS y signals, y las equivalencias con lo que uso a diario. Con base sólida de TypeScript y de arquitectura, la curva es de semanas, no de meses — ya hice ese salto entre Java, .NET y Python." <b>Inventar experiencia se detecta en cinco minutos de preguntas técnicas; esta respuesta transmite seguridad y criterio.</b></div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "En frontend trabajo con <b>React y Next.js</b>: componentes, manejo de estado con hooks, renderizado en servidor y PWA — lo apliqué integrando sistemas legacy con interfaces modernas en Movistar y en mis propios productos, como el front de PayControl. Domino los fundamentos que son comunes a cualquier framework: modelo de componentes, flujo de datos, rendimiento y consumo de APIs. Angular no lo he usado en producción, pero conozco su modelo y las equivalencias; como líder técnico, además, lo que aporto es criterio para <b>elegir el stack según el equipo y el contexto</b>, no según la moda."</div>
+
+    <h3>Preguntas típicas de frontend</h3>
+    <details class="qa"><summary>¿Cuál es la diferencia entre props y estado?</summary>
+      <div class="ans"><p>Las <b>props</b> las recibe el componente de su padre y son de <b>solo lectura</b>: son su entrada. El <b>estado</b> es información que el componente <b>posee y puede modificar</b>; al cambiarlo, React vuelve a renderizar. Regla práctica: si el dato lo necesitan varios componentes, <b>súbelo</b> al ancestro común y bájalo por props; si solo lo usa uno, que sea estado local.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué son los hooks y cuáles son sus reglas?</summary>
+      <div class="ans"><p>Funciones que dan estado y ciclo de vida a los componentes de función (<code>useState</code>, <code>useEffect</code>, <code>useMemo</code>, <code>useContext</code>). Dos reglas: se llaman <b>siempre en el nivel superior</b> (nunca dentro de <code>if</code>, bucles o funciones anidadas, porque React los identifica por orden de llamada) y <b>solo desde componentes o desde otros hooks</b>. La lógica reutilizable se extrae en un <b>hook personalizado</b>.</p></div>
+    </details>
+    <details class="qa"><summary>¿Para qué sirve el array de dependencias de useEffect?</summary>
+      <div class="ans"><p>Le dice a React <b>cuándo volver a ejecutar</b> el efecto. Vacío (<code>[]</code>) = solo al montar; con variables = cada vez que alguna cambie; sin array = <b>en cada render</b> (fuente clásica de bucles infinitos). Si el efecto abre algo (suscripción, timer, <i>listener</i>), debe devolver una <b>función de limpieza</b> para cerrarlo, o se filtra memoria.</p></div>
+    </details>
+    <details class="qa"><summary>¿Por qué no usar el índice como <code>key</code>?</summary>
+      <div class="ans"><p>Porque la <code>key</code> es la <b>identidad</b> del elemento entre renders. Si la lista se reordena, filtra o se inserta al principio, los índices se corren y React asocia el estado del DOM a la fila equivocada: se mezclan valores de inputs y se pierde el foco. Usa un <b>id estable</b> del dato. Con listas estáticas que nunca cambian de orden, el índice es inocuo.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es RxJS y qué diferencia hay con una promesa?</summary>
+      <div class="ans"><p>Una promesa entrega <b>un solo valor, una vez</b>. Un <b>Observable</b> de RxJS es un <b>flujo</b> que puede emitir muchos valores en el tiempo, es <b>cancelable</b> y se compone con operadores (<code>map</code>, <code>filter</code>, <code>debounceTime</code>, <code>switchMap</code>). Brilla en búsquedas mientras escribes o WebSockets: con <code>debounceTime</code> + <code>switchMap</code> cancelas la petición anterior. El costo es la curva de aprendizaje; por eso Angular incorporó <b>signals</b> para el estado simple.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo decides entre React y Angular en un proyecto nuevo?</summary>
+      <div class="ans"><p>Por <b>contexto, no por preferencia</b>: qué domina el equipo actual, qué hay en el resto de la organización (mantener dos stacks cuesta), y el perfil del proyecto. <b>Angular</b> si es corporativo, grande y de larga vida, donde la uniformidad y las convenciones ganan. <b>React/Next.js</b> si necesito velocidad, SSR/SEO o contratar rápido. Y siempre miro el <b>coste de mantenimiento a cinco años</b>, no solo el arranque.</p></div>
     </details>
   </div>
 </section>
@@ -1501,6 +1851,350 @@ router = APIRouter(prefix=<span class="str">"/api/facturas"</span>)
   </div>
 </section>
 
+<section id="rest-soap">
+  <div class="wrap">
+    <h2><span class="tag t-api">La integración</span> APIs e integración: REST, SOAP y el bus de servicios</h2>
+    <p class="sub">Aquí tienes una ventaja que casi nadie de tu competencia puede reclamar: <b>viviste los dos mundos</b>. Implementaste integraciones empresariales con <b>Oracle SOA Suite, BizTalk Server y Oracle Service Bus</b> para transacciones de alto volumen —y estás <b>certificado en Oracle Service Bus</b>—, y hoy diseñas <b>REST APIs y arquitecturas event-driven</b> a nivel experto. Los candidatos jóvenes solo saben REST; los veteranos a veces solo SOAP. Tú puedes hablar de la migración entre ambos, que es justo lo que necesita cualquier empresa con sistemas heredados.</p>
+
+    <div class="callout"><b>Analogía:</b> <b>SOAP</b> es enviar un <b>documento notariado por correo certificado</b>: sobre formal, formato obligatorio, firma, acuse de recibo y un contrato (el WSDL) que define exactamente qué se puede pedir. <b>REST</b> es hablar por <b>mensajería instantánea</b>: directo, ligero y basado en convenciones acordadas. Uno da garantías y ceremonia; el otro, velocidad y simplicidad.</div>
+
+    <h3>Parte 1 · REST: los principios que debes recitar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Recursos, no acciones</h4><p>La URI nombra <b>cosas</b>, en plural y sin verbos: <code>/api/facturas/10245</code>. El verbo lo pone HTTP, no la ruta (<code>/getFactura</code> es el error clásico).</p></div>
+      <div class="card"><h4>Sin estado (stateless)</h4><p>Cada petición <b>lleva todo lo necesario</b>; el servidor no recuerda nada entre llamadas. Por eso escala horizontalmente: cualquier réplica puede atender.</p></div>
+      <div class="card"><h4>Verbos con semántica</h4><p><code>GET</code> lee, <code>POST</code> crea, <code>PUT</code> reemplaza, <code>PATCH</code> modifica parcialmente, <code>DELETE</code> borra. Respetarlos es la mitad de una buena API.</p></div>
+      <div class="card"><h4>Códigos de estado</h4><p>La respuesta se comunica por el <b>código HTTP</b>, no por un <code>{"error": true}</code> con 200. Un 200 con un error dentro rompe a todos los clientes.</p></div>
+      <div class="card"><h4>Idempotencia</h4><p>Repetir la misma petición debe dar el <b>mismo resultado</b>. Clave con reintentos: por eso <code>PUT</code> y <code>DELETE</code> son idempotentes y <code>POST</code> no lo es.</p></div>
+      <div class="card"><h4>Contrato: OpenAPI</h4><p>El esquema <b>OpenAPI/Swagger</b> es el equivalente moderno del WSDL: documenta, valida y genera clientes. Sin contrato no hay integración seria.</p></div>
+    </div>
+
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Verbo</th><th>Qué hace</th><th>¿Seguro?</th><th>¿Idempotente?</th><th>Respuesta típica</th></tr></thead>
+        <tbody>
+          <tr><td><code>GET</code></td><td>Leer, sin efectos secundarios</td><td>Sí</td><td>Sí</td><td>200 · 404</td></tr>
+          <tr><td><code>POST</code></td><td>Crear (o ejecutar una acción)</td><td>No</td><td><b>No</b></td><td>201 + <code>Location</code> · 400 · 409</td></tr>
+          <tr><td><code>PUT</code></td><td>Reemplazar el recurso completo</td><td>No</td><td>Sí</td><td>200 · 204 · 404</td></tr>
+          <tr><td><code>PATCH</code></td><td>Modificar algunos campos</td><td>No</td><td>Depende</td><td>200 · 204</td></tr>
+          <tr><td><code>DELETE</code></td><td>Eliminar</td><td>No</td><td>Sí</td><td>204 · 404</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>"Seguro" significa que no modifica nada</b> (se puede cachear y repetir sin miedo). <b>"Idempotente" significa que repetirlo no cambia el resultado</b>: si un reintento por timeout reenvía un <code>DELETE</code>, no pasa nada; si reenvía un <code>POST</code>, cobras dos veces. Por eso a los <code>POST</code> críticos se les pone una <b>clave de idempotencia</b>.</div>
+
+    <p>Los códigos de estado que debes usar bien (y que preguntan):</p>
+    <pre><code><span class="cmt">--- Éxito ---</span>
+<span class="num">200</span> OK                    lectura o actualización correcta
+<span class="num">201</span> Created               creado; devuelve la cabecera Location
+<span class="num">202</span> Accepted              aceptado, se procesará asíncronamente (cola)
+<span class="num">204</span> No Content            correcto, sin cuerpo (típico de DELETE)
+
+<span class="cmt">--- Error del cliente: no reintentar igual ---</span>
+<span class="num">400</span> Bad Request           petición mal formada
+<span class="num">401</span> Unauthorized          no te identificaste (o el token no vale)
+<span class="num">403</span> Forbidden             te identificaste, pero no tienes permiso
+<span class="num">404</span> Not Found             el recurso no existe
+<span class="num">409</span> Conflict              choca con el estado actual (duplicado, versión)
+<span class="num">422</span> Unprocessable Entity  sintaxis bien, validación de negocio mal
+<span class="num">429</span> Too Many Requests     rate limiting; respeta Retry-After
+
+<span class="cmt">--- Error del servidor: el cliente SÍ puede reintentar ---</span>
+<span class="num">500</span> Internal Server Error  falló algo nuestro
+<span class="num">503</span> Service Unavailable    caído o saturado (reintento con backoff)</code></pre>
+
+    <div class="grid cols-2">
+      <div class="card"><h4>Versionado</h4><p>Por ruta (<code>/api/v1/facturas</code>) es lo más común y explícito; también por cabecera. Lo importante es <b>no romper a los clientes</b>: añadir campos es compatible, quitarlos o renombrarlos no.</p></div>
+      <div class="card"><h4>Paginación</h4><p><code>?page=2&amp;size=50</code> o paginación por cursor para listas grandes. Devolver 100.000 registros de una vez es el clásico problema de rendimiento en producción.</p></div>
+      <div class="card"><h4>Errores consistentes</h4><p>Un formato único para todos los errores (código, mensaje, detalle, id de traza). Estandarizado: <b>Problem Details</b> (RFC 7807).</p></div>
+      <div class="card"><h4>HATEOAS</h4><p>El nivel más alto del modelo de madurez de Richardson: la respuesta incluye <b>enlaces</b> a las acciones posibles. Se menciona en teoría y casi no se usa — dilo así y suena honesto.</p></div>
+    </div>
+
+    <h3>Parte 2 · SOAP: el mundo del contrato estricto</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Envelope</h4><p>Todo va dentro de un <b>sobre XML</b> con <code>Header</code> (metadatos, seguridad) y <code>Body</code> (la operación). El formato es obligatorio, no convención.</p></div>
+      <div class="card"><h4>WSDL</h4><p>El <b>contrato</b>: describe operaciones, parámetros y tipos. Con él generas cliente y servidor automáticamente. Es el antepasado directo de OpenAPI.</p></div>
+      <div class="card"><h4>XSD</h4><p>El esquema que define y <b>valida</b> los tipos de datos. Validación estricta antes de procesar: en banca eso es una virtud, no un estorbo.</p></div>
+      <div class="card"><h4>WS-Security</h4><p>Seguridad <b>a nivel de mensaje</b>: firma digital, cifrado de partes del XML y tokens. Sobrevive aunque el mensaje pase por varios intermediarios (REST cifra el <b>transporte</b>, con TLS).</p></div>
+      <div class="card"><h4>WS-* y transacciones</h4><p><b>WS-AtomicTransaction</b>, <b>WS-ReliableMessaging</b>: transacciones distribuidas y entrega garantizada estandarizadas. Es lo que REST nunca estandarizó.</p></div>
+      <div class="card"><h4>SOAP Fault</h4><p>Los errores tienen <b>estructura propia</b> dentro del sobre (<code>faultcode</code>, <code>faultstring</code>), independiente del código HTTP.</p></div>
+    </div>
+
+    <p>Una petición SOAP real, como las que atraviesan un bus de servicios:</p>
+    <pre><code><span class="kw">&lt;soap:Envelope</span> xmlns:soap=<span class="str">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;soap:Header&gt;</span>
+    <span class="kw">&lt;wsse:Security&gt;</span>                       <span class="cmt">&lt;!-- token firmado, cifrado --&gt;</span>
+      <span class="kw">&lt;wsse:UsernameToken&gt;</span>...<span class="kw">&lt;/wsse:UsernameToken&gt;</span>
+    <span class="kw">&lt;/wsse:Security&gt;</span>
+  <span class="kw">&lt;/soap:Header&gt;</span>
+  <span class="kw">&lt;soap:Body&gt;</span>
+    <span class="kw">&lt;ConsultarFactura</span> xmlns=<span class="str">"http://empresa.co/facturacion"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;FacturaId&gt;</span><span class="num">10245</span><span class="kw">&lt;/FacturaId&gt;</span>   <span class="cmt">&lt;!-- el XSD valida el tipo --&gt;</span>
+    <span class="kw">&lt;/ConsultarFactura&gt;</span>
+  <span class="kw">&lt;/soap:Body&gt;</span>
+<span class="kw">&lt;/soap:Envelope&gt;</span>
+
+<span class="cmt">&lt;!-- Y así viaja un error: siempre HTTP 500, con el detalle dentro --&gt;</span>
+<span class="kw">&lt;soap:Fault&gt;</span>
+  <span class="kw">&lt;faultcode&gt;</span>soap:Client<span class="kw">&lt;/faultcode&gt;</span>
+  <span class="kw">&lt;faultstring&gt;</span>FacturaId no existe<span class="kw">&lt;/faultstring&gt;</span>
+<span class="kw">&lt;/soap:Fault&gt;</span></code></pre>
+
+    <h3>Parte 3 · La comparación que te van a pedir</h3>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Dimensión</th><th>SOAP</th><th>REST</th></tr></thead>
+        <tbody>
+          <tr><td>Qué es</td><td>Un <b>protocolo</b> con reglas estrictas</td><td>Un <b>estilo de arquitectura</b> sobre HTTP</td></tr>
+          <tr><td>Formato</td><td>Solo XML</td><td>JSON casi siempre (también XML, texto, binario)</td></tr>
+          <tr><td>Contrato</td><td><b>WSDL</b> + XSD, obligatorio</td><td><b>OpenAPI</b>, recomendado pero opcional</td></tr>
+          <tr><td>Transporte</td><td>HTTP, JMS, SMTP…</td><td>Solo HTTP/HTTPS</td></tr>
+          <tr><td>Seguridad</td><td><b>WS-Security</b>: a nivel de mensaje, extremo a extremo</td><td><b>TLS</b> + OAuth2/JWT: a nivel de transporte</td></tr>
+          <tr><td>Transacciones</td><td>Estandarizadas (WS-AtomicTransaction)</td><td>No estandarizadas (patrón <b>Saga</b>, compensación)</td></tr>
+          <tr><td>Peso y rendimiento</td><td>Pesado (XML + sobre)</td><td>Ligero, cacheable</td></tr>
+          <tr><td>Errores</td><td><code>SOAP Fault</code> (HTTP 500 casi siempre)</td><td>Códigos de estado HTTP</td></tr>
+          <tr><td>Se usa hoy en…</td><td>Banca, seguros, telco legacy, gobierno, ERP</td><td>Casi todo lo nuevo: web, móvil, microservicios</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>Nunca digas "SOAP es obsoleto".</b> En banca, seguros y gobierno sigue moviendo dinero de verdad, y quien te entrevista probablemente lo mantiene. La respuesta madura es: <b>"para servicios nuevos, REST o eventos; SOAP donde el contrato estricto, la seguridad a nivel de mensaje y las transacciones distribuidas lo justifican, o donde ya existe y funciona"</b>.</div>
+
+    <h3>Parte 4 · El bus de servicios (ESB) y qué fue de él</h3>
+    <p>Es tu terreno: Oracle SOA Suite, BizTalk y Oracle Service Bus. Un <b>ESB</b> se pone en medio de todos los sistemas para que no se hablen directamente.</p>
+    <div class="grid cols-2">
+      <div class="card"><h4>Qué hace un ESB</h4><p><b>Enrutar</b> mensajes al sistema correcto, <b>transformar</b> formatos (XSLT: el XML de un sistema al del otro), <b>mediar</b> protocolos (SOAP↔JMS↔archivo) y <b>orquestar</b> procesos de negocio de varios pasos.</p></div>
+      <div class="card"><h4>Por qué apareció</h4><p>Sin él, N sistemas necesitan N×N integraciones punto a punto. El bus las convierte en N conexiones: cada sistema habla solo con el bus.</p></div>
+      <div class="card"><h4>Por qué cayó en desgracia</h4><p>Se volvió un <b>punto único de fallo</b> y un cuello de botella organizativo: toda la lógica de negocio terminaba dentro del bus y un equipo central bloqueaba a todos los demás.</p></div>
+      <div class="card"><h4>En qué se transformó</h4><p>En <b>API Gateway</b> (seguridad, rate limiting, enrutado — sin lógica de negocio) más <b>mensajería/eventos</b> (NATS, Kafka). "Smart endpoints, dumb pipes": la inteligencia vuelve a los servicios.</p></div>
+    </div>
+    <div class="callout"><b>Orquestación vs coreografía:</b> en el ESB había un <b>director</b> que decía a cada sistema qué hacer y cuándo (orquestación). En event-driven cada servicio <b>reacciona a los eventos</b> que le importan, sin director (coreografía) — que es exactamente lo que hiciste con NATS en la migración a Nébula. Saber nombrar ese cambio te posiciona como arquitecto, no como programador.</div>
+
+    <h3>Parte 5 · Modernizar sin romper: exponer el legacy SOAP como REST</h3>
+    <p>El escenario real que ya resolviste, y que te van a plantear en entrevista:</p>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">📱</div><div class="n">Cliente</div><h5>App / web</h5><p>Solo entiende JSON</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🛡️</div><div class="n">API Gateway</div><h5>REST</h5><p>Auth, rate limit, versión</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🔄</div><div class="n">Fachada</div><h5>Adaptador</h5><p>JSON ↔ XML, mapeo de errores</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🏛️</div><div class="n">Legacy</div><h5>Servicio SOAP</h5><p>Intacto, sin tocarlo</p></div>
+      </div>
+    </div>
+    <div class="grid cols-2">
+      <div class="card"><h4>Es un adaptador hexagonal</h4><p>La fachada es exactamente un <b>adaptador secundario</b>: el dominio nuevo habla por su puerto, y quien traduce a SOAP es una pieza reemplazable. El día que el legacy muera, cambias el adaptador y nada más.</p></div>
+      <div class="card"><h4>Traduce también los errores</h4><p>Un <code>SOAP Fault</code> no puede llegar crudo al móvil: se mapea a códigos HTTP con sentido (404, 409, 422). Es el detalle que separa una integración seria de un parche.</p></div>
+      <div class="card"><h4>Protege el legacy</h4><p>El sistema viejo no aguanta el tráfico de una app móvil: <b>caché</b>, <b>rate limiting</b> y <b>circuit breaker</b> en la fachada, para que un pico no lo tumbe.</p></div>
+      <div class="card"><h4>Encaja con strangler fig</h4><p>La fachada es el punto por donde después vas <b>reemplazando</b> operación por operación con servicios nuevos, sin que el cliente se entere nunca.</p></div>
+    </div>
+
+    <div class="callout"><b>Menciónalo si encaja:</b> además de REST y SOAP existen <b>gRPC</b> (binario, contrato en Protobuf, muy rápido — ideal entre microservicios internos) y <b>GraphQL</b> (el cliente pide exactamente los campos que necesita — útil cuando muchas pantallas distintas consumen los mismos datos). Nombrarlos y decir <b>cuándo</b> usarías cada uno demuestra criterio de arquitecto.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Manejo integración de sistemas de punta a punta, en los dos paradigmas. Vengo del mundo <b>SOAP y ESB</b>: implementé integraciones empresariales con <b>Oracle SOA Suite, BizTalk Server y Oracle Service Bus</b> —estoy certificado en Oracle Service Bus— para transacciones de alto volumen en banca. Y hoy diseño <b>REST APIs</b> con contrato OpenAPI, versionado, idempotencia y códigos de estado bien usados, además de integración <b>event-driven con NATS</b>. Esa combinación me permite modernizar sin romper: exponer servicios legacy SOAP tras una fachada REST, con circuit breaker y caché para protegerlos, e ir reemplazándolos por dentro — que es exactamente lo que hicimos al migrar el monolito a microservicios."</div>
+
+    <h3>Preguntas típicas de APIs e integración</h3>
+    <details class="qa"><summary>¿Cuándo elegirías SOAP en lugar de REST?</summary>
+      <div class="ans"><p>Cuando el caso exige <b>contrato formal y validación estricta</b> (WSDL + XSD), <b>seguridad a nivel de mensaje</b> que sobreviva a intermediarios (WS-Security) o <b>transacciones distribuidas estandarizadas</b>. Es típico en banca, seguros y gobierno, o cuando el otro extremo <b>ya expone SOAP</b> y no lo vas a cambiar. Para todo lo demás —web, móvil, microservicios— REST o eventos: más ligero, cacheable y con mejor tooling.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué significa que una API sea idempotente y por qué importa?</summary>
+      <div class="ans"><p>Que <b>repetir la misma petición produce el mismo resultado</b>. Importa por los <b>reintentos</b>: si un cliente no recibe respuesta por un timeout, reintentará. <code>GET</code>, <code>PUT</code> y <code>DELETE</code> son idempotentes por definición; <code>POST</code> no. Por eso a las operaciones críticas —un pago— les pongo una <b>clave de idempotencia</b> que el servidor guarda: si llega repetida, devuelve el resultado anterior en vez de cobrar dos veces.</p></div>
+    </details>
+    <details class="qa"><summary>¿Diferencia entre 401 y 403? ¿Y entre 400 y 422?</summary>
+      <div class="ans"><p><b>401 Unauthorized</b>: no sé quién eres (falta el token o no es válido) — autenticación. <b>403 Forbidden</b>: sé quién eres, pero <b>no tienes permiso</b> — autorización. <b>400 Bad Request</b>: la petición está mal formada (JSON roto, tipo equivocado). <b>422 Unprocessable Entity</b>: la sintaxis es correcta pero falla una <b>regla de negocio</b> (una fecha de vencimiento anterior a hoy). Usarlos bien ahorra horas de depuración a quien consume la API.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo versionas una API sin romper a los clientes?</summary>
+      <div class="ans"><p>Versión explícita en la ruta (<code>/api/v1/</code>) y regla de compatibilidad: <b>agregar campos opcionales no rompe; quitar o renombrar sí</b>. Cuando hay un cambio incompatible, publico <code>v2</code> y mantengo <code>v1</code> en paralelo con una <b>fecha de fin de vida comunicada</b>, midiendo qué clientes la siguen usando. El contrato OpenAPI y las <b>pruebas de contrato</b> me avisan si rompo algo antes de desplegar.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es un ESB y por qué hoy se usan API Gateway y eventos?</summary>
+      <div class="ans"><p>Un <b>ESB</b> centraliza enrutado, transformación y orquestación para evitar integraciones punto a punto N×N. Funcionó, pero terminó concentrando la lógica de negocio y volviéndose un <b>cuello de botella y punto único de fallo</b>: un equipo central bloqueaba a todos. Hoy se separa: el <b>API Gateway</b> se queda con lo transversal (seguridad, rate limiting, enrutado) y la comunicación entre servicios pasa a <b>eventos</b> (NATS, Kafka), devolviendo la lógica a cada servicio — de orquestación a <b>coreografía</b>.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo modernizas un servicio SOAP legacy que no puedes tocar?</summary>
+      <div class="ans"><p>Con una <b>fachada REST</b> delante: expone JSON al cliente moderno y traduce a SOAP hacia atrás, mapeando los <code>SOAP Fault</code> a códigos HTTP con sentido. Conceptualmente es un <b>adaptador</b> de arquitectura hexagonal. Le agrego <b>caché, rate limiting y circuit breaker</b> para que el legacy no se caiga con el tráfico nuevo, y esa fachada se vuelve el punto donde después reemplazo operación por operación (<b>strangler fig</b>) sin que el consumidor lo note.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cuándo usarías gRPC o GraphQL en vez de REST?</summary>
+      <div class="ans"><p><b>gRPC</b> entre microservicios internos donde importa la latencia y el volumen: binario, contrato fuerte en Protobuf y streaming. <b>GraphQL</b> cuando muchos clientes distintos necesitan combinaciones diferentes de los mismos datos y REST te obliga a multiplicar endpoints o a mandar de más. <b>REST</b> sigue siendo el defecto para APIs públicas: simple, cacheable y lo entiende todo el mundo.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="jwt">
+  <div class="wrap">
+    <h2><span class="tag t-auth">La seguridad</span> Autenticación y autorización: JWT, OAuth2 y RBAC</h2>
+    <p class="sub">Es la parte de seguridad que preguntan <b>en toda entrevista de backend</b>, y donde muchos candidatos se quedan en "el token va en la cabecera". Tú ya implementaste <b>RBAC</b> en el dashboard de reconciliación financiera y aseguras APIs REST en plataformas de telco con alto tráfico: este curso te da el vocabulario preciso para defenderlo, incluidos los errores clásicos que los entrevistadores usan como filtro.</p>
+
+    <div class="callout"><b>Analogía:</b> el <b>JWT es la manilla de un festival</b>. En la entrada muestras tu documento (te <b>autenticas</b>) y te dan una manilla <b>sellada e infalsificable</b> que dice quién eres y a qué escenarios puedes entrar. Después nadie vuelve a consultar la lista: basta con mirar la manilla. Por eso escala tan bien... y por eso <b>no se puede quitar a mitad del festival</b>: hasta que caduque, sirve.</div>
+
+    <h3>1 · El problema: HTTP no tiene memoria</h3>
+    <p>Cada petición HTTP llega sin saber nada de la anterior. Hay dos formas de resolverlo, y saber comparar ambas es la mitad de la respuesta:</p>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Dimensión</th><th>Sesión con cookie (estado en servidor)</th><th>Token JWT (sin estado)</th></tr></thead>
+        <tbody>
+          <tr><td>Dónde vive la verdad</td><td>En el servidor (memoria, Redis, BD)</td><td><b>Dentro del propio token</b>, firmado</td></tr>
+          <tr><td>Escalado horizontal</td><td>Requiere sesión compartida (Redis) o <i>sticky sessions</i></td><td>Cualquier réplica valida sin consultar nada</td></tr>
+          <tr><td>Revocar el acceso</td><td><b>Inmediato</b>: borras la sesión</td><td><b>Difícil</b>: vale hasta que expire (o necesitas lista negra)</td></tr>
+          <tr><td>Tamaño por petición</td><td>Un identificador pequeño</td><td>El token completo, en cada llamada</td></tr>
+          <tr><td>Encaja bien en…</td><td>App web monolítica de un solo dominio</td><td><b>Microservicios</b>, APIs, móvil, terceros</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>2 · El JWT por dentro: tres partes separadas por puntos</h3>
+    <pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9  .  eyJzdWIiOiIxMDI0NSIsInJv...  .  4fJk9_xQ2...
+<span class="cmt">└──────── HEADER ────────┘     └──── PAYLOAD ────┘    └── FIRMA ──┘</span>
+
+<span class="cmt">// 1. HEADER — qué algoritmo firma esto</span>
+{ <span class="str">"alg"</span>: <span class="str">"RS256"</span>, <span class="str">"typ"</span>: <span class="str">"JWT"</span> }
+
+<span class="cmt">// 2. PAYLOAD — los "claims": afirmaciones sobre el usuario</span>
+{
+  <span class="str">"sub"</span>: <span class="str">"10245"</span>,                <span class="cmt">// subject: quién es (id de usuario)</span>
+  <span class="str">"iss"</span>: <span class="str">"https://auth.empresa.co"</span>, <span class="cmt">// issuer: quién lo emitió</span>
+  <span class="str">"aud"</span>: <span class="str">"facturacion-api"</span>,     <span class="cmt">// audience: para qué API sirve</span>
+  <span class="str">"exp"</span>: <span class="num">1735689600</span>,             <span class="cmt">// expiration: caduca (SIEMPRE ponerlo)</span>
+  <span class="str">"iat"</span>: <span class="num">1735688700</span>,             <span class="cmt">// issued at: cuándo se emitió</span>
+  <span class="str">"roles"</span>: [<span class="str">"tesoreria"</span>, <span class="str">"auditor"</span>],
+  <span class="str">"scope"</span>: <span class="str">"facturas:leer facturas:pagar"</span>
+}
+
+<span class="cmt">// 3. FIRMA — garantiza que nadie alteró el payload</span>
+firma = RS256(base64(header) + <span class="str">"."</span> + base64(payload), clavePrivada)</code></pre>
+    <div class="callout"><b>El malentendido más común:</b> el payload va en <b>Base64, que NO es cifrado</b> — cualquiera puede leerlo pegándolo en jwt.io. La firma garantiza <b>integridad y autenticidad</b> (que no fue alterado y que lo emitió quien dice), <b>no confidencialidad</b>. Por eso <b>nunca</b> pongas datos sensibles en un JWT: ni contraseñas, ni números de tarjeta, ni datos personales de más.</div>
+
+    <div class="grid cols-2">
+      <div class="card"><h4>HS256 (simétrico)</h4><p>Una <b>misma clave secreta</b> firma y verifica. Simple, pero todo el que valida puede también <b>emitir</b> tokens. Sirve para un servicio único.</p></div>
+      <div class="card"><h4>RS256 (asimétrico)</h4><p>Una <b>clave privada</b> firma (solo el servidor de autenticación) y una <b>pública</b> verifica (todos los microservicios). Es lo correcto en arquitecturas distribuidas: nadie más puede emitir.</p></div>
+    </div>
+
+    <h3>3 · El flujo completo: access token + refresh token</h3>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">🔑</div><div class="n">1 · Login</div><h5>Credenciales</h5><p>Usuario y contraseña, una vez</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🎫</div><div class="n">2 · Emisión</div><h5>Dos tokens</h5><p>Access (15 min) + refresh (días)</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">📨</div><div class="n">3 · Uso</div><h5>Authorization</h5><p>Bearer &lt;token&gt; en cada llamada</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">✅</div><div class="n">4 · Validación</div><h5>Firma + exp</h5><p>Sin consultar la base de datos</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">♻️</div><div class="n">5 · Renovación</div><h5>Refresh</h5><p>Nuevo access sin re-login</p></div>
+      </div>
+    </div>
+    <div class="grid cols-2">
+      <div class="card"><h4>¿Por qué dos tokens?</h4><p>El <b>access token</b> viaja en cada petición: si lo roban, quieres que dure poco (5–15 min). El <b>refresh token</b> viaja rara vez, se guarda mejor protegido y <b>sí se puede revocar</b> porque el servidor lo tiene registrado.</p></div>
+      <div class="card"><h4>Rotación del refresh</h4><p>Cada vez que se usa, se emite uno nuevo y se invalida el anterior. Si aparece un refresh ya usado, es señal de robo: <b>se revoca toda la familia</b> de tokens de esa sesión.</p></div>
+    </div>
+
+    <p>Cómo se valida en la práctica (Spring Boot y FastAPI, el mismo concepto):</p>
+    <pre><code><span class="cmt">// Spring Boot — Spring Security valida firma, exp, iss y aud por ti</span>
+<span class="kw">http</span>.oauth2ResourceServer(o -&gt; o.jwt(Customizer.withDefaults()))
+    .authorizeHttpRequests(a -&gt; a
+        .requestMatchers(<span class="str">"/health"</span>).permitAll()
+        .requestMatchers(<span class="str">"/api/facturas/**"</span>).hasAuthority(<span class="str">"SCOPE_facturas:leer"</span>)
+        .anyRequest().authenticated());
+
+<span class="cmt"># FastAPI — la validación como dependencia reutilizable</span>
+<span class="kw">def</span> usuario_actual(token: str = Depends(oauth2_scheme)) -&gt; Usuario:
+    <span class="kw">try</span>:
+        claims = jwt.decode(token, CLAVE_PUBLICA, algorithms=[<span class="str">"RS256"</span>],
+                            audience=<span class="str">"facturacion-api"</span>)   <span class="cmt"># valida exp, aud, iss</span>
+    <span class="kw">except</span> JWTError:
+        <span class="kw">raise</span> HTTPException(status_code=<span class="num">401</span>, detail=<span class="str">"Token inválido"</span>)
+    <span class="kw">return</span> Usuario(id=claims[<span class="str">"sub"</span>], roles=claims[<span class="str">"roles"</span>])
+
+<span class="kw">@router.post</span>(<span class="str">"/api/facturas/{id}/pagar"</span>)
+<span class="kw">async def</span> pagar(id: int, u: Usuario = Depends(usuario_actual)):
+    <span class="kw">if</span> <span class="str">"tesoreria"</span> <span class="kw">not in</span> u.roles:
+        <span class="kw">raise</span> HTTPException(status_code=<span class="num">403</span>, detail=<span class="str">"Sin permiso"</span>)  <span class="cmt"># 403, no 401</span>
+    ...</code></pre>
+
+    <h3>4 · ¿Dónde guardo el token en el navegador?</h3>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Opción</th><th>Riesgo</th><th>Veredicto</th></tr></thead>
+        <tbody>
+          <tr><td><code>localStorage</code></td><td>Vulnerable a <b>XSS</b>: cualquier script inyectado lo lee</td><td>Cómodo y muy usado, pero un XSS entrega la sesión completa</td></tr>
+          <tr><td>Cookie <code>HttpOnly</code> + <code>Secure</code> + <code>SameSite</code></td><td>Vulnerable a <b>CSRF</b> si no se configura bien</td><td><b>La opción recomendada</b>: el JavaScript no puede leerla</td></tr>
+          <tr><td>Solo en memoria</td><td>Se pierde al recargar la página</td><td>Lo más seguro; se combina con refresh en cookie HttpOnly</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>La respuesta que impresiona:</b> "Access token <b>en memoria</b> y refresh token en <b>cookie HttpOnly, Secure y SameSite=Strict</b>. Así un XSS no puede leer ninguno de los dos, y el <code>SameSite</code> corta el CSRF. Y por encima: HTTPS obligatorio, expiración corta y CORS restringido a los orígenes conocidos."</div>
+
+    <h3>5 · OAuth2 y OpenID Connect: quién es quién</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>OAuth2 = autorización</h4><p>Un protocolo para <b>delegar acceso</b>: le das a una app permiso para usar un recurso tuyo <b>sin darle tu contraseña</b>. Responde "¿qué puede hacer esta app?".</p></div>
+      <div class="card"><h4>OIDC = autenticación</h4><p>Una <b>capa sobre OAuth2</b> que añade el <code>id_token</code> (un JWT con la identidad). Responde "¿quién es este usuario?". Es lo que hay detrás de "Entrar con Google/Microsoft".</p></div>
+      <div class="card"><h4>JWT = el formato</h4><p>No es un protocolo: es el <b>formato del token</b> que OAuth2/OIDC suelen usar. Confundir los tres es el error más frecuente en entrevistas.</p></div>
+      <div class="card"><h4>Authorization Code + PKCE</h4><p>El flujo <b>correcto hoy</b> para web y móvil. El <i>implicit flow</i> está <b>obsoleto</b>; decirlo demuestra que estás al día.</p></div>
+      <div class="card"><h4>Client Credentials</h4><p>El flujo <b>máquina a máquina</b>: un servicio pide un token con su id y secreto, sin usuario de por medio. El habitual entre microservicios.</p></div>
+      <div class="card"><h4>Proveedores</h4><p><b>Entra ID</b> (Azure AD), Keycloak, Auth0, Okta, Cognito. Lo normal es <b>no implementar tu propio servidor de identidad</b>: delegarlo es más seguro y más barato.</p></div>
+    </div>
+
+    <h3>6 · Autorización: RBAC, scopes y el error del 401/403</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>RBAC</h4><p><b>Control de acceso basado en roles</b>: al usuario se le asignan roles (<code>tesoreria</code>, <code>auditor</code>, <code>admin</code>) y los permisos cuelgan del rol, no de la persona. Es lo que implementaste en el dashboard de reconciliación financiera.</p></div>
+      <div class="card"><h4>Scopes</h4><p>Permisos <b>de grano fino</b> sobre la API (<code>facturas:leer</code>, <code>facturas:pagar</code>). El rol dice quién eres en la organización; el scope, qué puede hacer <b>esta aplicación</b> en tu nombre.</p></div>
+      <div class="card"><h4>ABAC</h4><p>Control por <b>atributos</b>: no solo el rol, también el contexto (monto, país, horario, si el recurso es suyo). Necesario cuando "puede aprobar, pero solo hasta cierto monto".</p></div>
+      <div class="card"><h4>401 vs 403</h4><p><b>401</b>: no sé quién eres (falta el token o es inválido). <b>403</b>: sé quién eres pero <b>no tienes permiso</b>. Confundirlos es un clásico y se nota de inmediato.</p></div>
+    </div>
+
+    <h3>7 · JWT entre microservicios</h3>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">🔐</div><div class="n">Identity</div><h5>Emisor</h5><p>Firma con clave privada</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🛡️</div><div class="n">API Gateway</div><h5>Primera validación</h5><p>Rechaza lo inválido en el borde</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">📄</div><div class="n">JWKS</div><h5>Clave pública</h5><p>Cada servicio la descarga y cachea</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">⚙️</div><div class="n">Servicio</div><h5>Valida local</h5><p>Sin llamar a nadie: rápido</p></div>
+      </div>
+    </div>
+    <div class="callout"><b>Por qué esto escala:</b> cada microservicio valida la firma con la <b>clave pública</b> (que obtiene del endpoint <b>JWKS</b> del proveedor y cachea), sin una llamada de red por petición. Ese es el gran argumento del JWT sin estado — y también su precio: <b>no puedes revocar en el acto</b>. Por eso el access token vive minutos, no días.</div>
+
+    <h3>8 · Los errores clásicos (con esto te filtran)</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4><code>alg: none</code></h4><p>Aceptar el algoritmo que dice el propio token permite firmar cualquier cosa. <b>Fija el algoritmo esperado</b> en el servidor y rechaza el resto.</p></div>
+      <div class="card"><h4>No validar <code>exp</code>, <code>iss</code>, <code>aud</code></h4><p>Verificar solo la firma deja pasar tokens caducados o emitidos para <b>otra</b> API. Hay que validar los tres.</p></div>
+      <div class="card"><h4>Datos sensibles en el payload</h4><p>Va en Base64: es <b>legible</b>. Nada de contraseñas, tarjetas ni datos personales de más.</p></div>
+      <div class="card"><h4>Tokens eternos</h4><p>Un access token de 30 días es una llave maestra que no se puede quitar. Minutos para el access, y refresh rotativo.</p></div>
+      <div class="card"><h4>Secretos en el repositorio</h4><p>La clave de firma va en <b>Key Vault</b> o en un secret de Kubernetes, nunca en el código ni en <code>appsettings.json</code>. Y se rota.</p></div>
+      <div class="card"><h4>Sin plan de revocación</h4><p>Para "cerrar sesión en todos los dispositivos" hace falta lista negra, versión de token por usuario o refresh revocable. Tener respuesta a esto es lo que distingue.</p></div>
+    </div>
+
+    <div class="callout"><b>El círculo completo:</b> el usuario se autentica contra <b>Entra ID</b> → recibe un JWT firmado con RS256 → el <b>API Gateway</b> lo valida en el borde → cada microservicio (Spring Boot, .NET o FastAPI) verifica la firma con la clave pública del <b>JWKS</b> y aplica <b>RBAC/scopes</b> → los secretos viven en <b>Key Vault</b>, no en la imagen → y el pipeline con SonarQube detecta credenciales <i>hardcodeadas</i> antes de desplegar en <b>AKS</b>.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Aseguro APIs con <b>JWT</b> firmado en <b>RS256</b>: el servidor de identidad firma con la clave privada y cada microservicio valida con la pública del JWKS, sin llamadas extra — por eso escala. Uso <b>access token de vida corta más refresh rotativo</b>, guardo el refresh en cookie <code>HttpOnly</code>/<code>Secure</code>/<code>SameSite</code> y valido siempre <code>exp</code>, <code>iss</code> y <code>aud</code>, no solo la firma. Para permisos aplico <b>RBAC</b> —lo implementé en el dashboard de reconciliación financiera— combinado con <b>scopes</b> por operación, distinguiendo bien 401 de 403. Y los secretos van en <b>Key Vault</b>, nunca en el repositorio. Cuando hace falta identidad corporativa, delego en <b>OAuth2/OIDC con Entra ID</b> en lugar de construir un servidor propio."</div>
+
+    <h3>Preguntas típicas de autenticación y seguridad</h3>
+    <details class="qa"><summary>¿Qué es un JWT y qué garantiza exactamente?</summary>
+      <div class="ans"><p>Un token con tres partes —<b>header, payload y firma</b>— codificadas en Base64 y separadas por puntos. El payload lleva <b>claims</b> (<code>sub</code>, <code>exp</code>, <code>iss</code>, <code>aud</code>, roles). La firma garantiza <b>integridad y autenticidad</b>: que nadie lo alteró y que lo emitió quien dice. <b>No garantiza confidencialidad</b>: el payload es legible por cualquiera, así que ahí no van datos sensibles. Su ventaja es que se valida <b>sin estado</b>, sin consultar la base de datos.</p></div>
+    </details>
+    <details class="qa"><summary>¿Sesión con cookie o JWT? ¿Cómo eliges?</summary>
+      <div class="ans"><p>Por la arquitectura. <b>Sesión en servidor</b> si es una app web de un solo dominio y necesito <b>revocación inmediata</b> — cerrar sesión es borrar la sesión. <b>JWT</b> si hay <b>microservicios, clientes móviles o terceros</b>: cada servicio valida por su cuenta y escala horizontalmente sin sesión compartida. El precio del JWT es que <b>no se revoca fácil</b>, y por eso el access token dura minutos y el refresh sí es revocable.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo revocas un JWT antes de que expire?</summary>
+      <div class="ans"><p>Directamente <b>no se puede</b>: es válido hasta su <code>exp</code>. Se resuelve por diseño: <b>expiración corta</b> (5–15 minutos) para que la ventana de riesgo sea mínima, y <b>refresh token revocable</b> guardado en servidor. Si necesito corte inmediato, añado una <b>lista negra</b> por <code>jti</code> en Redis (solo hasta que expire, así no crece) o una <b>versión de token</b> por usuario: al cerrar sesión en todos los dispositivos, se incrementa y los tokens viejos dejan de validar.</p></div>
+    </details>
+    <details class="qa"><summary>¿Dónde guardas el token en el navegador y por qué?</summary>
+      <div class="ans"><p><b>Access token en memoria</b> y <b>refresh en cookie <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite=Strict</code></b>. En <code>localStorage</code> es cómodo pero cualquier <b>XSS</b> lo lee y se lleva la sesión entera; la cookie <code>HttpOnly</code> es invisible para JavaScript, y el <code>SameSite</code> mitiga el <b>CSRF</b> que traen las cookies. Encima: HTTPS obligatorio, CORS restringido a orígenes conocidos y expiración corta.</p></div>
+    </details>
+    <details class="qa"><summary>¿Diferencia entre OAuth2, OIDC y JWT?</summary>
+      <div class="ans"><p>Son tres cosas distintas que suelen ir juntas. <b>OAuth2</b> es un protocolo de <b>autorización delegada</b>: permite que una app acceda a un recurso tuyo sin conocer tu contraseña. <b>OpenID Connect</b> es una capa <b>sobre</b> OAuth2 que añade <b>autenticación</b> y el <code>id_token</code> con la identidad del usuario. <b>JWT</b> no es un protocolo: es el <b>formato</b> de token que ambos usan. En corto: OAuth2 = qué puedes hacer, OIDC = quién eres, JWT = cómo viaja esa información.</p></div>
+    </details>
+    <details class="qa"><summary>¿HS256 o RS256?</summary>
+      <div class="ans"><p><b>HS256</b> es simétrico: la misma clave firma y verifica, así que todo servicio que valide <b>también puede emitir</b> tokens. Sirve para un servicio único y controlado. <b>RS256</b> es asimétrico: el servidor de identidad firma con la <b>privada</b> y los microservicios verifican con la <b>pública</b>, que publican en un endpoint <b>JWKS</b>. En arquitecturas distribuidas la respuesta correcta es RS256: separa emisión de validación y permite rotar la clave sin redistribuir secretos.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es RBAC y cómo lo has aplicado?</summary>
+      <div class="ans"><p><b>Role-Based Access Control</b>: los permisos se asignan a <b>roles</b> y los roles a personas, en vez de dar permisos uno por uno. Lo apliqué en el <b>dashboard de reconciliación financiera</b>, donde distintos perfiles ven y aprueban cosas distintas sobre datos sensibles. En APIs lo combino con <b>scopes</b> por operación (<code>facturas:leer</code> vs <code>facturas:pagar</code>), y cuando la regla depende del contexto —un monto máximo, el país, si el recurso es del propio usuario— se pasa a <b>ABAC</b>, decisión por atributos.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cuáles son los errores de seguridad más comunes con JWT?</summary>
+      <div class="ans"><p>Aceptar el algoritmo que declara el token (<code>alg: none</code>) en vez de <b>fijarlo</b> en el servidor; validar solo la firma y <b>olvidar <code>exp</code>, <code>iss</code> y <code>aud</code></b>, lo que deja pasar tokens caducados o emitidos para otra API; meter <b>datos sensibles</b> en el payload creyendo que va cifrado; tokens con vida de días; y <b>secretos en el repositorio</b> en lugar de Key Vault. Los reviso en revisión de código y el análisis estático del pipeline detecta credenciales <i>hardcodeadas</i>.</p></div>
+    </details>
+  </div>
+</section>
+
 <section id="docker">
   <div class="wrap">
     <h2><span class="tag t-docker">Paso 1</span> Docker &amp; Dockerfile</h2>
@@ -2073,7 +2767,7 @@ status changed to Done AFTER -7d</code></pre>
       <div id="sim-start" class="sim-panel">
         <p><b>Elige tu práctica:</b></p>
         <div class="sim-sets">
-          <button class="sim-set" data-set="all">Completo (15)</button>
+          <button class="sim-set" data-set="all">Completo (20)</button>
           <button class="sim-set" data-set="quick">Rápido (5)</button>
           <button class="sim-set" data-set="tech">Técnica</button>
           <button class="sim-set" data-set="sysdesign">System Design</button>
@@ -2163,6 +2857,26 @@ status changed to Done AFTER -7d</code></pre>
      good:'cortas por bounded context (no por capa técnica), migración incremental tipo strangler fig y reconoces que separar los datos es lo difícil.',watch:'proponer un big bang, cortar por capas técnicas o ignorar la base de datos compartida.',level:'nombrar el riesgo de monolito distribuido y cerrar con tus cifras reales.',
      model:'Cortamos por bounded contexts de DDD: cada servicio es un límite de negocio con su propio lenguaje y su dueño, nunca por capas técnicas. La migración fue incremental, tipo strangler fig: una fachada enruta el tráfico, extraemos primero un contexto de valor alto y acoplamiento bajo, lo comunicamos por eventos con NATS y apagamos el módulo viejo; y a repetir. Lo difícil no fue el código sino separar la base de datos compartida: si no lo haces, terminas en un monolito distribuido. El resultado fue 500 ms bajo alto tráfico, cero downtime y 60% menos tiempo de despliegue.',
      sets:['all','tech','sysdesign','lead'],time:150},
+    {cat:'Técnica (.NET)',q:'¿Qué diferencia hay entre .NET Framework y .NET 8, y qué complica una migración?',hint:'Multiplataforma, Kestrel, contenedores; y las dependencias solo-Windows.',
+     good:'distingues Windows/IIS de multiplataforma y contenedores, y nombras las dependencias que atascan la migración.',watch:'decir solo "es más nuevo" o no saber que Framework está en mantenimiento.',level:'contar que TÚ viviste la transición y hoy integras legacy .NET con APIs modernas.',
+     model:'.NET Framework, hasta 4.8, es solo Windows sobre IIS y hoy está en mantenimiento. .NET Core fue la reescritura multiplataforma, y desde .NET 5 se unificó el nombre: hoy .NET 8 LTS, mucho más rápido y pensado para contenedores con Kestrel integrado. Lo que complica migrar no es el lenguaje sino las dependencias solo-Windows: WebForms, WCF, System.Web y librerías de terceros sin versión moderna. Yo viví esa transición y hoy integro sistemas legacy .NET con APIs REST nuevas llevándolos a AKS.',
+     sets:['all','tech'],time:120},
+    {cat:'Frontend',q:'¿Has trabajado con Angular?',hint:'Sé honesto y convierte la respuesta en una fortaleza; no inventes experiencia.',
+     good:'dices con claridad qué has usado en producción, demuestras que conoces el modelo de Angular y cierras con tu capacidad de aprender rápido.',watch:'inventar experiencia (se detecta en 5 minutos) o encogerte y quedarte en el "no".',level:'dar equivalencias concretas React↔Angular y recordar saltos previos entre Java, .NET y Python.',
+     model:'En producción he trabajado con React y Next.js. Angular no lo he usado en un proyecto real, pero conozco su modelo: componentes con template, servicios con inyección de dependencias, RxJS y signals, y sé mapearlos a lo que uso a diario: signal a useState, ngOnInit a useEffect, Input y Output a props y callbacks. Con base sólida de TypeScript y de arquitectura la curva es de semanas, no de meses; ya hice ese salto entre Java, .NET y Python.',
+     sets:['all','tech'],time:90},
+    {cat:'Integración',q:'Tienes un servicio SOAP legacy que no puedes tocar y una app móvil que necesita esos datos. ¿Qué haces?',hint:'Fachada REST, traducción de errores y protección del legacy.',
+     good:'propones una fachada REST que traduce JSON↔XML, mapeas los SOAP Fault a códigos HTTP y proteges el legacy con caché, rate limiting y circuit breaker.',watch:'proponer reescribir el legacy, o exponer el SOAP tal cual al móvil.',level:'nombrarlo como adaptador hexagonal y ligarlo a strangler fig para reemplazarlo después.',
+     model:'Pongo una fachada REST delante: expone JSON al móvil y traduce a SOAP hacia atrás, mapeando los SOAP Fault a códigos HTTP con sentido en vez de devolver 500 siempre. Como el legacy no aguanta el tráfico de una app, le agrego caché, rate limiting y circuit breaker. Conceptualmente esa fachada es un adaptador hexagonal, y se convierte en el punto por donde después voy reemplazando operación por operación con strangler fig, sin que el cliente se entere. Vengo del mundo ESB —Oracle Service Bus, SOA Suite, BizTalk—, así que conozco bien los dos lados.',
+     sets:['all','tech','sysdesign'],time:180},
+    {cat:'Seguridad',q:'¿Cómo aseguras una API REST con JWT en una arquitectura de microservicios?',hint:'RS256, JWKS, claims a validar, dónde guardar el token.',
+     good:'RS256 con clave pública por JWKS, validar exp/iss/aud además de la firma, access corto + refresh rotativo y secretos fuera del repositorio.',watch:'quedarte en "el token va en la cabecera Authorization" o creer que el JWT va cifrado.',level:'explicar por qué escala (validación local sin llamadas) y el precio: no se puede revocar en el acto.',
+     model:'El servidor de identidad firma con RS256 usando su clave privada y cada microservicio valida con la pública que obtiene del JWKS y cachea, sin una llamada de red por petición: por eso escala. Valido siempre firma más exp, iss y aud, no solo la firma. Uso access token de vida corta con refresh rotativo, el refresh en cookie HttpOnly, Secure y SameSite. Para permisos, RBAC más scopes por operación, distinguiendo 401 de 403. Y los secretos en Key Vault, nunca en el repositorio. El precio del JWT es que no se revoca en el acto; por eso el access dura minutos.',
+     sets:['all','tech','sysdesign'],time:150},
+    {cat:'Seguridad',q:'Un usuario reporta que le robaron el token. ¿Cómo lo revocas si el JWT es sin estado?',hint:'No se puede revocar directamente: hay que diseñarlo.',
+     good:'reconoces que no se puede revocar directamente y das soluciones de diseño: expiración corta, refresh revocable, lista negra por jti o versión de token.',watch:'afirmar que basta con borrarlo del cliente, o inventar una revocación que el estándar no tiene.',level:'mencionar la rotación del refresh y revocar toda la familia si se reutiliza uno.',
+     model:'Un JWT es válido hasta su exp, así que directamente no se revoca: se resuelve por diseño. Access token de vida corta, 5 a 15 minutos, para que la ventana de riesgo sea mínima, y refresh token revocable guardado en servidor. Si necesito corte inmediato, añado lista negra por jti en Redis, solo hasta que expire para que no crezca, o una versión de token por usuario que incremento al cerrar sesión en todos los dispositivos. Y con rotación de refresh: si aparece uno ya usado, es señal de robo y revoco toda la familia de esa sesión.',
+     sets:['all','tech'],time:120},
     {cat:'RR.HH.',q:'¿Cuál es tu principal debilidad?',hint:'Honesta + cómo la trabajas.',
      good:'debilidad real + acción concreta para manejarla.',watch:'una fortaleza disfrazada o algo descalificante.',level:'mostrar autoconciencia y mejora continua.',
      model:'Por mi perfil hands-on me involucro mucho en el detalle técnico; lo trabajo delegando el resultado y confiando en el equipo, reservando mi tiempo para arquitectura y desbloqueos.',
@@ -2230,6 +2944,22 @@ status changed to Done AFTER -7d</code></pre>
     <details class="qa"><summary>¿Cómo validas los datos de entrada en FastAPI?</summary><div class="ans"><p>Con <b>Pydantic</b>: defino un schema con los tipos esperados y FastAPI valida y convierte cada request. Si no cumple, responde <b>422</b> con el detalle, sin escribir esa validación. Con <code>response_model</code> también valido y serializo la salida.</p></div></details>
     <details class="qa"><summary>¿Qué es <code>Depends</code> (inyección de dependencias) en FastAPI?</summary><div class="ans"><p>Es el mecanismo para "inyectar" cosas reutilizables en una ruta: la <b>sesión de BD</b>, el <b>usuario autenticado</b>, la configuración. Se declaran una vez y FastAPI las provee y las limpia por petición — desacopla y hace el código fácil de testear (puedes sobrescribir la dependencia con un mock).</p></div></details>
     <details class="qa"><summary>¿Cuándo ayuda async/await y cuándo no?</summary><div class="ans"><p>Ayuda en trabajo <b>I/O-bound</b> (BD, otras APIs) con alta concurrencia: la ruta cede el control mientras espera, en vez de bloquear. <b>No</b> acelera lo <b>CPU-intensivo</b>, y si el driver de BD es síncrono esa llamada sigue bloqueando. Con Python real: FastAPI corre sobre <b>Uvicorn (ASGI)</b>.</p></div></details>
+    <h3>.NET / C# y frontend</h3>
+    <details class="qa"><summary>¿.NET Framework o .NET 8? ¿Qué complica migrar?</summary><div class="ans"><p><b>.NET Framework</b> (4.8) es solo Windows sobre IIS y está en <b>mantenimiento</b>; <b>.NET 8</b> (LTS) es multiplataforma, mucho más rápido y pensado para <b>contenedores</b>, con Kestrel integrado. Lo que atasca una migración no es el lenguaje sino las dependencias <b>solo-Windows</b>: WebForms, WCF, <code>System.Web</code> y librerías de terceros sin versión moderna. Mi ventaja: viví la transición y hoy integro legacy .NET con APIs REST en AKS.</p></div></details>
+    <details class="qa"><summary>¿Cómo funciona la inyección de dependencias en ASP.NET Core?</summary><div class="ans"><p>El contenedor viene <b>integrado</b>. En <code>Program.cs</code> registro servicios con su ciclo de vida: <b>Transient</b> (uno por uso), <b>Scoped</b> (uno por petición — el habitual para servicios y <code>DbContext</code>) y <b>Singleton</b> (uno para toda la app), y el framework los inyecta por constructor. El error clásico: inyectar un <b>Scoped dentro de un Singleton</b>, que deja el <code>DbContext</code> capturado y corrupto.</p></div></details>
+    <details class="qa"><summary>¿EF Core o Dapper?</summary><div class="ans"><p><b>EF Core</b> es el ORM completo: mapea clases a tablas, traduce <b>LINQ</b> a SQL y trae migraciones. <b>Dapper</b> es un micro-ORM para cuando necesito <b>SQL a mano y máximo rendimiento</b>: reportes pesados, consultas afinadas, procedimientos almacenados. Conviven: EF Core para el CRUD del dominio, Dapper para lo crítico. Y ojo con el <b>N+1</b>: se resuelve con <code>Include</code>.</p></div></details>
+    <details class="qa"><summary>¿Props o estado en React? ¿Y por qué no usar el índice como key?</summary><div class="ans"><p>Las <b>props</b> bajan del padre y son de solo lectura; el <b>estado</b> lo posee el componente y al cambiarlo se re-renderiza. Si el dato lo necesitan varios, se <b>sube</b> al ancestro común. La <code>key</code> es la <b>identidad</b> del elemento entre renders: con el índice, al reordenar o filtrar, React asocia el estado del DOM a la fila equivocada (se mezclan inputs, se pierde el foco). Usa un <b>id estable</b>.</p></div></details>
+    <details class="qa"><summary>¿Has trabajado con Angular?</summary><div class="ans"><p>Respuesta honesta, que es la que convence: <em>"En producción trabajo con <b>React y Next.js</b>. Angular no lo he usado en un proyecto real, pero conozco su modelo —componentes con template, servicios con inyección de dependencias, RxJS y signals— y sé mapearlo a lo que uso: <code>signal</code>↔<code>useState</code>, <code>ngOnInit</code>↔<code>useEffect</code>, <code>@Input</code>/<code>@Output</code>↔props y callbacks. Con base de TypeScript y arquitectura la curva es de semanas; ya hice ese salto entre Java, .NET y Python."</em> <b>Inventar experiencia se detecta en cinco minutos de preguntas técnicas.</b></p></div></details>
+
+    <h3>APIs, integración y seguridad</h3>
+    <details class="qa"><summary>¿Cuándo SOAP y cuándo REST?</summary><div class="ans"><p><b>SOAP</b> cuando hace falta <b>contrato formal y validación estricta</b> (WSDL + XSD), <b>seguridad a nivel de mensaje</b> que sobreviva a intermediarios (WS-Security) o <b>transacciones distribuidas estandarizadas</b> — banca, seguros, gobierno, o cuando el otro extremo ya expone SOAP. <b>REST</b> para todo lo nuevo: web, móvil, microservicios. Nunca digo que SOAP sea obsoleto: sigue moviendo dinero real y probablemente lo mantiene quien me entrevista.</p></div></details>
+    <details class="qa"><summary>¿Qué es la idempotencia y por qué importa en una API?</summary><div class="ans"><p>Que <b>repetir la misma petición dé el mismo resultado</b>. Importa por los <b>reintentos</b>: ante un timeout el cliente reintenta. <code>GET</code>, <code>PUT</code> y <code>DELETE</code> son idempotentes; <code>POST</code> no. Por eso a las operaciones críticas —un pago— les pongo una <b>clave de idempotencia</b> que el servidor registra: si llega repetida, devuelve el resultado anterior en vez de cobrar dos veces.</p></div></details>
+    <details class="qa"><summary>¿Qué fue del ESB y qué lo reemplazó?</summary><div class="ans"><p>El <b>ESB</b> (Oracle Service Bus, SOA Suite, BizTalk) centralizaba enrutado, transformación y orquestación para evitar integraciones punto a punto N×N. Terminó concentrando la lógica de negocio y volviéndose <b>cuello de botella y punto único de fallo</b>. Hoy se separa: <b>API Gateway</b> para lo transversal (seguridad, rate limiting, enrutado) y <b>eventos</b> (NATS, Kafka) entre servicios — de <b>orquestación</b> a <b>coreografía</b>. Yo hice ese recorrido completo.</p></div></details>
+    <details class="qa"><summary>¿401 o 403? ¿400 o 422?</summary><div class="ans"><p><b>401</b>: no sé quién eres (falta el token o no vale) — autenticación. <b>403</b>: sé quién eres pero <b>no tienes permiso</b> — autorización. <b>400</b>: petición mal formada (JSON roto, tipo equivocado). <b>422</b>: sintaxis correcta pero falla una <b>regla de negocio</b>. Confundirlos se nota de inmediato y le cuesta horas de depuración a quien consume la API.</p></div></details>
+    <details class="qa"><summary>¿Qué garantiza un JWT y qué NO garantiza?</summary><div class="ans"><p>Garantiza <b>integridad y autenticidad</b>: que nadie alteró el contenido y que lo emitió quien dice, gracias a la firma. <b>No garantiza confidencialidad</b>: el payload va en <b>Base64, no cifrado</b>, y cualquiera lo lee. Por eso nunca van ahí contraseñas, tarjetas ni datos personales de más. Su ventaja es validarse <b>sin estado</b>: cada servicio verifica la firma con la clave pública del <b>JWKS</b>, sin consultar la BD.</p></div></details>
+    <details class="qa"><summary>¿Dónde guardas el token en el navegador?</summary><div class="ans"><p><b>Access token en memoria</b> y <b>refresh en cookie <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite=Strict</code></b>. En <code>localStorage</code> es cómodo, pero cualquier <b>XSS</b> se lleva la sesión completa; la cookie <code>HttpOnly</code> es invisible para JavaScript y el <code>SameSite</code> mitiga el <b>CSRF</b>. Encima: HTTPS obligatorio, CORS restringido y expiración corta.</p></div></details>
+    <details class="qa"><summary>¿Diferencia entre OAuth2, OIDC y JWT?</summary><div class="ans"><p><b>OAuth2</b> = <b>autorización</b> delegada (qué puede hacer una app en tu nombre, sin darle tu contraseña). <b>OIDC</b> = capa <b>sobre</b> OAuth2 que añade <b>autenticación</b> y el <code>id_token</code> con la identidad (el "Entrar con Google/Microsoft"). <b>JWT</b> no es un protocolo: es el <b>formato</b> del token que ambos usan. Confundir los tres es el error más frecuente. Y el flujo correcto hoy es <b>Authorization Code + PKCE</b>; el <i>implicit</i> está obsoleto.</p></div></details>
+
     <h3>Arquitectura</h3>
     <details class="qa"><summary>¿Qué es la arquitectura hexagonal, en una frase?</summary><div class="ans"><p>Las <b>reglas de negocio en el centro</b>, sin depender de ningún framework, y todo lo externo entrando o saliendo por <b>puertos</b> (interfaces del dominio) que implementan <b>adaptadores</b> (REST, JPA/SQLAlchemy, NATS). La regla que lo sostiene es la <b>inversión de dependencias</b>: todos los <code>import</code> apuntan hacia adentro. El beneficio concreto: pruebo el negocio <b>sin BD ni HTTP</b> y cambio de tecnología tocando un adaptador.</p></div></details>
     <details class="qa"><summary>Hexagonal, clean y onion: ¿son lo mismo?</summary><div class="ans"><p>En lo esencial, sí: las tres aplican la <b>misma regla de dependencia hacia adentro</b>. <b>Hexagonal</b> (Cockburn) habla de puertos y adaptadores; <b>Onion</b> (Palermo) lo dibuja como anillos; <b>Clean</b> (Uncle Bob) prescribe más capas y nombra <em>entidades</em> y <em>casos de uso</em>. Termino con la misma estructura: <code>domain / application / infrastructure</code>. Lo importante no es el nombre sino que el dominio no dependa del framework.</p></div></details>
@@ -2369,7 +3099,7 @@ status changed to Done AFTER -7d</code></pre>
   <div class="wrap">
     Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
     Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
-    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-28 15:24 (Bogotá)</span></span>
+    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-28 18:21 (Bogotá)</span></span>
   </div>
 </footer>
 
@@ -2410,10 +3140,12 @@ status changed to Done AFTER -7d</code></pre>
 
     // Navegación secuencial entre cursos (orden lógico de la ruta)
     var SEQ=[['panorama','Panorama'],['docker','Docker'],['kubernetes','Kubernetes'],
-      ['springboot','Java / Spring Boot'],['nextjs','Next.js'],['nodejs','Node.js'],
+      ['springboot','Java / Spring Boot'],['dotnet','.NET / C#'],['nextjs','Next.js'],
+      ['react-angular','React vs Angular'],['nodejs','Node.js'],
       ['fastapi','FastAPI / Python'],
       ['sql','Bases de datos / SQL'],['nats','NATS'],
-      ['arquitectura','Arquitectura de software'],['k8s-deep','Kubernetes a fondo'],
+      ['arquitectura','Arquitectura de software'],
+      ['rest-soap','REST vs SOAP'],['jwt','JWT y autenticación'],['k8s-deep','Kubernetes a fondo'],
       ['helm','Helm'],['azure','Azure / AKS'],['curso-devops','Curso DevOps'],
       ['pipelines','Pipelines CI/CD'],['testing','Pruebas / Testing'],
       ['calidad','Calidad y seguridad'],['liderazgo','Curso de liderazgo'],
