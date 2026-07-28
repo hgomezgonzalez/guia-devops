@@ -83,7 +83,7 @@
   .t-devops{background:#c9711a} .t-cheat{background:#b83a5e} .t-next{background:#111827}
   .t-lead{background:#a9791f} .t-guion{background:#b83a5e} .t-ruta{background:#1f6fa8}
   .t-sql{background:#2f6f8f} .t-test{background:#2e7d5b} .t-nats{background:#9c3d86} .t-node{background:#43873a}
-  .t-py{background:#3776ab}
+  .t-py{background:#3776ab} .t-arq{background:#7048a8}
   .t-train{background:#b83a5e} .t-jira{background:#2f81c9} .t-sd{background:#2f6fb0} .t-assess{background:#b8860b} .t-sim{background:#c0392b}
   /* Dashboard de cursos */
   .stamp{display:inline-block;font-family:var(--mono);font-size:.76rem;color:var(--ink-faint);
@@ -365,6 +365,10 @@
         <a href="#nats"><b>NATS (mensajería)</b><span>Event-driven entre servicios</span></a>
       </div>
       <div class="menu-cat">
+        <h4><span class="dot" style="background:#7048a8"></span>Arquitectura</h4>
+        <a href="#arquitectura"><b>Arquitectura de software</b><span>Hexagonal, DDD, capas, trade-offs</span></a>
+      </div>
+      <div class="menu-cat">
         <h4><span class="dot" style="background:#3760d4"></span>Contenedores &amp; Cloud</h4>
         <a href="#docker"><b>Docker</b><span>Empaquetar</span></a>
         <a href="#kubernetes"><b>Kubernetes</b><span>Orquestar</span></a>
@@ -412,7 +416,7 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-24 13:04 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-28 15:24 (Bogotá)</span></span></p>
 
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
@@ -431,30 +435,31 @@
         <a class="dash-card" href="#fastapi" style="--c:#3776ab"><span class="dc-n">7</span><b>FastAPI / Python</b><span>APIs backend en Python</span></a>
         <a class="dash-card" href="#sql" style="--c:#2f6f8f"><span class="dc-n">8</span><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle</span></a>
         <a class="dash-card" href="#nats" style="--c:#9c3d86"><span class="dc-n">9</span><b>NATS</b><span>Mensajería event-driven</span></a>
+        <a class="dash-card" href="#arquitectura" style="--c:#7048a8"><span class="dc-n">10</span><b>Arquitectura de software</b><span>Hexagonal, DDD, trade-offs</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 3</span> Infraestructura &amp; Cloud</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">10</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
-        <a class="dash-card" href="#helm" style="--c:#0f9d8a"><span class="dc-n">11</span><b>Helm</b><span>Despliegues reutilizables</span></a>
-        <a class="dash-card" href="#azure" style="--c:#0a7fbd"><span class="dc-n">12</span><b>Azure &amp; AKS</b><span>La nube</span></a>
+        <a class="dash-card" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">11</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
+        <a class="dash-card" href="#helm" style="--c:#0f9d8a"><span class="dc-n">12</span><b>Helm</b><span>Despliegues reutilizables</span></a>
+        <a class="dash-card" href="#azure" style="--c:#0a7fbd"><span class="dc-n">13</span><b>Azure &amp; AKS</b><span>La nube</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 4</span> Entrega (DevOps)</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">13</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
-        <a class="dash-card" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">14</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
-        <a class="dash-card" href="#testing" style="--c:#2e7d5b"><span class="dc-n">15</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
-        <a class="dash-card" href="#calidad" style="--c:#6f57c9"><span class="dc-n">16</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
+        <a class="dash-card" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">14</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
+        <a class="dash-card" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">15</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
+        <a class="dash-card" href="#testing" style="--c:#2e7d5b"><span class="dc-n">16</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
+        <a class="dash-card" href="#calidad" style="--c:#6f57c9"><span class="dc-n">17</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 5</span> Liderazgo &amp; gestión</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">17</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
-        <a class="dash-card" href="#jira" style="--c:#2f81c9"><span class="dc-n">18</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
+        <a class="dash-card" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">18</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
+        <a class="dash-card" href="#jira" style="--c:#2f81c9"><span class="dc-n">19</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
       </div>
     </div>
     <div class="dash-level">
@@ -1158,6 +1163,344 @@ nc.subscribe("pagos.recarga.ok", msg -&gt; enviarNotificacion(msg));</code></pre
   </div>
 </section>
 
+<section id="arquitectura">
+  <div class="wrap">
+    <h2><span class="tag t-arq">El diseño</span> Arquitectura de software (hexagonal, DDD y trade-offs)</h2>
+    <p class="sub">Este curso no te enseña algo nuevo: te enseña a <b>nombrar lo que ya hiciste</b>. Cuando migraste el monolito a microservicios event-driven, cortaste por dominios y conectaste servicios con NATS, estabas aplicando arquitectura hexagonal, DDD y patrón <i>strangler fig</i> — aunque en su momento no los llamaras así. En una entrevista de arquitecto, saber el vocabulario formal es la diferencia entre "hicimos una migración" y "diseñamos por <em>bounded contexts</em>, con el dominio aislado por puertos y adaptadores".</p>
+
+    <div class="callout"><b>Analogía:</b> el hexágono es una <b>torre de control de aeropuerto</b>. La torre (tu <b>dominio</b>: las reglas del negocio) no cambia aunque cambien las aerolíneas, los aviones o el sistema de radio. Solo le importan las <b>puertas</b> por donde entra y sale información (los <b>puertos</b>). Cada aerolínea, radio o radar es un <b>adaptador</b> intercambiable: cambias de PostgreSQL a Oracle, o de REST a mensajería, y la torre ni se entera.</div>
+
+    <h3>¿Para qué sirve la arquitectura? (lo que realmente evalúan)</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Acoplamiento</h4><p>Que cambiar una pieza no obligue a tocar otras cinco. El monolito duele porque todo está pegado a todo.</p></div>
+      <div class="card"><h4>Testabilidad</h4><p>Poder probar las reglas de negocio <b>sin base de datos, sin HTTP y sin Docker</b>. Si necesitas levantar todo para probar una regla, el diseño está mal.</p></div>
+      <div class="card"><h4>Reemplazabilidad</h4><p>Cambiar Oracle por PostgreSQL, o REST por NATS, tocando <b>un archivo</b> y no todo el proyecto.</p></div>
+      <div class="card"><h4>Velocidad de entrega</h4><p>Equipos que despliegan sin pisarse. Tu −60% en tiempo de despliegue es, en el fondo, un resultado de arquitectura.</p></div>
+      <div class="card"><h4>Autonomía de equipos</h4><p>Un límite de dominio bien puesto = un equipo que puede decidir, desplegar y fallar solo (ley de Conway).</p></div>
+      <div class="card"><h4>Coste del cambio</h4><p>La arquitectura no se juzga por lo bonita, sino por <b>cuánto cuesta el próximo cambio</b>. Ese es el criterio real.</p></div>
+    </div>
+
+    <h3>1 · Arquitectura por capas: la que ya usas (y dónde se rompe)</h3>
+    <p>Es la de los cursos de Spring Boot y FastAPI: <code>Controller → Service → Repository → BD</code>. Funciona y es correcta para muchísimos casos. Su límite es la <b>dirección de las dependencias</b>: todo apunta <em>hacia abajo</em>, hacia la base de datos.</p>
+    <div class="grid cols-2">
+      <div class="card"><h4>El síntoma</h4><p>Tu clase de negocio tiene <code>@Entity</code>, <code>@Column</code> y anotaciones del ORM. La regla de negocio y el mapeo a la tabla viven en el <b>mismo archivo</b>: el dominio quedó casado con el framework.</p></div>
+      <div class="card"><h4>La consecuencia</h4><p>No puedes probar una regla sin levantar la BD, y migrar de ORM o de motor te obliga a tocar el corazón del negocio. Lo que hexagonal hace es <b>invertir esa flecha</b>.</p></div>
+    </div>
+
+    <h3>2 · Hexagonal (puertos y adaptadores): el corazón del curso</h3>
+    <p>Propuesta por <b>Alistair Cockburn</b> en 2005. Una sola regla, y de ella sale todo lo demás: <b>el dominio no importa nada del exterior; el exterior importa del dominio</b>. Así viaja una petición para pagar una factura:</p>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">🌐</div><div class="n">REST / CLI / cron</div><h5>Adaptador primario</h5><p>Traduce HTTP a una llamada</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🚪</div><div class="n">Puerto de entrada</div><h5>Caso de uso</h5><p>PagarFactura.ejecutar()</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">💎</div><div class="n">Dominio</div><h5>El hexágono</h5><p>Reglas puras, cero framework</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🔌</div><div class="n">Puerto de salida</div><h5>Interfaz</h5><p>FacturaRepository</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🗃️</div><div class="n">Adaptador secundario</div><h5>JPA / SQLAlchemy / NATS</h5><p>PostgreSQL, eventos, APIs</p></div>
+      </div>
+    </div>
+
+    <div class="grid cols-3">
+      <div class="card"><h4>Dominio</h4><p>Las reglas del negocio en objetos <b>puros</b>: sin anotaciones, sin imports de Spring, FastAPI, JPA o SQLAlchemy. Es lo único que no puedes reemplazar.</p></div>
+      <div class="card"><h4>Puerto de entrada</h4><p>Lo que tu aplicación <b>sabe hacer</b> (un caso de uso: <code>PagarFactura</code>). Lo invoca quien sea: REST, un job, una consola.</p></div>
+      <div class="card"><h4>Puerto de salida</h4><p>Lo que tu aplicación <b>necesita</b>, declarado como <b>interfaz dentro del dominio</b>: "necesito guardar facturas", sin decir en qué motor.</p></div>
+      <div class="card"><h4>Adaptador primario</h4><p>Quien <b>empuja</b> al hexágono: controlador REST, consumidor de NATS, CLI, tarea programada, prueba automatizada.</p></div>
+      <div class="card"><h4>Adaptador secundario</h4><p>Lo que el hexágono <b>usa</b>: implementación JPA/SQLAlchemy del repositorio, cliente de NATS, cliente de la API de OpenAI.</p></div>
+      <div class="card"><h4>Inversión de dependencias</h4><p><b>La regla de oro:</b> el dominio define la interfaz, la infraestructura la implementa. Todas las flechas de <code>import</code> apuntan hacia el centro.</p></div>
+    </div>
+
+    <h3>3 · El mismo caso de facturas, ahora hexagonal (Java / Spring Boot)</h3>
+    <p>Es el servicio de facturas de los cursos anteriores, reescrito. Fíjate en qué archivo aparece cada framework.</p>
+
+    <p><b>1. El dominio</b> — sin una sola anotación; aquí vive la regla, no un montón de <i>getters</i>:</p>
+    <pre><code><span class="cmt">// domain/Factura.java — no importa NADA de Spring ni de JPA</span>
+<span class="kw">public class</span> Factura {
+    <span class="kw">private final</span> Long id;
+    <span class="kw">private final</span> BigDecimal monto;
+    <span class="kw">private final</span> LocalDate vence;
+    <span class="kw">private</span> Estado estado;
+
+    <span class="kw">public boolean</span> estaVencida(LocalDate hoy) {          <span class="cmt">// regla de negocio</span>
+        <span class="kw">return</span> estado == Estado.PENDIENTE &amp;&amp; vence.isBefore(hoy);
+    }
+
+    <span class="kw">public void</span> marcarPagada() {
+        <span class="kw">if</span> (estado == Estado.PAGADA)
+            <span class="kw">throw new</span> FacturaYaPagadaException(id);       <span class="cmt">// invariante protegida</span>
+        <span class="kw">this</span>.estado = Estado.PAGADA;
+    }
+}</code></pre>
+
+    <p><b>2. Los puertos de salida</b> — interfaces declaradas <b>dentro</b> del dominio (esta es la inversión):</p>
+    <pre><code><span class="cmt">// domain/port/FacturaRepository.java — el dominio dice QUÉ necesita, no CÓMO</span>
+<span class="kw">public interface</span> FacturaRepository {
+    Optional&lt;Factura&gt; buscarPorId(Long id);
+    List&lt;Factura&gt; pendientesVencidas(LocalDate hoy);
+    Factura guardar(Factura factura);
+}
+
+<span class="cmt">// domain/port/EventPublisher.java — otro puerto de salida (lo implementará NATS)</span>
+<span class="kw">public interface</span> EventPublisher {
+    <span class="kw">void</span> publicar(FacturaPagada evento);
+}</code></pre>
+
+    <p><b>3. El caso de uso</b> — orquesta el dominio; no sabe que existe HTTP ni SQL:</p>
+    <pre><code><span class="cmt">// application/PagarFactura.java — puerto de entrada</span>
+<span class="kw">public class</span> PagarFactura {
+    <span class="kw">private final</span> FacturaRepository repo;      <span class="cmt">// la INTERFAZ, no la clase JPA</span>
+    <span class="kw">private final</span> EventPublisher eventos;
+
+    <span class="kw">public</span> PagarFactura(FacturaRepository repo, EventPublisher eventos) {
+        <span class="kw">this</span>.repo = repo; <span class="kw">this</span>.eventos = eventos;
+    }
+
+    <span class="kw">public</span> Factura ejecutar(Long facturaId) {
+        Factura f = repo.buscarPorId(facturaId)
+                        .orElseThrow(() -&gt; <span class="kw">new</span> FacturaNoEncontradaException(facturaId));
+        f.marcarPagada();                                <span class="cmt">// la regla vive en el dominio</span>
+        Factura guardada = repo.guardar(f);
+        eventos.publicar(<span class="kw">new</span> FacturaPagada(guardada.id(), guardada.monto()));
+        <span class="kw">return</span> guardada;
+    }
+}</code></pre>
+
+    <p><b>4. El adaptador de persistencia</b> — aquí sí aparecen JPA y Spring, <b>afuera</b> del dominio:</p>
+    <pre><code><span class="cmt">// infrastructure/persistence/ — el ORM vive aquí y solo aquí</span>
+<span class="kw">@Entity @Table</span>(name = <span class="str">"facturas"</span>)
+<span class="kw">class</span> FacturaJpa {                                   <span class="cmt">// tabla ≠ dominio</span>
+    <span class="kw">@Id</span> Long id;  BigDecimal monto;  LocalDate vence;  String estado;
+}
+
+<span class="kw">@Repository</span>
+<span class="kw">class</span> FacturaRepositoryJpa <span class="kw">implements</span> FacturaRepository {   <span class="cmt">// adaptador secundario</span>
+    <span class="kw">private final</span> FacturaJpaRepo jpa;                 <span class="cmt">// Spring Data</span>
+
+    <span class="kw">public</span> Optional&lt;Factura&gt; buscarPorId(Long id) {
+        <span class="kw">return</span> jpa.findById(id).map(FacturaMapper::aDominio);   <span class="cmt">// fila → dominio</span>
+    }
+    <span class="kw">public</span> Factura guardar(Factura f) {
+        <span class="kw">return</span> FacturaMapper.aDominio(jpa.save(FacturaMapper.aJpa(f)));
+    }
+}</code></pre>
+
+    <p><b>5. El adaptador REST</b> — se vuelve delgadísimo: solo traduce HTTP:</p>
+    <pre><code><span class="kw">@RestController @RequestMapping</span>(<span class="str">"/api/facturas"</span>)
+<span class="kw">class</span> FacturaController {                            <span class="cmt">// adaptador primario</span>
+    <span class="kw">private final</span> PagarFactura pagarFactura;
+
+    <span class="kw">@PostMapping</span>(<span class="str">"/{id}/pagar"</span>)
+    FacturaResponse pagar(<span class="kw">@PathVariable</span> Long id) {
+        <span class="kw">return</span> FacturaResponse.de(pagarFactura.ejecutar(id));   <span class="cmt">// sin lógica aquí</span>
+    }
+}</code></pre>
+
+    <h3>4 · Cómo se ve en el disco (la estructura que te van a pedir dibujar)</h3>
+    <pre><code>src/main/java/com/nebula/facturas/
+├── <span class="kw">domain/</span>                      <span class="cmt"># el centro: no importa nada de afuera</span>
+│   ├── Factura.java                 <span class="cmt"># entidad con reglas</span>
+│   ├── Estado.java                  <span class="cmt"># value object</span>
+│   ├── FacturaPagada.java           <span class="cmt"># evento de dominio</span>
+│   └── port/
+│       ├── FacturaRepository.java   <span class="cmt"># puerto de salida</span>
+│       └── EventPublisher.java      <span class="cmt"># puerto de salida</span>
+├── <span class="kw">application/</span>                 <span class="cmt"># casos de uso = puertos de entrada</span>
+│   ├── PagarFactura.java
+│   └── ListarPendientes.java
+└── <span class="kw">infrastructure/</span>              <span class="cmt"># adaptadores: AQUÍ viven los frameworks</span>
+    ├── rest/FacturaController.java          <span class="cmt"># primario</span>
+    ├── persistence/FacturaRepositoryJpa.java <span class="cmt"># secundario</span>
+    └── messaging/NatsEventPublisher.java     <span class="cmt"># secundario</span>
+
+<span class="cmt"># La prueba de fuego: si borras la carpeta infrastructure/, el dominio</span>
+<span class="cmt"># y los casos de uso siguen compilando. Si no compilan, no es hexagonal.</span></code></pre>
+
+    <h3>5 · El equivalente en Python / FastAPI</h3>
+    <p>Mismo diseño, sin interfaces obligatorias: en Python el puerto se declara con <code>Protocol</code> (o <code>ABC</code>).</p>
+    <pre><code><span class="cmt"># domain/factura.py — sin FastAPI, sin SQLAlchemy, sin Pydantic</span>
+<span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass
+
+<span class="kw">@dataclass</span>
+<span class="kw">class</span> Factura:
+    id: int | <span class="kw">None</span>
+    monto: Decimal
+    vence: date
+    estado: Estado = Estado.PENDIENTE
+
+    <span class="kw">def</span> marcar_pagada(self) -&gt; <span class="kw">None</span>:
+        <span class="kw">if</span> self.estado <span class="kw">is</span> Estado.PAGADA:
+            <span class="kw">raise</span> FacturaYaPagada(self.id)
+        self.estado = Estado.PAGADA
+
+<span class="cmt"># domain/ports.py — el puerto de salida como Protocol</span>
+<span class="kw">class</span> FacturaRepository(Protocol):
+    <span class="kw">def</span> buscar_por_id(self, id: int) -&gt; Factura | <span class="kw">None</span>: ...
+    <span class="kw">def</span> guardar(self, f: Factura) -&gt; Factura: ...
+
+<span class="cmt"># application/pagar_factura.py — el caso de uso, sin framework</span>
+<span class="kw">class</span> PagarFactura:
+    <span class="kw">def</span> __init__(self, repo: FacturaRepository, eventos: EventPublisher):
+        self.repo, self.eventos = repo, eventos
+
+    <span class="kw">def</span> ejecutar(self, factura_id: int) -&gt; Factura:
+        f = self.repo.buscar_por_id(factura_id)
+        <span class="kw">if</span> f <span class="kw">is None</span>:
+            <span class="kw">raise</span> FacturaNoEncontrada(factura_id)
+        f.marcar_pagada()
+        guardada = self.repo.guardar(f)
+        self.eventos.publicar(FacturaPagada(guardada.id, guardada.monto))
+        <span class="kw">return</span> guardada</code></pre>
+
+    <p>Y el adaptador FastAPI, donde <code>Depends</code> hace de "cableado" del hexágono:</p>
+    <pre><code><span class="cmt"># infrastructure/rest/router.py — adaptador primario</span>
+router = APIRouter(prefix=<span class="str">"/api/facturas"</span>)
+
+<span class="kw">def</span> get_caso_uso(db = Depends(get_db)) -&gt; PagarFactura:   <span class="cmt"># aquí se arma el hexágono</span>
+    <span class="kw">return</span> PagarFactura(FacturaRepositorySQLAlchemy(db), NatsEventPublisher())
+
+<span class="kw">@router.post</span>(<span class="str">"/{id}/pagar"</span>, response_model=FacturaOut)
+<span class="kw">async def</span> pagar(id: int, caso: PagarFactura = Depends(get_caso_uso)):
+    <span class="kw">return</span> caso.ejecutar(id)      <span class="cmt"># el router no sabe de reglas ni de SQL</span></code></pre>
+
+    <h3>6 · El premio: probar el negocio sin BD, sin HTTP y sin Docker</h3>
+    <p>Este es el argumento más contundente que puedes dar en una entrevista. Como el caso de uso depende de una <b>interfaz</b>, en la prueba le pasas un doble en memoria:</p>
+    <pre><code><span class="kw">class</span> RepoEnMemoria:                    <span class="cmt"># un fake del puerto, en 4 líneas</span>
+    <span class="kw">def</span> __init__(self, *facturas): self.datos = {f.id: f <span class="kw">for</span> f <span class="kw">in</span> facturas}
+    <span class="kw">def</span> buscar_por_id(self, id):   <span class="kw">return</span> self.datos.get(id)
+    <span class="kw">def</span> guardar(self, f):          self.datos[f.id] = f; <span class="kw">return</span> f
+
+<span class="kw">def</span> test_pagar_marca_la_factura_y_publica_evento():
+    factura = Factura(id=<span class="num">1</span>, monto=Decimal(<span class="str">"120000"</span>), vence=date(<span class="num">2026</span>, <span class="num">1</span>, <span class="num">10</span>))
+    eventos = EventosEnMemoria()
+
+    resultado = PagarFactura(RepoEnMemoria(factura), eventos).ejecutar(<span class="num">1</span>)
+
+    <span class="kw">assert</span> resultado.estado <span class="kw">is</span> Estado.PAGADA
+    <span class="kw">assert</span> len(eventos.publicados) == <span class="num">1</span>
+<span class="cmt"># Corre en milisegundos. Sin PostgreSQL, sin Testcontainers, sin levantar la app.</span>
+<span class="cmt"># Por eso la base de la pirámide de pruebas se vuelve barata y rápida.</span></code></pre>
+
+    <h3>7 · Hexagonal, Clean, Onion y capas: ¿son lo mismo?</h3>
+    <p>Casi. Las tres modernas comparten <b>la misma regla de dependencia</b> (todo apunta al centro) y cambian sobre todo el vocabulario y cuántas capas prescriben. Saber esto te evita quedar atrapado en una discusión de nombres:</p>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Dimensión</th><th>Por capas (clásica)</th><th>Hexagonal</th><th>Clean / Onion</th></tr></thead>
+        <tbody>
+          <tr><td>Idea central</td><td>Controller → Service → Repository</td><td>Dominio al centro; todo lo externo es un adaptador</td><td>Anillos concéntricos alrededor del dominio</td></tr>
+          <tr><td>Dependencias apuntan…</td><td>Hacia abajo (a la BD)</td><td>Hacia adentro (al dominio)</td><td>Hacia adentro (al dominio)</td></tr>
+          <tr><td>¿El dominio conoce el framework?</td><td>Sí (entidades JPA anotadas)</td><td>No</td><td>No</td></tr>
+          <tr><td>Vocabulario propio</td><td>capa, servicio, DAO</td><td>puerto, adaptador, primario/secundario</td><td>entidad, caso de uso, adaptador de interfaz</td></tr>
+          <tr><td>Origen</td><td>Práctica común</td><td>Alistair Cockburn (2005)</td><td>Jeffrey Palermo (Onion) / Robert C. Martin (Clean)</td></tr>
+          <tr><td>Encaja bien cuando…</td><td>CRUD, equipo pequeño, poca regla</td><td>Hay reglas de negocio y varias entradas/salidas</td><td>Igual que hexagonal, con más capas prescritas</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>Cómo zanjarlo en entrevista:</b> "Clean, Onion y Hexagonal son variantes de la misma idea: <b>inversión de dependencias hacia un dominio aislado</b>. Hexagonal es la más simple de explicar y la que uso; Clean prescribe más capas. Lo importante no es el nombre, sino que el dominio no dependa del framework."</div>
+
+    <h3>8 · DDD táctico: los objetos que nombran tu dominio</h3>
+    <p><b>Domain-Driven Design</b> (Eric Evans) es el compañero natural de hexagonal: hexagonal te dice <em>dónde</em> poner el dominio, DDD te dice <em>cómo</em> modelarlo.</p>
+    <div class="grid cols-3">
+      <div class="card"><h4>Entidad</h4><p>Tiene <b>identidad</b> y ciclo de vida: una <code>Factura</code> sigue siendo la misma factura aunque cambien sus datos.</p></div>
+      <div class="card"><h4>Value Object</h4><p>Se define por su <b>valor</b>, no por un id, y es inmutable: <code>Dinero(120000, COP)</code>, <code>Periodo(desde, hasta)</code>.</p></div>
+      <div class="card"><h4>Agregado &amp; raíz</h4><p>Un grupo de objetos que se modifica como <b>una sola unidad transaccional</b>. Solo se toca por su <b>raíz</b> (<code>Factura</code> manda sobre sus <code>LineaFactura</code>).</p></div>
+      <div class="card"><h4>Repositorio</h4><p>La colección del agregado, <b>declarada como interfaz en el dominio</b> — exactamente el puerto de salida de hexagonal.</p></div>
+      <div class="card"><h4>Servicio de dominio</h4><p>La regla que no pertenece a una sola entidad (p. ej. <code>ConciliarPagos</code> entre factura y transacción bancaria).</p></div>
+      <div class="card"><h4>Evento de dominio</h4><p>Algo relevante que <b>ya ocurrió</b>, en pasado: <code>FacturaPagada</code>. Es lo que publicas por NATS para que otros contextos reaccionen.</p></div>
+    </div>
+    <div class="callout"><b>DDD estratégico (lo que más importa a nivel de arquitecto):</b> el <b>bounded context</b> es la frontera dentro de la cual un término significa una sola cosa. "Cliente" en Facturación no es el mismo "Cliente" de Soporte Técnico: mismos datos, distinto significado y dueño. <b>Un bounded context es el mejor candidato a microservicio</b> — cortar por contextos (y no por capas técnicas) es justo lo que evita el "monolito distribuido".</div>
+
+    <h3>9 · CQRS y arquitectura orientada a eventos</h3>
+    <p><b>CQRS</b> (<i>Command Query Responsibility Segregation</i>) separa el camino que <b>escribe</b> del que <b>lee</b>, porque casi nunca tienen la misma forma ni la misma carga.</p>
+    <div class="grid cols-2">
+      <div class="card"><h4>Comandos (escritura)</h4><p>Pasan por el agregado y respetan las invariantes: <code>PagarFactura</code>, <code>AnularFactura</code>. Consistencia fuerte, volumen bajo.</p></div>
+      <div class="card"><h4>Consultas (lectura)</h4><p>Van a un modelo optimizado para mostrar (una vista, un índice, una réplica). Volumen alto; puede tolerar <b>consistencia eventual</b>.</p></div>
+      <div class="card"><h4>Eventos como pegamento</h4><p>El comando publica <code>FacturaPagada</code> en <b>NATS</b>; otros contextos actualizan su propio modelo de lectura. Servicios <b>desacoplados</b>: no se llaman entre sí.</p></div>
+      <div class="card"><h4>Event Sourcing (opcional)</h4><p>Guardar la <b>secuencia de eventos</b> en vez del estado final. Da auditoría total, pero cuesta caro. <b>CQRS no lo exige</b> — confundirlos es un error clásico en entrevistas.</p></div>
+    </div>
+    <div class="callout"><b>Cuándo aplicarlo:</b> cuando lecturas y escrituras escalan distinto, o cuando la consulta necesita una forma que el modelo transaccional no da bien. Aplicarlo "porque sí" en un CRUD duplica el código y la complejidad sin ganancia.</div>
+
+    <h3>10 · De monolito a microservicios: el patrón Strangler Fig</h3>
+    <p>El patrón que aplicaste en la migración MTH → Nébula, y que Martin Fowler bautizó por la higuera estranguladora: crece alrededor del árbol viejo hasta reemplazarlo, sin talarlo nunca.</p>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">🌳</div><div class="n">Paso 1</div><h5>Monolito</h5><p>Todo junto, difícil de tocar</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🔀</div><div class="n">Paso 2</div><h5>Fachada</h5><p>Un gateway enruta el tráfico</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">✂️</div><div class="n">Paso 3</div><h5>Extraer un contexto</h5><p>Un bounded context → un servicio</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">📨</div><div class="n">Paso 4</div><h5>Conectar por eventos</h5><p>NATS en vez de llamadas directas</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🗑️</div><div class="n">Paso 5</div><h5>Apagar el módulo viejo</h5><p>Repetir hasta vaciar el monolito</p></div>
+      </div>
+    </div>
+    <div class="grid cols-2">
+      <div class="card"><h4>Por qué NO un "big bang"</h4><p>Reescribir todo y cambiar de golpe concentra el riesgo en un solo día. El enfoque incremental permite <b>convivir</b> con el monolito y volver atrás en cualquier paso.</p></div>
+      <div class="card"><h4>Por dónde empezar</h4><p>Por un contexto con <b>valor alto y acoplamiento bajo</b>. Nunca por el más enredado: lo primero que extraes es también donde aprendes a hacerlo.</p></div>
+      <div class="card"><h4>El riesgo real: los datos</h4><p>Separar el código es fácil; separar la <b>base de datos compartida</b> es lo difícil. Sin eso terminas en un <b>monolito distribuido</b>: la complejidad de microservicios sin ninguno de sus beneficios.</p></div>
+      <div class="card"><h4>Cuándo NO partir</h4><p>Si el equipo es pequeño y no hay problema de escala ni de autonomía, un <b>monolito modular</b> (bien separado por dentro) es la mejor decisión de arquitectura.</p></div>
+    </div>
+
+    <h3>11 · Documentar y comunicar: ADR y modelo C4</h3>
+    <p>Un arquitecto no solo decide: <b>deja rastro de por qué decidió</b>. Estas dos herramientas te hacen ver senior en cualquier entrevista.</p>
+    <p><b>ADR</b> (<i>Architecture Decision Record</i>): un archivo corto en Markdown, versionado junto al código:</p>
+    <pre><code><span class="cmt"># ADR-014: Usar NATS JetStream para eventos entre contextos</span>
+
+<span class="kw">Estado:</span> Aceptada — 2024-03-12
+<span class="kw">Contexto:</span> Los servicios se llamaban por REST de forma síncrona; una caída
+  de facturación tumbaba el flujo de pagos y acoplaba los despliegues.
+<span class="kw">Decisión:</span> Comunicación asíncrona por eventos con NATS JetStream
+  (at-least-once + deduplicación por clave de idempotencia).
+<span class="kw">Alternativas:</span> Kafka (más operación de la necesaria), RabbitMQ, seguir con REST.
+<span class="kw">Consecuencias:</span> (+) servicios desacoplados y resilientes, despliegues independientes.
+  (−) consistencia eventual: el equipo debe diseñar consumidores idempotentes.</code></pre>
+    <div class="grid cols-2">
+      <div class="card"><h4>Modelo C4 — 4 niveles de zoom</h4><p><b>C1 Contexto</b> (tu sistema y quién lo usa) → <b>C2 Contenedores</b> (apps, APIs, BDs) → <b>C3 Componentes</b> (dentro de un contenedor) → <b>C4 Código</b> (clases; casi nunca hace falta).</p></div>
+      <div class="card"><h4>Cómo usarlo en la entrevista</h4><p>Di explícitamente en qué nivel estás dibujando: <em>"empiezo por el diagrama de contexto y luego bajo a contenedores"</em>. Ordena la conversación y demuestra método.</p></div>
+      <div class="card"><h4>Atributos de calidad</h4><p>Los <i>-ilities</i>: disponibilidad, latencia, escalabilidad, seguridad, mantenibilidad. Toda decisión de arquitectura <b>favorece unos y sacrifica otros</b>.</p></div>
+      <div class="card"><h4>Deuda técnica consciente</h4><p>Registrar en el ADR lo que decidiste <b>no</b> hacer y por qué. Deuda documentada es una decisión; deuda sin documentar es un accidente.</p></div>
+    </div>
+
+    <h3>12 · Trade-offs: cuándo NO usar hexagonal</h3>
+    <p>Responder esto bien es lo que separa a un arquitecto de alguien que repite patrones. La respuesta madura nunca es "siempre".</p>
+    <div class="grid cols-2">
+      <div class="card"><h4>No lo uses si…</h4><p>Es un <b>CRUD sin reglas</b>, un MVP que quizá se bote en tres meses, o un script. Ahí hexagonal solo agrega carpetas, mapeos y ceremonia.</p></div>
+      <div class="card"><h4>Sí lo usas si…</h4><p>Hay <b>reglas de negocio de verdad</b>, varias entradas (REST + eventos + jobs), integraciones externas que pueden cambiar, o el sistema va a vivir años.</p></div>
+      <div class="card"><h4>El coste honesto</h4><p>Más archivos y un <b>mapeo dominio↔entidad</b> que hay que mantener. Lo pagas por adelantado a cambio de un cambio barato después.</p></div>
+      <div class="card"><h4>Antipatrón: el "hexágono de cartón"</h4><p>Interfaces con <b>una sola implementación</b> que replican exactamente los métodos del ORM y un dominio que sigue siendo anémico (puros <i>getters</i>). Tienes toda la ceremonia y ningún beneficio.</p></div>
+    </div>
+
+    <div class="callout"><b>El círculo completo:</b> defines el <b>dominio</b> aislado por puertos → <b>Spring Boot / FastAPI</b> aportan los adaptadores (REST, JPA/SQLAlchemy) → las reglas se prueban <b>sin BD</b> y SonarQube revisa el código → <b>Docker</b> empaqueta el servicio → <b>Helm</b> lo despliega en <b>AKS</b> → los <b>bounded contexts</b> se hablan por <b>NATS</b> con eventos de dominio. Cada curso de esta guía es una pieza de la misma arquitectura.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> "Diseño con el dominio aislado: arquitectura <b>hexagonal</b>, con las reglas de negocio en objetos puros, puertos declarados como interfaces y adaptadores para REST, persistencia y mensajería — así pruebo el negocio sin base de datos y cambiar de tecnología no toca el core. Para partir el monolito no hicimos un <em>big bang</em>: aplicamos <b>strangler fig</b>, cortando por <b>bounded contexts</b> de DDD y comunicando los servicios con eventos por NATS en AKS. El resultado fue 500&nbsp;ms bajo alto tráfico, <b>cero downtime</b> y un 60% menos de tiempo de despliegue, con un equipo de 21 personas entregando de forma independiente. Y documentamos cada decisión grande en un <b>ADR</b>, con sus alternativas y sus consecuencias."</div>
+
+    <h3>Preguntas típicas de arquitectura</h3>
+    <details class="qa"><summary>¿Qué es la arquitectura hexagonal y qué problema resuelve?</summary>
+      <div class="ans"><p>Es un estilo donde el <b>dominio</b> (las reglas de negocio) queda en el centro, sin depender de ningún framework, y todo lo externo entra o sale por <b>puertos</b> (interfaces) implementados por <b>adaptadores</b>. Resuelve el acoplamiento entre negocio e infraestructura: puedo <b>probar las reglas sin base de datos ni HTTP</b>, y cambiar de motor de BD, de ORM o de transporte tocando solo el adaptador. La regla que lo gobierna es la <b>inversión de dependencias</b>: el dominio declara la interfaz, la infraestructura la implementa.</p></div>
+    </details>
+    <details class="qa"><summary>¿Diferencia real entre hexagonal, clean y onion?</summary>
+      <div class="ans"><p>Poca, y conviene decirlo así: las tres aplican la misma <b>regla de dependencia hacia adentro</b>. <b>Hexagonal</b> (Cockburn) usa el vocabulario de puertos y adaptadores y es la más simple. <b>Onion</b> (Palermo) lo dibuja como anillos concéntricos. <b>Clean</b> (Uncle Bob) prescribe más capas y nombra explícitamente <em>entidades</em> y <em>casos de uso</em>. En la práctica termino con la misma estructura de carpetas: dominio, aplicación e infraestructura.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es un agregado y cómo eliges sus límites?</summary>
+      <div class="ans"><p>Un <b>agregado</b> es el conjunto de objetos que debe cambiar junto para no romper una regla, y se modifica <b>solo por su raíz</b>. El límite lo marcan las <b>invariantes transaccionales</b>: si "el total de la factura debe ser igual a la suma de sus líneas", entonces factura y líneas van en el mismo agregado. Lo que puede quedar consistente un segundo después (por ejemplo, actualizar un reporte) va en <b>otro</b> agregado y se sincroniza por eventos. La regla práctica: agregados <b>pequeños</b>, una transacción por agregado.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cuándo NO usarías hexagonal?</summary>
+      <div class="ans"><p>En un <b>CRUD sin reglas</b>, en un MVP que puede desecharse, o con un equipo pequeño y un alcance corto. Ahí el coste (más archivos, mapeos dominio↔entidad, ceremonia) no se paga. También evito el <b>"hexágono de cartón"</b>: interfaces con una sola implementación que copian el ORM y un dominio anémico — toda la complejidad sin ningún beneficio. La arquitectura es una inversión y debe justificarse por el <b>coste del próximo cambio</b>.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo decidiste por dónde cortar el monolito?</summary>
+      <div class="ans"><p>Por <b>bounded contexts</b> de DDD, no por capas técnicas: cada servicio es un límite de negocio con su propio lenguaje y su propio dueño. Apliqué <b>strangler fig</b>: puse una fachada que enruta, extraje primero un contexto de alto valor y bajo acoplamiento, lo comuniqué con el resto por <b>eventos (NATS)</b> y luego apagué el módulo del monolito; repetir. Lo más difícil no fue el código sino <b>separar los datos</b> — si compartes la base, terminas con un monolito distribuido. Resultado: zero-downtime, 500&nbsp;ms y −60% en tiempo de despliegue.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es CQRS y cuándo lo aplicarías?</summary>
+      <div class="ans"><p>Separar el modelo de <b>escritura</b> (comandos que pasan por el agregado y respetan invariantes) del de <b>lectura</b> (vistas optimizadas para consultar). Lo aplico cuando lecturas y escrituras <b>escalan distinto</b> o cuando la consulta necesita una forma que el modelo transaccional no da bien; los modelos de lectura se alimentan de eventos y aceptan <b>consistencia eventual</b>. No lo confundo con <b>Event Sourcing</b>: ese guarda la secuencia de eventos como fuente de verdad y es una decisión aparte, bastante más cara.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo documentas y comunicas una decisión de arquitectura?</summary>
+      <div class="ans"><p>Con un <b>ADR</b> por decisión relevante, versionado junto al código: contexto, decisión, <b>alternativas consideradas</b> y consecuencias (las buenas y las malas). Y para explicar el sistema uso el <b>modelo C4</b>, diciendo en qué nivel estoy: contexto → contenedores → componentes. Así la decisión sobrevive a la rotación del equipo: quien llegue en un año entiende <em>por qué</em> se hizo así y qué habría que reconsiderar si cambia el supuesto.</p></div>
+    </details>
+  </div>
+</section>
+
 <section id="docker">
   <div class="wrap">
     <h2><span class="tag t-docker">Paso 1</span> Docker &amp; Dockerfile</h2>
@@ -1730,7 +2073,7 @@ status changed to Done AFTER -7d</code></pre>
       <div id="sim-start" class="sim-panel">
         <p><b>Elige tu práctica:</b></p>
         <div class="sim-sets">
-          <button class="sim-set" data-set="all">Completo (13)</button>
+          <button class="sim-set" data-set="all">Completo (15)</button>
           <button class="sim-set" data-set="quick">Rápido (5)</button>
           <button class="sim-set" data-set="tech">Técnica</button>
           <button class="sim-set" data-set="sysdesign">System Design</button>
@@ -1812,6 +2155,14 @@ status changed to Done AFTER -7d</code></pre>
      good:'cede el control durante la E/S; ayuda en cargas I/O-bound con alta concurrencia; no acelera lo CPU-bound.',watch:'creer que async acelera todo, u olvidar que un driver síncrono sigue bloqueando.',level:'nombrar ASGI/Uvicorn y que un driver de BD síncrono anula el beneficio.',
      model:'async permite que la ruta ceda el control mientras espera una operación de E/S (BD, otra API) en vez de bloquear el proceso; con Uvicorn (ASGI) eso sostiene mucha concurrencia. Ayuda en trabajo I/O-bound; para CPU-intensivo no acelera, y si el driver de BD es síncrono esa llamada sigue bloqueando.',
      sets:['all','tech'],time:90},
+    {cat:'Arquitectura',q:'Explícame qué es la arquitectura hexagonal y qué problema resuelve.',hint:'Dominio al centro, puertos y adaptadores; cierra con el beneficio en pruebas.',
+     good:'defines dominio/puerto/adaptador, nombras la inversión de dependencias y das un beneficio concreto (probar sin BD, cambiar de tecnología).',watch:'quedarte en la definición de libro sin decir qué ganas, o confundir puerto con adaptador.',level:'mencionar que clean y onion son la misma regla con otro vocabulario, y decir cuándo NO la usarías.',
+     model:'Pongo las reglas de negocio en el centro, en objetos puros sin framework. Todo lo externo entra o sale por puertos, que son interfaces declaradas en el dominio, e implementadas por adaptadores: REST, JPA o SQLAlchemy, NATS. La regla es la inversión de dependencias: todo apunta hacia adentro. ¿Qué gano? Pruebo las reglas sin base de datos ni HTTP, en milisegundos, y cambiar de motor o de transporte toca un adaptador, no el core. Clean y onion son la misma idea con otros nombres. Eso sí, en un CRUD sin reglas no la uso: ahí solo agrega ceremonia.',
+     sets:['all','tech','sysdesign'],time:120},
+    {cat:'Arquitectura',q:'¿Cómo decidiste por dónde cortar el monolito en microservicios?',hint:'Bounded contexts + strangler fig; y no olvides los datos.',
+     good:'cortas por bounded context (no por capa técnica), migración incremental tipo strangler fig y reconoces que separar los datos es lo difícil.',watch:'proponer un big bang, cortar por capas técnicas o ignorar la base de datos compartida.',level:'nombrar el riesgo de monolito distribuido y cerrar con tus cifras reales.',
+     model:'Cortamos por bounded contexts de DDD: cada servicio es un límite de negocio con su propio lenguaje y su dueño, nunca por capas técnicas. La migración fue incremental, tipo strangler fig: una fachada enruta el tráfico, extraemos primero un contexto de valor alto y acoplamiento bajo, lo comunicamos por eventos con NATS y apagamos el módulo viejo; y a repetir. Lo difícil no fue el código sino separar la base de datos compartida: si no lo haces, terminas en un monolito distribuido. El resultado fue 500 ms bajo alto tráfico, cero downtime y 60% menos tiempo de despliegue.',
+     sets:['all','tech','sysdesign','lead'],time:150},
     {cat:'RR.HH.',q:'¿Cuál es tu principal debilidad?',hint:'Honesta + cómo la trabajas.',
      good:'debilidad real + acción concreta para manejarla.',watch:'una fortaleza disfrazada o algo descalificante.',level:'mostrar autoconciencia y mejora continua.',
      model:'Por mi perfil hands-on me involucro mucho en el detalle técnico; lo trabajo delegando el resultado y confiando en el equipo, reservando mi tiempo para arquitectura y desbloqueos.',
@@ -1879,6 +2230,12 @@ status changed to Done AFTER -7d</code></pre>
     <details class="qa"><summary>¿Cómo validas los datos de entrada en FastAPI?</summary><div class="ans"><p>Con <b>Pydantic</b>: defino un schema con los tipos esperados y FastAPI valida y convierte cada request. Si no cumple, responde <b>422</b> con el detalle, sin escribir esa validación. Con <code>response_model</code> también valido y serializo la salida.</p></div></details>
     <details class="qa"><summary>¿Qué es <code>Depends</code> (inyección de dependencias) en FastAPI?</summary><div class="ans"><p>Es el mecanismo para "inyectar" cosas reutilizables en una ruta: la <b>sesión de BD</b>, el <b>usuario autenticado</b>, la configuración. Se declaran una vez y FastAPI las provee y las limpia por petición — desacopla y hace el código fácil de testear (puedes sobrescribir la dependencia con un mock).</p></div></details>
     <details class="qa"><summary>¿Cuándo ayuda async/await y cuándo no?</summary><div class="ans"><p>Ayuda en trabajo <b>I/O-bound</b> (BD, otras APIs) con alta concurrencia: la ruta cede el control mientras espera, en vez de bloquear. <b>No</b> acelera lo <b>CPU-intensivo</b>, y si el driver de BD es síncrono esa llamada sigue bloqueando. Con Python real: FastAPI corre sobre <b>Uvicorn (ASGI)</b>.</p></div></details>
+    <h3>Arquitectura</h3>
+    <details class="qa"><summary>¿Qué es la arquitectura hexagonal, en una frase?</summary><div class="ans"><p>Las <b>reglas de negocio en el centro</b>, sin depender de ningún framework, y todo lo externo entrando o saliendo por <b>puertos</b> (interfaces del dominio) que implementan <b>adaptadores</b> (REST, JPA/SQLAlchemy, NATS). La regla que lo sostiene es la <b>inversión de dependencias</b>: todos los <code>import</code> apuntan hacia adentro. El beneficio concreto: pruebo el negocio <b>sin BD ni HTTP</b> y cambio de tecnología tocando un adaptador.</p></div></details>
+    <details class="qa"><summary>Hexagonal, clean y onion: ¿son lo mismo?</summary><div class="ans"><p>En lo esencial, sí: las tres aplican la <b>misma regla de dependencia hacia adentro</b>. <b>Hexagonal</b> (Cockburn) habla de puertos y adaptadores; <b>Onion</b> (Palermo) lo dibuja como anillos; <b>Clean</b> (Uncle Bob) prescribe más capas y nombra <em>entidades</em> y <em>casos de uso</em>. Termino con la misma estructura: <code>domain / application / infrastructure</code>. Lo importante no es el nombre sino que el dominio no dependa del framework.</p></div></details>
+    <details class="qa"><summary>¿Qué es un bounded context y por qué importa para microservicios?</summary><div class="ans"><p>Es la <b>frontera dentro de la cual un término significa una sola cosa</b>: el "cliente" de Facturación no es el de Soporte. Importa porque <b>un bounded context es el mejor candidato a microservicio</b>: cortar por contexto de negocio (y no por capa técnica) da servicios con dueño claro y despliegue independiente. Cortar mal es lo que produce un <b>monolito distribuido</b>.</p></div></details>
+    <details class="qa"><summary>¿Cuándo NO usarías hexagonal ni microservicios?</summary><div class="ans"><p>En un <b>CRUD sin reglas</b>, un MVP desechable o un equipo pequeño sin problema de escala: ahí un <b>monolito modular</b> bien separado por dentro es la mejor decisión, y hexagonal solo agrega archivos y mapeos. La arquitectura se justifica por el <b>coste del próximo cambio</b>, no por moda. Y evito el "hexágono de cartón": interfaces con una sola implementación que copian el ORM sobre un dominio anémico.</p></div></details>
+    <details class="qa"><summary>¿Qué es un ADR y para qué lo usas?</summary><div class="ans"><p>Un <b>Architecture Decision Record</b>: un Markdown corto, versionado junto al código, con <b>contexto, decisión, alternativas consideradas y consecuencias</b> (buenas y malas). Sirve para que la decisión sobreviva a la rotación del equipo: quien llegue después entiende <em>por qué</em> se hizo así y qué reconsiderar si cambia el supuesto. Para explicar el sistema uso además el <b>modelo C4</b> (contexto → contenedores → componentes).</p></div></details>
     <h3>Clásicas de RR.HH.</h3>
     <details class="qa"><summary>¿Cuáles son tus fortalezas?</summary><div class="ans"><p>Liderazgo técnico hands-on, visión de punta a punta y entrega de resultados medibles (500 ms, cero downtime, −60%).</p></div></details>
     <details class="qa"><summary>¿Una debilidad?</summary><div class="ans"><p>"Me involucro mucho en el detalle técnico por mi perfil hands-on; lo trabajo delegando el resultado y confiando en el equipo." Muestra autoconciencia + acción.</p></div></details>
@@ -2012,7 +2369,7 @@ status changed to Done AFTER -7d</code></pre>
   <div class="wrap">
     Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
     Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
-    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-22 09:42 (Bogotá)</span></span>
+    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-28 15:24 (Bogotá)</span></span>
   </div>
 </footer>
 
@@ -2055,7 +2412,8 @@ status changed to Done AFTER -7d</code></pre>
     var SEQ=[['panorama','Panorama'],['docker','Docker'],['kubernetes','Kubernetes'],
       ['springboot','Java / Spring Boot'],['nextjs','Next.js'],['nodejs','Node.js'],
       ['fastapi','FastAPI / Python'],
-      ['sql','Bases de datos / SQL'],['nats','NATS'],['k8s-deep','Kubernetes a fondo'],
+      ['sql','Bases de datos / SQL'],['nats','NATS'],
+      ['arquitectura','Arquitectura de software'],['k8s-deep','Kubernetes a fondo'],
       ['helm','Helm'],['azure','Azure / AKS'],['curso-devops','Curso DevOps'],
       ['pipelines','Pipelines CI/CD'],['testing','Pruebas / Testing'],
       ['calidad','Calidad y seguridad'],['liderazgo','Curso de liderazgo'],
