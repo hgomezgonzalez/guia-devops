@@ -101,6 +101,43 @@
   .dash-card b{display:block;color:var(--brand-ink);font-size:1rem;margin:0 30px .1em 0}
   .dash-card span{color:var(--ink-faint);font-size:.83rem}
 
+  /* Buscador del dashboard (se queda pegado bajo la nav al hacer scroll) */
+  .dash-tools{position:sticky;top:52px;z-index:15;background:var(--bg);
+    padding:10px 0 10px;margin:14px 0 2px;border-bottom:1px solid var(--line)}
+  .dash-search{display:flex;gap:8px;align-items:stretch}
+  .dash-search .field{position:relative;flex:1;min-width:0}
+  .dash-search input{width:100%;padding:12px 38px 12px 38px;font-size:16px;/* 16px evita el zoom de iOS */
+    border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);
+    box-shadow:var(--shadow);-webkit-appearance:none;appearance:none}
+  .dash-search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+  .dash-search input:focus{outline:2px solid var(--azure);outline-offset:1px;border-color:var(--azure)}
+  .dash-search .ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:.95rem;
+    color:var(--ink-faint);pointer-events:none}
+  .dash-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:30px;height:30px;
+    border:none;background:transparent;color:var(--ink-faint);font-size:1rem;border-radius:8px;cursor:pointer}
+  .dash-clear:hover{background:var(--surface-2);color:var(--ink)}
+  .dash-view{display:flex;gap:0;flex:0 0 auto;border:1px solid var(--line);border-radius:12px;
+    overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
+  .dash-view button{border:none;background:transparent;color:var(--ink-soft);cursor:pointer;
+    padding:0 13px;min-width:46px;font-size:1rem;font-family:var(--sans)}
+  .dash-view button + button{border-left:1px solid var(--line)}
+  .dash-view button.on{background:var(--azure);color:#fff}
+  .dash-count{margin:9px 0 0;font-family:var(--mono);font-size:.75rem;color:var(--ink-faint)}
+  .dash-empty{margin:22px 0;padding:20px;text-align:center;color:var(--ink-faint);font-size:.92rem;
+    background:var(--surface-2);border:1px dashed var(--line);border-radius:12px}
+  #dashboard .dash-card[hidden],#dashboard .dash-level[hidden]{display:none}
+  #dashboard .dash-card mark{background:color-mix(in srgb,var(--warn) 34%,transparent);color:inherit;
+    border-radius:3px;padding:0 1px}
+
+  /* Vista compacta: una línea por curso (mucho menos scroll en el celular) */
+  .dash-grid.as-list{grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:6px}
+  .as-list .dash-card{display:flex;align-items:center;gap:11px;padding:11px 13px;
+    border-radius:10px;box-shadow:none}
+  .as-list .dash-card:hover{transform:none}
+  .as-list .dash-card .dc-n{position:static;flex:0 0 auto;width:25px;height:21px;border-radius:6px;font-size:.68rem}
+  .as-list .dash-card b{margin:0;flex:1;min-width:0;font-size:.95rem;line-height:1.25}
+  .as-list .dash-card span:not(.dc-n){display:none}
+
   /* Navegación secuencial entre cursos */
   .seq-nav{display:flex;justify-content:space-between;gap:10px;margin-top:26px;padding-top:16px;border-top:1px solid var(--line)}
   .seq-nav a{flex:1;max-width:48%;display:flex;flex-direction:column;gap:1px;background:var(--surface);
@@ -315,10 +352,20 @@
     .cols-2,.cols-3{grid-template-columns:1fr}
     .term{grid-template-columns:1fr;gap:4px}
     .term dt{margin-top:2px}
-    .nav a{padding:9px 12px;font-size:.9rem}
+    /* En el celular el menú SIEMPRE debe quedar visible: el título se recorta
+       con puntos suspensivos en vez de empujar los botones fuera de pantalla. */
+    .nav .wrap{gap:4px;overflow-x:hidden}
+    .nav .brand{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:.86rem}
+    .nav a{padding:8px 9px;font-size:.82rem}
+    .focus-btn,.menu-btn{margin-left:4px;padding:8px 10px;font-size:.82rem}
     .toplinks{grid-template-columns:1fr}
     .cheat-pitch p{font-size:1rem}
     h2{font-size:1.35rem}
+    .dash-tools{margin-top:10px}
+    .dash-view button{min-width:42px;padding:0 10px}
+    .dash-count{font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .dash-grid.as-list{grid-template-columns:1fr}
+    .as-list .dash-card{padding:12px 13px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -424,79 +471,97 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: recorre los temas en orden lógico — toca una tarjeta para entrar al curso. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-28 18:21 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: <b>busca el curso por nombre o por tema</b> y entra directo — o recórrelos en orden lógico. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-29 22:06 (Bogotá)</span></span></p>
+
+    <div class="dash-tools">
+      <div class="dash-search">
+        <div class="field">
+          <span class="ico" aria-hidden="true">🔎</span>
+          <input id="dashfilter" type="search" enterkeyhint="go" autocomplete="off" autocorrect="off"
+                 spellcheck="false" placeholder="Buscar curso o tema…"
+                 aria-label="Buscar curso por nombre o tema" aria-describedby="dash-count">
+          <button id="dashclear" class="dash-clear" type="button" aria-label="Limpiar búsqueda" hidden>✕</button>
+        </div>
+        <div class="dash-view" role="group" aria-label="Forma de ver los cursos">
+          <button id="viewcards" type="button" class="on" aria-pressed="true" title="Ver como tarjetas">▦</button>
+          <button id="viewlist" type="button" aria-pressed="false" title="Ver como lista compacta">☰</button>
+        </div>
+      </div>
+      <p class="dash-count" id="dash-count" aria-live="polite">23 cursos · busca por tema: jwt, hexagonal, angular, pods…</p>
+    </div>
+    <p class="dash-empty" id="dash-empty" hidden>Ningún curso coincide. Prueba con <b>docker</b>, <b>jwt</b>, <b>sql</b>, <b>liderazgo</b>…</p>
 
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 1</span> Fundamentos</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#panorama" style="--c:#0a7fbd"><span class="dc-n">1</span><b>Panorama</b><span>Tu stack de un vistazo</span></a>
-        <a class="dash-card" href="#docker" style="--c:#1f7fd6"><span class="dc-n">2</span><b>Docker</b><span>Empaquetar la app</span></a>
-        <a class="dash-card" href="#kubernetes" style="--c:#3760d4"><span class="dc-n">3</span><b>Kubernetes</b><span>Orquestar contenedores</span></a>
+        <a class="dash-card" data-k="stack general vistazo mapa resumen panorama tecnologias" href="#panorama" style="--c:#0a7fbd"><span class="dc-n">1</span><b>Panorama</b><span>Tu stack de un vistazo</span></a>
+        <a class="dash-card" data-k="contenedor contenedores imagen dockerfile registry acr compose empaquetar volumen capas" href="#docker" style="--c:#1f7fd6"><span class="dc-n">2</span><b>Docker</b><span>Empaquetar la app</span></a>
+        <a class="dash-card" data-k="k8s pod pods orquestacion deployment service ingress cluster replicas escalar" href="#kubernetes" style="--c:#3760d4"><span class="dc-n">3</span><b>Kubernetes</b><span>Orquestar contenedores</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 2</span> Desarrollo</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#springboot" style="--c:#4f8a2e"><span class="dc-n">4</span><b>Java / Spring Boot</b><span>Microservicios backend</span></a>
-        <a class="dash-card" href="#dotnet" style="--c:#512bd4"><span class="dc-n">5</span><b>.NET / C#</b><span>Backend empresarial</span></a>
-        <a class="dash-card" href="#nextjs" style="--c:#111827"><span class="dc-n">6</span><b>Next.js</b><span>Frontend moderno</span></a>
-        <a class="dash-card" href="#react-angular" style="--c:#dd0031"><span class="dc-n">7</span><b>React vs Angular</b><span>Fundamentos y equivalencias</span></a>
-        <a class="dash-card" href="#nodejs" style="--c:#43873a"><span class="dc-n">8</span><b>Node.js</b><span>Backend JavaScript</span></a>
-        <a class="dash-card" href="#fastapi" style="--c:#3776ab"><span class="dc-n">9</span><b>FastAPI / Python</b><span>APIs backend en Python</span></a>
-        <a class="dash-card" href="#sql" style="--c:#2f6f8f"><span class="dc-n">10</span><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle</span></a>
-        <a class="dash-card" href="#nats" style="--c:#9c3d86"><span class="dc-n">11</span><b>NATS</b><span>Mensajería event-driven</span></a>
-        <a class="dash-card" href="#arquitectura" style="--c:#7048a8"><span class="dc-n">12</span><b>Arquitectura de software</b><span>Hexagonal, DDD, trade-offs</span></a>
+        <a class="dash-card" data-k="java spring boot jpa hibernate maven microservicio backend controller service repository resilience4j" href="#springboot" style="--c:#4f8a2e"><span class="dc-n">4</span><b>Java / Spring Boot</b><span>Microservicios backend</span></a>
+        <a class="dash-card" data-k="net dotnet c csharp asp aspnet ef core efcore entity framework linq nuget kestrel middleware dapper xunit sqlserver visual studio" href="#dotnet" style="--c:#512bd4"><span class="dc-n">5</span><b>.NET / C#</b><span>Backend empresarial</span></a>
+        <a class="dash-card" data-k="react ssr csr isr server components app router vercel frontend seo pwa render hidratacion" href="#nextjs" style="--c:#111827"><span class="dc-n">6</span><b>Next.js</b><span>Frontend moderno</span></a>
+        <a class="dash-card" data-k="react angular hooks usestate useeffect props estado jsx rxjs observable signals typescript componente frontend spa ngoninit injectable" href="#react-angular" style="--c:#dd0031"><span class="dc-n">7</span><b>React vs Angular</b><span>Fundamentos y equivalencias</span></a>
+        <a class="dash-card" data-k="node express javascript event loop npm backend asincrono streams middleware" href="#nodejs" style="--c:#43873a"><span class="dc-n">8</span><b>Node.js</b><span>Backend JavaScript</span></a>
+        <a class="dash-card" data-k="python pydantic uvicorn asgi async flask sqlalchemy alembic schema depends openapi swagger" href="#fastapi" style="--c:#3776ab"><span class="dc-n">9</span><b>FastAPI / Python</b><span>APIs backend en Python</span></a>
+        <a class="dash-card" data-k="postgresql postgres oracle sqlserver base de datos bd consultas query join joins indice indices transaccion acid normalizacion explain" href="#sql" style="--c:#2f6f8f"><span class="dc-n">10</span><b>Bases de datos / SQL</b><span>PostgreSQL, Oracle</span></a>
+        <a class="dash-card" data-k="mensajeria eventos evento jetstream kafka rabbitmq pubsub cola broker event driven publicador suscriptor idempotencia" href="#nats" style="--c:#9c3d86"><span class="dc-n">11</span><b>NATS</b><span>Mensajería event-driven</span></a>
+        <a class="dash-card" data-k="hexagonal puertos adaptadores ddd domain driven design clean onion cebolla cqrs event sourcing strangler fig adr c4 bounded context agregado dominio monolito microservicios acoplamiento trade offs" href="#arquitectura" style="--c:#7048a8"><span class="dc-n">12</span><b>Arquitectura de software</b><span>Hexagonal, DDD, trade-offs</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 3</span> APIs, integración &amp; seguridad</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#rest-soap" style="--c:#0e6f74"><span class="dc-n">13</span><b>REST vs SOAP</b><span>APIs, ESB, modernizar legacy</span></a>
-        <a class="dash-card" href="#jwt" style="--c:#b45309"><span class="dc-n">14</span><b>JWT y autenticación</b><span>OAuth2, OIDC, RBAC</span></a>
+        <a class="dash-card" data-k="rest soap api apis wsdl xsd xml json ws security esb bus oracle service bus biztalk soa suite gateway grpc graphql idempotencia verbos http get post put patch delete codigos estado 401 403 404 422 versionado paginacion openapi swagger integracion legacy fachada xslt orquestacion coreografia" href="#rest-soap" style="--c:#0e6f74"><span class="dc-n">13</span><b>REST vs SOAP</b><span>APIs, ESB, modernizar legacy</span></a>
+        <a class="dash-card" data-k="jwt token tokens oauth oauth2 oidc openid connect rbac abac scopes scope autenticacion autorizacion auth login logout refresh access jwks rs256 hs256 claims exp cookie httponly xss csrf cors keyvault secretos entra id azure ad keycloak auth0 seguridad sesion pkce" href="#jwt" style="--c:#b45309"><span class="dc-n">14</span><b>JWT y autenticación</b><span>OAuth2, OIDC, RBAC</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 4</span> Infraestructura &amp; Cloud</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">15</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
-        <a class="dash-card" href="#helm" style="--c:#0f9d8a"><span class="dc-n">16</span><b>Helm</b><span>Despliegues reutilizables</span></a>
-        <a class="dash-card" href="#azure" style="--c:#0a7fbd"><span class="dc-n">17</span><b>Azure &amp; AKS</b><span>La nube</span></a>
+        <a class="dash-card" data-k="kubernetes k8s etcd scheduler kubelet kube proxy control plane api server arquitectura interna probes readiness liveness namespace configmap secret" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">15</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
+        <a class="dash-card" data-k="chart charts values templates release helmfile despliegue reutilizable plantillas upgrade rollback" href="#helm" style="--c:#0f9d8a"><span class="dc-n">16</span><b>Helm</b><span>Despliegues reutilizables</span></a>
+        <a class="dash-card" data-k="aks cloud nube acr key vault monitor suscripcion resource group app service microsoft azure devops" href="#azure" style="--c:#0a7fbd"><span class="dc-n">17</span><b>Azure &amp; AKS</b><span>La nube</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 5</span> Entrega (DevOps)</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">18</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
-        <a class="dash-card" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">19</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
-        <a class="dash-card" href="#testing" style="--c:#2e7d5b"><span class="dc-n">20</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
-        <a class="dash-card" href="#calidad" style="--c:#6f57c9"><span class="dc-n">21</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
+        <a class="dash-card" data-k="devops calms dora metricas cultura automatizacion lean medicion iac terraform bicep infraestructura como codigo ruta" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">18</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
+        <a class="dash-card" data-k="cicd ci cd pipeline pipelines azure devops github actions jenkins gitlab build release deploy despliegue automatizacion artefacto quality gate blue green canary" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">19</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
+        <a class="dash-card" data-k="pruebas test testing junit mockito piramide tdd unitaria integracion e2e cobertura mocks testcontainers xunit pytest" href="#testing" style="--c:#2e7d5b"><span class="dc-n">20</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
+        <a class="dash-card" data-k="sonarqube sonar kiuwan calidad seguridad sast dast quality gate deuda tecnica owasp code smell cobertura vulnerabilidades" href="#calidad" style="--c:#6f57c9"><span class="dc-n">21</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 6</span> Liderazgo &amp; gestión</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">22</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
-        <a class="dash-card" href="#jira" style="--c:#2f81c9"><span class="dc-n">23</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
+        <a class="dash-card" data-k="liderazgo lider equipo gestion personas 1a1 uno a uno feedback sbi estimacion story points planning poker delegar capacidad conflicto desempeño mentoria scrum master" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">22</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
+        <a class="dash-card" data-k="jira confluence jql tablero board backlog sprint kanban scrum seguimiento velocity burndown epica historia ticket azure boards trello" href="#jira" style="--c:#2f81c9"><span class="dc-n">23</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Repaso</span> Antes de la entrevista</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#chuleta" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎯 Chuleta</b><span>Qué decir, rápido</span></a>
-        <a class="dash-card" href="#guion" style="--c:#b83a5e"><span class="dc-n">★</span><b>Guion completo</b><span>Todos los talking points</span></a>
-        <a class="dash-card" href="#simulador" style="--c:#c0392b"><span class="dc-n">★</span><b>🎬 Simulador</b><span>Práctica cronometrada</span></a>
-        <a class="dash-card" href="#entrenamiento" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎓 Entrenamiento</b><span>Banco de preguntas (quiz)</span></a>
-        <a class="dash-card" href="#entrevista" style="--c:#6f57c9"><span class="dc-n">★</span><b>Preguntas</b><span>Practica en voz alta</span></a>
-        <a class="dash-card" href="#glosario" style="--c:#0a7fbd"><span class="dc-n">★</span><b>Glosario</b><span>Cada término del CV</span></a>
+        <a class="dash-card" data-k="chuleta resumen frases pitch rapido repaso ultimo minuto que decir" href="#chuleta" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎯 Chuleta</b><span>Qué decir, rápido</span></a>
+        <a class="dash-card" data-k="guion talking points frases como lo cuentas discurso" href="#guion" style="--c:#b83a5e"><span class="dc-n">★</span><b>Guion completo</b><span>Todos los talking points</span></a>
+        <a class="dash-card" data-k="simulador practica cronometro cronometrada simulacion entrevista en vivo" href="#simulador" style="--c:#c0392b"><span class="dc-n">★</span><b>🎬 Simulador</b><span>Práctica cronometrada</span></a>
+        <a class="dash-card" data-k="entrenamiento quiz banco de preguntas practicar respuestas modelo" href="#entrenamiento" style="--c:#b83a5e"><span class="dc-n">★</span><b>🎓 Entrenamiento</b><span>Banco de preguntas (quiz)</span></a>
+        <a class="dash-card" data-k="preguntas respuestas entrevista practicar voz alta star" href="#entrevista" style="--c:#6f57c9"><span class="dc-n">★</span><b>Preguntas</b><span>Practica en voz alta</span></a>
+        <a class="dash-card" data-k="glosario terminos definiciones diccionario cv significado" href="#glosario" style="--c:#0a7fbd"><span class="dc-n">★</span><b>Glosario</b><span>Cada término del CV</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">🏆</span> Assessments (ganar la prueba)</h3>
       <div class="dash-grid">
-        <a class="dash-card" href="#system-design" style="--c:#2f6fb0"><span class="dc-n">A</span><b>System Design</b><span>Diseño de sistemas</span></a>
-        <a class="dash-card" href="#assessment-coding" style="--c:#b8860b"><span class="dc-n">A</span><b>Pruebas técnicas</b><span>Coding &amp; take-home</span></a>
-        <a class="dash-card" href="#assessment-psico" style="--c:#b8860b"><span class="dc-n">A</span><b>Psicométricos</b><span>DISC, aptitud</span></a>
-        <a class="dash-card" href="#assessment-center" style="--c:#b8860b"><span class="dc-n">A</span><b>Assessment center</b><span>Dinámicas, SJT</span></a>
+        <a class="dash-card" data-k="system design diseño de sistemas escala escalabilidad cap sharding cache replicas estimacion qps cuellos de botella trade offs" href="#system-design" style="--c:#2f6fb0"><span class="dc-n">A</span><b>System Design</b><span>Diseño de sistemas</span></a>
+        <a class="dash-card" data-k="coding live coding take home prueba tecnica algoritmos ejercicio programacion leetcode" href="#assessment-coding" style="--c:#b8860b"><span class="dc-n">A</span><b>Pruebas técnicas</b><span>Coding &amp; take-home</span></a>
+        <a class="dash-card" data-k="psicometrico psicometricos disc big five aptitud razonamiento numerico verbal test personalidad" href="#assessment-psico" style="--c:#b8860b"><span class="dc-n">A</span><b>Psicométricos</b><span>DISC, aptitud</span></a>
+        <a class="dash-card" data-k="assessment center dinamica dinamicas grupal role play sjt situacional bandeja de entrada" href="#assessment-center" style="--c:#b8860b"><span class="dc-n">A</span><b>Assessment center</b><span>Dinámicas, SJT</span></a>
       </div>
     </div>
   </div>
@@ -3099,7 +3164,7 @@ status changed to Done AFTER -7d</code></pre>
   <div class="wrap">
     Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
     Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
-    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-28 18:21 (Bogotá)</span></span>
+    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-29 22:06 (Bogotá)</span></span>
   </div>
 </footer>
 
@@ -3158,6 +3223,79 @@ status changed to Done AFTER -7d</code></pre>
       if(i<SEQ.length-1){ var n=SEQ[i+1]; html+='<a class="next" href="#'+n[0]+'"><small>Siguiente &#8250;</small><b>'+n[1]+'</b></a>'; }
       nav.innerHTML=html; wrap.appendChild(nav);
     });
+
+    // Buscador del dashboard: filtra tarjetas por nombre, subtítulo y palabras clave
+    (function(){
+      var input=document.getElementById('dashfilter');
+      if(!input) return;
+      var cards=[].slice.call(document.querySelectorAll('#dashboard .dash-card')),
+          levels=[].slice.call(document.querySelectorAll('#dashboard .dash-level')),
+          grids=[].slice.call(document.querySelectorAll('#dashboard .dash-grid')),
+          count=document.getElementById('dash-count'),
+          empty=document.getElementById('dash-empty'),
+          clear=document.getElementById('dashclear'),
+          bCards=document.getElementById('viewcards'),
+          bList=document.getElementById('viewlist'),
+          IDLE='23 cursos · busca por tema: jwt, hexagonal, angular, pods…';
+
+      function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+      cards.forEach(function(c){
+        var t=c.querySelector('b');
+        c._t=t; c._orig=t.textContent;
+        c._hay=norm(c.textContent+' '+(c.getAttribute('data-k')||''));
+      });
+
+      function paint(c,q){                       // resalta la coincidencia en el título
+        var t=c._orig, el=c._t;
+        var i=q?norm(t).indexOf(q):-1;
+        if(i<0){ el.textContent=t; return; }
+        el.textContent='';
+        el.appendChild(document.createTextNode(t.slice(0,i)));
+        var m=document.createElement('mark'); m.textContent=t.slice(i,i+q.length);
+        el.appendChild(m);
+        el.appendChild(document.createTextNode(t.slice(i+q.length)));
+      }
+
+      var first=null;
+      function apply(){
+        var q=norm(input.value.trim()), n=0;
+        // varias palabras = todas deben aparecer, en cualquier orden ("ef core", "base datos")
+        var terms=q?q.split(/\s+/):[];
+        first=null;
+        cards.forEach(function(c){
+          var ok=terms.every(function(t){ return c._hay.indexOf(t)>=0; });
+          c.hidden=!ok;
+          if(ok){ n++; if(!first) first=c; }
+          paint(c,terms[0]||'');
+        });
+        levels.forEach(function(l){
+          l.hidden=l.querySelectorAll('.dash-card:not([hidden])').length===0;
+        });
+        clear.hidden=!input.value;
+        empty.hidden=!(q&&n===0);
+        count.textContent=!q?IDLE
+          :(n===0?'Sin resultados':n+(n===1?' resultado':' resultados')+' · Enter para entrar');
+      }
+
+      input.addEventListener('input',apply);
+      input.addEventListener('keydown',function(e){
+        if(e.key==='Enter'&&first){ e.preventDefault(); input.blur(); location.hash=first.getAttribute('href'); }
+        if(e.key==='Escape'){ input.value=''; apply(); }
+      });
+      clear.addEventListener('click',function(){ input.value=''; apply(); input.focus(); });
+
+      function setView(list){
+        grids.forEach(function(g){ g.classList.toggle('as-list',list); });
+        bList.classList.toggle('on',list);  bList.setAttribute('aria-pressed',list?'true':'false');
+        bCards.classList.toggle('on',!list); bCards.setAttribute('aria-pressed',list?'false':'true');
+        try{ localStorage.setItem('dashView',list?'list':'cards'); }catch(e){}
+      }
+      bList.addEventListener('click',function(){ setView(true); });
+      bCards.addEventListener('click',function(){ setView(false); });
+      try{ if(localStorage.getItem('dashView')==='list') setView(true); }catch(e){}
+      apply();
+    })();
 
     // Modo enfoque: muestra un curso a la vez (usa :target; apagado = página normal)
     var fb=document.getElementById('focusbtn');
