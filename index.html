@@ -85,6 +85,7 @@
   .t-sql{background:#2f6f8f} .t-test{background:#2e7d5b} .t-nats{background:#9c3d86} .t-node{background:#43873a}
   .t-py{background:#3776ab} .t-arq{background:#7048a8} .t-net{background:#512bd4}
   .t-front{background:#dd0031} .t-api{background:#0e6f74} .t-auth{background:#b45309}
+  .t-gcp{background:#ea4335}
   .t-train{background:#b83a5e} .t-jira{background:#2f81c9} .t-sd{background:#2f6fb0} .t-assess{background:#b8860b} .t-sim{background:#c0392b}
   /* Dashboard de cursos */
   .stamp{display:inline-block;font-family:var(--mono);font-size:.76rem;color:var(--ink-faint);
@@ -429,7 +430,8 @@
         <a href="#kubernetes"><b>Kubernetes</b><span>Orquestar</span></a>
         <a href="#k8s-deep"><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
         <a href="#helm"><b>Helm</b><span>Despliegues reutilizables</span></a>
-        <a href="#azure"><b>Azure &amp; AKS</b><span>La nube</span></a>
+        <a href="#azure"><b>Azure &amp; AKS</b><span>La nube que dominas</span></a>
+        <a href="#gcp"><b>GCP / Google Cloud</b><span>Traducido desde Azure y AKS</span></a>
       </div>
       <div class="menu-cat">
         <h4><span class="dot" style="background:#c9711a"></span>DevOps &amp; Calidad</h4>
@@ -471,7 +473,7 @@
 <section id="dashboard">
   <div class="wrap">
     <h2><span class="tag t-ruta">Inicio</span> Dashboard de cursos</h2>
-    <p class="sub">Tu punto de partida: <b>busca el curso por nombre o por tema</b> y entra directo — o recórrelos en orden lógico. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-07-29 22:06 (Bogotá)</span></span></p>
+    <p class="sub">Tu punto de partida: <b>busca el curso por nombre o por tema</b> y entra directo — o recórrelos en orden lógico. Al final de cada uno puedes seguir al siguiente.<br><span class="stamp">🕒 Última actualización: <span id="deploy-stamp">Desplegado: 2026-08-03 22:38 (Bogotá)</span></span></p>
 
     <div class="dash-tools">
       <div class="dash-search">
@@ -487,7 +489,7 @@
           <button id="viewlist" type="button" aria-pressed="false" title="Ver como lista compacta">☰</button>
         </div>
       </div>
-      <p class="dash-count" id="dash-count" aria-live="polite">23 cursos · busca por tema: jwt, hexagonal, angular, pods…</p>
+      <p class="dash-count" id="dash-count" aria-live="polite">24 cursos · busca por tema: gcp, jwt, hexagonal, angular, pods…</p>
     </div>
     <p class="dash-empty" id="dash-empty" hidden>Ningún curso coincide. Prueba con <b>docker</b>, <b>jwt</b>, <b>sql</b>, <b>liderazgo</b>…</p>
 
@@ -525,23 +527,24 @@
       <div class="dash-grid">
         <a class="dash-card" data-k="kubernetes k8s etcd scheduler kubelet kube proxy control plane api server arquitectura interna probes readiness liveness namespace configmap secret" href="#k8s-deep" style="--c:#3760d4"><span class="dc-n">15</span><b>Kubernetes a fondo</b><span>Arquitectura interna</span></a>
         <a class="dash-card" data-k="chart charts values templates release helmfile despliegue reutilizable plantillas upgrade rollback" href="#helm" style="--c:#0f9d8a"><span class="dc-n">16</span><b>Helm</b><span>Despliegues reutilizables</span></a>
-        <a class="dash-card" data-k="aks cloud nube acr key vault monitor suscripcion resource group app service microsoft azure devops" href="#azure" style="--c:#0a7fbd"><span class="dc-n">17</span><b>Azure &amp; AKS</b><span>La nube</span></a>
+        <a class="dash-card" data-k="aks cloud nube acr key vault monitor suscripcion resource group app service microsoft azure devops" href="#azure" style="--c:#0a7fbd"><span class="dc-n">17</span><b>Azure &amp; AKS</b><span>La nube que dominas</span></a>
+        <a class="dash-card" data-k="gcp google cloud platform gke autopilot standard cloud run bigquery pub sub pubsub firestore spanner cloud sql memorystore artifact registry cloud build secret manager iam cuenta de servicio service account workload identity vpc proyecto gcloud compute engine vertex ai terraform equivalencias homologacion multinube" href="#gcp" style="--c:#ea4335"><span class="dc-n">18</span><b>GCP / Google Cloud</b><span>Traducido desde Azure/AKS</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 5</span> Entrega (DevOps)</h3>
       <div class="dash-grid">
-        <a class="dash-card" data-k="devops calms dora metricas cultura automatizacion lean medicion iac terraform bicep infraestructura como codigo ruta" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">18</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
-        <a class="dash-card" data-k="cicd ci cd pipeline pipelines azure devops github actions jenkins gitlab build release deploy despliegue automatizacion artefacto quality gate blue green canary" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">19</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
-        <a class="dash-card" data-k="pruebas test testing junit mockito piramide tdd unitaria integracion e2e cobertura mocks testcontainers xunit pytest" href="#testing" style="--c:#2e7d5b"><span class="dc-n">20</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
-        <a class="dash-card" data-k="sonarqube sonar kiuwan calidad seguridad sast dast quality gate deuda tecnica owasp code smell cobertura vulnerabilidades" href="#calidad" style="--c:#6f57c9"><span class="dc-n">21</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
+        <a class="dash-card" data-k="devops calms dora metricas cultura automatizacion lean medicion iac terraform bicep infraestructura como codigo ruta" href="#curso-devops" style="--c:#c9711a"><span class="dc-n">19</span><b>Curso DevOps</b><span>CALMS, DORA, ruta</span></a>
+        <a class="dash-card" data-k="cicd ci cd pipeline pipelines azure devops github actions jenkins gitlab build release deploy despliegue automatizacion artefacto quality gate blue green canary" href="#pipelines" style="--c:#1f6fa8"><span class="dc-n">20</span><b>Pipelines CI/CD</b><span>Automatizar la entrega</span></a>
+        <a class="dash-card" data-k="pruebas test testing junit mockito piramide tdd unitaria integracion e2e cobertura mocks testcontainers xunit pytest" href="#testing" style="--c:#2e7d5b"><span class="dc-n">21</span><b>Pruebas / Testing</b><span>JUnit, pirámide, TDD</span></a>
+        <a class="dash-card" data-k="sonarqube sonar kiuwan calidad seguridad sast dast quality gate deuda tecnica owasp code smell cobertura vulnerabilidades" href="#calidad" style="--c:#6f57c9"><span class="dc-n">22</span><b>Calidad &amp; seguridad</b><span>SonarQube / Kiuwan</span></a>
       </div>
     </div>
     <div class="dash-level">
       <h3><span class="lvl-n">Nivel 6</span> Liderazgo &amp; gestión</h3>
       <div class="dash-grid">
-        <a class="dash-card" data-k="liderazgo lider equipo gestion personas 1a1 uno a uno feedback sbi estimacion story points planning poker delegar capacidad conflicto desempeño mentoria scrum master" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">22</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
-        <a class="dash-card" data-k="jira confluence jql tablero board backlog sprint kanban scrum seguimiento velocity burndown epica historia ticket azure boards trello" href="#jira" style="--c:#2f81c9"><span class="dc-n">23</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
+        <a class="dash-card" data-k="liderazgo lider equipo gestion personas 1a1 uno a uno feedback sbi estimacion story points planning poker delegar capacidad conflicto desempeño mentoria scrum master" href="#liderazgo" style="--c:#a9791f"><span class="dc-n">23</span><b>Curso de liderazgo</b><span>Asignar, estimar, personas</span></a>
+        <a class="dash-card" data-k="jira confluence jql tablero board backlog sprint kanban scrum seguimiento velocity burndown epica historia ticket azure boards trello" href="#jira" style="--c:#2f81c9"><span class="dc-n">24</span><b>Jira &amp; seguimiento</b><span>Jira, Confluence y similares</span></a>
       </div>
     </div>
     <div class="dash-level">
@@ -2441,15 +2444,266 @@ helm list                     <span class="cmt"># ver releases instaladas</span>
     <h2><span class="tag t-azure">Paso 3</span> Azure &amp; AKS</h2>
     <p class="sub">Azure es la <b>nube de Microsoft</b>: servidores, redes, bases de datos y servicios bajo demanda. <b>AKS (Azure Kubernetes Service)</b> es Kubernetes <em>gestionado</em>: Azure opera la parte compleja (el “control plane”) y tú te concentras en desplegar tus apps.</p>
 
+    <h3>Cómo se organiza todo: la jerarquía</h3>
+    <p>Antes de los servicios hay que entender dónde vive cada cosa. Es lo primero que preguntan y lo que cambia al pasarte a otra nube:</p>
+    <div class="pipe-scroll">
+      <div class="pipe">
+        <div class="step"><div class="ic">🏢</div><div class="n">Tenant</div><h5>Entra ID</h5><p>La organización entera</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🗂️</div><div class="n">Management Group</div><h5>Agrupador</h5><p>Políticas para varias suscripciones</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">🧾</div><div class="n">Suscripción</div><h5>Facturación</h5><p>Límite de costos y cuotas</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">📦</div><div class="n">Resource Group</div><h5>Grupo de recursos</h5><p>Se crean y borran juntos</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="ic">⚙️</div><div class="n">Recurso</div><h5>AKS, BD, Key Vault…</h5><p>La pieza concreta</p></div>
+      </div>
+    </div>
+
     <h3>Las piezas de Azure que se conectan</h3>
-    <div class="grid cols-2">
+    <div class="grid cols-3">
       <div class="card"><h4>AKS</h4><p class="obj">Kubernetes gestionado</p><p>El clúster donde corren tus contenedores. Azure administra la infraestructura y las actualizaciones del clúster.</p></div>
       <div class="card"><h4>ACR — Container Registry</h4><p class="obj">tus imágenes privadas</p><p>El “almacén” donde guardas y versionas las imágenes Docker que AKS descarga para desplegar.</p></div>
       <div class="card"><h4>Azure DevOps / Pipelines</h4><p class="obj">CI/CD</p><p>Automatiza construir, probar, publicar la imagen y desplegar a AKS en cada cambio de código.</p></div>
-      <div class="card"><h4>Key Vault &amp; Monitor</h4><p class="obj">secretos + observabilidad</p><p>Key Vault guarda credenciales de forma segura; Azure Monitor/Log Analytics da métricas, logs y alertas.</p></div>
+      <div class="card"><h4>Key Vault</h4><p class="obj">secretos</p><p>Guarda credenciales, cadenas de conexión y certificados fuera del código, con acceso auditado y rotación.</p></div>
+      <div class="card"><h4>Azure Monitor</h4><p class="obj">observabilidad</p><p>Métricas, logs (Log Analytics) y alertas; <b>Application Insights</b> añade trazas y rendimiento de la app.</p></div>
+      <div class="card"><h4>Entra ID (ex Azure AD)</h4><p class="obj">identidad</p><p>Quién es cada usuario o app. Es el directorio corporativo, y sobre él se apoyan el SSO y los tokens.</p></div>
     </div>
 
-    <div class="youuse"><b>Cómo lo cuentas tú:</b> “Lideré la migración del monolito WebLogic a microservicios en Azure AKS, con imágenes en ACR y pipelines de Azure DevOps que automatizaron el despliegue diario en producción — reduciendo el tiempo de despliegue en un 60%.”</div>
+    <h3>Identidad y permisos: dos capas que se confunden</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Entra ID = quién eres</h4><p>Autenticación: usuarios, grupos y aplicaciones registradas. Es lo que emite los tokens (OAuth2/OIDC).</p></div>
+      <div class="card"><h4>RBAC de Azure = qué puedes</h4><p>Autorización <b>sobre recursos</b>: asignas un <i>rol</i> (Lector, Colaborador, Propietario) en un ámbito (suscripción, grupo o recurso).</p></div>
+      <div class="card"><h4>Managed Identity</h4><p>Una identidad que Azure crea y rota por ti para que <b>una app hable con otro servicio sin contraseñas</b> — p. ej. AKS leyendo de Key Vault.</p></div>
+    </div>
+    <div class="callout"><b>El detalle que delata experiencia real:</b> en Azure hay <b>dos sistemas de permisos distintos</b> — los roles de <b>Entra ID</b> (administrar el directorio) y el <b>RBAC de Azure</b> (administrar recursos). Ser Global Admin del directorio no te da acceso automático a los recursos. Es la confusión número uno de quien empieza.</div>
+
+    <h3>Red, datos y mensajería</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>VNet + NSG</h4><p>La <b>red virtual</b> es <b>regional</b>: si necesitas otra región, creas otra VNet y las emparejas (<i>peering</i>). El <b>NSG</b> es el firewall por subred o interfaz.</p></div>
+      <div class="card"><h4>Application Gateway</h4><p>Balanceador de capa 7 con WAF, el que suele publicar el Ingress de AKS. <b>Front Door</b> hace lo mismo a escala global.</p></div>
+      <div class="card"><h4>Regiones y zonas</h4><p>Una <b>región</b> agrupa varias <b>zonas de disponibilidad</b>; distribuir el clúster entre zonas es lo que da alta disponibilidad real.</p></div>
+      <div class="card"><h4>Azure Database for PostgreSQL</h4><p>PostgreSQL gestionado: backups, réplicas y parches automáticos. También hay para MySQL y SQL Server.</p></div>
+      <div class="card"><h4>Cosmos DB &amp; Cache for Redis</h4><p><b>Cosmos DB</b>: NoSQL distribuido, multi-región y baja latencia. <b>Cache for Redis</b>: caché gestionada.</p></div>
+      <div class="card"><h4>Service Bus / Event Hubs</h4><p><b>Service Bus</b>: colas y temas con garantías de entrega (mensajería empresarial). <b>Event Hubs</b>: ingesta masiva de eventos, estilo Kafka.</p></div>
+    </div>
+
+    <h3>Contenedores sin clúster, e infraestructura como código</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Container Apps</h4><p>Corre contenedores <b>sin administrar Kubernetes</b>, con escala automática (incluso a cero). Para un servicio suelto evita todo el costo operativo de un clúster.</p></div>
+      <div class="card"><h4>Azure Functions</h4><p>Serverless por <b>función</b>: se ejecuta ante un evento (HTTP, cola, timer) y pagas por invocación.</p></div>
+      <div class="card"><h4>Bicep</h4><p>El lenguaje nativo de Azure para declarar infraestructura, sucesor de las plantillas ARM.</p></div>
+      <div class="card"><h4>Terraform</h4><p>La alternativa <b>multinube</b>: la misma herramienta te sirve en Azure, GCP o AWS — y es tu mejor argumento de portabilidad.</p></div>
+    </div>
+
+    <div class="callout"><b>El círculo completo:</b> el código se construye en <b>Azure Pipelines</b> → la imagen va a <b>ACR</b> → <b>Helm</b> la despliega en <b>AKS</b>, que corre dentro de una <b>VNet</b> → la app toma sus secretos de <b>Key Vault</b> con una <b>managed identity</b> → habla con <b>PostgreSQL</b> y publica eventos → y <b>Azure Monitor</b> con <b>App Insights</b> te dicen si todo va bien.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú:</b> “Lideré la migración del monolito WebLogic a microservicios en <b>Azure AKS</b>, con imágenes en <b>ACR</b> y pipelines de <b>Azure DevOps</b> que automatizaron el despliegue diario en producción — reduciendo el tiempo de despliegue en un 60% y con cero downtime. Los secretos viven en <b>Key Vault</b> y se consumen con <b>managed identity</b>, la observabilidad va con <b>Azure Monitor</b>, y el despliegue se parametriza con <b>Helm</b> por entorno. Sé moverme en la jerarquía de suscripciones y grupos de recursos, y distinguir bien la identidad de Entra ID del RBAC sobre recursos.”</div>
+
+    <h3>Preguntas típicas de Azure</h3>
+    <details class="qa"><summary>¿Diferencia entre suscripción y grupo de recursos?</summary>
+      <div class="ans"><p>La <b>suscripción</b> es el límite de <b>facturación y cuotas</b>: todo lo que crees dentro se cobra ahí. El <b>grupo de recursos</b> es una carpeta lógica <b>dentro</b> de una suscripción para recursos que comparten ciclo de vida — se despliegan, se permisan y se borran juntos. Un patrón común es una suscripción por entorno (dev/QA/prod) y grupos por aplicación.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es una managed identity y por qué usarla?</summary>
+      <div class="ans"><p>Es una identidad que <b>Azure crea y rota automáticamente</b> para un recurso (una app, un pod de AKS), de modo que pueda autenticarse contra otro servicio <b>sin guardar credenciales</b>. Elimina la contraseña del código y de las variables de entorno: el pod pide un token y accede a Key Vault o a la base de datos. Es la respuesta correcta a "¿dónde guardas el secreto?" — en ningún lado, uso identidad administrada.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cuándo AKS y cuándo Container Apps?</summary>
+      <div class="ans"><p><b>AKS</b> cuando necesito control fino: varios servicios, políticas de red, sidecars, operadores, afinidad de nodos o ya tengo cultura de Kubernetes. <b>Container Apps</b> cuando quiero correr un contenedor <b>sin operar un clúster</b>: escala a cero, menos costo fijo y mucho menos trabajo de plataforma. Como líder lo decido por el <b>costo operativo</b>: un clúster exige un equipo que lo mantenga.</p></div>
+    </details>
+  </div>
+</section>
+
+<section id="gcp">
+  <div class="wrap">
+    <h2><span class="tag t-gcp">Paso 4</span> GCP — Google Cloud, traducido desde Azure</h2>
+    <p class="sub">Este curso parte de cero: <b>no has trabajado con GCP</b>. La buena noticia es que no necesitas empezar de cero de verdad — el 80% ya lo sabes. Contenedores, Kubernetes, CI/CD, identidades, redes y observabilidad son los mismos conceptos que operas en Azure; lo que cambia son los <b>nombres</b> y unas pocas decisiones de diseño que sí son distintas de verdad. Aquí traducimos pieza por pieza desde AKS, que es tu terreno, y marcamos con claridad las tres o cuatro cosas donde Google realmente hace algo diferente.</p>
+
+    <div class="callout"><b>Analogía:</b> cambiar de nube es como <b>cambiar de aeropuerto</b>, no de medio de transporte. Los aviones son los mismos (tus contenedores), las rutas son las mismas (Kubernetes), los procedimientos de vuelo son idénticos. Lo que cambia es la <b>señalización</b>, el nombre de las aerolíneas y en qué mostrador se factura. Si sabes volar, aterrizas en el otro aeropuerto sin problema: solo tienes que aprender a leer los letreros.</div>
+
+    <h3>1 · Lo primero que cambia: el proyecto</h3>
+    <p>Este es el concepto que más confunde al llegar desde Azure, y el que más rápido te delata si no lo tienes claro. Compara las dos jerarquías:</p>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Nivel</th><th>Azure</th><th>GCP</th></tr></thead>
+        <tbody>
+          <tr><td>La organización</td><td>Tenant (Entra ID)</td><td>Organización</td></tr>
+          <tr><td>Agrupador con políticas</td><td>Management Group</td><td>Carpeta</td></tr>
+          <tr><td>Facturación y cuotas</td><td>Suscripción</td><td rowspan="2"><b>Proyecto</b> — reúne las dos cosas</td></tr>
+          <tr><td>Agrupación de recursos</td><td>Grupo de recursos</td></tr>
+          <tr><td>La pieza concreta</td><td>Recurso (AKS, BD…)</td><td>Recurso (GKE, BD…)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>La idea clave:</b> el <b>proyecto</b> de GCP no es un grupo de recursos — es <b>suscripción y grupo de recursos fusionados</b>. Concentra la facturación, las cuotas, los permisos y el aislamiento. Todo recurso vive en exactamente un proyecto, y casi todo comando lleva <code>--project</code>. En la práctica se crea <b>un proyecto por aplicación y entorno</b> (<code>facturas-dev</code>, <code>facturas-prod</code>), porque borrar el proyecto borra todo lo que hay dentro: es la unidad natural de limpieza.</div>
+
+    <h3>2 · IAM: un solo sistema de permisos</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>La fórmula</h4><p>En GCP todo permiso se lee igual: <b>quién</b> (principal) + <b>qué puede hacer</b> (rol) + <b>sobre qué</b> (recurso o proyecto). Una sola frase, un solo sistema.</p></div>
+      <div class="card"><h4>Tipos de rol</h4><p><b>Básicos</b> (Propietario, Editor, Lector — demasiado amplios), <b>predefinidos</b> (por servicio, los recomendados) y <b>personalizados</b>.</p></div>
+      <div class="card"><h4>Cuenta de servicio</h4><p>La identidad de una <b>aplicación</b>, no de una persona. Es el equivalente exacto de la <b>managed identity</b> de Azure.</p></div>
+      <div class="card"><h4>Herencia</h4><p>Los permisos <b>bajan</b> por la jerarquía: lo que das en la carpeta se hereda en todos sus proyectos. Igual que el ámbito del RBAC de Azure.</p></div>
+      <div class="card"><h4>Workload Identity</h4><p>Permite que un <b>pod de GKE</b> actúe como una cuenta de servicio sin manejar llaves. Mismo propósito que Workload Identity en AKS.</p></div>
+      <div class="card"><h4>Lo que se simplifica</h4><p>En Azure separas <b>Entra ID</b> (identidad) del <b>RBAC de recursos</b>. En GCP <b>es un solo IAM</b> para ambas cosas — un dolor de cabeza menos.</p></div>
+    </div>
+    <div class="callout"><b>El error clásico del que llega de Azure:</b> descargarse la <b>llave JSON</b> de una cuenta de servicio y meterla en el contenedor. Es exactamente lo que estabas evitando con managed identity. La forma correcta en GKE es <b>Workload Identity</b>: el pod obtiene credenciales temporales, sin archivos de llave que rotar ni filtrar.</div>
+
+    <h3>3 · Red: aquí sí hay una diferencia real</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>La VPC de GCP es global</h4><p>Una sola VPC <b>abarca todas las regiones</b>, con una subred por región. Los recursos de distintos continentes se hablan por IP privada sin configurar nada más.</p></div>
+      <div class="card"><h4>La VNet de Azure es regional</h4><p>Cada región necesita su propia VNet, y para conectarlas hay que hacer <b>peering</b> explícito. Es trabajo que en GCP simplemente no existe.</p></div>
+      <div class="card"><h4>Firewall de VPC vs NSG</h4><p>En GCP las reglas viven <b>en la VPC</b> y se aplican por <i>etiquetas</i> a las máquinas. En Azure el <b>NSG</b> se asocia a subredes o interfaces de red.</p></div>
+      <div class="card"><h4>Balanceo global</h4><p><b>Cloud Load Balancing</b> da <b>una sola IP anycast mundial</b> que enruta al usuario a la región más cercana. En Azure, eso es <b>Front Door</b>; el Load Balancer normal es regional.</p></div>
+    </div>
+
+    <h3>4 · GKE: Kubernetes, pero de quien lo inventó</h3>
+    <p>Aquí es donde tu experiencia con AKS se transfiere casi intacta. <b>Kubernetes es el mismo</b>: Deployments, Services, Ingress, ConfigMaps, HPA y <code>kubectl</code> funcionan igual. Lo que cambia es cómo se crea y se opera el clúster.</p>
+
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Dimensión</th><th>GKE Autopilot</th><th>GKE Standard</th><th>AKS</th></tr></thead>
+        <tbody>
+          <tr><td>Quién opera los nodos</td><td><b>Google</b></td><td>Tú</td><td>Tú</td></tr>
+          <tr><td>Qué pagas</td><td>Por <b>pod</b> (CPU/RAM pedidos)</td><td>Por nodo (VM)</td><td>Por nodo (VM)</td></tr>
+          <tr><td>Node pools</td><td>No los ves</td><td>Sí</td><td>Sí</td></tr>
+          <tr><td>DaemonSets / privilegios</td><td><b>Limitados</b></td><td>Libres</td><td>Libres</td></tr>
+          <tr><td>Equivalente directo</td><td colspan="2">Autopilot <b>no tiene par</b> en AKS</td><td>≈ GKE Standard</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>Autopilot es el argumento comercial de GKE:</b> Google opera los nodos, los parcha y los escala, y tú pagas por lo que piden tus pods. A cambio pierdes control — no puedes correr DaemonSets arbitrarios ni contenedores privilegiados, lo que rompe algunos agentes de seguridad o monitoreo. Saber <b>nombrar ese trade-off</b> es lo que demuestra criterio, no repetir que "es más fácil".</div>
+
+    <div class="grid cols-3">
+      <div class="card"><h4>Zonal vs regional</h4><p>Un clúster <b>regional</b> replica el control plane y los nodos en <b>varias zonas</b>: sobrevive a la caída de una. El <b>zonal</b> es más barato pero es un punto único de fallo. En AKS el control plane es gestionado y la HA por zonas se configura aparte.</p></div>
+      <div class="card"><h4>Node Auto-Provisioning</h4><p>GKE puede <b>crear node pools solo</b> cuando un pod no cabe en ningún nodo existente. AKS escala los pools que ya definiste, pero no te inventa uno nuevo.</p></div>
+      <div class="card"><h4>Ingress</h4><p>El Ingress de GKE levanta un <b>Cloud Load Balancer global</b> automáticamente. En AKS normalmente pones <b>Application Gateway</b> o un NGINX que tú administras.</p></div>
+      <div class="card"><h4>Autoescalado</h4><p><b>HPA</b> (pods) es idéntico en ambas. El <b>Cluster Autoscaler</b> (nodos) también existe en las dos.</p></div>
+      <div class="card"><h4>Versiones</h4><p>GKE tiene <b>canales de lanzamiento</b> (rapid, regular, stable) y puede actualizarse solo. En AKS defines la versión y las ventanas de mantenimiento.</p></div>
+      <div class="card"><h4>Y desde aquí, igual</h4><p>Una vez tienes credenciales, <code>kubectl</code>, Helm, tus manifiestos y tus charts <b>funcionan sin cambios</b>. Ese es el verdadero seguro de portabilidad.</p></div>
+    </div>
+
+    <h3>5 · El mismo despliegue, en los dos mundos</h3>
+    <p>Desplegar el servicio de facturas. Fíjate en que solo cambian los primeros comandos — <b>a partir de <code>kubectl</code> todo es idéntico</b>:</p>
+    <pre><code><span class="cmt"># ---------- 1. Crear el clúster ----------</span>
+<span class="kw">gcloud</span> container clusters create-auto facturas-prod \
+    --region us-central1 --project facturas-prod
+<span class="cmt"># Azure:  az aks create -g rg-facturas -n facturas-prod --node-count 3</span>
+
+<span class="cmt"># ---------- 2. Conectar kubectl ----------</span>
+<span class="kw">gcloud</span> container clusters get-credentials facturas-prod --region us-central1
+<span class="cmt"># Azure:  az aks get-credentials -g rg-facturas -n facturas-prod</span>
+
+<span class="cmt"># ---------- 3. Publicar la imagen ----------</span>
+<span class="kw">docker</span> build -t us-central1-docker.pkg.dev/facturas-prod/apps/facturas:1.0 .
+<span class="kw">docker</span> push us-central1-docker.pkg.dev/facturas-prod/apps/facturas:1.0
+<span class="cmt"># Azure:  az acr build -r miacr -t facturas:1.0 .   (registro = ACR)</span>
+
+<span class="cmt"># ---------- 4. Desplegar: AQUÍ YA NO HAY DIFERENCIA ----------</span>
+<span class="kw">kubectl</span> apply -f k8s/
+<span class="kw">helm</span> upgrade --install facturas ./chart -f values-prod.yaml
+<span class="kw">kubectl</span> get pods -w</code></pre>
+
+    <h3>6 · Cloud Run: lo que AKS no te da</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Qué es</h4><p>Corre un <b>contenedor sin clúster</b>: le das la imagen y una URL HTTPS aparece. <b>Escala a cero</b> cuando nadie lo usa y pagas por request y por tiempo de CPU.</p></div>
+      <div class="card"><h4>Por qué importa</h4><p>Es la joya de GCP para servicios sueltos: sin nodos, sin parches, sin equipo de plataforma. El equivalente en Azure es <b>Container Apps</b>; para el modelo por función, <b>Azure Functions</b> ≈ <b>Cloud Functions</b>.</p></div>
+      <div class="card"><h4>Cuándo Cloud Run</h4><p>APIs con tráfico irregular, tareas por evento, prototipos, <i>webhooks</i>. Si el servicio pasa horas sin tráfico, escalar a cero cambia la factura por completo.</p></div>
+      <div class="card"><h4>Cuándo GKE</h4><p>Muchos servicios que se hablan entre sí, políticas de red, sidecars, procesos de larga duración, o cuando ya tienes cultura y herramientas de Kubernetes.</p></div>
+    </div>
+
+    <h3>7 · Datos, mensajería y el resto de la plataforma</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Cloud SQL</h4><p>PostgreSQL, MySQL o SQL Server gestionados, con backups y réplicas. ≈ <b>Azure Database for PostgreSQL</b>. Es donde pondrías la BD de facturas.</p></div>
+      <div class="card"><h4>BigQuery</h4><p>El <b>producto estrella</b> de GCP: almacén analítico que consulta terabytes con SQL en segundos, sin servidores que administrar. ≈ <b>Synapse</b>, pero es la razón principal por la que muchas empresas eligen Google.</p></div>
+      <div class="card"><h4>Firestore &amp; Memorystore</h4><p><b>Firestore</b>: NoSQL de documentos ≈ Cosmos DB. <b>Memorystore</b>: Redis gestionado ≈ Azure Cache for Redis.</p></div>
+      <div class="card"><h4>Spanner</h4><p>Base relacional que escala <b>horizontalmente conservando consistencia fuerte global</b>. No tiene equivalente real en Azure; menciónalo solo si viene al caso.</p></div>
+      <div class="card"><h4>Pub/Sub</h4><p>Mensajería gestionada: publicador/suscriptor, <b>at-least-once</b>, reintentos y <i>dead-letter</i> incluidos. ≈ <b>Service Bus</b> / <b>Event Hubs</b>.</p></div>
+      <div class="card"><h4>Secret Manager</h4><p>Secretos versionados con permisos por IAM. ≈ <b>Key Vault</b>. Se consume desde GKE con Workload Identity, sin llaves en el contenedor.</p></div>
+      <div class="card"><h4>Artifact Registry</h4><p>El registro de imágenes y paquetes. ≈ <b>ACR</b>. Sustituyó al antiguo Container Registry.</p></div>
+      <div class="card"><h4>Cloud Build</h4><p>CI/CD gestionado que construye, prueba y despliega. ≈ <b>Azure Pipelines</b>. <b>Cloud Deploy</b> añade entornos y aprobaciones.</p></div>
+      <div class="card"><h4>Cloud Logging &amp; Monitoring</h4><p>Logs, métricas y alertas (antes Stackdriver) ≈ <b>Azure Monitor / Log Analytics</b>. <b>Cloud Trace</b> ≈ Application Insights.</p></div>
+    </div>
+    <div class="callout"><b>Conecta con lo que ya sabes:</b> tú diseñaste la comunicación event-driven con <b>NATS</b>, que operabas tú mismo. <b>Pub/Sub es esa misma idea pero gestionada</b>: no administras servidores y traes reintentos y dead-letter de fábrica, a cambio de menos control sobre la latencia y de quedar atado al proveedor. Poder comparar los dos —lo que ganas y lo que cedes— vale más en una entrevista que haber usado cualquiera de los dos.</div>
+
+    <h3>8 · La tabla que debes poder recitar</h3>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th>Necesidad</th><th>Azure (lo que usas)</th><th>GCP (cómo se llama)</th></tr></thead>
+        <tbody>
+          <tr><td>Kubernetes gestionado</td><td>AKS</td><td><b>GKE</b> (Autopilot o Standard)</td></tr>
+          <tr><td>Contenedor sin clúster</td><td>Container Apps</td><td><b>Cloud Run</b></td></tr>
+          <tr><td>Serverless por función</td><td>Azure Functions</td><td>Cloud Functions</td></tr>
+          <tr><td>Registro de imágenes</td><td>ACR</td><td><b>Artifact Registry</b></td></tr>
+          <tr><td>CI/CD</td><td>Azure Pipelines</td><td><b>Cloud Build</b> (+ Cloud Deploy)</td></tr>
+          <tr><td>Máquinas virtuales</td><td>Virtual Machines</td><td>Compute Engine</td></tr>
+          <tr><td>Identidad y permisos</td><td>Entra ID + RBAC (dos capas)</td><td><b>Cloud IAM</b> (una sola)</td></tr>
+          <tr><td>Identidad para apps</td><td>Managed Identity</td><td><b>Cuenta de servicio</b></td></tr>
+          <tr><td>Identidad para pods</td><td>Workload Identity</td><td>Workload Identity</td></tr>
+          <tr><td>Secretos</td><td>Key Vault</td><td><b>Secret Manager</b></td></tr>
+          <tr><td>Red privada</td><td>VNet (regional)</td><td><b>VPC (global)</b></td></tr>
+          <tr><td>Firewall</td><td>NSG</td><td>Reglas de firewall de VPC</td></tr>
+          <tr><td>Balanceo global</td><td>Front Door</td><td>Cloud Load Balancing</td></tr>
+          <tr><td>PostgreSQL gestionado</td><td>Azure Database for PostgreSQL</td><td><b>Cloud SQL</b></td></tr>
+          <tr><td>NoSQL de documentos</td><td>Cosmos DB</td><td>Firestore</td></tr>
+          <tr><td>Caché</td><td>Azure Cache for Redis</td><td>Memorystore</td></tr>
+          <tr><td>Analítica / data warehouse</td><td>Synapse</td><td><b>BigQuery</b></td></tr>
+          <tr><td>Mensajería</td><td>Service Bus / Event Hubs</td><td><b>Pub/Sub</b></td></tr>
+          <tr><td>Almacenamiento de objetos</td><td>Blob Storage</td><td>Cloud Storage</td></tr>
+          <tr><td>Logs, métricas y trazas</td><td>Azure Monitor + App Insights</td><td>Cloud Logging / Monitoring / Trace</td></tr>
+          <tr><td>Infra como código nativa</td><td>Bicep / ARM</td><td>Deployment Manager (poco usado)</td></tr>
+          <tr><td>Infra como código portable</td><td colspan="2"><b>Terraform — el mismo en las dos</b></td></tr>
+          <tr><td>CLI</td><td><code>az</code></td><td><code>gcloud</code></td></tr>
+          <tr><td>Unidad de facturación</td><td>Suscripción</td><td><b>Proyecto</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>9 · Por qué una empresa elige GCP</h3>
+    <div class="grid cols-2">
+      <div class="card"><h4>Suelen elegir GCP</h4><p>Empresas con foco en <b>datos y analítica</b> (BigQuery no tiene rival cómodo), en <b>ML/IA</b> (Vertex AI), y equipos muy de Kubernetes — recuerda que <b>Google creó Kubernetes</b> y GKE es el más maduro. También startups y producto digital.</p></div>
+      <div class="card"><h4>Suelen elegir Azure</h4><p>Corporativos con <b>Microsoft de base</b>: Active Directory, Office, licenciamiento, .NET y SQL Server. La integración con el directorio existente y los acuerdos comerciales pesan más que la tecnología. Es el caso de tu experiencia en telco.</p></div>
+      <div class="card"><h4>Lo que NO cambia</h4><p>Contenedores, Kubernetes, CI/CD, arquitectura hexagonal, observabilidad, seguridad y diseño de sistemas. <b>Ahí está el 80% del trabajo</b>, y es transferible entre las tres nubes.</p></div>
+      <div class="card"><h4>Tu respuesta de líder</h4><p>La nube se elige por <b>contexto</b>: qué domina el equipo, qué hay ya en la organización, qué acuerdos comerciales existen y cuánto cuesta mantenerlo a cinco años. No por preferencia técnica.</p></div>
+    </div>
+
+    <h3>10 · Errores de novato que conviene evitar</h3>
+    <div class="grid cols-3">
+      <div class="card"><h4>Olvidar el proyecto</h4><p>Casi todo comando necesita <code>--project</code> o un proyecto activo. Crear recursos en el proyecto equivocado es el tropiezo número uno.</p></div>
+      <div class="card"><h4>Llaves JSON en el contenedor</h4><p>Descargar la llave de una cuenta de servicio y montarla en el pod. Usa <b>Workload Identity</b>: sin archivos que rotar ni filtrar.</p></div>
+      <div class="card"><h4>Creer que la VPC es regional</h4><p>Vienes de VNets y asumes que necesitas una por región. En GCP la VPC es <b>global</b>; te sobra la mitad del diseño.</p></div>
+      <div class="card"><h4>Elegir Autopilot a ciegas</h4><p>Es cómodo hasta que necesitas un DaemonSet o un contenedor privilegiado. Verifica primero tus agentes de seguridad y monitoreo.</p></div>
+      <div class="card"><h4>Ignorar el egreso</h4><p>Sacar datos de la nube y el <b>balanceador global</b> cuestan, y no siempre aparecen en la estimación inicial.</p></div>
+      <div class="card"><h4>Confundir roles básicos</h4><p>Dar <b>Editor</b> a todo el mundo "para que funcione". Los roles predefinidos por servicio existen justo para no hacer eso.</p></div>
+    </div>
+
+    <div class="callout"><b>El círculo completo:</b> tu código se construye en <b>Cloud Build</b> → la imagen va a <b>Artifact Registry</b> → <b>Helm</b> la despliega en <b>GKE</b> dentro de una <b>VPC</b> → el pod toma sus secretos de <b>Secret Manager</b> mediante <b>Workload Identity</b> → guarda en <b>Cloud SQL</b> y publica eventos en <b>Pub/Sub</b> → y <b>Cloud Logging/Monitoring</b> te dicen cómo va. <b>Es exactamente el mismo diagrama que dibujaste en Azure</b>, con otros nombres en las cajas.</div>
+
+    <div class="youuse"><b>Cómo lo cuentas tú (honesto, sin inventar):</b> "En producción mi nube es <b>Azure</b>: lideré la migración a microservicios sobre <b>AKS</b>, con ACR, Key Vault, Azure DevOps y Monitor. <b>GCP no lo he operado en un proyecto real</b>, pero conozco su modelo y sé traducir pieza por pieza: GKE por AKS, Artifact Registry por ACR, Cloud Build por Pipelines, Secret Manager por Key Vault, Pub/Sub por Service Bus, y el proyecto de GCP como la fusión de suscripción y grupo de recursos. También tengo claras las diferencias que sí importan: la VPC es global, GKE ofrece Autopilot —que no tiene par en AKS— y el IAM es uno solo en vez de dos capas. Y lo más importante: <b>lo que de verdad usamos a diario es portable</b> — Kubernetes, Docker, Helm y Terraform son los mismos, así que la curva es de semanas, no de meses. Ya hice ese salto entre Java, .NET y Python."</div>
+
+    <h3>Preguntas típicas de GCP</h3>
+    <details class="qa"><summary>¿Has trabajado con GCP?</summary>
+      <div class="ans"><p>Responde con franqueza y conviértelo en fortaleza: <em>"En producción trabajo con <b>Azure</b>, sobre AKS. GCP no lo he operado en un proyecto real, pero conozco el modelo y las equivalencias — GKE, Artifact Registry, Cloud Build, Secret Manager, Pub/Sub — y las diferencias de fondo, como que la VPC es global o que el proyecto concentra facturación y agrupación. Como el grueso del trabajo es Kubernetes, Docker y Terraform, que son idénticos, la curva es corta."</em> <b>Inventar experiencia en nube se detecta en dos preguntas</b>: basta con que te pregunten por la consola o por una cuota.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué es un proyecto en GCP y con qué se corresponde en Azure?</summary>
+      <div class="ans"><p>Es la <b>unidad central</b>: concentra facturación, cuotas, permisos y aislamiento, y todo recurso pertenece a exactamente uno. No equivale al grupo de recursos: se parece más a <b>suscripción y grupo de recursos fusionados</b>. Por eso lo habitual es un proyecto por aplicación y entorno — borrarlo elimina todo lo que contiene, lo que lo vuelve la unidad natural de limpieza. Por encima están las carpetas y la organización, equivalentes a los management groups y al tenant.</p></div>
+    </details>
+    <details class="qa"><summary>¿Diferencia entre GKE Autopilot y Standard?</summary>
+      <div class="ans"><p>En <b>Standard</b> administras los node pools y pagas por nodo, como en AKS. En <b>Autopilot</b> los nodos los opera Google y <b>pagas por los recursos que piden tus pods</b>. Autopilot quita casi todo el trabajo de plataforma, pero <b>restringe DaemonSets y contenedores privilegiados</b>, lo que puede chocar con agentes de seguridad o monitoreo. Elijo Autopilot cuando el equipo es pequeño y las cargas son estándar; Standard cuando necesito control fino del nodo. En AKS no hay un equivalente directo de Autopilot.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cuenta de servicio o managed identity?</summary>
+      <div class="ans"><p>Son el mismo concepto con distinto nombre: la <b>identidad de una aplicación</b>, no de una persona, para que un servicio hable con otro sin contraseñas. En Azure es la <b>managed identity</b>; en GCP, la <b>cuenta de servicio</b>. En Kubernetes ambas se aterrizan con <b>Workload Identity</b>, que asocia la cuenta de servicio de la nube con la del pod. La mala práctica en GCP es descargar la llave JSON y montarla en el contenedor: eso es volver a tener una credencial que rotar.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cuándo usarías Cloud Run en vez de GKE?</summary>
+      <div class="ans"><p><b>Cloud Run</b> cuando quiero correr un contenedor <b>sin operar un clúster</b>: escala a cero, pago por uso y cero mantenimiento — ideal para APIs de tráfico irregular, webhooks o tareas por evento. <b>GKE</b> cuando hay muchos servicios que se comunican, necesito políticas de red, sidecars, procesos de larga duración o ya existe cultura de Kubernetes. El criterio de fondo es el <b>costo operativo</b>: un clúster exige un equipo que lo sostenga. Su par en Azure es Container Apps.</p></div>
+    </details>
+    <details class="qa"><summary>¿Qué diferencias hay en redes entre Azure y GCP?</summary>
+      <div class="ans"><p>La mayor es que la <b>VPC de GCP es global</b>: una sola red abarca todas las regiones con una subred por región, y los recursos se hablan por IP privada sin más. En Azure la <b>VNet es regional</b> y hay que emparejar redes entre regiones. Además el firewall en GCP vive <b>en la VPC</b> y se aplica por etiquetas, mientras que el <b>NSG</b> de Azure se asocia a subredes o interfaces. Y <b>Cloud Load Balancing</b> ofrece una IP anycast global; en Azure ese papel lo cumple Front Door.</p></div>
+    </details>
+    <details class="qa"><summary>¿Cómo migrarías una plataforma de AKS a GKE?</summary>
+      <div class="ans"><p>Primero delimito qué es portable y qué no: <b>manifiestos, charts de Helm e imágenes son portables</b>; lo atado al proveedor es la identidad, los secretos, el Ingress, el almacenamiento y la mensajería. Replico la infraestructura con <b>Terraform</b>, publico las imágenes en <b>Artifact Registry</b>, cambio la identidad de managed identity a <b>cuenta de servicio con Workload Identity</b>, muevo los secretos de Key Vault a <b>Secret Manager</b> y ajusto el Ingress al balanceador de GKE. Migro <b>servicio por servicio</b>, no en bloque —igual que hice con el monolito usando strangler fig—, con doble publicación de eventos durante la transición y un plan de vuelta atrás.</p></div>
+    </details>
+    <details class="qa"><summary>¿Pub/Sub o NATS?</summary>
+      <div class="ans"><p><b>Pub/Sub</b> es gestionado: no operas servidores y trae reintentos, <i>dead-letter</i> y entrega <b>at-least-once</b> de fábrica; el precio es menos control sobre la latencia y dependencia del proveedor. <b>NATS</b> —que es lo que yo operé— es muy liviano y rapidísimo, y me daba control total, pero <b>alguien tiene que mantenerlo</b> y las garantías de entrega exigen JetStream. Si el equipo ya está en GCP y no quiere operar mensajería, Pub/Sub; si necesito latencia mínima o portabilidad entre nubes, NATS.</p></div>
+    </details>
   </div>
 </section>
 
@@ -2832,7 +3086,7 @@ status changed to Done AFTER -7d</code></pre>
       <div id="sim-start" class="sim-panel">
         <p><b>Elige tu práctica:</b></p>
         <div class="sim-sets">
-          <button class="sim-set" data-set="all">Completo (20)</button>
+          <button class="sim-set" data-set="all">Completo (22)</button>
           <button class="sim-set" data-set="quick">Rápido (5)</button>
           <button class="sim-set" data-set="tech">Técnica</button>
           <button class="sim-set" data-set="sysdesign">System Design</button>
@@ -2942,6 +3196,14 @@ status changed to Done AFTER -7d</code></pre>
      good:'reconoces que no se puede revocar directamente y das soluciones de diseño: expiración corta, refresh revocable, lista negra por jti o versión de token.',watch:'afirmar que basta con borrarlo del cliente, o inventar una revocación que el estándar no tiene.',level:'mencionar la rotación del refresh y revocar toda la familia si se reutiliza uno.',
      model:'Un JWT es válido hasta su exp, así que directamente no se revoca: se resuelve por diseño. Access token de vida corta, 5 a 15 minutos, para que la ventana de riesgo sea mínima, y refresh token revocable guardado en servidor. Si necesito corte inmediato, añado lista negra por jti en Redis, solo hasta que expire para que no crezca, o una versión de token por usuario que incremento al cerrar sesión en todos los dispositivos. Y con rotación de refresh: si aparece uno ya usado, es señal de robo y revoco toda la familia de esa sesión.',
      sets:['all','tech'],time:120},
+    {cat:'Nube',q:'La vacante pide GCP y tu experiencia es Azure. ¿Has trabajado con Google Cloud?',hint:'Sé honesto y demuestra que sabes traducir; no inventes experiencia en nube.',
+     good:'dices con claridad que tu nube es Azure, demuestras que conoces las equivalencias de GCP y cierras con lo que es portable (Kubernetes, Docker, Terraform).',watch:'inventar experiencia —se cae en dos preguntas— o quedarte en un "no" seco sin mostrar el mapeo.',level:'nombrar diferencias reales: la VPC global, Autopilot sin par en AKS, y el proyecto como fusión de suscripción y grupo de recursos.',
+     model:'En producción mi nube es Azure: lideré la migración a microservicios sobre AKS, con ACR, Key Vault, Azure DevOps y Monitor. GCP no lo he operado en un proyecto real, pero conozco el modelo y sé traducirlo: GKE por AKS, Artifact Registry por ACR, Cloud Build por Pipelines, Secret Manager por Key Vault y Pub/Sub por Service Bus. Y tengo claras las diferencias que sí importan: en GCP la VPC es global, GKE ofrece Autopilot que no tiene equivalente en AKS, y el proyecto concentra facturación y agrupación, o sea suscripción y grupo de recursos fusionados. Lo que usamos a diario —Kubernetes, Docker, Helm, Terraform— es idéntico, así que la curva es de semanas.',
+     sets:['all','tech'],time:120},
+    {cat:'Nube',q:'¿Cómo migrarías una plataforma de microservicios de AKS a GKE?',hint:'Separa lo portable de lo atado al proveedor, y hazlo por servicio.',
+     good:'distingues lo portable (manifiestos, Helm, imágenes) de lo específico (identidad, secretos, ingress, mensajería), usas Terraform y migras servicio por servicio con vuelta atrás.',watch:'decir que "es solo cambiar el kubeconfig" o proponer una migración en bloque.',level:'ligarlo a strangler fig y mencionar la doble publicación de eventos durante la transición.',
+     model:'Primero separo lo portable de lo que está atado al proveedor. Manifiestos, charts de Helm e imágenes se mueven tal cual; lo específico es identidad, secretos, ingress, almacenamiento y mensajería. Replico infraestructura con Terraform, publico las imágenes en Artifact Registry, cambio managed identity por cuenta de servicio con Workload Identity, muevo los secretos de Key Vault a Secret Manager y ajusto el ingress al balanceador de GKE. Migro servicio por servicio, no en bloque, igual que hice con el monolito usando strangler fig, con doble publicación de eventos durante la transición y plan de vuelta atrás en cada paso.',
+     sets:['all','tech','sysdesign'],time:180},
     {cat:'RR.HH.',q:'¿Cuál es tu principal debilidad?',hint:'Honesta + cómo la trabajas.',
      good:'debilidad real + acción concreta para manejarla.',watch:'una fortaleza disfrazada o algo descalificante.',level:'mostrar autoconciencia y mejora continua.',
      model:'Por mi perfil hands-on me involucro mucho en el detalle técnico; lo trabajo delegando el resultado y confiando en el equipo, reservando mi tiempo para arquitectura y desbloqueos.',
@@ -3024,6 +3286,14 @@ status changed to Done AFTER -7d</code></pre>
     <details class="qa"><summary>¿Qué garantiza un JWT y qué NO garantiza?</summary><div class="ans"><p>Garantiza <b>integridad y autenticidad</b>: que nadie alteró el contenido y que lo emitió quien dice, gracias a la firma. <b>No garantiza confidencialidad</b>: el payload va en <b>Base64, no cifrado</b>, y cualquiera lo lee. Por eso nunca van ahí contraseñas, tarjetas ni datos personales de más. Su ventaja es validarse <b>sin estado</b>: cada servicio verifica la firma con la clave pública del <b>JWKS</b>, sin consultar la BD.</p></div></details>
     <details class="qa"><summary>¿Dónde guardas el token en el navegador?</summary><div class="ans"><p><b>Access token en memoria</b> y <b>refresh en cookie <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite=Strict</code></b>. En <code>localStorage</code> es cómodo, pero cualquier <b>XSS</b> se lleva la sesión completa; la cookie <code>HttpOnly</code> es invisible para JavaScript y el <code>SameSite</code> mitiga el <b>CSRF</b>. Encima: HTTPS obligatorio, CORS restringido y expiración corta.</p></div></details>
     <details class="qa"><summary>¿Diferencia entre OAuth2, OIDC y JWT?</summary><div class="ans"><p><b>OAuth2</b> = <b>autorización</b> delegada (qué puede hacer una app en tu nombre, sin darle tu contraseña). <b>OIDC</b> = capa <b>sobre</b> OAuth2 que añade <b>autenticación</b> y el <code>id_token</code> con la identidad (el "Entrar con Google/Microsoft"). <b>JWT</b> no es un protocolo: es el <b>formato</b> del token que ambos usan. Confundir los tres es el error más frecuente. Y el flujo correcto hoy es <b>Authorization Code + PKCE</b>; el <i>implicit</i> está obsoleto.</p></div></details>
+
+    <h3>Nube: Azure y GCP</h3>
+    <details class="qa"><summary>¿Has trabajado con GCP?</summary><div class="ans"><p>Respuesta honesta y con criterio: <em>"En producción mi nube es <b>Azure</b>, sobre <b>AKS</b>. GCP no lo he operado en un proyecto real, pero conozco el modelo y las equivalencias —GKE, Artifact Registry, Cloud Build, Secret Manager, Pub/Sub— y las diferencias de fondo: la VPC es global, GKE ofrece Autopilot que no tiene par en AKS, y el proyecto concentra facturación y agrupación. Como el grueso del trabajo es Kubernetes, Docker y Terraform, que son idénticos, la curva es de semanas."</em> <b>Inventar experiencia en nube se cae en dos preguntas.</b></p></div></details>
+    <details class="qa"><summary>¿Qué es un proyecto en GCP y a qué equivale en Azure?</summary><div class="ans"><p>Es la <b>unidad central</b> de GCP: concentra facturación, cuotas, permisos y aislamiento, y todo recurso pertenece a uno solo. No es el equivalente del grupo de recursos: se parece más a <b>suscripción + grupo de recursos fusionados</b>. Por eso se usa un proyecto por aplicación y entorno — al borrarlo desaparece todo lo que contiene. Por encima están las <b>carpetas</b> y la <b>organización</b>, equivalentes a los management groups y al tenant.</p></div></details>
+    <details class="qa"><summary>¿GKE Autopilot o Standard?</summary><div class="ans"><p><b>Standard</b>: administras node pools y pagas por nodo, como AKS. <b>Autopilot</b>: Google opera los nodos y <b>pagas por lo que piden tus pods</b>. Autopilot elimina casi todo el trabajo de plataforma, pero <b>limita DaemonSets y contenedores privilegiados</b>, lo que puede romper agentes de seguridad o monitoreo. Autopilot con equipo pequeño y cargas estándar; Standard cuando necesito control del nodo. <b>Autopilot no tiene equivalente directo en AKS.</b></p></div></details>
+    <details class="qa"><summary>¿Diferencias de red entre Azure y GCP?</summary><div class="ans"><p>La grande: la <b>VPC de GCP es global</b> — una red abarca todas las regiones con una subred por región, y todo se habla por IP privada sin configurar nada. La <b>VNet de Azure es regional</b> y exige <i>peering</i> entre regiones. Además el firewall en GCP vive en la VPC y se aplica por etiquetas, mientras el <b>NSG</b> se asocia a subredes o interfaces. Para balanceo global, <b>Cloud Load Balancing</b> da una IP anycast; en Azure ese papel es de <b>Front Door</b>.</p></div></details>
+    <details class="qa"><summary>¿Managed identity y cuenta de servicio son lo mismo?</summary><div class="ans"><p>Sí, con distinto nombre: la <b>identidad de una aplicación</b> para que hable con otros servicios <b>sin contraseñas</b>. En Azure es la <b>managed identity</b>; en GCP la <b>cuenta de servicio</b>. En Kubernetes ambas se aterrizan con <b>Workload Identity</b>. La mala práctica en GCP es descargar la <b>llave JSON</b> y montarla en el contenedor: vuelves a tener una credencial que rotar y que se puede filtrar.</p></div></details>
+    <details class="qa"><summary>¿Cuándo Cloud Run y cuándo GKE?</summary><div class="ans"><p><b>Cloud Run</b> para correr un contenedor <b>sin operar un clúster</b>: escala a cero, pago por uso, cero mantenimiento — APIs de tráfico irregular, webhooks, tareas por evento. <b>GKE</b> cuando hay muchos servicios que se comunican, políticas de red, sidecars o procesos largos. El criterio real es el <b>costo operativo</b>: un clúster necesita un equipo que lo sostenga. En Azure el equivalente de Cloud Run es <b>Container Apps</b>.</p></div></details>
 
     <h3>Arquitectura</h3>
     <details class="qa"><summary>¿Qué es la arquitectura hexagonal, en una frase?</summary><div class="ans"><p>Las <b>reglas de negocio en el centro</b>, sin depender de ningún framework, y todo lo externo entrando o saliendo por <b>puertos</b> (interfaces del dominio) que implementan <b>adaptadores</b> (REST, JPA/SQLAlchemy, NATS). La regla que lo sostiene es la <b>inversión de dependencias</b>: todos los <code>import</code> apuntan hacia adentro. El beneficio concreto: pruebo el negocio <b>sin BD ni HTTP</b> y cambio de tecnología tocando un adaptador.</p></div></details>
@@ -3164,7 +3434,7 @@ status changed to Done AFTER -7d</code></pre>
   <div class="wrap">
     Guía de estudio personalizada para Hugo Ferney Gómez González · Cloud · Docker · Kubernetes · Azure ·
     Practica cada respuesta en voz alta y ancla siempre en tu experiencia real (MTH → Nébula, dashboards, zero-downtime).
-    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-07-29 22:06 (Bogotá)</span></span>
+    <br><span class="stamp" style="margin-top:10px">🕒 <span class="deploy-stamp">Desplegado: 2026-08-03 22:38 (Bogotá)</span></span>
   </div>
 </footer>
 
@@ -3211,7 +3481,8 @@ status changed to Done AFTER -7d</code></pre>
       ['sql','Bases de datos / SQL'],['nats','NATS'],
       ['arquitectura','Arquitectura de software'],
       ['rest-soap','REST vs SOAP'],['jwt','JWT y autenticación'],['k8s-deep','Kubernetes a fondo'],
-      ['helm','Helm'],['azure','Azure / AKS'],['curso-devops','Curso DevOps'],
+      ['helm','Helm'],['azure','Azure / AKS'],['gcp','GCP / Google Cloud'],
+      ['curso-devops','Curso DevOps'],
       ['pipelines','Pipelines CI/CD'],['testing','Pruebas / Testing'],
       ['calidad','Calidad y seguridad'],['liderazgo','Curso de liderazgo'],
       ['jira','Jira & seguimiento']];
@@ -3236,7 +3507,7 @@ status changed to Done AFTER -7d</code></pre>
           clear=document.getElementById('dashclear'),
           bCards=document.getElementById('viewcards'),
           bList=document.getElementById('viewlist'),
-          IDLE='23 cursos · busca por tema: jwt, hexagonal, angular, pods…';
+          IDLE='24 cursos · busca por tema: gcp, jwt, hexagonal, angular, pods…';
 
       function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
 
