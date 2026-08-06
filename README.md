@@ -4,6 +4,7 @@ Guía visual de estudio para entrevistas de perfiles técnicos: **24 cursos** or
 chuleta de bolsillo, glosario, banco de preguntas y simulador cronometrado.
 
 **Sitio:** https://hgomezgonzalez.github.io/guia-devops/
+**Inicio:** https://hgomezgonzalez.github.io/
 
 ---
 

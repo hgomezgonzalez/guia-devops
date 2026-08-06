@@ -1,5 +1,7 @@
 # Runbook — cómo está hecha esta guía y cómo se le añade un curso
 
+[🧭 Inicio](https://hgomezgonzalez.github.io/) · [Ver la guía publicada](https://hgomezgonzalez.github.io/guia-devops/)
+
 Manual de mantenimiento de `index.html`. Escrito después de construir el sistema y añadir once cursos con
 él, así que documenta lo que funcionó y también lo que se rompió por el camino.
 
