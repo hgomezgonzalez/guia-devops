@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Runbook — cómo está hecha la guía de entrevistas</title>
+<meta name="description" content="Manual de mantenimiento: arquitectura del sistema, cómo añadir un curso, verificación, despliegue y los errores ya cometidos.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Runbook — cómo está hecha la guía de entrevistas">
+<meta property="og:description" content="Manual de mantenimiento: arquitectura del sistema, cómo añadir un curso, verificación, despliegue y los errores ya cometidos.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+<style>
+  :root{
+    --paper:#fbfbfc; --surface:#fff; --sunk:#f2f4f7;
+    --ink:#131a24; --ink-soft:#4a5769; --ink-faint:#7d8a9d;
+    --line:#dfe4ec; --line-soft:#eceff4;
+    --brand:#1d3557; --brand-soft:#3d6491; --accent:#a2542a; --accent-soft:#c47a48;
+    --serif:ui-serif,"New York","Iowan Old Style",Georgia,serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --shadow:0 1px 2px rgba(19,26,36,.04),0 6px 20px rgba(19,26,36,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--paper:#0e1319;--surface:#161d26;--sunk:#1b232e;--ink:#e7ecf3;--ink-soft:#a5b2c4;
+      --ink-faint:#77869a;--line:#28323f;--line-soft:#1f2833;--brand:#84acd8;--brand-soft:#5f88b4;
+      --accent:#d9895a;--accent-soft:#b56b41;--shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.28)}
+  }
+  :root[data-theme="dark"]{--paper:#0e1319;--surface:#161d26;--sunk:#1b232e;--ink:#e7ecf3;
+    --ink-soft:#a5b2c4;--ink-faint:#77869a;--line:#28323f;--line-soft:#1f2833;--brand:#84acd8;
+    --brand-soft:#5f88b4;--accent:#d9895a;--accent-soft:#b56b41;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.28)}
+  :root[data-theme="light"]{--paper:#fbfbfc;--surface:#fff;--sunk:#f2f4f7;--ink:#131a24;
+    --ink-soft:#4a5769;--ink-faint:#7d8a9d;--line:#dfe4ec;--line-soft:#eceff4;--brand:#1d3557;
+    --brand-soft:#3d6491;--accent:#a2542a;--accent-soft:#c47a48;
+    --shadow:0 1px 2px rgba(19,26,36,.04),0 6px 20px rgba(19,26,36,.05)}
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+  a{color:var(--brand)}
+
+  .fixed{position:fixed;top:16px;z-index:50;display:inline-flex;align-items:center;gap:6px;
+    padding:8px 14px;border-radius:20px;font-size:.84rem;font-weight:550;text-decoration:none;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);box-shadow:var(--shadow)}
+  .fixed:hover{border-color:var(--accent);color:var(--accent)}
+  #home{left:16px} #theme{right:16px;cursor:pointer;font-family:var(--sans)}
+  @media(max-width:640px){.fixed span{display:none}.fixed{padding:9px 11px}}
+
+  header.top{padding:74px 0 26px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 14px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4.6vw,2.7rem);line-height:1.1;
+    letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance;max-width:22ch}
+  .lede{font-size:1.06rem;color:var(--ink-soft);max-width:62ch;margin:0}
+  .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:9px;
+    font-size:.9rem;font-weight:550;text-decoration:none;border:1px solid var(--line);
+    background:var(--surface);color:var(--ink);cursor:pointer;font-family:var(--sans);
+    transition:border-color .15s,transform .12s}
+  .btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .btn.primary{background:var(--brand);border-color:var(--brand);color:var(--paper)}
+
+  .idx{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:26px 0 8px}
+  .idx a{display:flex;align-items:baseline;gap:9px;padding:13px 15px;background:var(--surface);
+    border:1px solid var(--line);border-left:3px solid var(--brand-soft);border-radius:9px;
+    text-decoration:none;box-shadow:var(--shadow);transition:border-color .15s,transform .12s}
+  .idx a:hover{border-left-color:var(--accent);transform:translateY(-1px)}
+  .idx a b{font-family:var(--mono);font-size:.72rem;color:var(--accent)}
+  .idx a span{font-family:var(--serif);font-size:.98rem;color:var(--ink);line-height:1.25}
+
+  main{padding-bottom:10px}
+  h2{font-family:var(--serif);font-size:1.6rem;font-weight:600;margin:52px 0 12px;
+    letter-spacing:-.01em;scroll-margin-top:18px;text-wrap:balance;
+    padding-bottom:9px;border-bottom:1px solid var(--line)}
+  h3{font-family:var(--serif);font-size:1.2rem;font-weight:600;margin:32px 0 8px;scroll-margin-top:18px}
+  h4{font-size:1rem;font-weight:650;margin:22px 0 6px;color:var(--brand);scroll-margin-top:18px}
+  h5{font-size:.93rem;font-weight:650;margin:16px 0 5px}
+  .anchor{margin-left:9px;font-size:.7em;color:var(--ink-faint);text-decoration:none;opacity:0;
+    transition:opacity .15s}
+  h2:hover .anchor{opacity:1}
+  p{margin:0 0 13px;max-width:70ch}
+  ul,ol{margin:0 0 14px;padding-left:22px;max-width:70ch;display:grid;gap:6px}
+  li{color:var(--ink-soft)}
+  li strong,p strong{color:var(--ink)}
+  ul.check{list-style:none;padding-left:0}
+  ul.check li{position:relative;padding-left:27px}
+  ul.check li::before{content:"";position:absolute;left:0;top:.3em;width:15px;height:15px;
+    border:1.5px solid var(--line);border-radius:4px;background:var(--surface)}
+  blockquote{margin:16px 0;padding:14px 18px;background:var(--sunk);
+    border-left:3px solid var(--accent-soft);border-radius:0 9px 9px 0;color:var(--ink-soft);max-width:70ch}
+  hr{border:none;border-top:1px solid var(--line-soft);margin:30px 0}
+  code{font-family:var(--mono);font-size:.87em;background:var(--sunk);padding:1px 5px;
+    border-radius:4px;color:var(--brand)}
+  pre{background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:15px 18px;
+    overflow-x:auto;margin:0 0 16px}
+  pre code{background:none;padding:0;color:var(--ink-soft);font-size:.83rem;line-height:1.65}
+  .tw{overflow-x:auto;margin:0 0 18px;border:1px solid var(--line);border-radius:10px;
+    background:var(--surface)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:440px}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{background:var(--sunk);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--brand)}
+  td:first-child{color:var(--ink)}
+  tr:last-child td{border-bottom:none}
+
+  footer{margin-top:56px;padding:22px 0 60px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:.75rem;color:var(--ink-faint)}
+
+  @page{margin:16mm 14mm}
+  @media print{
+    :root{--paper:#fff;--surface:#fff;--sunk:#f5f6f8;--ink:#000;--ink-soft:#333;--line:#ccc;
+      --line-soft:#e2e2e2;--accent:#8f4720;--shadow:none}
+    body{font-size:10.5pt}
+    .fixed,.cta,.idx,.anchor,footer{display:none!important}
+    .wrap{max-width:100%;padding:0}
+    h2{break-before:page;break-after:avoid}
+    h2:first-of-type{break-before:auto}
+    h3,h4,h5{break-after:avoid}
+    pre,.tw,blockquote{break-inside:avoid}
+    a{color:inherit;text-decoration:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<a class="fixed" id="home" href="https://hgomezgonzalez.github.io/" title="Volver al inicio">🧭<span>Inicio</span></a>
+<button class="fixed" id="theme" type="button" aria-label="Cambiar tema" title="Cambiar tema">◐</button>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Manual de mantenimiento</p>
+    <h1>Cómo está hecha la guía y cómo se le añade un curso</h1>
+    <p class="lede">Escrito después de construir el sistema y añadir once cursos con él, así que documenta
+      lo que funcionó y también lo que se rompió por el camino.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://hgomezgonzalez.github.io/guia-devops/">Ver la guía publicada →</a>
+      <button class="btn" type="button" onclick="window.print()">Imprimir o guardar en PDF</button>
+    </div>
+    <nav class="idx"><a href="#1-por-que-un-solo-archivo"><b>01</b><span>Por qué un solo archivo</span></a>
+<a href="#2-arquitectura-del-sistema"><b>02</b><span>Arquitectura del sistema</span></a>
+<a href="#3-anadir-un-curso-los-10-puntos-de-registro"><b>03</b><span>Añadir un curso: los 10 puntos de registro</span></a>
+<a href="#4-como-se-escribe-un-curso"><b>04</b><span>Cómo se escribe un curso</span></a>
+<a href="#5-verificacion"><b>05</b><span>Verificación</span></a>
+<a href="#6-despliegue"><b>06</b><span>Despliegue</span></a>
+<a href="#7-errores-que-ya-se-cometieron"><b>07</b><span>Errores que ya se cometieron</span></a>
+<a href="#anadir-un-curso-resumen-ejecutable"><b>08</b><span>Añadir un curso — resumen ejecutable</span></a></nav>
+  </header>
+
+  <main>
+<p>Manual de mantenimiento de <code>index.html</code>. Escrito después de construir el sistema y añadir once cursos con él, así que documenta lo que funcionó y también lo que se rompió por el camino.</p>
+<hr>
+<h2 id="1-por-que-un-solo-archivo">1. Por qué un solo archivo<a class="anchor" href="#1-por-que-un-solo-archivo" aria-label="Enlace">#</a></h2>
+<p>Todo vive en un <code>index.html</code> de ~3.600 líneas: HTML, CSS y JS en línea. Sin build, sin dependencias, sin <code>node_modules</code>.</p>
+<p>Suena primitivo y es justamente la ventaja. El caso de uso real es <strong>abrirlo en el móvil cinco minutos antes de una entrevista</strong>, a veces sin buena conexión. Un solo archivo:</p>
+<ul><li>carga de una y funciona offline una vez cacheado,</li><li>se edita sin arrancar nada,</li><li>se despliega con <code>git push</code>,</li><li>no puede romperse porque una dependencia cambió.</li></ul>
+<p>El precio es un archivo grande. Se paga con disciplina: <strong>estructura repetida y previsible</strong>, que es de lo que trata el resto de este documento.</p>
+<hr>
+<h2 id="2-arquitectura-del-sistema">2. Arquitectura del sistema<a class="anchor" href="#2-arquitectura-del-sistema" aria-label="Enlace">#</a></h2>
+<h3 id="21-sistema-de-diseno-en-root">2.1 Sistema de diseño en <code>:root</code></h3>
+<p>Todo el color y la tipografía salen de variables CSS. Nunca se escribe un hex suelto en un componente.</p>
+<pre><code class="lang-css">:root{
+  --bg; --surface; --surface-2; --surface-3;     /* superficies */
+  --ink; --ink-soft; --ink-faint;                /* tinta */
+  --line; --brand; --brand-ink;                  /* estructura */
+  --azure; --docker; --k8s; --good; --warn;      /* semánticos y por tecnología */
+  --sans; --mono; --maxw:960px; --radius; --shadow;
+}</code></pre>
+<p>Tres temas: <code>prefers-color-scheme: dark</code> para la preferencia del sistema, más overrides manuales <code>[data-theme=light|dark]</code>. <strong>Los componentes se estilan siempre a través de los tokens</strong>, nunca dentro de la media query — si no, el tema manual no puede ganarle a la del sistema.</p>
+<h3 id="22-navegacion-en-cuatro-capas">2.2 Navegación en cuatro capas</h3>
+<div class="tw"><table><thead><tr><th>Capa</th><th>Qué es</th></tr></thead><tbody><tr><td><code>nav.nav</code></td><td>Barra fija: inicio, marca, acceso a chuleta, botón Enfoque, botón Menú</td></tr><tr><td><code>#menu</code></td><td>Overlay con las secciones agrupadas en 9 categorías, con buscador propio</td></tr><tr><td><code>#dashboard</code></td><td>La portada: los cursos por niveles, con buscador</td></tr><tr><td><code>.seq-nav</code></td><td>Anterior/Siguiente inyectados por JS al final de cada curso</td></tr></tbody></table></div>
+<h3 id="23-el-dashboard-y-su-buscador">2.3 El dashboard y su buscador</h3>
+<p>Los cursos se agrupan en niveles que van de fundamentos a liderazgo:</p>
+<pre><code class="lang-">Nivel 1  Fundamentos          Nivel 4  Infraestructura &amp; Cloud
+Nivel 2  Desarrollo           Nivel 5  Entrega (DevOps)
+Nivel 3  APIs, integración    Nivel 6  Liderazgo &amp; gestión
+         &amp; seguridad          Repaso · Assessments</code></pre>
+<p>Cada curso es una tarjeta:</p>
+<pre><code class="lang-html">&lt;a class=&quot;dash-card&quot; data-k=&quot;palabras clave sin tildes&quot; href=&quot;#id&quot; style=&quot;--c:#COLOR&quot;&gt;
+  &lt;span class=&quot;dc-n&quot;&gt;12&lt;/span&gt;&lt;b&gt;Título&lt;/b&gt;&lt;span&gt;Subtítulo&lt;/span&gt;
+&lt;/a&gt;</code></pre>
+<p><strong>El atributo <code>data-k</code> es el corazón del buscador.</strong> Es un índice de sinónimos y jerga que permite encontrar el curso por tema y no solo por nombre. Ejemplos reales del archivo:</p>
+<pre><code class="lang-">kubernetes → &quot;k8s pod pods orquestacion deployment service ingress cluster replicas escalar&quot;
+.NET       → &quot;net dotnet c csharp asp aspnet ef core efcore entity framework linq nuget kestrel&quot;
+arquitectura → &quot;hexagonal puertos adaptadores ddd clean onion cqrs strangler fig adr c4 bounded context&quot;</code></pre>
+<p>Sin <code>data-k</code>, buscar &quot;hexagonal&quot; no encontraría nada, porque el curso se llama &quot;Arquitectura de software&quot;.</p>
+<p>El buscador normaliza con <code>NFD</code> y quita diacríticos, exige <strong>todos los términos en cualquier orden</strong> (<code>&quot;ef core&quot;</code>, <code>&quot;base datos&quot;</code>), resalta la coincidencia con <code>&lt;mark&gt;</code>, oculta los niveles que quedan vacíos, y <strong>Enter salta al primer resultado</strong>.</p>
+<h3 id="24-modo-enfoque">2.4 Modo Enfoque</h3>
+<p><code>body.focus-mode</code> + el selector <code>:target</code> en CSS muestra <strong>un solo curso a la vez</strong>. Apagado, la página vuelve a ser un documento continuo. Se persiste en <code>localStorage</code>. Sirve para estudiar sin distracción y para que el móvil no tenga que renderizar 3.600 líneas.</p>
+<h3 id="25-simulador">2.5 Simulador</h3>
+<p>Mini-app JS sin backend. El banco es un array <code>Q</code> donde cada pregunta tiene esquema fijo:</p>
+<pre><code class="lang-javascript">{
+  cat:&#x27;Arquitectura&#x27;,                    // categoría visible
+  q:&#x27;...&#x27;,                               // la pregunta
+  hint:&#x27;...&#x27;,                            // pista de por dónde empezar
+  good:&#x27;...&#x27;,                            // qué suma en la respuesta
+  watch:&#x27;...&#x27;,                           // qué te van a cuestionar
+  level:&#x27;...&#x27;,                           // cómo subir el nivel
+  model:&#x27;...&#x27;,                           // respuesta modelo
+  sets:[&#x27;all&#x27;,&#x27;tech&#x27;,&#x27;sysdesign&#x27;],       // para filtrar por tipo de práctica
+  time:120                               // segundos sugeridos
+}</code></pre>
+<p>Flujo: elegir set → pregunta con <strong>cronómetro corriendo</strong> y textarea → &quot;Ver evaluación&quot; revela la rúbrica de tres criterios (<code>good</code> / <code>watch</code> / <code>level</code>) y la respuesta modelo → siguiente.</p>
+<p>Sets disponibles: <code>all</code>, <code>quick</code> (corta a 5), <code>tech</code>, <code>sysdesign</code>, <code>lead</code>.</p>
+<h3 id="26-los-bloques-de-practica">2.6 Los bloques de práctica</h3>
+<ul><li><strong><code>#chuleta</code></strong> — tarjeta de bolsillo: pitch de 20 s y las métricas que siempre se mencionan.</li><li><strong><code>#guion</code></strong> — todos los &quot;cómo lo cuentas tú&quot; reunidos en un solo lugar.</li><li><strong><code>#entrenamiento</code></strong> — banco de preguntas en <code>&lt;details class=&quot;qa&quot;&gt;</code>, agrupado por bloques temáticos.</li><li><strong><code>#glosario</code></strong> — cada término del CV explicado en una frase. Su propósito: que ninguna palabra escrita en el CV pueda tomarte por sorpresa.</li><li><strong>Assessments</strong> — System Design, prueba de código, psicométricos y assessment center.</li></ul>
+<hr>
+<h2 id="3-anadir-un-curso-los-10-puntos-de-registro">3. Añadir un curso: los 10 puntos de registro<a class="anchor" href="#3-anadir-un-curso-los-10-puntos-de-registro" aria-label="Enlace">#</a></h2>
+<p>Un curso no es solo una <code>&lt;section&gt;</code>. Hay <strong>diez sitios</strong> que tocar, y omitir uno deja el sistema inconsistente de formas que no siempre saltan a la vista.</p>
+<h3 id="1-clase-de-color-del-tag">1 · Clase de color del tag</h3>
+<p>Junto a las demás <code>.t-*</code> (≈ línea 91):</p>
+<pre><code class="lang-css">.t-gcp{background:#ea4335}</code></pre>
+<p>Elige un color que no choque con los vecinos de su nivel. Ejemplo real: GCP entró al Nivel 4, cuyos vecinos eran azules y verde azulado, así que se le dio el rojo de Google.</p>
+<h3 id="2-la-seccion-del-curso">2 · La sección del curso</h3>
+<p>Se inserta <strong>en el orden lógico de la ruta</strong>, no al final del archivo. Si el curso va después de Azure, la sección va físicamente entre <code>&lt;/section&gt;</code> de <code>#azure</code> y <code>&lt;section id=&quot;pipelines&quot;&gt;</code>.</p>
+<h3 id="3-entrada-en-el-menu">3 · Entrada en el menú</h3>
+<p>En la categoría que corresponda dentro de <code>.menu-groups</code>:</p>
+<pre><code class="lang-html">&lt;a href=&quot;#gcp&quot;&gt;&lt;b&gt;GCP / Google Cloud&lt;/b&gt;&lt;span&gt;Traducido desde Azure y AKS&lt;/span&gt;&lt;/a&gt;</code></pre>
+<p>Si el tema no encaja en ninguna categoría, se crea una nueva con su punto de color.</p>
+<h3 id="4-tarjeta-del-dashboard">4 · Tarjeta del dashboard</h3>
+<p>Cerrando el nivel que le toque, <strong>con su <code>data-k</code></strong> (ver §2.3). Este es el punto que más se olvida y el que rompe el buscador en silencio.</p>
+<h3 id="5-renumerar-las-tarjetas-siguientes">5 · Renumerar las tarjetas siguientes</h3>
+<p>Los <code>&lt;span class=&quot;dc-n&quot;&gt;N&lt;/span&gt;</code> están escritos a mano. Si insertas en medio, hay que correr todos los números posteriores. <strong>Hazlo de atrás hacia adelante</strong> para no colisionar:</p>
+<pre><code class="lang-">23→24, 22→23, 21→22 …</code></pre>
+<h3 id="6-array-seq">6 · Array <code>SEQ</code></h3>
+<p>Alimenta los botones Anterior/Siguiente. Se inserta en la posición del recorrido:</p>
+<pre><code class="lang-javascript">[&#x27;azure&#x27;,&#x27;Azure / AKS&#x27;],[&#x27;gcp&#x27;,&#x27;GCP / Google Cloud&#x27;],[&#x27;curso-devops&#x27;,&#x27;Curso DevOps&#x27;],</code></pre>
+<h3 id="7-contador-del-buscador-en-dos-lugares">7 · Contador del buscador — <strong>en DOS lugares</strong></h3>
+<p>Este es <em>el</em> punto que más fácil se escapa, porque el texto está duplicado:</p>
+<pre><code class="lang-html">&lt;p class=&quot;dash-count&quot; id=&quot;dash-count&quot;&gt;24 cursos · busca por tema: …&lt;/p&gt;</code></pre>
+<pre><code class="lang-javascript">IDLE=&#x27;24 cursos · busca por tema: …&#x27;;</code></pre>
+<p>Si actualizas solo uno, el contador cambia al escribir y al borrar vuelve al número viejo.</p>
+<h3 id="8-preguntas-del-simulador">8 · Preguntas del simulador</h3>
+<p>Dos por curso suele bastar. Se añaden al array <code>Q</code> con su esquema completo, y <strong>hay que actualizar el contador del botón</strong>:</p>
+<pre><code class="lang-html">&lt;button class=&quot;sim-set&quot; data-set=&quot;all&quot;&gt;Completo (22)&lt;/button&gt;</code></pre>
+<p>Ese número también está escrito a mano. Cuéntalo así:</p>
+<pre><code class="lang-bash">grep -c &quot;sets:\[&#x27;all&#x27;&quot; index.html</code></pre>
+<h3 id="9-bloque-en-el-banco-de-entrenamiento">9 · Bloque en el banco de entrenamiento</h3>
+<p>Un <code>&lt;h3&gt;</code> con el tema y 4–6 <code>&lt;details class=&quot;qa&quot;&gt;</code> dentro de <code>#entrenamiento</code>.</p>
+<h3 id="10-sellos-de-despliegue">10 · Sellos de despliegue</h3>
+<p>Dos, con la hora real de Bogotá: <code>#deploy-stamp</code> en el dashboard y <code>.deploy-stamp</code> en el pie.</p>
+<pre><code class="lang-bash">TZ=America/Bogota date &#x27;+%Y-%m-%d %H:%M&#x27;</code></pre>
+<hr>
+<h2 id="4-como-se-escribe-un-curso">4. Cómo se escribe un curso<a class="anchor" href="#4-como-se-escribe-un-curso" aria-label="Enlace">#</a></h2>
+<p>La estructura es <strong>siempre la misma</strong>. La repetición es deliberada: cuando todos los cursos se leen igual, estudiar es más rápido y se nota enseguida lo que falta.</p>
+<pre><code class="lang-">h2 con tag       → título del curso
+p.sub            → por qué existe esta pieza y qué gap llena
+.callout         → ANALOGÍA cotidiana
+.pipe-scroll     → diagrama del recorrido (opcional pero muy útil)
+.grid.cols-3     → los conceptos que debes saber explicar
+&lt;pre&gt;&lt;code&gt;      → el código, capa por capa
+.cmp-wrap+table  → tabla comparativa (cuando aplica)
+.callout         → el dato que demuestra profundidad
+.callout         → &quot;el círculo completo&quot;: cómo conecta con el resto de la guía
+.youuse          → CÓMO LO CUENTAS TÚ
+&lt;details.qa&gt;     → 5–8 preguntas típicas</code></pre>
+<h3 id="la-analogia">La analogía</h3>
+<p>Cada curso abre con una metáfora cotidiana. Es lo que te salva cuando te piden explicárselo a alguien de negocio. Ejemplos del archivo:</p>
+<div class="tw"><table><thead><tr><th>Curso</th><th>Analogía</th></tr></thead><tbody><tr><td>Docker</td><td>Una lonchera sellada: la abras donde la abras, adentro está lo mismo</td></tr><tr><td>Arquitectura hexagonal</td><td>Una torre de control: no cambia aunque cambien las aerolíneas</td></tr><tr><td>GCP</td><td>Cambiar de aeropuerto, no de medio de transporte</td></tr><tr><td>.NET</td><td>El Spring Boot de Microsoft</td></tr></tbody></table></div>
+<h3 id="la-frase-con-metrica">La frase con métrica</h3>
+<p><strong>Todo curso cierra en un <code>.youuse</code></strong>: una frase en primera persona, lista para decir, que termina en una cifra.</p>
+<blockquote><em>&quot;Diseño con el dominio aislado: arquitectura hexagonal […] El resultado fue 500 ms bajo alto tráfico, cero downtime y un 60% menos de tiempo de despliegue.&quot;</em></blockquote>
+<p>Si no puedes escribir esa frase para un curso, o no dominas el tema o no tienes experiencia real en él —y ambas cosas son información útil.</p>
+<h3 id="el-guion-honesto">El guion honesto</h3>
+<p>Para tecnologías <strong>no operadas en producción</strong>, el <code>.youuse</code> debe decirlo con todas las letras. Es una regla dura del proyecto, no una preferencia de estilo.</p>
+<p>Los cursos de <strong>React vs Angular</strong> y <strong>GCP</strong> son los ejemplos: ambos reconocen explícitamente que esa tecnología no se ha usado en un proyecto real, y convierten la respuesta en fortaleza mostrando el mapeo con lo que sí se domina.</p>
+<blockquote>Inventar experiencia se detecta en dos preguntas: basta con que pregunten por la consola, por una cuota o por un error típico.</blockquote>
+<h3 id="la-tecnica-de-homologacion">La técnica de homologación</h3>
+<p>Cuando el curso trata un stack ajeno pero análogo a uno conocido, el formato que funciona es:</p>
+<ol><li>Presentar cada concepto <strong>junto a su equivalente</strong> conocido.</li><li>Aislar las <strong>3 o 4 diferencias reales</strong> (de concepto, no de nombre).</li><li>Un <strong>ejemplo lado a lado</strong>: los mismos comandos en ambos, con el equivalente comentado en la línea.</li><li>Una <strong>tabla maestra</strong> de equivalencias, pensada para memorizar.</li></ol>
+<p>El curso de GCP es el ejemplo completo: 24 filas de equivalencias contra Azure y un despliegue lado a lado <code>gcloud</code> / <code>az</code> que termina en el mismo <code>kubectl apply</code>, para mostrar qué es realmente portable.</p>
+<h3 id="componentes-disponibles">Componentes disponibles</h3>
+<p>No inventes CSS nuevo. Lo que ya existe:</p>
+<div class="tw"><table><thead><tr><th>Clase</th><th>Para qué</th></tr></thead><tbody><tr><td><code>.callout</code></td><td>Bloque destacado (analogía, dato de entrevista, círculo completo)</td></tr><tr><td><code>.youuse</code></td><td>La frase en primera persona, con borde verde</td></tr><tr><td><code>.grid.cols-2</code> / <code>.cols-3</code></td><td>Rejilla de <code>.card</code></td></tr><tr><td><code>.card</code> + <code>p.obj</code></td><td>Tarjeta de concepto con su rol en una frase</td></tr><tr><td><code>.pipe-scroll</code> + <code>.pipe</code> + <code>.step</code></td><td>Diagrama de flujo horizontal, con scroll en móvil</td></tr><tr><td><code>.cmp-wrap</code> + <code>table.cmp</code></td><td>Tabla comparativa que desplaza dentro de su contenedor</td></tr><tr><td><code>&lt;pre&gt;&lt;code&gt;</code> + <code>.kw .str .cmt .num</code></td><td>Código con resaltado manual</td></tr><tr><td><code>&lt;details class=&quot;qa&quot;&gt;</code></td><td>Pregunta plegable con respuesta</td></tr></tbody></table></div>
+<hr>
+<h2 id="5-verificacion">5. Verificación<a class="anchor" href="#5-verificacion" aria-label="Enlace">#</a></h2>
+<p>Nueve pasos. Los primeros cuatro atrapan casi todo.</p>
+<pre><code class="lang-bash"># servir con cache-busting (el navegador cachea index.html con ganas)
+python3 -m http.server 8000
+# abrir http://localhost:8000/index.html?v=1</code></pre>
+<p><strong>1 · Estructura HTML</strong> — anidamiento y etiquetas sin cerrar:</p>
+<pre><code class="lang-bash">python3 - &lt;&lt;&#x27;PY&#x27;
+from html.parser import HTMLParser
+VOID={&#x27;br&#x27;,&#x27;hr&#x27;,&#x27;img&#x27;,&#x27;input&#x27;,&#x27;meta&#x27;,&#x27;link&#x27;,&#x27;source&#x27;,&#x27;area&#x27;,&#x27;base&#x27;,&#x27;col&#x27;,&#x27;embed&#x27;,&#x27;param&#x27;,&#x27;track&#x27;,&#x27;wbr&#x27;}
+h=open(&#x27;index.html&#x27;,encoding=&#x27;utf-8&#x27;).read()
+class P(HTMLParser):
+    def __init__(s): super().__init__(convert_charrefs=False); s.st=[]; s.err=[]
+    def handle_starttag(s,t,a):
+        if t not in VOID: s.st.append((t,s.getpos()))
+    def handle_endtag(s,t):
+        if t in VOID: return
+        if not s.st: s.err.append(f&quot;sobra &lt;/{t}&gt; l{s.getpos()[0]}&quot;); return
+        if s.st[-1][0]!=t:
+            s.err.append(f&quot;esperaba &lt;/{s.st[-1][0]}&gt; l{s.st[-1][1][0]}, llegó &lt;/{t}&gt; l{s.getpos()[0]}&quot;)
+            for i in range(len(s.st)-1,-1,-1):
+                if s.st[i][0]==t: del s.st[i:]; return
+        else: s.st.pop()
+p=P(); p.feed(h)
+print(&quot;errores:&quot;,len(p.err),&quot;· sin cerrar:&quot;,[t for t,_ in p.st])
+for e in p.err[:6]: print(&quot;  &quot;,e)
+PY</code></pre>
+<p><strong>2 · JavaScript</strong> — una coma mal puesta en <code>SEQ</code> o en <code>Q</code> rompe navegación, buscador y simulador a la vez:</p>
+<pre><code class="lang-bash">python3 -c &quot;
+import re
+h=open(&#x27;index.html&#x27;,encoding=&#x27;utf-8&#x27;).read()
+for i,s in enumerate(re.findall(r&#x27;&lt;script&gt;(.*?)&lt;/script&gt;&#x27;,h,re.S)):
+    open(f&#x27;/tmp/_s{i}.js&#x27;,&#x27;w&#x27;).write(s)
+&quot; &amp;&amp; for f in /tmp/_s*.js; do node --check &quot;$f&quot; &amp;&amp; echo &quot;OK $f&quot;; done</code></pre>
+<p><strong>3 · Numeración del dashboard</strong> — sin saltos ni repetidos:</p>
+<pre><code class="lang-bash">grep -o &#x27;href=&quot;#[a-z0-9-]*&quot;[^&gt;]*&gt;&lt;span class=&quot;dc-n&quot;&gt;[^&lt;]*&#x27; index.html \
+  | sed &#x27;s/href=&quot;#//;s/&quot;[^&gt;]*&gt;&lt;span class=&quot;dc-n&quot;&gt;/  →  /&#x27;</code></pre>
+<p><strong>4 · Contador del buscador</strong> — que no queden dos números distintos:</p>
+<pre><code class="lang-bash">grep -c &quot;24 cursos&quot; index.html      # debe dar 2
+grep -c &quot;23 cursos&quot; index.html      # debe dar 0</code></pre>
+<p><strong>5 · Buscador</strong> — probar que <code>data-k</code> funciona, en la consola del navegador:</p>
+<pre><code class="lang-javascript">const i=document.getElementById(&#x27;dashfilter&#x27;);
+[&#x27;gcp&#x27;,&#x27;hexagonal&#x27;,&#x27;oauth&#x27;,&#x27;pods&#x27;,&#x27;ef core&#x27;].forEach(q=&gt;{
+  i.value=q; i.dispatchEvent(new Event(&#x27;input&#x27;));
+  console.log(q, [...document.querySelectorAll(&#x27;#dashboard .dash-card:not([hidden])&#x27;)]
+    .map(c=&gt;c.getAttribute(&#x27;href&#x27;)));
+});</code></pre>
+<p><strong>6 · Navegación secuencial</strong> — que el curso anterior apunte al nuevo y el nuevo al siguiente.</p>
+<p><strong>7 · Modo Enfoque</strong> — con el curso activo, debe mostrarse solo esa sección.</p>
+<p><strong>8 · Simulador</strong> — el set Completo trae el total nuevo y las preguntas muestran rúbrica y modelo.</p>
+<p><strong>9 · Móvil y consola</strong> — sin errores en consola y <strong>sin scroll horizontal</strong>: las tablas deben desplazarse dentro de su <code>.cmp-wrap</code>, no arrastrar la página.</p>
+<hr>
+<h2 id="6-despliegue">6. Despliegue<a class="anchor" href="#6-despliegue" aria-label="Enlace">#</a></h2>
+<pre><code class="lang-bash">TZ=America/Bogota date &#x27;+%Y-%m-%d %H:%M&#x27;     # actualizar los dos sellos primero
+
+git add index.html
+git commit -m &quot;feat: curso de &lt;tema&gt; en la guía de entrevistas&quot;
+git push origin main</code></pre>
+<p>GitHub Pages despliega solo. Tarda 1–3 minutos y <strong>el navegador cachea</strong>, así que la comprobación se hace con polling y cache-busting:</p>
+<pre><code class="lang-bash">for i in $(seq 1 30); do
+  if curl -s -H &#x27;Cache-Control: no-cache&#x27; &quot;https://&lt;usuario&gt;.github.io/guia-devops/?v=$i&quot; \
+     | grep -q &#x27;section id=&quot;&lt;nuevo-id&gt;&quot;&#x27;; then echo &quot;publicado&quot;; break; fi
+  sleep 10
+done</code></pre>
+<p>Convención de commits: <code>feat: curso de &lt;tema&gt; en la guía de entrevistas</code>.</p>
+<hr>
+<h2 id="7-errores-que-ya-se-cometieron">7. Errores que ya se cometieron<a class="anchor" href="#7-errores-que-ya-se-cometieron" aria-label="Enlace">#</a></h2>
+<p>Esta sección vale más que el resto. Todo lo que sigue pasó de verdad.</p>
+<p><strong>El contador del buscador en un solo sitio.</strong> El texto está en el HTML y en la constante <code>IDLE</code> del JS. Al actualizar solo el HTML, el contador se &quot;arreglaba&quot; al escribir y volvía al número viejo al borrar.</p>
+<p><strong>Renumerar de adelante hacia atrás.</strong> Al correr 18→19 antes que 19→20, se pisan los números. Siempre de atrás hacia adelante.</p>
+<p><strong>El botón Menú fuera de pantalla en móvil.</strong> La barra tenía <code>overflow-x:auto</code> y el título completo empujaba el botón de Menú fuera del viewport: había que arrastrar la barra para abrir el menú, cosa que nadie descubre. Se arregló recortando el título con <code>text-overflow:ellipsis</code> y <code>overflow-x:hidden</code>. <strong>Cada vez que se añade algo a la nav hay que volver a comprobarlo</strong> — pasó otra vez al añadir el enlace de Inicio.</p>
+<p><strong>Olvidar <code>data-k</code>.</strong> El curso aparece en el dashboard pero es invisible para el buscador. No da error, y solo se descubre buscando el tema a mano.</p>
+<p><strong>Sobremuestrear en las verificaciones visuales.</strong> Al revisar detalle fino, ampliar una imagen genera artefactos que parecen defectos del contenido. Verifica a resolución nativa.</p>
+<p><strong>Confiar en la recarga normal del navegador.</strong> Al probar tras publicar, sin <code>?v=algo</code> se ve la versión cacheada y parece que el despliegue falló.</p>
+<p><strong>Añadir el curso al final del archivo.</strong> Funciona, pero rompe el orden lógico de lectura y deja la <code>seq-nav</code> incoherente con el dashboard.</p>
+<hr>
+<h2 id="anadir-un-curso-resumen-ejecutable">Añadir un curso — resumen ejecutable<a class="anchor" href="#anadir-un-curso-resumen-ejecutable" aria-label="Enlace">#</a></h2>
+<pre><code class="lang-">[ ] 1.  Clase .t-xxx con color que no choque en su nivel
+[ ] 2.  &lt;section id=&quot;...&quot;&gt; en el orden lógico de la ruta
+[ ] 3.  Entrada en el menú, en su categoría
+[ ] 4.  Tarjeta del dashboard CON data-k
+[ ] 5.  Renumerar las siguientes (de atrás hacia adelante)
+[ ] 6.  Insertar en el array SEQ
+[ ] 7.  Contador &quot;N cursos&quot; en HTML **y** en IDLE
+[ ] 8.  2 preguntas en Q + actualizar &quot;Completo (N)&quot;
+[ ] 9.  Bloque en #entrenamiento
+[ ] 10. Los dos sellos de despliegue
+
+[ ] Verificar: HTML · JS · numeración · buscador · seq-nav · enfoque · simulador · móvil
+[ ] Publicar y confirmar en vivo con cache-busting</code></pre>
+  </main>
+
+  <footer>Runbook de mantenimiento · guía de entrevistas técnicas</footer>
+</div>
+
+<script>
+(function(){
+  var b=document.getElementById('theme'), r=document.documentElement;
+  try{ var s=localStorage.getItem('tema'); if(s) r.setAttribute('data-theme',s); }catch(e){}
+  b.addEventListener('click',function(){
+    var a=r.getAttribute('data-theme');
+    if(!a) a = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark':'light';
+    var n = a==='dark' ? 'light':'dark';
+    r.setAttribute('data-theme',n);
+    try{ localStorage.setItem('tema',n); }catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
